@@ -17,16 +17,28 @@
 .card-hoverable:hover {
   border-color: var(--gold);
   background: #1a1a1a;
-  box-shadow: 0 4px 16px rgba(200, 151, 31, 0.1);
+  box-shadow: 0 4px 16px rgba(200, 151, 31, 0.15);
 }
 
+.card-hoverable:active {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(200, 151, 31, 0.2);
+}
+
+.card-hoverable:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -1px;
+}
+
+/* Card Sections */
 .card-header {
   padding: var(--spacing-lg);
   border-bottom: 1px solid var(--border);
   background: rgba(200, 151, 31, 0.03);
 }
 
-.card-content {
+.card-content,
+.card-body {
   padding: var(--spacing-lg);
 }
 
@@ -36,8 +48,10 @@
   background: rgba(255, 255, 255, 0.02);
 }
 
-.card-header h3,
-.card-header h2 {
+/* Card Typography */
+.card-header h1,
+.card-header h2,
+.card-header h3 {
   font-family: var(--font-serif);
   font-size: var(--font-size-2xl);
   font-weight: 600;
@@ -45,8 +59,73 @@
   color: var(--white);
 }
 
+.card-header h4,
+.card-header h5,
+.card-header h6 {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin: 0;
+  color: var(--white);
+}
+
 .card-header p {
-  margin: 4px 0 0 0;
+  margin: var(--spacing-sm) 0 0 0;
   font-size: var(--font-size-sm);
-  color: var(--gray);
+  color: var(--mid-gray);
+}
+
+.card-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--mid-gray);
+  margin-top: var(--spacing-sm);
+}
+
+/* Variants */
+.card-elevated {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.card-flat {
+  border: none;
+  background: #1a1a1a;
+}
+
+.card-outlined {
+  background: transparent;
+  border: 2px solid var(--border);
+}
+
+.card-with-accent {
+  border-left: 4px solid var(--gold);
+}
+
+.card-danger {
+  border-left: 4px solid var(--red);
+}
+
+.card-success {
+  border-left: 4px solid var(--green);
+}
+
+.card-warning {
+  border-left: 4px solid var(--orange);
+}
+
+/* Layout helpers */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: var(--card);
+  }
+  
+  .card-flat {
+    background: #1a1a1a;
+  }
 }

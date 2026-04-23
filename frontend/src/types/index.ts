@@ -136,3 +136,38 @@ export interface CreateMaterialRequest {
   supplier: string | null;
   project_id: string;
 }
+
+export type BuilderRequestStatus = "pending" | "approved" | "rejected";
+
+export interface BuilderRequest {
+  id: string;
+  email: string;
+  full_name: string;
+  status: BuilderRequestStatus;
+  rejection_reason?: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Query {
+  id: string;
+  title: string;
+  description: string | null;
+  status: "open" | "answered" | "resolved";
+  project_id: string;
+  client_id: string;
+  builder_id?: string | null;
+  response?: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CreateQueryRequest {
+  title: string;
+  description: string | null;
+  project_id: string;
+}
+
+export interface RespondToQueryRequest {
+  response: string;
+}

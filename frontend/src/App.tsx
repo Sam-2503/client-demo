@@ -12,17 +12,23 @@ import BuilderProjectDetail from "./pages/builder/ProjectDetail";
 import BuilderUpdates from "./pages/builder/Updates";
 import BuilderMaterials from "./pages/builder/Materials";
 import BuilderClients from "./pages/builder/Clients";
+import BuilderQueriesPage from "./pages/builder/QueriesPage";
+
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import ApprovalRequests from "./pages/admin/ApprovalRequests";
+import AdminProjects from "./pages/admin/AdminProjects";
 
 import ClientLayout from "./pages/client/Layout";
 import ClientOverview from "./pages/client/Overview";
 import ClientProgress from "./pages/client/Progress";
 import ClientUpdates from "./pages/client/Updates";
+import ClientQueriesPage from "./pages/client/QueriesPage";
 
 function RootRedirect() {
   const { user } = useAuth();
   if (!user) return <Navigate to="/login" replace />;
   return (
-    <Navigate to={user.role === "client" ? "/client" : "/builder"} replace />
+    <Navigate to={user.role === "client" ? "/client" : user.role === "admin" ? "/admin" : "/builder"} replace />
   );
 }
 
@@ -50,6 +56,21 @@ export default function App() {
               <Route path="updates" element={<BuilderUpdates />} />
               <Route path="materials" element={<BuilderMaterials />} />
               <Route path="clients" element={<BuilderClients />} />
+              <Route path="queries" element={<BuilderQueriesPage />} />
+            </Route>
+
+            {/* ── Admin ── */}
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute roles={["admin"]}>
+                  <BuilderLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<AdminDashboard />} />
+              <Route path="approvals" element={<ApprovalRequests />} />
+              <Route path="projects" element={<AdminProjects />} />
             </Route>
 
             {/* ── Client ── */}
@@ -64,6 +85,7 @@ export default function App() {
               <Route index element={<ClientOverview />} />
               <Route path="progress" element={<ClientProgress />} />
               <Route path="updates" element={<ClientUpdates />} />
+              <Route path="queries" element={<ClientQueriesPage />} />
             </Route>
 
             <Route path="*" element={<Navigate to="/" replace />} />

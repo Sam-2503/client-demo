@@ -1,0 +1,304 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   ADMIN DASHBOARD STYLES
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.admin-dashboard-page {
+  padding: var(--spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
+}
+
+.admin-dashboard-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.admin-dashboard-title-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.admin-dashboard-title {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-3xl);
+  font-weight: 600;
+  color: var(--white);
+  margin: 0;
+}
+
+.admin-dashboard-subtitle {
+  font-size: var(--font-size-base);
+  color: var(--light-gray);
+  margin: 0;
+}
+
+.admin-dashboard-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-3xl);
+  color: var(--light-gray);
+  font-size: var(--font-size-base);
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   Stats Grid
+   ──────────────────────────────────────────────────────────────────────────── */
+
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.admin-stat-card {
+  background: var(--card);
+  border: 1px solid var(--border-light);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold),
+    transparent
+  );
+}
+
+.admin-stat-label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--light-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.admin-stat-value {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--gold);
+  font-family: var(--font-serif);
+}
+
+.admin-stat-meta {
+  font-size: var(--font-size-base);
+  color: var(--mid-gray);
+}
+
+.admin-stat-bar {
+  height: 4px;
+  background: var(--panel);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.admin-stat-bar-fill {
+  height: 100%;
+  background: var(--gold);
+  transition: width var(--transition-slow) ease;
+}
+
+.admin-stat-card-alert {
+  border-color: var(--gold);
+}
+
+.admin-stat-action {
+  margin-top: var(--spacing-sm);
+}
+
+.admin-stat-action a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: var(--font-size-base);
+  transition: color var(--transition-base) ease;
+}
+
+.admin-stat-action a:hover {
+  color: var(--gold-light);
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   Recent Projects
+   ──────────────────────────────────────────────────────────────────────────── */
+
+.admin-dashboard-projects-card {
+  background: var(--card);
+  border: 1px solid var(--border-light);
+  padding: var(--spacing-lg);
+}
+
+.admin-projects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-projects-title {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--white);
+  margin: 0;
+}
+
+.admin-projects-link {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: var(--font-size-base);
+  transition: color var(--transition-base) ease;
+}
+
+.admin-projects-link:hover {
+  color: var(--gold-light);
+}
+
+.admin-projects-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-3xl);
+  color: var(--mid-gray);
+  font-size: var(--font-size-base);
+}
+
+.admin-projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.admin-project-item {
+  display: grid;
+  grid-template-columns: 1fr 200px 150px;
+  gap: var(--spacing-lg);
+  align-items: center;
+  padding: var(--spacing-lg);
+  background: var(--panel);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  transition: all var(--transition-base) ease;
+}
+
+.admin-project-item:hover {
+  border-color: var(--gold);
+  background: var(--panel-light);
+}
+
+.admin-project-info {
+  min-width: 0;
+}
+
+.admin-project-name {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--white);
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.admin-project-location {
+  font-size: var(--font-size-sm);
+  color: var(--light-gray);
+  margin: 0;
+}
+
+.admin-project-progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.admin-project-status {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.admin-project-status-badge {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-transform: capitalize;
+  background: var(--panel);
+  border: 1px solid var(--border);
+}
+
+.admin-project-status-badge.admin-status-in_progress {
+  background: rgba(200, 151, 31, 0.15);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.admin-project-status-badge.admin-status-completed {
+  background: rgba(39, 174, 96, 0.15);
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.admin-project-status-badge.admin-status-planning {
+  background: rgba(127, 140, 141, 0.15);
+  border-color: var(--mid-gray);
+  color: var(--mid-gray);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  .admin-stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .admin-project-item {
+    grid-template-columns: 1fr 100px;
+  }
+
+  .admin-project-status {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-dashboard-page {
+    padding: var(--spacing-lg);
+    gap: var(--spacing-lg);
+  }
+
+  .admin-dashboard-title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .admin-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-project-item {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-projects-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+  }
+}

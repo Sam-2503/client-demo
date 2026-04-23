@@ -44,3 +44,8 @@ class Update(Base):
     progress = Column(Integer)  # % completion
 
     created_at = Column(DateTime, default=datetime.utcnow)
+
+    # Relationship back to Project
+    project = relationship(
+        "Project", back_populates="updates"
+    )

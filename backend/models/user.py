@@ -27,6 +27,9 @@ class User(Base):
     hashed_password: Mapped[str] = mapped_column(String(255), nullable=False)
     role: Mapped[UserRole] = mapped_column(Enum(UserRole), default=UserRole.client)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+    is_approved: Mapped[bool] = mapped_column(Boolean, default=True)  # For builders awaiting approval
+    approved_at: Mapped[datetime] = mapped_column(DateTime, nullable=True)
+    approval_notes: Mapped[str] = mapped_column(String(500), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
     # Relationships
@@ -36,4 +39,9 @@ class User(Base):
     projects_as_builder = relationship(
         "Project", back_populates="builder", foreign_keys="Project.builder_id"
     )
-    updates = relationship("Update", back_populates="posted_by_user")
+    queries_asked = relationship(
+        "Query", back_populates="asked_by", foreign_keys="Query.asked_by_id"
+    )
+    queries_answered = relationship(
+        "Query", back_populates="answered_by", foreign_keys="Query.answered_by_id"
+    )

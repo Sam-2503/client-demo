@@ -18,9 +18,16 @@ def create_project(
     db: Session = Depends(get_db),
     current_user: User = Depends(require_builder),
 ):
+    # Check if builder is approved
+    if current_user.role == UserRole.builder and not current_user.is_approved:
+        raise HTTPException(
+            status_code=403,
+            detail="Only approved builders can create projects"
+        )
+    
     project = Project(**payload.model_dump(), builder_id=current_user.id)
     db.add(project)
-    db.flush()
+    db.commit()
     db.refresh(project)
     return project
 
@@ -62,10 +69,18 @@ def update_project(
     if not project:
         raise HTTPException(status_code=404, detail="Project not found")
 
+    # Only project builder or admin can edit
+    if current_user.id != project.builder_id and current_user.role != UserRole.admin:
+        raise HTTPException(status_code=403, detail="Only project builder or admin can edit")
+    
+    # Check if builder is approved (only for non-admins)
+    if current_user.role == UserRole.builder and not current_user.is_approved:
+        raise HTTPException(status_code=403, detail="Only approved builders can edit projects")
+
     for field, value in payload.model_dump(exclude_unset=True).items():
         setattr(project, field, value)
 
-    db.flush()
+    db.commit()
     db.refresh(project)
     return project
 
@@ -79,4 +94,10 @@ def delete_project(
     project = db.query(Project).filter(Project.id == project_id).first()
     if not project:
         raise HTTPException(status_code=404, detail="Project not found")
+    
+    # Only project builder or admin can delete
+    if current_user.id != project.builder_id and current_user.role != UserRole.admin:
+        raise HTTPException(status_code=403, detail="Only project builder or admin can delete")
+    
     db.delete(project)
+    db.commit()

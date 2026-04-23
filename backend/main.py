@@ -1,4 +1,5 @@
 import models.material
+import models.builder_request
 import models.project
 import models.update
 
@@ -11,11 +12,11 @@ from fastapi.middleware.cors import CORSMiddleware
 
 # Import routers
 from routers.auth import router as auth_router
+from routers.admin import router as admin_router
 from routers.materials import router as materials_router
 from routers.projects import router as projects_router
+from routers.queries import router as queries_router
 from routers.updates import router as updates_router
-
-# with the other router imports
 from routers.users import router as users_router
 
 # ── Create all tables in Neon.tech on startup ────────────────────────────────
@@ -32,6 +33,7 @@ app.add_middleware(
         settings.FRONTEND_URL,
         "http://localhost:3000",
         "http://localhost:5173",
+        "http://localhost:5174",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -40,10 +42,11 @@ app.add_middleware(
 
 # ── Routers ───────────────────────────────────────────────────────────────────
 app.include_router(auth_router)
+app.include_router(admin_router)
 app.include_router(projects_router)
+app.include_router(queries_router)
 app.include_router(updates_router)
 app.include_router(materials_router)
-# with the other app.include_router() calls
 app.include_router(users_router)
 
 

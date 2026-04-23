@@ -35,10 +35,18 @@ def post_update(
     project = db.query(Project).filter(Project.id == payload.project_id).first()
     if not project:
         raise HTTPException(status_code=404, detail="Project not found")
+    
+    # Only project builder or admin can post updates
+    if current_user.id != project.builder_id and current_user.role != UserRole.admin:
+        raise HTTPException(status_code=403, detail="Only project builder or admin can post updates")
+    
+    # Check if builder is approved (only for non-admins)
+    if current_user.role == UserRole.builder and not current_user.is_approved:
+        raise HTTPException(status_code=403, detail="Only approved builders can post updates")
 
     update = Update(**payload.model_dump(), posted_by=current_user.id)
     db.add(update)
-    db.flush()
+    db.commit()
     db.refresh(update)
 
     # Fire and forget broadcast — run async broadcast from sync context
