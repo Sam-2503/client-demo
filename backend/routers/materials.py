@@ -1,7 +1,7 @@
 import uuid
 from typing import List
 
-from core.security import get_current_user, require_admin, require_builder
+from core.deps import get_current_user, require_builder
 from database import get_db
 from fastapi import APIRouter, Depends, HTTPException
 from models.material import Material

@@ -1,7 +1,7 @@
 import uuid
 from typing import List
 
-from core.security import get_current_user, require_builder
+from core.deps import get_current_user, require_builder
 from database import get_db
 from fastapi import APIRouter, Depends, HTTPException, WebSocket, WebSocketDisconnect
 from models.project import Project
@@ -85,8 +85,3 @@ def get_updates_for_project(
         .order_by(Update.created_at.desc())
         .all()
     )
-
-    @router.post("/upload")
-    def upload_media(file: UploadFile = File(...)):
-        url = upload_file(file.file)
-        return {"url": url}

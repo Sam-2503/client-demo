@@ -1,11 +1,4 @@
-from uuid import UUID
-
-from core.security import (
-    create_access_token,
-    get_current_user,
-    hash_password,
-    verify_password,
-)
+from core.security import create_access_token, hash_password, verify_password
 from database import get_db
 from fastapi import APIRouter, Depends, HTTPException, status
 from models.user import User
@@ -13,15 +6,6 @@ from schemas.user import LoginRequest, Token, UserCreate, UserOut
 from sqlalchemy.orm import Session
 
 router = APIRouter(prefix="/api/auth", tags=["Auth"])
-
-
-def require_admin(
-    current_user: User = Depends(get_current_user),
-):
-    if current_user.role != UserRole.admin:
-        raise HTTPException(status_code=403, detail="Admin access required")
-
-    return current_user
 
 
 @router.post("/register", response_model=UserOut, status_code=201)
@@ -56,28 +40,3 @@ def login(payload: LoginRequest, db: Session = Depends(get_db)):
 
     token = create_access_token(data={"sub": str(user.id), "role": user.role})
     return Token(access_token=token, user=UserOut.model_validate(user))
-
-
-@router.get("/users")
-def get_users(db: Session = Depends(get_db)):
-    return db.query(User).all()
-
-
-@router.patch("/users/{user_id}")
-def update_user_role(
-    user_id: UUID,
-    payload: dict,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(require_admin),
-):
-    user = db.query(User).filter(User.id == user_id).first()
-
-    if not user:
-        raise HTTPException(404, "User not found")
-
-    user.role = payload["role"]
-
-    db.commit()
-    db.refresh(user)
-
-    return user
