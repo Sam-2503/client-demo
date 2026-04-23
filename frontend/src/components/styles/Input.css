@@ -1,0 +1,64 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   INPUT STYLES
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.input-group-full {
+  width: 100%;
+}
+
+.input-label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: block;
+}
+
+.input {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  transition: all var(--transition-base) ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: rgba(200, 151, 31, 0.03);
+}
+
+.input::placeholder {
+  color: #3a3a3a;
+}
+
+.input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.input-error {
+  font-size: var(--font-size-xs);
+  color: var(--red);
+  display: block;
+}
+
+.input-helper {
+  font-size: var(--font-size-xs);
+  color: var(--gray);
+  display: block;
+}
+
+.input-group-error .input {
+  border-color: var(--red);
+}

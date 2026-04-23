@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../../api/client";
 import { useToast } from "../../components/Toast";
-import {
+import type {
   Project,
   Update,
   Material,
@@ -10,7 +10,6 @@ import {
   WorkCategory,
   MaterialType,
   CreateUpdateRequest,
-  CreateMaterialRequest,
 } from "../../types";
 
 const STATUS_LABEL: Record<ProjectStatus, string> = {
@@ -18,12 +17,6 @@ const STATUS_LABEL: Record<ProjectStatus, string> = {
   in_progress: "Active",
   on_hold: "On Hold",
   completed: "Complete",
-};
-const STATUS_COLOR: Record<ProjectStatus, string> = {
-  planning: "var(--gray)",
-  in_progress: "var(--gold)",
-  on_hold: "var(--orange)",
-  completed: "var(--green)",
 };
 const STATUSES: ProjectStatus[] = [
   "planning",
@@ -79,10 +72,17 @@ const EMPTY_UPD: CreateUpdateRequest = {
   photo_urls: [],
   project_id: "",
 };
-const EMPTY_MAT: Omit<CreateMaterialRequest, "project_id"> & {
+
+interface MaterialForm {
+  material_type: MaterialType;
+  name: string;
   quantity: string;
+  unit: string;
   unit_cost: string;
-} = {
+  supplier: string | null;
+}
+
+const EMPTY_MAT: MaterialForm = {
   material_type: "lumber",
   name: "",
   quantity: "",

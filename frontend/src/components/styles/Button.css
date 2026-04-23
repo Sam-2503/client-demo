@@ -1,0 +1,91 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   BUTTON STYLES
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.btn {
+  font-family: var(--font-sans);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-base) ease;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  text-transform: uppercase;
+  font-size: var(--font-size-sm);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Variants */
+.btn-primary {
+  background: var(--gold);
+  color: var(--black);
+  border: 2px solid var(--gold);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--gold-light);
+  border-color: var(--gold-light);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--gold);
+  border: 2px solid var(--gold);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background: rgba(200, 151, 31, 0.1);
+  border-color: var(--gold-light);
+}
+
+.btn-secondary {
+  background: var(--panel);
+  color: var(--white);
+  border: 2px solid var(--border);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--panel-light);
+  border-color: var(--gold);
+}
+
+/* Sizes */
+.btn-sm {
+  padding: 6px 12px;
+  font-size: var(--font-size-xs);
+}
+
+.btn-md {
+  padding: 10px 16px;
+  font-size: var(--font-size-sm);
+}
+
+.btn-lg {
+  padding: 14px 24px;
+  font-size: var(--font-size-base);
+}
+
+/* Loading spinner */
+.btn-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

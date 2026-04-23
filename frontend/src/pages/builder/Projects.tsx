@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/client";
 import { useToast } from "../../components/Toast";
-import {
+import type {
   Project,
   ProjectStatus,
   User,

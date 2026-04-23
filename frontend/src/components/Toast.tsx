@@ -3,8 +3,9 @@ import {
   useContext,
   useState,
   useCallback,
-  ReactNode,
+  type ReactNode,
 } from "react";
+import "./styles/Toast.css";
 
 type ToastFn = (msg: string) => void;
 

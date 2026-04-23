@@ -1,0 +1,67 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   PROGRESS BAR STYLES
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.progress-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--font-size-sm);
+}
+
+.progress-label {
+  color: var(--gray);
+  font-weight: 500;
+}
+
+.progress-percent {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.progress {
+  width: 100%;
+  height: 8px;
+  background: var(--panel);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.progress-sm {
+  height: 4px;
+}
+
+.progress-md {
+  height: 8px;
+}
+
+.progress-lg {
+  height: 12px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  border-radius: var(--radius-sm);
+  transition: width var(--transition-base) ease;
+}
+
+.progress-animated .progress-fill {
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}

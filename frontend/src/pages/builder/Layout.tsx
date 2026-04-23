@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { Project } from "../../types";
+import type { Project } from "../../types";
 import api from "../../api/client";
 
 const STATUS_COLOR: Record<string, string> = {
