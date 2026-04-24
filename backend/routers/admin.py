@@ -20,17 +20,11 @@ router = APIRouter(prefix="/api/admin", tags=["Admin"])
 
 @router.get("/requests", response_model=List[BuilderRequestOut])
 def get_builder_requests(
-    status_filter: str = "pending",
     db: Session = Depends(get_db),
     current_user: User = Depends(require_admin),
 ):
-    """Get pending builder registration requests (admin only)"""
-    query = db.query(BuilderRequest)
-    
-    if status_filter and status_filter in ["pending", "approved", "rejected"]:
-        query = query.filter(BuilderRequest.status == status_filter)
-    
-    return query.all()
+    """Get all builder registration requests (admin only)"""
+    return db.query(BuilderRequest).order_by(BuilderRequest.created_at.desc()).all()
 
 
 @router.get("/requests/pending/count", response_model=dict)

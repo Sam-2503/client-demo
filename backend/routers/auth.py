@@ -14,7 +14,7 @@ router = APIRouter(prefix="/api/auth", tags=["Auth"])
 def register(payload: UserCreate, db: Session = Depends(get_db)):
     """
     Register a new user.
-    - Clients/Admins: Account created immediately
+    - Clients/Admins: Account created immediately with access token
     - Builders: Request created, awaiting admin approval
     """
     # Check if email exists in users or pending requests
@@ -43,7 +43,7 @@ def register(payload: UserCreate, db: Session = Depends(get_db)):
             "status": "pending"
         }
 
-    # For clients/admins: create user immediately
+    # For clients/admins: create user immediately with access token
     user = User(
         full_name=payload.full_name,
         email=payload.email,
@@ -54,7 +54,10 @@ def register(payload: UserCreate, db: Session = Depends(get_db)):
     db.add(user)
     db.commit()
     db.refresh(user)
-    return UserOut.model_validate(user)
+    
+    # Return Token (with access_token) for immediate login capability
+    token = create_access_token(data={"sub": str(user.id), "role": user.role})
+    return Token(access_token=token, user=UserOut.model_validate(user))
 
 
 @router.post("/login", response_model=Token)
