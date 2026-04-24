@@ -23,6 +23,7 @@ import ClientOverview from "./pages/client/Overview";
 import ClientProgress from "./pages/client/Progress";
 import ClientUpdates from "./pages/client/Updates";
 import ClientQueriesPage from "./pages/client/QueriesPage";
+import ClientProjectDetail from "./pages/client/ProjectDetail";
 
 function RootRedirect() {
   const { user } = useAuth();
@@ -71,6 +72,7 @@ export default function App() {
               <Route index element={<AdminDashboard />} />
               <Route path="approvals" element={<ApprovalRequests />} />
               <Route path="projects" element={<AdminProjects />} />
+              <Route path="projects/:id" element={<BuilderProjectDetail />} />
             </Route>
 
             {/* ── Client ── */}
@@ -86,6 +88,7 @@ export default function App() {
               <Route path="progress" element={<ClientProgress />} />
               <Route path="updates" element={<ClientUpdates />} />
               <Route path="queries" element={<ClientQueriesPage />} />
+              <Route path="projects/:id" element={<ClientProjectDetail />} />
             </Route>
 
             <Route path="*" element={<Navigate to="/" replace />} />

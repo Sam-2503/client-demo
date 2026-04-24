@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import api from '../../api/client'
 import { useToast } from '../../components/Toast'
 import type { Project } from '../../types'
@@ -7,6 +8,7 @@ export default function ClientOverview() {
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
   const toast = useToast()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const load = async () => {
@@ -98,7 +100,9 @@ export default function ClientOverview() {
                         : p.status === 'on_hold'
                           ? 'var(--orange)'
                           : 'var(--gray)',
+                  cursor: 'pointer',
                 }}
+                onClick={() => navigate(`/client/projects/${p.id}`)}
               >
                 <div className="proj-card-top">
                   <div className="proj-card-hdr">

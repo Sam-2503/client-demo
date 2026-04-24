@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Card, ProgressBar, useToast } from '../../components'
 import api from '../../api/client'
 import type { Project } from '../../types'
@@ -9,6 +10,7 @@ export default function AdminProjects() {
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all')
   const toast = useToast()
+  const navigate = useNavigate()
 
   const loadProjects = async () => {
     setLoading(true)
@@ -88,9 +90,11 @@ export default function AdminProjects() {
       ) : (
         <div className="admin-projects-page-grid">
           {filteredProjects.map((project) => (
-            <Card
+            <div
               key={project.id}
               className="admin-projects-page-item"
+              onClick={() => navigate(`/builder/projects/${project.id}`)}
+              style={{ cursor: 'pointer' }}
             >
               <div className="admin-projects-page-item-header">
                 <div className="admin-projects-page-item-title-section">
@@ -149,7 +153,7 @@ export default function AdminProjects() {
                   </div>
                 )}
               </div>
-            </Card>
+            </div>
           ))}
         </div>
       )}
