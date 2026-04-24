@@ -73,17 +73,21 @@ export default function ApprovalRequests() {
         await api.post(`/api/admin/requests/${requestId}/approve`, {
           notes: notes.trim() || null,
         })
-        toast('Request approved')
+        toast('Builder approved successfully!')
       } else if (action === 'reject') {
         await api.post(`/api/admin/requests/${requestId}/reject`, {
-          rejection_reason: notes.trim(),
+          reason: notes.trim(),
         })
-        toast('Request rejected')
+        toast('Builder request rejected')
       }
 
-      await loadRequests()
       closeModal()
+      // Reload requests after brief delay to ensure DB is updated
+      setTimeout(() => {
+        loadRequests()
+      }, 300)
     } catch (err: any) {
+      console.error('Approval error:', err)
       toast(err?.response?.data?.detail || 'Failed to process request')
     } finally {
       setSubmitting(false)
@@ -130,7 +134,7 @@ export default function ApprovalRequests() {
             <div className="approval-empty-icon">✓</div>
             <div className="approval-empty-title">All caught up!</div>
             <div className="approval-empty-text">
-              No pending builder requests at this time
+              No builder requests to process
             </div>
           </div>
         ) : (
