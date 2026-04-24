@@ -43,7 +43,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const register = async (payload: RegisterRequest): Promise<User> => {
     setLoading(true)
     try {
-      await api.post('/api/auth/register', payload)
+      await api.post<any>('/api/auth/register', payload)
+      
+      // For builders, registration returns a pending request message, not a user
+      if (payload.role === 'builder') {
+        // Return a dummy user object to indicate successful registration
+        return {
+          id: '0',
+          full_name: payload.full_name,
+          email: payload.email,
+          role: 'builder',
+          is_active: false,
+        } as User
+      }
+      
+      // For clients/admins, auto-login
       return await login(payload.email, payload.password)
     } finally {
       setLoading(false)
