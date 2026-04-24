@@ -111,18 +111,24 @@ export default function BuilderProjectDetail() {
   const [saving, setSaving] = useState(false);
 
   const load = async () => {
-    if (!id) return;
+    if (!id) {
+      console.log("No project ID");
+      return;
+    }
     try {
+      console.log("Loading project:", id);
       const [pR, uR, mR] = await Promise.all([
         api.get<Project>(`/api/projects/${id}`),
         api.get<Update[]>(`/api/updates/${id}`),
         api.get<Material[]>(`/api/materials/${id}`),
       ]);
+      console.log("Project loaded:", pR.data);
       setProject(pR.data);
       setUpdates(uR.data);
       setMaterials(mR.data);
-    } catch {
-      toast("Failed to load project");
+    } catch (e: any) {
+      console.error("Failed to load project:", e);
+      toast(e?.response?.data?.detail || "Failed to load project");
       navigate("/builder/projects");
     }
   };
