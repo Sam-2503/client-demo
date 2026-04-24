@@ -26,6 +26,39 @@ async def websocket_endpoint(websocket: WebSocket, project_id: str):
 
 
 # ── REST endpoints ──────────────────────────────────────────────────────────
+@router.get("/", response_model=List[UpdateOut])
+def get_all_updates(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Get all updates accessible to the current user"""
+    if current_user.role == UserRole.admin:
+        # Admins see all updates
+        return (
+            db.query(Update)
+            .order_by(Update.created_at.desc())
+            .all()
+        )
+    elif current_user.role == UserRole.builder:
+        # Builders see updates for their own projects
+        return (
+            db.query(Update)
+            .join(Project, Update.project_id == Project.id)
+            .filter(Project.builder_id == current_user.id)
+            .order_by(Update.created_at.desc())
+            .all()
+        )
+    else:  # client
+        # Clients see updates for their own projects
+        return (
+            db.query(Update)
+            .join(Project, Update.project_id == Project.id)
+            .filter(Project.client_id == current_user.id)
+            .order_by(Update.created_at.desc())
+            .all()
+        )
+
+
 @router.post("/", response_model=UpdateOut, status_code=201)
 def post_update(
     payload: UpdateCreate,
