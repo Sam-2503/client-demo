@@ -36,12 +36,20 @@ export default function BuilderLayout() {
     navigate("/login");
   };
 
+  const isAdmin = user?.role === "admin";
+  
   const nav = [
     { to: "/builder", label: "Dashboard", ic: "◈", end: true },
-    { to: "/builder/projects", label: "Projects", ic: "🏗" },
-    { to: "/builder/updates", label: "Post Update", ic: "📢" },
-    { to: "/builder/materials", label: "Materials Log", ic: "🪵" },
-    { to: "/builder/clients", label: "Clients", ic: "👥" },
+    ...(isAdmin ? [] : [
+      { to: "/builder/projects", label: "Projects", ic: "🏗" },
+      { to: "/builder/updates", label: "Post Update", ic: "📢" },
+      { to: "/builder/materials", label: "Materials Log", ic: "🪵" },
+      { to: "/builder/clients", label: "Clients", ic: "👥" },
+    ]),
+    ...(isAdmin ? [
+      { to: "/admin/approvals", label: "Builder Approvals", ic: "✓", end: false },
+      { to: "/admin/projects", label: "All Projects", ic: "🏗" },
+    ] : []),
   ];
 
   return (
@@ -53,7 +61,7 @@ export default function BuilderLayout() {
           <div className="sb-logo-icon">RJS</div>
           <div>
             <div className="sb-logo-n">RJS Homes</div>
-            <div className="sb-logo-s">Admin Portal</div>
+            <div className="sb-logo-s">{isAdmin ? "Admin Portal" : "Builder Portal"}</div>
           </div>
         </div>
 
@@ -67,48 +75,52 @@ export default function BuilderLayout() {
         </div>
 
         {/* Project quick-switcher */}
-        <div className="sb-proj-hdr">
-          <div className="sb-proj-label">Projects</div>
-          <button
-            className="sb-proj-new"
-            onClick={() => navigate("/builder/projects")}
-          >
-            + New
-          </button>
-        </div>
+        {!isAdmin && (
+          <>
+            <div className="sb-proj-hdr">
+              <div className="sb-proj-label">Projects</div>
+              <button
+                className="sb-proj-new"
+                onClick={() => navigate("/builder/projects")}
+              >
+                + New
+              </button>
+            </div>
 
-        <div className="proj-list">
-          {projects.slice(0, 6).map((p) => (
-            <div
-              key={p.id}
-              className="proj-item"
-              onClick={() => navigate(`/builder/projects/${p.id}`)}
-            >
-              <div className="proj-item-name">{p.name}</div>
-              <div className="proj-item-meta">
-                <span
-                  style={{
-                    display: "inline-block",
-                    width: 6,
-                    height: 6,
-                    borderRadius: "50%",
-                    background: STATUS_COLOR[p.status] ?? "#444",
-                    marginRight: 5,
-                    verticalAlign: "middle",
-                  }}
-                />
-                {p.overall_progress}% · {p.status.replace("_", " ")}
-              </div>
+            <div className="proj-list">
+              {projects.slice(0, 6).map((p) => (
+                <div
+                  key={p.id}
+                  className="proj-item"
+                  onClick={() => navigate(`/builder/projects/${p.id}`)}
+                >
+                  <div className="proj-item-name">{p.name}</div>
+                  <div className="proj-item-meta">
+                    <span
+                      style={{
+                        display: "inline-block",
+                        width: 6,
+                        height: 6,
+                        borderRadius: "50%",
+                        background: STATUS_COLOR[p.status] ?? "#444",
+                        marginRight: 5,
+                        verticalAlign: "middle",
+                      }}
+                    />
+                    {p.overall_progress}% · {p.status.replace("_", " ")}
+                  </div>
+                </div>
+              ))}
+              {projects.length === 0 && (
+                <div
+                  style={{ padding: "6px 10px", fontSize: ".72rem", color: "#333" }}
+                >
+                  No projects yet
+                </div>
+              )}
             </div>
-          ))}
-          {projects.length === 0 && (
-            <div
-              style={{ padding: "6px 10px", fontSize: ".72rem", color: "#333" }}
-            >
-              No projects yet
-            </div>
-          )}
-        </div>
+          </>
+        )}
 
         {/* Nav */}
         <div className="sb-section">Tools</div>

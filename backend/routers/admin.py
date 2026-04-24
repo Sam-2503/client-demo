@@ -33,6 +33,18 @@ def get_builder_requests(
     return query.all()
 
 
+@router.get("/requests/pending/count", response_model=dict)
+def get_pending_count(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_admin),
+):
+    """Get count of pending builder requests (admin only)"""
+    count = db.query(BuilderRequest).filter(
+        BuilderRequest.status == BuilderRequestStatus.pending
+    ).count()
+    return {"count": count}
+
+
 @router.post("/requests/{request_id}/approve", response_model=dict)
 def approve_builder_request(
     request_id: UUID,

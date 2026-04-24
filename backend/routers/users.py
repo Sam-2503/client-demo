@@ -27,3 +27,21 @@ def get_clients(
         .filter(User.role == UserRole.client, User.is_active == True)
         .all()
     )
+
+
+@router.get("/builders/count", response_model=dict)
+def get_builders_count(
+    db: Session = Depends(get_db),
+):
+    """Get count of approved builders"""
+    count = db.query(User).filter(User.role == UserRole.builder).count()
+    return {"count": count}
+
+
+@router.get("/clients/count", response_model=dict)
+def get_clients_count(
+    db: Session = Depends(get_db),
+):
+    """Get count of registered clients"""
+    count = db.query(User).filter(User.role == UserRole.client).count()
+    return {"count": count}

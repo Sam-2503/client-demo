@@ -3027,3 +3027,87 @@ INFO:     127.0.0.1:41280 - "GET /api/materials HTTP/1.1" 307 Temporary Redirect
 INFO:     127.0.0.1:41280 - "GET /api/materials HTTP/1.1" 307 Temporary Redirect
 INFO:     127.0.0.1:41280 - "GET /api/materials/ HTTP/1.1" 405 Method Not Allowed
 INFO:     127.0.0.1:41280 - "GET /api/materials/ HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:40190 - "GET /api/updates HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:40190 - "GET /api/updates HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:40190 - "GET /api/updates/ HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:40190 - "GET /api/updates/ HTTP/1.1" 405 Method Not Allowed
+2026-04-24 12:39:15,490 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-04-24 12:39:15,491 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.full_name AS users_full_name, users.email AS users_email, users.hashed_password AS users_hashed_password, users.role AS users_role, users.is_active AS users_is_active, users.is_approved AS users_is_approved, users.approved_at AS users_approved_at, users.approval_notes AS users_approval_notes, users.created_at AS users_created_at 
+FROM users 
+WHERE users.id = %(id_1)s::UUID 
+ LIMIT %(param_1)s
+2026-04-24 12:39:15,491 INFO sqlalchemy.engine.Engine [cached since 659.3s ago] {'id_1': '06584038-59ae-4562-b719-e698cabdd6bb', 'param_1': 1}
+2026-04-24 12:39:15,491 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-04-24 12:39:15,491 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.full_name AS users_full_name, users.email AS users_email, users.hashed_password AS users_hashed_password, users.role AS users_role, users.is_active AS users_is_active, users.is_approved AS users_is_approved, users.approved_at AS users_approved_at, users.approval_notes AS users_approval_notes, users.created_at AS users_created_at 
+FROM users 
+WHERE users.id = %(id_1)s::UUID 
+ LIMIT %(param_1)s
+2026-04-24 12:39:15,491 INFO sqlalchemy.engine.Engine [cached since 659.3s ago] {'id_1': '06584038-59ae-4562-b719-e698cabdd6bb', 'param_1': 1}
+2026-04-24 12:39:15,714 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.full_name AS users_full_name, users.email AS users_email, users.hashed_password AS users_hashed_password, users.role AS users_role, users.is_active AS users_is_active, users.is_approved AS users_is_approved, users.approved_at AS users_approved_at, users.approval_notes AS users_approval_notes, users.created_at AS users_created_at 
+FROM users 
+WHERE users.role = %(role_1)s AND users.is_active = true
+2026-04-24 12:39:15,714 INFO sqlalchemy.engine.Engine [cached since 495s ago] {'role_1': 'client'}
+2026-04-24 12:39:15,716 INFO sqlalchemy.engine.Engine SELECT projects.id AS projects_id, projects.name AS projects_name, projects.description AS projects_description, projects.location AS projects_location, projects.status AS projects_status, projects.overall_progress AS projects_overall_progress, projects.start_date AS projects_start_date, projects.expected_end_date AS projects_expected_end_date, projects.created_at AS projects_created_at, projects.updated_at AS projects_updated_at, projects.client_id AS projects_client_id, projects.builder_id AS projects_builder_id 
+FROM projects
+2026-04-24 12:39:15,716 INFO sqlalchemy.engine.Engine [cached since 659.4s ago] {}
+INFO:     127.0.0.1:50384 - "GET /api/users/clients HTTP/1.1" 200 OK
+2026-04-24 12:39:15,826 INFO sqlalchemy.engine.Engine COMMIT
+INFO:     127.0.0.1:40190 - "GET /api/projects/ HTTP/1.1" 200 OK
+2026-04-24 12:39:15,828 INFO sqlalchemy.engine.Engine COMMIT
+2026-04-24 12:39:15,829 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-04-24 12:39:15,830 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.full_name AS users_full_name, users.email AS users_email, users.hashed_password AS users_hashed_password, users.role AS users_role, users.is_active AS users_is_active, users.is_approved AS users_is_approved, users.approved_at AS users_approved_at, users.approval_notes AS users_approval_notes, users.created_at AS users_created_at 
+FROM users 
+WHERE users.id = %(id_1)s::UUID 
+ LIMIT %(param_1)s
+2026-04-24 12:39:15,830 INFO sqlalchemy.engine.Engine [cached since 659.7s ago] {'id_1': '06584038-59ae-4562-b719-e698cabdd6bb', 'param_1': 1}
+2026-04-24 12:39:15,831 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-04-24 12:39:15,831 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.full_name AS users_full_name, users.email AS users_email, users.hashed_password AS users_hashed_password, users.role AS users_role, users.is_active AS users_is_active, users.is_approved AS users_is_approved, users.approved_at AS users_approved_at, users.approval_notes AS users_approval_notes, users.created_at AS users_created_at 
+FROM users 
+WHERE users.id = %(id_1)s::UUID 
+ LIMIT %(param_1)s
+2026-04-24 12:39:15,831 INFO sqlalchemy.engine.Engine [cached since 659.7s ago] {'id_1': '06584038-59ae-4562-b719-e698cabdd6bb', 'param_1': 1}
+2026-04-24 12:39:16,015 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.full_name AS users_full_name, users.email AS users_email, users.hashed_password AS users_hashed_password, users.role AS users_role, users.is_active AS users_is_active, users.is_approved AS users_is_approved, users.approved_at AS users_approved_at, users.approval_notes AS users_approval_notes, users.created_at AS users_created_at 
+FROM users 
+WHERE users.role = %(role_1)s AND users.is_active = true
+2026-04-24 12:39:16,015 INFO sqlalchemy.engine.Engine [cached since 495.3s ago] {'role_1': 'client'}
+2026-04-24 12:39:16,024 INFO sqlalchemy.engine.Engine SELECT projects.id AS projects_id, projects.name AS projects_name, projects.description AS projects_description, projects.location AS projects_location, projects.status AS projects_status, projects.overall_progress AS projects_overall_progress, projects.start_date AS projects_start_date, projects.expected_end_date AS projects_expected_end_date, projects.created_at AS projects_created_at, projects.updated_at AS projects_updated_at, projects.client_id AS projects_client_id, projects.builder_id AS projects_builder_id 
+FROM projects
+2026-04-24 12:39:16,024 INFO sqlalchemy.engine.Engine [cached since 659.7s ago] {}
+INFO:     127.0.0.1:40190 - "GET /api/projects/ HTTP/1.1" 200 OK
+2026-04-24 12:39:16,120 INFO sqlalchemy.engine.Engine COMMIT
+INFO:     127.0.0.1:50384 - "GET /api/users/clients HTTP/1.1" 200 OK
+2026-04-24 12:39:16,198 INFO sqlalchemy.engine.Engine COMMIT
+INFO:     127.0.0.1:54404 - "GET /api/updates HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:54404 - "GET /api/updates HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:54404 - "GET /api/updates/ HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:54404 - "GET /api/updates/ HTTP/1.1" 405 Method Not Allowed
+2026-04-24 12:39:38,289 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-04-24 12:39:38,292 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.full_name AS users_full_name, users.email AS users_email, users.hashed_password AS users_hashed_password, users.role AS users_role, users.is_active AS users_is_active, users.is_approved AS users_is_approved, users.approved_at AS users_approved_at, users.approval_notes AS users_approval_notes, users.created_at AS users_created_at 
+FROM users 
+WHERE users.id = %(id_1)s::UUID 
+ LIMIT %(param_1)s
+2026-04-24 12:39:38,292 INFO sqlalchemy.engine.Engine [cached since 682.1s ago] {'id_1': '06584038-59ae-4562-b719-e698cabdd6bb', 'param_1': 1}
+2026-04-24 12:39:38,494 INFO sqlalchemy.engine.Engine SELECT projects.id AS projects_id, projects.name AS projects_name, projects.description AS projects_description, projects.location AS projects_location, projects.status AS projects_status, projects.overall_progress AS projects_overall_progress, projects.start_date AS projects_start_date, projects.expected_end_date AS projects_expected_end_date, projects.created_at AS projects_created_at, projects.updated_at AS projects_updated_at, projects.client_id AS projects_client_id, projects.builder_id AS projects_builder_id 
+FROM projects
+2026-04-24 12:39:38,495 INFO sqlalchemy.engine.Engine [cached since 682.1s ago] {}
+INFO:     127.0.0.1:54404 - "GET /api/projects/ HTTP/1.1" 200 OK
+2026-04-24 12:39:38,601 INFO sqlalchemy.engine.Engine COMMIT
+2026-04-24 12:39:38,605 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-04-24 12:39:38,606 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.full_name AS users_full_name, users.email AS users_email, users.hashed_password AS users_hashed_password, users.role AS users_role, users.is_active AS users_is_active, users.is_approved AS users_is_approved, users.approved_at AS users_approved_at, users.approval_notes AS users_approval_notes, users.created_at AS users_created_at 
+FROM users 
+WHERE users.id = %(id_1)s::UUID 
+ LIMIT %(param_1)s
+2026-04-24 12:39:38,606 INFO sqlalchemy.engine.Engine [cached since 682.5s ago] {'id_1': '06584038-59ae-4562-b719-e698cabdd6bb', 'param_1': 1}
+2026-04-24 12:39:38,834 INFO sqlalchemy.engine.Engine SELECT projects.id AS projects_id, projects.name AS projects_name, projects.description AS projects_description, projects.location AS projects_location, projects.status AS projects_status, projects.overall_progress AS projects_overall_progress, projects.start_date AS projects_start_date, projects.expected_end_date AS projects_expected_end_date, projects.created_at AS projects_created_at, projects.updated_at AS projects_updated_at, projects.client_id AS projects_client_id, projects.builder_id AS projects_builder_id 
+FROM projects
+2026-04-24 12:39:38,834 INFO sqlalchemy.engine.Engine [cached since 682.5s ago] {}
+INFO:     127.0.0.1:54404 - "GET /api/projects/ HTTP/1.1" 200 OK
+2026-04-24 12:39:38,944 INFO sqlalchemy.engine.Engine COMMIT
+INFO:     127.0.0.1:54404 - "GET /api/materials HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:54404 - "GET /api/materials HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:54404 - "GET /api/materials/ HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:54404 - "GET /api/materials/ HTTP/1.1" 405 Method Not Allowed
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [188571]
