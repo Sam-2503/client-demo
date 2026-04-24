@@ -1,8 +1,9 @@
-import { Outlet, NavLink } from 'react-router-dom'
+import { Outlet, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 
 export default function ClientLayout() {
-  const { user } = useAuth()
+  const { user, logout } = useAuth()
+  const navigate = useNavigate()
 
   const initials =
     user?.full_name
@@ -11,6 +12,11 @@ export default function ClientLayout() {
       .join('')
       .toUpperCase()
       .slice(0, 2) ?? 'C'
+
+  const doLogout = () => {
+    logout()
+    navigate('/login')
+  }
 
   const nav = [
     { to: '/client', label: 'Overview', icon: '◈', end: true },
@@ -53,6 +59,12 @@ export default function ClientLayout() {
             {n.label}
           </NavLink>
         ))}
+
+        <div className="sb-foot">
+          <button className="sb-logout" onClick={doLogout}>
+            Sign Out
+          </button>
+        </div>
       </div>
 
       {/* ── MAIN ── */}
