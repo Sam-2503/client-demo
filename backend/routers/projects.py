@@ -52,10 +52,23 @@ def get_project(
     if not project:
         raise HTTPException(status_code=404, detail="Project not found")
 
-    if current_user.role == UserRole.client and project.client_id != current_user.id:
-        raise HTTPException(status_code=403, detail="Access denied")
-
-    return project
+    # Admin can access any project
+    if current_user.role == UserRole.admin:
+        return project
+    
+    # Clients can see only their projects
+    if current_user.role == UserRole.client:
+        if project.client_id != current_user.id:
+            raise HTTPException(status_code=403, detail="Access denied")
+        return project
+    
+    # Builders can see their own projects
+    if current_user.role == UserRole.builder:
+        if project.builder_id != current_user.id:
+            raise HTTPException(status_code=403, detail="Access denied")
+        return project
+    
+    raise HTTPException(status_code=403, detail="Access denied")
 
 
 @router.patch("/{project_id}", response_model=ProjectOut)
