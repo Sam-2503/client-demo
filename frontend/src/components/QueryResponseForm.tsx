@@ -14,7 +14,7 @@ export default function QueryResponseForm({
   onSubmit,
   loading = false,
 }: QueryResponseFormProps) {
-  const [response, setResponse] = useState('')
+  const [answer, setAnswer] = useState('')
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
 
@@ -22,7 +22,7 @@ export default function QueryResponseForm({
     e.preventDefault()
     setError('')
 
-    if (!response.trim()) {
+    if (!answer.trim()) {
       setError('Response is required')
       return
     }
@@ -30,9 +30,9 @@ export default function QueryResponseForm({
     setSubmitting(true)
     try {
       await onSubmit({
-        response: response.trim(),
+        answer: answer.trim(),
       })
-      setResponse('')
+      setAnswer('')
     } catch (err: any) {
       setError(err?.response?.data?.detail || err?.message || 'Failed to submit response')
     } finally {
@@ -43,20 +43,13 @@ export default function QueryResponseForm({
   return (
     <Card className="query-response-card">
       <div className="query-response-header">
-        <h3 className="query-response-title">Respond to Query</h3>
+        <h3 className="query-response-title">Respond to Question</h3>
         <div className="query-response-question">
-          <strong>{query.title}</strong>
+          <strong>{query.question}</strong>
         </div>
       </div>
 
       <form onSubmit={handleSubmit} className="query-response-form">
-        {query.description && (
-          <div className="query-response-context">
-            <div className="query-response-label">Context:</div>
-            <div className="query-response-text">{query.description}</div>
-          </div>
-        )}
-
         <div className="query-response-group">
           <label htmlFor="response-text" className="query-response-label">
             Your Response
@@ -65,8 +58,8 @@ export default function QueryResponseForm({
             id="response-text"
             className="query-response-textarea"
             placeholder="Provide your detailed response..."
-            value={response}
-            onChange={(e) => setResponse(e.target.value)}
+            value={answer}
+            onChange={(e) => setAnswer(e.target.value)}
             disabled={submitting || loading}
             rows={4}
           />

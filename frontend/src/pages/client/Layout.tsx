@@ -22,6 +22,7 @@ export default function ClientLayout() {
     { to: '/client', label: 'Overview', icon: '◈', end: true },
     { to: '/client/progress', label: 'Progress', icon: '📈' },
     { to: '/client/updates', label: 'Updates', icon: '📝' },
+    { to: '/client/queries', label: 'Questions', icon: '❓' },
   ]
 
   return (

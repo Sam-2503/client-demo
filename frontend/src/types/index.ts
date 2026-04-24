@@ -151,23 +151,21 @@ export interface BuilderRequest {
 
 export interface Query {
   id: string;
-  title: string;
-  description: string | null;
-  status: "open" | "answered" | "resolved";
   project_id: string;
-  client_id: string;
-  builder_id?: string | null;
-  response?: string | null;
+  asked_by_id: string;
+  answered_by_id: string | null;
+  question: string;
+  answer: string | null;
+  status: "open" | "resolved";
   created_at: string;
-  updated_at: string;
+  resolved_at: string | null;
 }
 
 export interface CreateQueryRequest {
-  title: string;
-  description: string | null;
   project_id: string;
+  question: string;
 }
 
 export interface RespondToQueryRequest {
-  response: string;
+  answer: string;
 }

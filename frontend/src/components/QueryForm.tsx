@@ -14,8 +14,7 @@ export default function QueryForm({
   onSubmit,
   loading = false,
 }: QueryFormProps) {
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
+  const [question, setQuestion] = useState('')
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
 
@@ -23,22 +22,20 @@ export default function QueryForm({
     e.preventDefault()
     setError('')
 
-    if (!title.trim()) {
-      setError('Question title is required')
+    if (!question.trim()) {
+      setError('Question is required')
       return
     }
 
     setSubmitting(true)
     try {
       await onSubmit({
-        title: title.trim(),
-        description: description.trim() || null,
+        question: question.trim(),
         project_id: projectId,
       })
-      setTitle('')
-      setDescription('')
+      setQuestion('')
     } catch (err: any) {
-      setError(err?.response?.data?.detail || err?.message || 'Failed to submit query')
+      setError(err?.response?.data?.detail || err?.message || 'Failed to submit question')
     } finally {
       setSubmitting(false)
     }
@@ -50,29 +47,14 @@ export default function QueryForm({
         <h3 className="query-form-title">Ask a Question</h3>
 
         <Input
-          label="Question Title"
-          placeholder="e.g., When will plumbing start?"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          error={error && !title.trim() ? error : ''}
+          label="Your Question"
+          placeholder="e.g., When will plumbing start? What's the timeline for completion?"
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
+          error={error && !question.trim() ? error : ''}
           disabled={submitting || loading}
           fullWidth
         />
-
-        <div className="query-form-group">
-          <label htmlFor="query-desc" className="query-form-label">
-            Details (optional)
-          </label>
-          <textarea
-            id="query-desc"
-            className="query-form-textarea"
-            placeholder="Provide more context if needed..."
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            disabled={submitting || loading}
-            rows={3}
-          />
-        </div>
 
         {error && <div className="query-form-error">{error}</div>}
 

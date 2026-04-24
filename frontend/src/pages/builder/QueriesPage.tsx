@@ -8,7 +8,7 @@ export default function QueriesPage() {
   const [queries, setQueries] = useState<Query[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedQuery, setSelectedQuery] = useState<Query | null>(null)
-  const [filter, setFilter] = useState<'all' | 'open' | 'answered' | 'resolved'>('all')
+  const [filter, setFilter] = useState<'all' | 'open' | 'resolved'>('all')
   const toast = useToast()
 
   const loadQueries = async () => {
@@ -48,7 +48,6 @@ export default function QueriesPage() {
   const statusCounts = {
     all: queries.length,
     open: queries.filter((q) => q.status === 'open').length,
-    answered: queries.filter((q) => q.status === 'answered').length,
     resolved: queries.filter((q) => q.status === 'resolved').length,
   }
 
@@ -57,7 +56,7 @@ export default function QueriesPage() {
       {/* Header */}
       <div className="queries-page-header">
         <div className="queries-page-title-section">
-          <h1 className="queries-page-title">Client Queries</h1>
+          <h1 className="queries-page-title">Client Questions</h1>
           <p className="queries-page-subtitle">
             Respond to client questions about projects
           </p>
@@ -77,12 +76,6 @@ export default function QueriesPage() {
           onClick={() => setFilter('open')}
         >
           Open ({statusCounts.open})
-        </button>
-        <button
-          className={`queries-page-tab ${filter === 'answered' ? 'active' : ''}`}
-          onClick={() => setFilter('answered')}
-        >
-          Answered ({statusCounts.answered})
         </button>
         <button
           className={`queries-page-tab ${filter === 'resolved' ? 'active' : ''}`}

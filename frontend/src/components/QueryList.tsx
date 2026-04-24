@@ -10,7 +10,6 @@ interface QueryListProps {
 
 const STATUS_BADGE: Record<string, 'active' | 'done' | 'pending'> = {
   open: 'active',
-  answered: 'active',
   resolved: 'done',
 }
 
@@ -23,7 +22,7 @@ export default function QueryList({
     return (
       <div className="query-list">
         <Card>
-          <div className="query-list-loading">Loading queries...</div>
+          <div className="query-list-loading">Loading questions...</div>
         </Card>
       </div>
     )
@@ -37,7 +36,7 @@ export default function QueryList({
             <div className="query-list-empty-icon">💬</div>
             <div className="query-list-empty-text">No questions yet</div>
             <div className="query-list-empty-subtext">
-              Your questions will appear here
+              Ask your first question above
             </div>
           </div>
         </Card>
@@ -55,20 +54,16 @@ export default function QueryList({
         >
           <Card className="query-item" hoverable={!!onSelect}>
             <div className="query-item-header">
-              <h3 className="query-item-title">{query.title}</h3>
+              <h3 className="query-item-title">{query.question}</h3>
               <Badge status={STATUS_BADGE[query.status]}>
                 {query.status}
               </Badge>
             </div>
 
-            {query.description && (
-              <p className="query-item-description">{query.description}</p>
-            )}
-
-            {query.response && (
+            {query.answer && (
               <div className="query-item-response">
-                <div className="query-item-response-label">Response:</div>
-                <div className="query-item-response-text">{query.response}</div>
+                <div className="query-item-response-label">Response from builder:</div>
+                <div className="query-item-response-text">{query.answer}</div>
               </div>
             )}
 
