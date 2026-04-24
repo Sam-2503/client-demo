@@ -1,11 +1,11 @@
 import uuid
 from datetime import datetime
 from typing import Optional
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, field_serializer
 
 
 class BuilderRequestOut(BaseModel):
-    id: str = Field(..., description="Request ID")
+    id: uuid.UUID = Field(..., description="Request ID")
     email: EmailStr
     full_name: str
     phone: Optional[str] = None
@@ -17,20 +17,10 @@ class BuilderRequestOut(BaseModel):
 
     class Config:
         from_attributes = True
-        
-    @staticmethod
-    def from_orm(obj):
-        return BuilderRequestOut(
-            id=str(obj.id),
-            email=obj.email,
-            full_name=obj.full_name,
-            phone=obj.phone,
-            company_name=obj.company_name,
-            status=obj.status,
-            rejection_reason=obj.rejection_reason,
-            created_at=obj.created_at,
-            reviewed_at=obj.reviewed_at,
-        )
+    
+    @field_serializer('id')
+    def serialize_id(self, value: uuid.UUID) -> str:
+        return str(value)
 
 
 class ApproveBuilderRequest(BaseModel):

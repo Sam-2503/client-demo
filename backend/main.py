@@ -2,6 +2,7 @@ import models.material
 import models.builder_request
 import models.project
 import models.update
+import models.query
 
 # Import all models so Base knows about them before create_all
 import models.user
