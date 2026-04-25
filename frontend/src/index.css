@@ -78,7 +78,7 @@ body {
     font-family: var(--font-sans);
     background: var(--dark);
     color: var(--white);
-    overflow: hidden;
+    overflow-y: auto;
     scroll-behavior: smooth;
 }
 
@@ -88,8 +88,8 @@ html {
 }
 
 #root {
-    height: 100%;
     width: 100%;
+    min-height: 100vh;
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
