@@ -104,6 +104,7 @@ export default function BuilderProjectDetail() {
   const [materials, setMaterials] = useState<Material[]>([]);
   const [queries, setQueries] = useState<Query[]>([]);
   const [tab, setTab] = useState<Tab>("updates");
+  const [lastError, setLastError] = useState<string>("");
 
   const [showUpd, setShowUpd] = useState(false);
   const [showMat, setShowMat] = useState(false);
@@ -117,25 +118,49 @@ export default function BuilderProjectDetail() {
   const load = async () => {
     if (!id) {
       console.log("No project ID");
+      setLastError("No project ID");
       return;
     }
     try {
       console.log("Loading project:", id);
-      const [pR, uR, mR, qR] = await Promise.all([
-        api.get<Project>(`/api/projects/${id}`),
-        api.get<Update[]>(`/api/updates/${id}`),
-        api.get<Material[]>(`/api/materials/${id}`),
-        api.get<Query[]>(`/api/queries?project_id=${id}`),
+      const token = localStorage.getItem("rjs_token");
+      console.log("Token present:", !!token);
+      if (token) console.log("Token:", token.substring(0, 30) + "...");
+      
+      // Load each endpoint separately to identify which one fails
+      console.log("Calling /api/projects/" + id);
+      const projRes = await api.get<Project>(`/api/projects/${id}`);
+      console.log("✓ Project loaded:", projRes.data);
+      
+      const [uR, mR, qR] = await Promise.all([
+        api.get<Update[]>(`/api/updates/${id}`).catch(e => {
+          console.warn("Updates load error:", e?.response?.status, e?.message);
+          return { data: [] };
+        }),
+        api.get<Material[]>(`/api/materials/${id}`).catch(e => {
+          console.warn("Materials load error:", e?.response?.status, e?.message);
+          return { data: [] };
+        }),
+        api.get<Query[]>(`/api/queries?project_id=${id}`).catch(e => {
+          console.warn("Queries load error:", e?.response?.status, e?.message);
+          return { data: [] };
+        }),
       ]);
-      console.log("Project loaded:", pR.data);
-      setProject(pR.data);
+      
+      console.log("✓ All data loaded, setting state...");
+      setProject(projRes.data);
       setUpdates(uR.data);
       setMaterials(mR.data);
       setQueries(qR.data);
+      setLastError("");
+      console.log("✓ State updated, component should render");
     } catch (e: any) {
-      console.error("Failed to load project:", e);
-      toast(e?.response?.data?.detail || "Failed to load project");
-      navigate("/builder/projects");
+      const errMsg = e?.response?.data?.detail || e?.message || "Unknown error";
+      setLastError(errMsg);
+      console.error("Failed to load project - Error:", errMsg);
+      console.error("Status:", e?.response?.status);
+      console.error("Full response:", e?.response?.data);
+      toast(errMsg);
     }
   };
 
@@ -238,11 +263,19 @@ export default function BuilderProjectDetail() {
     return (
       <>
         <div className="topbar">
-          <div className="tb-title">Loading…</div>
+          <div className="tb-title">Loading Project…</div>
         </div>
         <div className="content">
           <div className="empty">
             <div className="empty-ic">⏳</div>
+            <div style={{ marginTop: "1rem", fontSize: ".9rem", color: "var(--gray)" }}>
+              Project ID: {id}
+            </div>
+            {lastError && (
+              <div style={{ color: "red", marginTop: "1rem", fontSize: ".9rem" }}>
+                Error: {lastError}
+              </div>
+            )}
           </div>
         </div>
       </>
