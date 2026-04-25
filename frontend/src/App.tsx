@@ -4,6 +4,8 @@ import { ToastProvider } from "./components/Toast";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import Login from "./pages/Login";
+import Homepage from "./pages/public/Homepage";
+import Services from "./pages/public/Services";
 
 import BuilderLayout from "./pages/builder/Layout";
 import BuilderDashboard from "./pages/builder/Dashboard";
@@ -27,7 +29,7 @@ import ClientProjectDetail from "./pages/client/ProjectDetail";
 
 function RootRedirect() {
   const { user } = useAuth();
-  if (!user) return <Navigate to="/login" replace />;
+  if (!user) return <Navigate to="/home" replace />;
   return (
     <Navigate to={user.role === "client" ? "/client" : user.role === "admin" ? "/admin" : "/builder"} replace />
   );
@@ -40,6 +42,8 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<RootRedirect />} />
+            <Route path="/home" element={<Homepage />} />
+            <Route path="/services" element={<Services />} />
             <Route path="/login" element={<Login />} />
 
             {/* ── Builder / Admin ── */}
