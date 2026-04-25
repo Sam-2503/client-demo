@@ -1,4 +1,5 @@
 import enum
+import uuid as uuid_module
 from datetime import datetime
 
 from database import Base
@@ -33,15 +34,23 @@ class WorkCategory(str, enum.Enum):
 class Update(Base):
     __tablename__ = "updates"
 
-    id = Column(UUID, primary_key=True)
+    id = Column(UUID, primary_key=True, default=uuid_module.uuid4)
     project_id = Column(UUID, ForeignKey("projects.id"))
 
     title = Column(String)
     description = Column(Text)
-
-    media = Column(JSON)  # list of {type, url}
-
-    progress = Column(Integer)  # % completion
+    
+    # Category of work being done
+    category = Column(Enum(WorkCategory), default=WorkCategory.other)
+    
+    # Progress as percentage
+    progress_percentage = Column(Float, default=0.0)
+    
+    # Photos/URLs for this update
+    photo_urls = Column(JSON, default=list)  # list of URLs
+    
+    # Who posted this update
+    posted_by = Column(UUID, ForeignKey("users.id"))
 
     created_at = Column(DateTime, default=datetime.utcnow)
 

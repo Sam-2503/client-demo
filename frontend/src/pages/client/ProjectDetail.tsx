@@ -21,17 +21,19 @@ export default function ClientProjectDetail() {
     if (!id) return
     setLoading(true)
     try {
+      console.log('Loading project:', id)
       const [projRes, updatesRes, queriesRes] = await Promise.all([
         api.get<Project>(`/api/projects/${id}`),
-        api.get<Update[]>(`/api/updates?project_id=${id}`),
+        api.get<Update[]>(`/api/updates/${id}`),
         api.get<Query[]>(`/api/queries?project_id=${id}`),
       ])
+      console.log('Project loaded:', projRes.data)
       setProject(projRes.data)
       setUpdates(updatesRes.data)
       setQueries(queriesRes.data)
     } catch (err: any) {
+      console.error('Load error:', err?.response?.status, err?.response?.data?.detail, err)
       toast(err?.response?.data?.detail || 'Failed to load project')
-      console.error('Load error:', err)
     } finally {
       setLoading(false)
     }
