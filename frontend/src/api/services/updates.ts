@@ -4,7 +4,7 @@ import type { Update, CreateUpdateRequest } from '../../types'
 export const updateService = {
   getByProject: async (projectId: string): Promise<Update[]> => {
     const response = await api.get<Update[]>(
-      `/api/updates?project_id=${projectId}`
+      `/api/updates/${projectId}`
     )
     return response.data
   },
