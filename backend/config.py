@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     DATABASE_URL: str
     FRONTEND_URL: str = "http://localhost:5173"
+    ALLOWED_ORIGINS: str = ""  # Comma-separated list of additional origins
 
     class Config:
         env_file = ".env"

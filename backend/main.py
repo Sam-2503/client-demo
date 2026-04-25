@@ -28,14 +28,27 @@ print("✅ Database tables ready")
 app = FastAPI(title=settings.APP_NAME, version="1.0.0")
 
 # ── CORS ──────────────────────────────────────────────────────────────────────
+# Build CORS origins list
+cors_origins = [
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "https://localhost:3000",
+    "https://localhost:5173",
+]
+
+# Add FRONTEND_URL from environment if set
+if settings.FRONTEND_URL and settings.FRONTEND_URL not in cors_origins:
+    cors_origins.append(settings.FRONTEND_URL)
+
+# Support multiple domains if needed (comma-separated in env)
+if hasattr(settings, 'ALLOWED_ORIGINS') and settings.ALLOWED_ORIGINS:
+    allowed = settings.ALLOWED_ORIGINS.split(",")
+    cors_origins.extend([origin.strip() for origin in allowed])
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        settings.FRONTEND_URL,
-        "http://localhost:3000",
-        "http://localhost:5173",
-        "http://localhost:5174",
-    ],
+    allow_origins=cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
