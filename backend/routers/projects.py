@@ -18,14 +18,20 @@ def create_project(
     db: Session = Depends(get_db),
     current_user: User = Depends(require_builder),
 ):
-    # Check if builder is approved
+    # Check if builder is approved (for non-admins)
     if current_user.role == UserRole.builder and not current_user.is_approved:
         raise HTTPException(
             status_code=403,
             detail="Only approved builders can create projects"
         )
     
-    project = Project(**payload.model_dump(), builder_id=current_user.id)
+    # Admin can specify builder_id, otherwise use current user
+    builder_id = payload.builder_id if payload.builder_id else current_user.id
+    
+    # Remove builder_id from payload dict since we're setting it explicitly
+    project_data = payload.model_dump(exclude={'builder_id'})
+    project = Project(**project_data, builder_id=builder_id)
+    
     db.add(project)
     db.commit()
     db.refresh(project)

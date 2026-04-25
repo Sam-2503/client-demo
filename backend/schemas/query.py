@@ -13,6 +13,16 @@ class QueryRespond(BaseModel):
     answer: str
 
 
+class UserBasic(BaseModel):
+    """Basic user info for queries"""
+    id: UUID
+    email: str
+    full_name: str
+    
+    class Config:
+        from_attributes = True
+
+
 class QueryOut(BaseModel):
     id: UUID
     project_id: UUID
@@ -28,7 +38,19 @@ class QueryOut(BaseModel):
         from_attributes = True
 
 
-class QueryDetailOut(QueryOut):
+class QueryDetailOut(BaseModel):
     """Extended query with user details"""
-    asked_by: Optional[dict] = None  # User info who asked
-    answered_by: Optional[dict] = None  # User info who answered
+    id: UUID
+    project_id: UUID
+    asked_by_id: UUID
+    answered_by_id: Optional[UUID] = None
+    question: str
+    answer: Optional[str] = None
+    status: str
+    created_at: datetime
+    resolved_at: Optional[datetime] = None
+    asked_by: Optional[UserBasic] = None
+    answered_by: Optional[UserBasic] = None
+    
+    class Config:
+        from_attributes = True

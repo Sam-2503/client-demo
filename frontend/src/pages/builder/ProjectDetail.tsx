@@ -6,6 +6,7 @@ import type {
   Project,
   Update,
   Material,
+  Query,
   ProjectStatus,
   WorkCategory,
   MaterialType,
@@ -91,7 +92,7 @@ const EMPTY_MAT: MaterialForm = {
   supplier: null,
 };
 
-type Tab = "updates" | "materials" | "info";
+type Tab = "updates" | "materials" | "queries" | "info";
 
 export default function BuilderProjectDetail() {
   const { id } = useParams<{ id: string }>();
@@ -101,12 +102,15 @@ export default function BuilderProjectDetail() {
   const [project, setProject] = useState<Project | null>(null);
   const [updates, setUpdates] = useState<Update[]>([]);
   const [materials, setMaterials] = useState<Material[]>([]);
+  const [queries, setQueries] = useState<Query[]>([]);
   const [tab, setTab] = useState<Tab>("updates");
 
   const [showUpd, setShowUpd] = useState(false);
   const [showMat, setShowMat] = useState(false);
+  const [showQueryResponse, setShowQueryResponse] = useState<string | null>(null);
   const [updForm, setUpdForm] = useState<CreateUpdateRequest>(EMPTY_UPD);
   const [matForm, setMatForm] = useState(EMPTY_MAT);
+  const [queryResponseText, setQueryResponseText] = useState("");
   const [photoIn, setPhotoIn] = useState("");
   const [saving, setSaving] = useState(false);
 
@@ -117,15 +121,17 @@ export default function BuilderProjectDetail() {
     }
     try {
       console.log("Loading project:", id);
-      const [pR, uR, mR] = await Promise.all([
+      const [pR, uR, mR, qR] = await Promise.all([
         api.get<Project>(`/api/projects/${id}`),
         api.get<Update[]>(`/api/updates/${id}`),
         api.get<Material[]>(`/api/materials/${id}`),
+        api.get<Query[]>(`/api/queries?project_id=${id}`),
       ]);
       console.log("Project loaded:", pR.data);
       setProject(pR.data);
       setUpdates(uR.data);
       setMaterials(mR.data);
+      setQueries(qR.data);
     } catch (e: any) {
       console.error("Failed to load project:", e);
       toast(e?.response?.data?.detail || "Failed to load project");
@@ -183,6 +189,27 @@ export default function BuilderProjectDetail() {
       load();
     } catch (e: any) {
       toast(e?.response?.data?.detail ?? "Failed");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const respondToQuery = async (queryId: string) => {
+    if (!queryResponseText.trim()) {
+      toast("Response cannot be empty");
+      return;
+    }
+    setSaving(true);
+    try {
+      await api.post(`/api/queries/${queryId}/respond`, {
+        answer: queryResponseText.trim(),
+      });
+      toast("Response posted ✓");
+      setQueryResponseText("");
+      setShowQueryResponse(null);
+      load();
+    } catch (e: any) {
+      toast(e?.response?.data?.detail ?? "Failed to post response");
     } finally {
       setSaving(false);
     }
@@ -371,6 +398,7 @@ export default function BuilderProjectDetail() {
             [
               ["updates", "📝 Updates"],
               ["materials", "🪵 Materials"],
+              ["queries", "💬 Questions"],
               ["info", "⚙ Info"],
             ] as [Tab, string][]
           ).map(([k, l]) => (
@@ -537,6 +565,164 @@ export default function BuilderProjectDetail() {
                   ₹{totalCost.toLocaleString()}
                 </span>
               </div>
+            </div>
+          ))}
+
+        {/* ── QUERIES TAB ── */}
+        {tab === "queries" &&
+          (queries.length === 0 ? (
+            <div className="empty">
+              <div className="empty-ic">💬</div>
+              <div className="empty-tx">No questions yet</div>
+            </div>
+          ) : (
+            <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+              {queries.map((q) => (
+                <div
+                  key={q.id}
+                  style={{
+                    padding: "1.5rem",
+                    background: "rgba(255, 255, 255, 0.03)",
+                    border: "1px solid var(--gray)",
+                    borderRadius: "8px",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "start",
+                      marginBottom: "1rem",
+                    }}
+                  >
+                    <h3 style={{ margin: "0 0 0.5rem 0", color: "var(--white)" }}>
+                      {q.question}
+                    </h3>
+                    <div
+                      style={{
+                        background:
+                          q.status === "resolved" ? "var(--green)" : "var(--orange)",
+                        color: "var(--black)",
+                        padding: "0.25rem 0.75rem",
+                        borderRadius: "4px",
+                        fontSize: "0.85rem",
+                        fontWeight: "600",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {q.status}
+                    </div>
+                  </div>
+
+                  {q.answer && (
+                    <div
+                      style={{
+                        padding: "1rem",
+                        background: "rgba(255, 255, 255, 0.05)",
+                        borderLeft: "3px solid var(--gold)",
+                        borderRadius: "4px",
+                        marginBottom: "1rem",
+                      }}
+                    >
+                      <div style={{ fontSize: "0.85rem", color: "var(--gray)", marginBottom: "0.5rem" }}>
+                        Your Response:
+                      </div>
+                      <div style={{ color: "var(--white)" }}>{q.answer}</div>
+                    </div>
+                  )}
+
+                  {!q.answer && (
+                    <>
+                      {showQueryResponse === q.id ? (
+                        <div
+                          style={{
+                            padding: "1rem",
+                            background: "rgba(255, 255, 255, 0.03)",
+                            border: "1px solid var(--gold)",
+                            borderRadius: "4px",
+                          }}
+                        >
+                          <textarea
+                            placeholder="Type your response..."
+                            value={queryResponseText}
+                            onChange={(e) => setQueryResponseText(e.target.value)}
+                            disabled={saving}
+                            style={{
+                              width: "100%",
+                              padding: "0.75rem",
+                              marginBottom: "1rem",
+                              background: "var(--input-bg)",
+                              border: "1px solid var(--gray)",
+                              borderRadius: "4px",
+                              color: "var(--white)",
+                              fontFamily: "inherit",
+                              fontSize: "0.95rem",
+                              minHeight: "80px",
+                              resize: "vertical",
+                            }}
+                          />
+                          <div style={{ display: "flex", gap: "1rem" }}>
+                            <button
+                              onClick={() => respondToQuery(q.id)}
+                              disabled={saving || !queryResponseText.trim()}
+                              style={{
+                                padding: "0.75rem 1.5rem",
+                                background: "var(--gold)",
+                                color: "var(--black)",
+                                border: "none",
+                                borderRadius: "4px",
+                                cursor: saving ? "not-allowed" : "pointer",
+                                fontSize: "0.95rem",
+                                fontWeight: "600",
+                                opacity: saving ? 0.6 : 1,
+                              }}
+                            >
+                              {saving ? "Posting..." : "Post Response"}
+                            </button>
+                            <button
+                              onClick={() => {
+                                setShowQueryResponse(null);
+                                setQueryResponseText("");
+                              }}
+                              disabled={saving}
+                              style={{
+                                padding: "0.75rem 1.5rem",
+                                background: "transparent",
+                                color: "var(--gray)",
+                                border: "1px solid var(--gray)",
+                                borderRadius: "4px",
+                                cursor: "pointer",
+                                fontSize: "0.95rem",
+                              }}
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => {
+                            setShowQueryResponse(q.id);
+                            setQueryResponseText("");
+                          }}
+                          style={{
+                            padding: "0.75rem 1.5rem",
+                            background: "var(--gold)",
+                            color: "var(--black)",
+                            border: "none",
+                            borderRadius: "4px",
+                            cursor: "pointer",
+                            fontSize: "0.95rem",
+                            fontWeight: "600",
+                          }}
+                        >
+                          Respond
+                        </button>
+                      )}
+                    </>
+                  )}
+                </div>
+              ))}
             </div>
           ))}
 

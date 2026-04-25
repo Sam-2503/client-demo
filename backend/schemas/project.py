@@ -13,6 +13,7 @@ class ProjectCreate(BaseModel):
     start_date: Optional[datetime] = None
     expected_end_date: Optional[datetime] = None
     client_id: uuid.UUID  # which client this project belongs to
+    builder_id: Optional[uuid.UUID] = None  # admin can specify builder, defaults to current user
 
 
 class ProjectUpdate(BaseModel):
