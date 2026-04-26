@@ -201,13 +201,19 @@ export default function BuilderProjectDetail() {
       return;
     }
     setSaving(true);
+    console.log("Posting update...");
     try {
-      await api.post("/api/updates/", { ...updForm, project_id: id });
+      const res = await api.post("/api/updates/", { ...updForm, project_id: id });
+      console.log("✓ Update posted successfully:", res.data);
       toast("Update posted ✓");
+      console.log("Resetting form and closing modal...");
       setUpdForm(EMPTY_UPD);
       setShowUpd(false);
+      console.log("Modal should be closed now. Loading fresh data...");
       await load();
+      console.log("✓ Load complete, modal should stay closed");
     } catch (e: any) {
+      console.error("✗ Failed to post update:", e);
       toast(e?.response?.data?.detail ?? "Failed");
     } finally {
       setSaving(false);
