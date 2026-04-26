@@ -204,9 +204,9 @@ export default function BuilderProjectDetail() {
     try {
       await api.post("/api/updates/", { ...updForm, project_id: id });
       toast("Update posted ✓");
-      setShowUpd(false);
       setUpdForm(EMPTY_UPD);
-      load();
+      setShowUpd(false);
+      await load();
     } catch (e: any) {
       toast(e?.response?.data?.detail ?? "Failed");
     } finally {
@@ -228,9 +228,9 @@ export default function BuilderProjectDetail() {
         unit_cost: parseFloat(matForm.unit_cost),
       });
       toast("Material logged ✓");
-      setShowMat(false);
       setMatForm(EMPTY_MAT);
-      load();
+      setShowMat(false);
+      await load();
     } catch (e: any) {
       toast(e?.response?.data?.detail ?? "Failed");
     } finally {
@@ -251,7 +251,7 @@ export default function BuilderProjectDetail() {
       toast("Response posted ✓");
       setQueryResponseText("");
       setShowQueryResponse(null);
-      load();
+      await load();
     } catch (e: any) {
       toast(e?.response?.data?.detail ?? "Failed to post response");
     } finally {
