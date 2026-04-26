@@ -113,6 +113,7 @@ export default function BuilderProjectDetail() {
   const [matForm, setMatForm] = useState(EMPTY_MAT);
   const [queryResponseText, setQueryResponseText] = useState("");
   const [photoIn, setPhotoIn] = useState("");
+  const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const [saving, setSaving] = useState(false);
 
   const load = async () => {
@@ -176,19 +177,43 @@ export default function BuilderProjectDetail() {
     }
   };
 
+  const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingPhoto(true);
+    try {
+      const { updateService } = await import("../../api/services/updates");
+      const result = await updateService.uploadImage(file);
+      setUpdForm((f) => ({ ...f, photo_urls: [...f.photo_urls, result.url] }));
+      toast("Image uploaded ✓");
+    } catch (err: any) {
+      toast(err?.response?.data?.detail ?? "Failed to upload image");
+    } finally {
+      setUploadingPhoto(false);
+      e.target.value = "";
+    }
+  };
+
   const postUpdate = async () => {
     if (!updForm.title) {
       toast("Title is required");
       return;
     }
     setSaving(true);
+    console.log("Posting update...");
     try {
-      await api.post("/api/updates/", { ...updForm, project_id: id });
+      const res = await api.post("/api/updates/", { ...updForm, project_id: id });
+      console.log("✓ Update posted successfully:", res.data);
       toast("Update posted ✓");
-      setShowUpd(false);
+      console.log("Resetting form and closing modal...");
       setUpdForm(EMPTY_UPD);
-      load();
+      setShowUpd(false);
+      console.log("Modal should be closed now. Loading fresh data...");
+      await load();
+      console.log("✓ Load complete, modal should stay closed");
     } catch (e: any) {
+      console.error("✗ Failed to post update:", e);
       toast(e?.response?.data?.detail ?? "Failed");
     } finally {
       setSaving(false);
@@ -209,9 +234,9 @@ export default function BuilderProjectDetail() {
         unit_cost: parseFloat(matForm.unit_cost),
       });
       toast("Material logged ✓");
-      setShowMat(false);
       setMatForm(EMPTY_MAT);
-      load();
+      setShowMat(false);
+      await load();
     } catch (e: any) {
       toast(e?.response?.data?.detail ?? "Failed");
     } finally {
@@ -232,7 +257,7 @@ export default function BuilderProjectDetail() {
       toast("Response posted ✓");
       setQueryResponseText("");
       setShowQueryResponse(null);
-      load();
+      await load();
     } catch (e: any) {
       toast(e?.response?.data?.detail ?? "Failed to post response");
     } finally {
@@ -922,11 +947,27 @@ export default function BuilderProjectDetail() {
             </div>
             <div className="mf">
               <label className="ml2">Photo URLs (optional)</label>
+              <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handlePhotoUpload}
+                  disabled={uploadingPhoto}
+                  style={{ flex: 1, cursor: uploadingPhoto ? "not-allowed" : "pointer" }}
+                />
+                <button 
+                  className="btn-g btn-sm" 
+                  disabled={uploadingPhoto}
+                  style={{ opacity: uploadingPhoto ? 0.6 : 1 }}
+                >
+                  {uploadingPhoto ? "Uploading…" : "Upload"}
+                </button>
+              </div>
               <div style={{ display: "flex", gap: 8 }}>
                 <input
                   className="mi2"
                   style={{ flex: 1 }}
-                  placeholder="Paste image URL…"
+                  placeholder="Or paste image URL…"
                   value={photoIn}
                   onChange={(e) => setPhotoIn(e.target.value)}
                 />

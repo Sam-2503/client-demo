@@ -9,6 +9,11 @@ class Settings(BaseSettings):
     DATABASE_URL: str
     FRONTEND_URL: str = "http://localhost:5173"
     ALLOWED_ORIGINS: str = ""  # Comma-separated list of additional origins
+    
+    # Cloudinary configuration
+    CLOUDINARY_CLOUD_NAME: str = ""
+    CLOUDINARY_API_KEY: str = ""
+    CLOUDINARY_API_SECRET: str = ""
 
     class Config:
         env_file = ".env"

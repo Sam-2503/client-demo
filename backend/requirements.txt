@@ -14,3 +14,4 @@ websockets
 aiofiles
 httpx
 psycopg2-binary
+cloudinary

@@ -18,13 +18,13 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   const toast = useCallback((message: string) => {
     setMsg(message);
     setShow(true);
-    setTimeout(() => setShow(false), 2800);
+    setTimeout(() => setShow(false), 10000);
   }, []);
 
   return (
     <ToastContext.Provider value={toast}>
       {children}
-      <div className={`toast${show ? " show" : ""}`}>{msg}</div>
+      {show && <div className="toast">{msg}</div>}
     </ToastContext.Provider>
   );
 }
