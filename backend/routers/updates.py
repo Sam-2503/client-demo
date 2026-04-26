@@ -86,25 +86,29 @@ def post_update(
     # Fire and forget broadcast — run async broadcast from sync context
     import asyncio
 
-    asyncio.create_task(
-        manager.broadcast_to_project(
-            str(payload.project_id),
-            {
-                "event": "NEW_UPDATE",
-                "project_id": str(payload.project_id),
-                "update": {
-                    "id": str(update.id),
-                    "title": update.title,
-                    "category": update.category,
-                    "progress_percentage": update.progress_percentage,
-                    "description": update.description,
-                    "photo_urls": update.photo_urls,
-                    "posted_by": str(update.posted_by),
-                    "created_at": update.created_at.isoformat(),
+    try:
+        asyncio.create_task(
+            manager.broadcast_to_project(
+                str(payload.project_id),
+                {
+                    "event": "NEW_UPDATE",
+                    "project_id": str(payload.project_id),
+                    "update": {
+                        "id": str(update.id),
+                        "title": update.title,
+                        "category": update.category,
+                        "progress_percentage": update.progress_percentage,
+                        "description": update.description,
+                        "photo_urls": update.photo_urls,
+                        "posted_by": str(update.posted_by),
+                        "created_at": update.created_at.isoformat(),
+                    },
                 },
-            },
+            )
         )
-    )
+    except Exception as e:
+        print(f"⚠️  WebSocket broadcast failed (non-critical): {e}")
+    
     return update
 
 
