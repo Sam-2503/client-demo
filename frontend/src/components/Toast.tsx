@@ -24,7 +24,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   return (
     <ToastContext.Provider value={toast}>
       {children}
-      <div className={`toast${show ? " show" : ""}`}>{msg}</div>
+      {show && <div className="toast">{msg}</div>}
     </ToastContext.Provider>
   );
 }
