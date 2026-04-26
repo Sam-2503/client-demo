@@ -10,6 +10,7 @@ from config import settings
 from database import Base, engine
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from core.cloudinary_config import init_cloudinary
 
 # Import routers
 from routers.auth import router as auth_router
@@ -19,6 +20,13 @@ from routers.projects import router as projects_router
 from routers.queries import router as queries_router
 from routers.updates import router as updates_router
 from routers.users import router as users_router
+
+# ── Initialize Cloudinary ─────────────────────────────────────────────────────
+if settings.CLOUDINARY_CLOUD_NAME:
+    init_cloudinary()
+    print("✅ Cloudinary initialized")
+else:
+    print("⚠️  Cloudinary credentials not set")
 
 # ── Create all tables in Neon.tech on startup ────────────────────────────────
 Base.metadata.create_all(bind=engine)

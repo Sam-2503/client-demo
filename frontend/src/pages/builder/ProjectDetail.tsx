@@ -113,6 +113,7 @@ export default function BuilderProjectDetail() {
   const [matForm, setMatForm] = useState(EMPTY_MAT);
   const [queryResponseText, setQueryResponseText] = useState("");
   const [photoIn, setPhotoIn] = useState("");
+  const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const [saving, setSaving] = useState(false);
 
   const load = async () => {
@@ -173,6 +174,24 @@ export default function BuilderProjectDetail() {
     if (u) {
       setUpdForm((f) => ({ ...f, photo_urls: [...f.photo_urls, u] }));
       setPhotoIn("");
+    }
+  };
+
+  const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingPhoto(true);
+    try {
+      const { updateService } = await import("../../api/services/updates");
+      const result = await updateService.uploadImage(file);
+      setUpdForm((f) => ({ ...f, photo_urls: [...f.photo_urls, result.url] }));
+      toast("Image uploaded ✓");
+    } catch (err: any) {
+      toast(err?.response?.data?.detail ?? "Failed to upload image");
+    } finally {
+      setUploadingPhoto(false);
+      e.target.value = "";
     }
   };
 
@@ -922,11 +941,27 @@ export default function BuilderProjectDetail() {
             </div>
             <div className="mf">
               <label className="ml2">Photo URLs (optional)</label>
+              <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handlePhotoUpload}
+                  disabled={uploadingPhoto}
+                  style={{ flex: 1, cursor: uploadingPhoto ? "not-allowed" : "pointer" }}
+                />
+                <button 
+                  className="btn-g btn-sm" 
+                  disabled={uploadingPhoto}
+                  style={{ opacity: uploadingPhoto ? 0.6 : 1 }}
+                >
+                  {uploadingPhoto ? "Uploading…" : "Upload"}
+                </button>
+              </div>
               <div style={{ display: "flex", gap: 8 }}>
                 <input
                   className="mi2"
                   style={{ flex: 1 }}
-                  placeholder="Paste image URL…"
+                  placeholder="Or paste image URL…"
                   value={photoIn}
                   onChange={(e) => setPhotoIn(e.target.value)}
                 />

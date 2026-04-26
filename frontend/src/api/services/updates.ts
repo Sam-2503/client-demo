@@ -19,6 +19,22 @@ export const updateService = {
     return response.data
   },
 
+  uploadImage: async (file: File): Promise<{ url: string; public_id: string }> => {
+    const formData = new FormData()
+    formData.append('file', file)
+    
+    const response = await api.post<{ url: string; public_id: string }>(
+      '/api/updates/upload-image',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    )
+    return response.data
+  },
+
   delete: async (id: string): Promise<void> => {
     await api.delete(`/api/updates/${id}`)
   },

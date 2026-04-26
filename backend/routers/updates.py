@@ -2,8 +2,9 @@ import uuid
 from typing import List
 
 from core.deps import get_current_user, require_builder
+from core.cloudinary_config import upload_image
 from database import get_db
-from fastapi import APIRouter, Depends, HTTPException, WebSocket, WebSocketDisconnect
+from fastapi import APIRouter, Depends, HTTPException, WebSocket, WebSocketDisconnect, UploadFile, File
 from models.project import Project
 from models.update import Update
 from models.user import User, UserRole
@@ -126,3 +127,47 @@ def get_updates_for_project(
         .order_by(Update.created_at.desc())
         .all()
     )
+
+
+@router.post("/upload-image", status_code=200)
+async def upload_update_image(
+    file: UploadFile = File(...),
+    current_user: User = Depends(require_builder),
+):
+    """Upload an image for a project update (builders/admins only)"""
+    
+    # Validate file type
+    allowed_types = ["image/jpeg", "image/png", "image/jpg", "image/webp"]
+    if file.content_type not in allowed_types:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid file type. Allowed: {', '.join(allowed_types)}"
+        )
+    
+    # Validate file size (max 5MB)
+    file_content = await file.read()
+    if len(file_content) > 5 * 1024 * 1024:
+        raise HTTPException(
+            status_code=400,
+            detail="File size must be less than 5MB"
+        )
+    
+    try:
+        # Upload to Cloudinary
+        result = upload_image(
+            file_content,
+            filename=file.filename,
+            folder=f"rjs-homes/updates/user_{str(current_user.id)[:8]}"
+        )
+        
+        return {
+            "url": result["url"],
+            "public_id": result["public_id"],
+            "message": "Image uploaded successfully"
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to upload image: {str(e)}"
+        )
+
