@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Input, Button, Card } from ".";
-import "./styles/QueryForm.css";
 import type { CreateQueryRequest } from "../types";
 
 interface QueryFormProps {
@@ -46,9 +45,11 @@ export default function QueryForm({
 	};
 
 	return (
-		<Card className="query-form-card">
-			<form onSubmit={handleSubmit} className="query-form">
-				<h3 className="query-form-title">Ask a Question</h3>
+		<Card className="mb-6 border-brand-border-light bg-brand-card">
+			<form onSubmit={handleSubmit} className="flex flex-col gap-5">
+				<h3 className="font-serif text-xl font-semibold text-white">
+					Ask a Question
+				</h3>
 
 				<Input
 					label="Your Question"
@@ -60,14 +61,19 @@ export default function QueryForm({
 					fullWidth
 				/>
 
-				{error && <div className="query-form-error">{error}</div>}
+				{error && (
+					<div className="rounded-md border border-red-700 bg-[rgba(192,57,43,0.1)] px-4 py-3 text-sm text-red-400">
+						{error}
+					</div>
+				)}
 
-				<div className="query-form-actions">
+				<div className="flex gap-3 max-md:flex-col">
 					<Button
 						type="submit"
 						variant="primary"
 						disabled={submitting || loading}
 						isLoading={submitting || loading}
+						className="w-full max-w-[200px] max-md:max-w-none"
 					>
 						Submit Question
 					</Button>

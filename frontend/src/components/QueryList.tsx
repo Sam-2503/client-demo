@@ -1,5 +1,4 @@
 import { Badge, Card } from ".";
-import "./styles/QueryList.css";
 import type { Query } from "../types";
 
 interface QueryListProps {
@@ -20,9 +19,9 @@ export default function QueryList({
 }: QueryListProps) {
 	if (loading) {
 		return (
-			<div className="query-list">
+			<div className="flex flex-col gap-5">
 				<Card>
-					<div className="query-list-loading">
+					<div className="flex flex-col items-center justify-center px-8 py-12 text-center text-brand-muted-light">
 						Loading questions...
 					</div>
 				</Card>
@@ -32,14 +31,14 @@ export default function QueryList({
 
 	if (queries.length === 0) {
 		return (
-			<div className="query-list">
+			<div className="flex flex-col gap-5">
 				<Card>
-					<div className="query-list-empty">
-						<div className="query-list-empty-icon">💬</div>
-						<div className="query-list-empty-text">
+					<div className="flex flex-col items-center justify-center gap-4 px-8 py-12 text-center">
+						<div className="text-5xl leading-none">💬</div>
+						<div className="font-serif text-lg font-semibold text-white">
 							No questions yet
 						</div>
-						<div className="query-list-empty-subtext">
+						<div className="text-sm text-brand-muted-light">
 							Ask your first question above
 						</div>
 					</div>
@@ -49,16 +48,19 @@ export default function QueryList({
 	}
 
 	return (
-		<div className="query-list">
+		<div className="flex flex-col gap-4">
 			{queries.map((query) => (
 				<div
 					key={query.id}
-					className="query-item-wrapper"
+					className="cursor-pointer"
 					onClick={() => onSelect?.(query)}
 				>
-					<Card className="query-item" hoverable={!!onSelect}>
-						<div className="query-item-header">
-							<h3 className="query-item-title">
+					<Card
+						className="cursor-pointer border-brand-border-light bg-brand-card p-4"
+						hoverable={!!onSelect}
+					>
+						<div className="mb-4 flex items-start justify-between gap-3 max-md:flex-col">
+							<h3 className="font-serif text-lg font-semibold text-white max-md:text-base">
 								{query.question}
 							</h3>
 							<Badge status={STATUS_BADGE[query.status]}>
@@ -67,18 +69,18 @@ export default function QueryList({
 						</div>
 
 						{query.answer && (
-							<div className="query-item-response">
-								<div className="query-item-response-label">
+							<div className="my-4 rounded-sm border-l-4 border-brand-gold bg-brand-panel-light p-4">
+								<div className="mb-1 text-sm font-semibold uppercase tracking-[0.05em] text-brand-gold">
 									Response from builder:
 								</div>
-								<div className="query-item-response-text">
+								<div className="text-base leading-6 text-white">
 									{query.answer}
 								</div>
 							</div>
 						)}
 
-						<div className="query-item-meta">
-							<span className="query-item-date">
+						<div className="mt-4 flex gap-3 border-t border-brand-border pt-4 text-sm text-brand-muted">
+							<span className="flex items-center">
 								{new Date(
 									query.created_at,
 								).toLocaleDateString()}

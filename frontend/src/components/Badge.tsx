@@ -27,10 +27,10 @@ export default function Badge({
 			"border-[rgba(127,140,141,0.3)] bg-[rgba(127,140,141,0.15)] text-[#7f8c8d] hover:border-[rgba(127,140,141,0.5)] hover:bg-[rgba(127,140,141,0.25)]",
 	};
 
-	const sizeClass = {
+	const sizeClass: Record<"sm" | "md", string> = {
 		sm: "px-1.5 py-0.5",
 		md: "px-2 py-1",
-	}[size];
+	};
 
 	return (
 		<span

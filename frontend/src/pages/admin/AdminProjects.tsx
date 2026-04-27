@@ -1,9 +1,20 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Card, ProgressBar, useToast } from "../../components";
+import { ProgressBar, useToast } from "../../components";
 import api from "../../api/client";
 import type { Project } from "../../types";
-import "./styles/AdminProjects.css";
+import { cn } from "../../utils";
+
+const projectStatusClasses: Record<Project["status"], string> = {
+	planning:
+		"border-[rgba(127,140,141,0.3)] bg-[rgba(127,140,141,0.15)] text-[#7f8c8d]",
+	in_progress:
+		"border-[rgba(200,151,31,0.3)] bg-[rgba(200,151,31,0.15)] text-brand-gold",
+	on_hold:
+		"border-[rgba(230,126,34,0.3)] bg-[rgba(230,126,34,0.15)] text-[#e67e22]",
+	completed:
+		"border-[rgba(39,174,96,0.3)] bg-[rgba(39,174,96,0.15)] text-[#27ae60]",
+};
 
 export default function AdminProjects() {
 	const [projects, setProjects] = useState<Project[]>([]);
@@ -41,93 +52,103 @@ export default function AdminProjects() {
 	};
 
 	return (
-		<div className="admin-projects-page">
-			{/* Header */}
-			<div className="admin-projects-page-header">
-				<div className="admin-projects-page-title-section">
-					<h1 className="admin-projects-page-title">All Projects</h1>
-					<p className="admin-projects-page-subtitle">
-						System-wide project management
-					</p>
-				</div>
+		<div className="flex flex-col gap-6 p-6 max-md:p-4">
+			<div className="mb-2 flex flex-col gap-2">
+				<h1 className="font-serif text-[1.75rem] font-semibold text-white max-md:text-2xl">
+					All Projects
+				</h1>
+				<p className="text-sm text-brand-muted">
+					System-wide project management
+				</p>
 			</div>
 
-			{/* Filter Tabs */}
-			<div className="admin-projects-filter-tabs">
+			<div className="flex gap-4 border-b-2 border-brand-border max-md:gap-2 max-md:mb-1">
 				<button
-					className={`admin-projects-filter-tab ${filter === "all" ? "active" : ""}`}
+					type="button"
+					className={cn(
+						"relative -mb-px border-b-2 border-transparent px-4 py-3 text-sm font-medium text-brand-muted transition-colors duration-300 hover:text-brand-gold max-md:px-3 max-md:py-2 max-md:text-xs",
+						filter === "all" && "border-brand-gold text-brand-gold",
+					)}
 					onClick={() => setFilter("all")}
 				>
 					All Projects ({statusCounts.all})
 				</button>
 				<button
-					className={`admin-projects-filter-tab ${filter === "active" ? "active" : ""}`}
+					type="button"
+					className={cn(
+						"relative -mb-px border-b-2 border-transparent px-4 py-3 text-sm font-medium text-brand-muted transition-colors duration-300 hover:text-brand-gold max-md:px-3 max-md:py-2 max-md:text-xs",
+						filter === "active" && "border-brand-gold text-brand-gold",
+					)}
 					onClick={() => setFilter("active")}
 				>
 					Active ({statusCounts.active})
 				</button>
 				<button
-					className={`admin-projects-filter-tab ${filter === "completed" ? "active" : ""}`}
+					type="button"
+					className={cn(
+						"relative -mb-px border-b-2 border-transparent px-4 py-3 text-sm font-medium text-brand-muted transition-colors duration-300 hover:text-brand-gold max-md:px-3 max-md:py-2 max-md:text-xs",
+						filter === "completed" && "border-brand-gold text-brand-gold",
+					)}
 					onClick={() => setFilter("completed")}
 				>
 					Completed ({statusCounts.completed})
 				</button>
 			</div>
 
-			{/* Projects List */}
 			{loading ? (
-				<div className="admin-projects-page-loading">
+				<div className="flex min-h-[280px] items-center justify-center rounded-lg border border-brand-border bg-brand-card text-sm text-brand-muted">
 					Loading projects...
 				</div>
 			) : filteredProjects.length === 0 ? (
-				<Card className="admin-projects-page-empty">
-					<div className="admin-projects-page-empty-icon">📋</div>
-					<div className="admin-projects-page-empty-title">
+				<div className="flex min-h-[280px] flex-col items-center justify-center gap-4 rounded-lg border border-brand-border bg-brand-card px-6 py-12 text-center">
+					<div className="text-4xl">📋</div>
+					<div className="font-serif text-lg font-semibold text-white">
 						No projects found
 					</div>
-					<div className="admin-projects-page-empty-text">
+					<div className="text-sm text-brand-muted">
 						{filter === "all"
 							? "Start by creating your first project"
 							: `No ${filter} projects at this time`}
 					</div>
-				</Card>
+				</div>
 			) : (
-				<div className="admin-projects-page-grid">
+				<div className="grid gap-4 [grid-template-columns:repeat(auto-fill,minmax(400px,1fr))] max-lg:[grid-template-columns:repeat(auto-fill,minmax(350px,1fr))] max-md:grid-cols-1">
 					{filteredProjects.map((project) => (
-						<div
+						<button
 							key={project.id}
-							className="admin-projects-page-item"
-							onClick={() =>
-								navigate(`/builder/projects/${project.id}`)
-							}
-							style={{ cursor: "pointer" }}
+							type="button"
+							className="flex flex-col gap-4 rounded-lg border border-brand-border bg-brand-card p-4 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-gold hover:bg-brand-panel"
+							onClick={() => navigate(`/builder/projects/${project.id}`)}
 						>
-							<div className="admin-projects-page-item-header">
-								<div className="admin-projects-page-item-title-section">
-									<h3 className="admin-projects-page-item-title">
+							<div className="flex items-start justify-between gap-3">
+								<div className="min-w-0 flex-1">
+									<h3 className="mb-1 font-serif text-lg font-semibold text-white">
 										{project.name}
 									</h3>
 									{project.location && (
-										<p className="admin-projects-page-item-location">
+										<p className="text-sm text-brand-muted">
 											📍 {project.location}
 										</p>
 									)}
 								</div>
 								<span
-									className={`admin-projects-page-item-status admin-projects-page-status-${project.status}`}
+									className={cn(
+										"shrink-0 whitespace-nowrap rounded-sm border px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-[0.05em]",
+										projectStatusClasses[project.status],
+									)}
 								>
 									{project.status.replace("_", " ")}
 								</span>
 							</div>
 
 							{project.description && (
-								<p className="admin-projects-page-item-description">
+								<p className="text-sm leading-6 text-brand-muted">
 									{project.description}
 								</p>
 							)}
 
-							<div className="admin-projects-page-item-progress">
-								<div className="admin-projects-page-progress-label">
+							<div className="flex flex-col gap-2">
+								<div className="text-sm font-semibold uppercase tracking-[0.05em] text-brand-muted">
 									Progress
 								</div>
 								<ProgressBar
@@ -137,33 +158,29 @@ export default function AdminProjects() {
 								/>
 							</div>
 
-							<div className="admin-projects-page-item-meta">
+							<div className="grid gap-3 border-t border-brand-border pt-4 sm:grid-cols-2">
 								{project.start_date && (
-									<div className="admin-projects-page-item-date">
-										<span className="admin-projects-page-item-date-label">
+									<div className="flex flex-col gap-1">
+										<span className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
 											Started
 										</span>
-										<span className="admin-projects-page-item-date-value">
-											{new Date(
-												project.start_date,
-											).toLocaleDateString()}
+										<span className="text-sm font-medium text-white">
+											{new Date(project.start_date).toLocaleDateString()}
 										</span>
 									</div>
 								)}
 								{project.expected_end_date && (
-									<div className="admin-projects-page-item-date">
-										<span className="admin-projects-page-item-date-label">
+									<div className="flex flex-col gap-1">
+										<span className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
 											Expected End
 										</span>
-										<span className="admin-projects-page-item-date-value">
-											{new Date(
-												project.expected_end_date,
-											).toLocaleDateString()}
+										<span className="text-sm font-medium text-white">
+											{new Date(project.expected_end_date).toLocaleDateString()}
 										</span>
 									</div>
 								)}
 							</div>
-						</div>
+						</button>
 					))}
 				</div>
 			)}

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { Card, Badge, Button, Modal, Input, useToast } from "../../components";
+import { Badge, Button, Modal, Input, useToast } from "../../components";
 import api from "../../api/client";
 import type { BuilderRequest } from "../../types";
-import "./styles/ApprovalRequests.css";
+import { cn } from "../../utils";
 
 type ApprovalAction = "approve" | "reject" | null;
 
@@ -103,81 +103,108 @@ export default function ApprovalRequests() {
 	).length;
 
 	return (
-		<div className="approval-requests-page">
-			{/* Header with Stats */}
-			<div className="approval-header">
-				<div className="approval-title-section">
-					<h1 className="approval-title">
+		<div className="flex flex-col gap-6 p-6 max-md:p-4">
+			<div className="flex flex-col gap-4">
+				<div className="flex flex-col gap-2">
+					<h1 className="font-serif text-[1.75rem] font-semibold text-white max-md:text-2xl">
 						Builder Approval Requests
 					</h1>
-					<p className="approval-subtitle">
+					<p className="text-sm text-brand-muted">
 						Review and approve pending builder registrations
 					</p>
 				</div>
 
-				<div className="approval-stats">
-					<Card className="approval-stat">
-						<div className="stat-value">{pendingCount}</div>
-						<div className="stat-label">Pending</div>
-					</Card>
-					<Card className="approval-stat">
-						<div className="stat-value">{approvedCount}</div>
-						<div className="stat-label">Approved</div>
-					</Card>
-					<Card className="approval-stat">
-						<div className="stat-value">{rejectedCount}</div>
-						<div className="stat-label">Rejected</div>
-					</Card>
+				<div className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(180px,1fr))] max-md:grid-cols-1">
+					<div className="flex flex-col gap-3 rounded-lg border border-brand-border bg-brand-card p-4 text-center">
+						<div className="font-serif text-2xl font-bold text-brand-gold">
+							{pendingCount}
+						</div>
+						<div className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
+							Pending
+						</div>
+					</div>
+					<div className="flex flex-col gap-3 rounded-lg border border-brand-border bg-brand-card p-4 text-center">
+						<div className="font-serif text-2xl font-bold text-brand-gold">
+							{approvedCount}
+						</div>
+						<div className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
+							Approved
+						</div>
+					</div>
+					<div className="flex flex-col gap-3 rounded-lg border border-brand-border bg-brand-card p-4 text-center">
+						<div className="font-serif text-2xl font-bold text-brand-gold">
+							{rejectedCount}
+						</div>
+						<div className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
+							Rejected
+						</div>
+					</div>
 				</div>
 			</div>
 
-			{/* Requests Table */}
-			<Card className="approval-table-card">
+			<div className="overflow-hidden rounded-lg border border-brand-border bg-brand-card">
 				{loading ? (
-					<div className="approval-loading">Loading requests...</div>
+					<div className="flex min-h-[280px] items-center justify-center p-8 text-sm text-brand-muted">
+						Loading requests...
+					</div>
 				) : requests.length === 0 ? (
-					<div className="approval-empty">
-						<div className="approval-empty-icon">✓</div>
-						<div className="approval-empty-title">
+					<div className="flex min-h-[280px] flex-col items-center justify-center gap-4 p-8 text-center">
+						<div className="text-4xl text-brand-gold">✓</div>
+						<div className="font-serif text-lg font-semibold text-white">
 							All caught up!
 						</div>
-						<div className="approval-empty-text">
+						<div className="text-sm text-brand-muted">
 							No builder requests to process
 						</div>
 					</div>
 				) : (
-					<div className="approval-table-wrapper">
-						<table className="approval-table">
+					<div className="overflow-x-auto">
+						<table className="min-w-full border-collapse">
 							<thead>
-								<tr>
-									<th>Email</th>
-									<th>Full Name</th>
-									<th>Status</th>
-									<th>Submitted</th>
-									<th className="approval-table-actions">
+								<tr className="border-b-2 border-brand-border bg-brand-panel">
+									<th className="px-4 py-4 text-left text-sm font-semibold uppercase tracking-[0.05em] text-brand-muted max-md:hidden">
+										Email
+									</th>
+									<th className="px-4 py-4 text-left text-sm font-semibold uppercase tracking-[0.05em] text-brand-muted">
+										Full Name
+									</th>
+									<th className="px-4 py-4 text-left text-sm font-semibold uppercase tracking-[0.05em] text-brand-muted">
+										Status
+									</th>
+									<th className="px-4 py-4 text-left text-sm font-semibold uppercase tracking-[0.05em] text-brand-muted max-md:hidden">
+										Submitted
+									</th>
+									<th className="px-4 py-4 text-right text-sm font-semibold uppercase tracking-[0.05em] text-brand-muted">
 										Actions
 									</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody className="divide-y divide-brand-border">
 								{requests.map((request) => (
 									<tr
 										key={request.id}
-										className={`approval-table-row approval-status-${request.status}`}
+										className={cn(
+											"transition-colors duration-300 hover:bg-[#252525]",
+											request.status === "pending" &&
+												"bg-[rgba(230,126,34,0.05)]",
+											request.status === "approved" &&
+												"bg-[rgba(39,174,96,0.05)]",
+											request.status === "rejected" &&
+												"bg-[rgba(192,57,43,0.05)]",
+										)}
 									>
-										<td className="approval-table-email">
+										<td className="px-4 py-4 font-mono text-sm text-brand-gold max-md:hidden">
 											{request.email}
 										</td>
-										<td className="approval-table-name">
+										<td className="px-4 py-4 text-sm font-medium text-white">
 											{request.full_name}
 										</td>
-										<td className="approval-table-status">
+										<td className="px-4 py-4 text-sm text-white">
 											<Badge
 												status={
 													request.status === "pending"
 														? "pending"
-														: request.status ===
-															  "approved"
+														: request.status === "approved"
 															? "done"
 															: "blocked"
 												}
@@ -185,22 +212,18 @@ export default function ApprovalRequests() {
 												{request.status}
 											</Badge>
 										</td>
-										<td className="approval-table-date">
-											{new Date(
-												request.created_at,
-											).toLocaleDateString()}
+										<td className="px-4 py-4 text-sm text-brand-muted max-md:hidden">
+											{new Date(request.created_at).toLocaleDateString()}
 										</td>
-										<td className="approval-table-actions">
+										<td className="px-4 py-4 text-right text-sm text-white">
 											{request.status === "pending" ? (
-												<div className="approval-actions">
+												<div className="flex flex-col justify-end gap-2 lg:flex-row">
 													<Button
 														variant="primary"
 														size="sm"
+														className="w-full lg:w-auto"
 														onClick={() =>
-															openApprovalModal(
-																request.id,
-																"approve",
-															)
+															openApprovalModal(request.id, "approve")
 														}
 														disabled={submitting}
 													>
@@ -209,11 +232,9 @@ export default function ApprovalRequests() {
 													<Button
 														variant="outline"
 														size="sm"
+														className="w-full lg:w-auto"
 														onClick={() =>
-															openApprovalModal(
-																request.id,
-																"reject",
-															)
+															openApprovalModal(request.id, "reject")
 														}
 														disabled={submitting}
 													>
@@ -221,9 +242,7 @@ export default function ApprovalRequests() {
 													</Button>
 												</div>
 											) : (
-												<span className="approval-no-actions">
-													—
-												</span>
+												<span className="text-brand-muted">—</span>
 											)}
 										</td>
 									</tr>
@@ -232,9 +251,8 @@ export default function ApprovalRequests() {
 						</table>
 					</div>
 				)}
-			</Card>
+			</div>
 
-			{/* Approval Modal */}
 			<Modal
 				isOpen={approvalState.notesOpen}
 				onClose={closeModal}
@@ -245,11 +263,12 @@ export default function ApprovalRequests() {
 				}
 				size="md"
 				footer={
-					<div className="modal-footer-actions">
+					<div className="flex w-full flex-col justify-end gap-3 sm:flex-row">
 						<Button
 							variant="outline"
 							onClick={closeModal}
 							disabled={submitting}
+							className="min-w-[120px] sm:w-auto"
 						>
 							Cancel
 						</Button>
@@ -258,6 +277,7 @@ export default function ApprovalRequests() {
 							onClick={handleApproval}
 							disabled={submitting}
 							isLoading={submitting}
+							className="min-w-[120px] sm:w-auto"
 						>
 							{approvalState.action === "approve"
 								? "Approve"
@@ -266,10 +286,10 @@ export default function ApprovalRequests() {
 					</div>
 				}
 			>
-				<div className="approval-modal-content">
+				<div className="flex flex-col gap-4">
 					{approvalState.action === "approve" ? (
 						<>
-							<p className="approval-modal-desc">
+							<p className="text-sm leading-6 text-brand-muted">
 								Are you sure you want to approve this builder
 								request?
 							</p>
@@ -289,12 +309,12 @@ export default function ApprovalRequests() {
 						</>
 					) : (
 						<>
-							<p className="approval-modal-desc">
+							<p className="text-sm leading-6 text-brand-muted">
 								Please provide a reason for rejecting this
 								request:
 							</p>
 							<textarea
-								className="approval-modal-textarea"
+								className="min-h-[120px] w-full resize-y rounded-md border border-brand-border bg-brand-panel px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#3a3a3a] hover:border-brand-border-light hover:bg-[rgba(200,151,31,0.02)] focus:border-brand-gold focus:bg-[rgba(200,151,31,0.05)] focus:ring-2 focus:ring-brand-gold/10 disabled:cursor-not-allowed disabled:bg-brand-panel-light disabled:opacity-50"
 								placeholder="Rejection reason..."
 								value={approvalState.notes}
 								onChange={(e) =>
@@ -307,7 +327,7 @@ export default function ApprovalRequests() {
 								rows={3}
 							/>
 							{!approvalState.notes.trim() && (
-								<div className="approval-modal-error">
+								<div className="rounded-md border border-[rgba(192,57,43,0.3)] bg-[rgba(192,57,43,0.1)] px-4 py-3 text-sm text-[#c0392b]">
 									Rejection reason is required
 								</div>
 							)}
