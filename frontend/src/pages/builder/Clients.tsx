@@ -60,59 +60,50 @@ export default function BuilderClients() {
 	return (
 		<>
 			{/* Topbar */}
-			<div className="topbar">
-				<div className="tb-title">Clients</div>
-				<div className="tb-right">
-					<span style={{ fontSize: ".78rem", color: "var(--gray)" }}>
-						{clients.length} client{clients.length !== 1 ? "s" : ""}
-					</span>
+			<div className="flex items-center justify-between border-b border-brand-border-light bg-brand-card px-6 py-4">
+				<div className="font-serif text-2xl font-semibold text-white">
+					Clients
+				</div>
+				<div className="text-xs text-brand-muted">
+					{clients.length} client{clients.length !== 1 ? "s" : ""}
 				</div>
 			</div>
 
-			<div className="content fade-up">
+			<div className="animate-fade-up space-y-4 px-6 py-6">
 				{/* Search */}
-				<div className="card" style={{ marginBottom: 16 }}>
-					<div
-						style={{
-							display: "flex",
-							alignItems: "center",
-							gap: 12,
-						}}
-					>
-						<span
-							style={{ fontSize: ".78rem", color: "var(--gray)" }}
-						>
-							🔍
-						</span>
+				<div className="rounded-md border border-brand-border-light bg-brand-card p-4">
+					<div className="flex items-center gap-3">
+						<span className="text-xs text-brand-muted">🔍</span>
 						<input
-							className="mi2"
+							className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
 							placeholder="Search by name or email…"
 							value={searchTerm}
 							onChange={(e) => setSearchTerm(e.target.value)}
-							style={{ flex: 1 }}
 						/>
 					</div>
 				</div>
 
 				{/* Clients list */}
 				{loading ? (
-					<div className="empty">
-						<div className="empty-ic">⏳</div>
-						<div className="empty-tx">Loading clients…</div>
+					<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
+						<div className="mb-2 text-3xl">⏳</div>
+						<div className="text-sm text-brand-muted-light">
+							Loading clients…
+						</div>
 					</div>
 				) : filteredClients.length === 0 ? (
-					<div className="empty">
-						<div className="empty-ic">👥</div>
-						<div className="empty-tx">
+					<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
+						<div className="mb-2 text-3xl">👥</div>
+						<div className="text-sm text-brand-muted-light">
 							{searchTerm ? "No clients found" : "No clients yet"}
 						</div>
 					</div>
 				) : (
-					<div className="card" style={{ padding: 0 }}>
+					<div className="overflow-hidden rounded-md border border-brand-border-light bg-brand-card">
 						<div style={{ overflowX: "auto" }}>
-							<table className="dt">
+							<table className="min-w-full text-left text-sm">
 								<thead>
-									<tr>
+									<tr className="border-b border-brand-border bg-brand-panel text-xs uppercase tracking-[0.08em] text-brand-muted-light">
 										<th>Client Name</th>
 										<th>Email</th>
 										<th>Projects</th>
@@ -130,33 +121,16 @@ export default function BuilderClients() {
 												onClick={() =>
 													setSelectedClient(client.id)
 												}
-												style={{ cursor: "pointer" }}
+												className="cursor-pointer border-b border-brand-border/50 text-brand-muted-light transition hover:bg-brand-panel"
 											>
-												<td style={{ fontWeight: 500 }}>
+												<td className="px-3 py-2 font-medium text-white">
 													{client.full_name}
 												</td>
-												<td
-													style={{
-														fontSize: ".75rem",
-													}}
-												>
+												<td className="px-3 py-2 text-xs">
 													{client.email}
 												</td>
 												<td>
-													<span
-														style={{
-															display:
-																"inline-block",
-															padding: "4px 8px",
-															background:
-																"var(--panel-light)",
-															borderRadius:
-																"var(--radius-md)",
-															fontSize: ".7rem",
-															fontWeight: 500,
-															color: "var(--gold)",
-														}}
-													>
+													<span className="inline-block rounded bg-brand-panel-light px-2 py-1 text-[0.7rem] font-medium text-brand-gold">
 														{projectCount} project
 														{projectCount !== 1
 															? "s"
@@ -165,27 +139,14 @@ export default function BuilderClients() {
 												</td>
 												<td>
 													<span
-														className="badge"
-														style={{
-															background:
-																client.is_active
-																	? "var(--green)"
-																	: "var(--gray)",
-															color: "var(--black)",
-															fontSize: ".58rem",
-														}}
+														className={`rounded px-2 py-0.5 text-[0.58rem] font-semibold uppercase ${client.is_active ? "bg-[#27ae60] text-brand-black" : "bg-brand-muted text-brand-black"}`}
 													>
 														{client.is_active
 															? "Active"
 															: "Inactive"}
 													</span>
 												</td>
-												<td
-													style={{
-														fontSize: ".7rem",
-														color: "var(--gray)",
-													}}
-												>
+												<td className="px-3 py-2 text-xs text-brand-muted">
 													{new Date(
 														client.created_at,
 													).toLocaleDateString(
@@ -208,13 +169,7 @@ export default function BuilderClients() {
 
 				{/* Client details panel */}
 				{selectedClient && (
-					<div
-						className="card"
-						style={{
-							marginTop: 20,
-							borderLeft: "3px solid var(--gold)",
-						}}
-					>
+					<div className="rounded-md border border-brand-border-light border-l-4 border-l-brand-gold bg-brand-card p-4">
 						{(() => {
 							const client = clients.find(
 								(c) => c.id === selectedClient,
@@ -231,32 +186,17 @@ export default function BuilderClients() {
 
 							return (
 								<>
-									<div
-										style={{
-											display: "flex",
-											justifyContent: "space-between",
-											alignItems: "flex-start",
-											marginBottom: 16,
-										}}
-									>
+									<div className="mb-4 flex items-start justify-between">
 										<div>
-											<div
-												className="st"
-												style={{ marginBottom: 8 }}
-											>
+											<div className="mb-2 text-base font-semibold text-white">
 												{client.full_name}
 											</div>
-											<div
-												style={{
-													fontSize: ".78rem",
-													color: "var(--gray)",
-												}}
-											>
+											<div className="text-xs text-brand-muted">
 												{client.email}
 											</div>
 										</div>
 										<button
-											className="btn-o btn-sm"
+											className="rounded border border-brand-border px-3 py-2 text-xs font-medium text-brand-muted-light transition hover:border-brand-gold hover:text-brand-gold"
 											onClick={() =>
 												setSelectedClient(null)
 											}
@@ -266,47 +206,17 @@ export default function BuilderClients() {
 									</div>
 
 									{/* Client stats */}
-									<div
-										style={{
-											display: "grid",
-											gridTemplateColumns:
-												"repeat(3, 1fr)",
-											gap: 12,
-											marginBottom: 16,
-											borderBottom:
-												"1px solid var(--border)",
-											paddingBottom: 16,
-										}}
-									>
-										<div style={{ textAlign: "center" }}>
-											<div
-												style={{
-													fontSize: "1.3rem",
-													fontFamily:
-														"'Cormorant Garamond', serif",
-													color: "var(--gold)",
-												}}
-											>
+									<div className="mb-4 grid grid-cols-3 gap-3 border-b border-brand-border pb-4">
+										<div className="text-center">
+											<div className="font-serif text-2xl text-brand-gold">
 												{clientProjects.length}
 											</div>
-											<div
-												style={{
-													fontSize: ".7rem",
-													color: "var(--gray)",
-												}}
-											>
+											<div className="text-[0.7rem] text-brand-muted">
 												Total Projects
 											</div>
 										</div>
-										<div style={{ textAlign: "center" }}>
-											<div
-												style={{
-													fontSize: "1.3rem",
-													fontFamily:
-														"'Cormorant Garamond', serif",
-													color: "var(--green)",
-												}}
-											>
+										<div className="text-center">
+											<div className="font-serif text-2xl text-[#27ae60]">
 												{activeProjects}
 											</div>
 											<div
@@ -318,23 +228,11 @@ export default function BuilderClients() {
 												Active
 											</div>
 										</div>
-										<div style={{ textAlign: "center" }}>
-											<div
-												style={{
-													fontSize: "1.3rem",
-													fontFamily:
-														"'Cormorant Garamond', serif",
-													color: "var(--green)",
-												}}
-											>
+										<div className="text-center">
+											<div className="font-serif text-2xl text-[#4caf50]">
 												{completedProjects}
 											</div>
-											<div
-												style={{
-													fontSize: ".7rem",
-													color: "var(--gray)",
-												}}
-											>
+											<div className="text-[0.7rem] text-brand-muted">
 												Completed
 											</div>
 										</div>
@@ -343,23 +241,10 @@ export default function BuilderClients() {
 									{/* Client projects */}
 									{clientProjects.length > 0 ? (
 										<>
-											<div
-												style={{
-													fontSize: ".7rem",
-													letterSpacing: ".08em",
-													textTransform: "uppercase",
-													color: "var(--gray)",
-													marginBottom: 8,
-												}}
-											>
+											<div className="mb-2 text-[0.7rem] uppercase tracking-[0.08em] text-brand-muted">
 												Projects
 											</div>
-											<div
-												style={{
-													display: "grid",
-													gap: 8,
-												}}
-											>
+											<div className="grid gap-2">
 												{clientProjects.map((p) => (
 													<div
 														key={p.id}
@@ -368,62 +253,19 @@ export default function BuilderClients() {
 																`/builder/projects/${p.id}`,
 															)
 														}
-														style={{
-															padding: "12px",
-															background:
-																"var(--panel-light)",
-															borderRadius:
-																"var(--radius-md)",
-															cursor: "pointer",
-															transition:
-																"var(--transition-base)",
-															display: "flex",
-															justifyContent:
-																"space-between",
-															alignItems:
-																"center",
-														}}
+														className="flex items-center justify-between rounded bg-brand-panel-light p-3 transition hover:bg-brand-panel"
 													>
 														<div>
-															<div
-																style={{
-																	fontSize:
-																		".78rem",
-																	fontWeight: 500,
-																	marginBottom: 4,
-																}}
-															>
+															<div className="mb-1 text-[0.78rem] font-medium text-white">
 																{p.name}
 															</div>
-															<div
-																style={{
-																	fontSize:
-																		".7rem",
-																	color: "var(--gray)",
-																}}
-															>
+															<div className="text-[0.7rem] text-brand-muted">
 																{p.location ||
 																	"Location TBD"}
 															</div>
 														</div>
 														<span
-															style={{
-																fontSize:
-																	".68rem",
-																background:
-																	p.status ===
-																	"completed"
-																		? "var(--green)"
-																		: p.status ===
-																			  "in_progress"
-																			? "var(--gold)"
-																			: "var(--gray)",
-																color: "var(--black)",
-																padding:
-																	"4px 8px",
-																borderRadius:
-																	"var(--radius-md)",
-															}}
+															className={`rounded px-2 py-1 text-[0.68rem] font-semibold uppercase ${p.status === "completed" ? "bg-[#27ae60] text-brand-black" : p.status === "in_progress" ? "bg-brand-gold text-brand-black" : "bg-brand-muted text-brand-black"}`}
 														>
 															{p.status.replace(
 																"_",
@@ -435,12 +277,7 @@ export default function BuilderClients() {
 											</div>
 										</>
 									) : (
-										<div
-											style={{
-												fontSize: ".78rem",
-												color: "var(--gray)",
-											}}
-										>
+										<div className="text-[0.78rem] text-brand-muted">
 											No projects assigned
 										</div>
 									)}

@@ -31,73 +31,59 @@ export default function ClientProgress() {
 	return (
 		<>
 			{/* Topbar */}
-			<div className="topbar">
-				<div className="tb-title">Progress Tracking</div>
+			<div className="flex items-center justify-between border-b border-brand-border-light bg-brand-card px-6 py-4">
+				<div className="font-serif text-2xl font-semibold text-white">
+					Progress Tracking
+				</div>
 			</div>
 
-			<div className="content fade-up">
+			<div className="animate-fade-up space-y-5 px-6 py-6">
 				{/* Progress header */}
-				<div className="sh" style={{ marginBottom: 20 }}>
-					<div className="st">Project Progress</div>
+				<div className="mb-4 flex items-center justify-between">
+					<div className="text-sm font-semibold uppercase tracking-[0.1em] text-brand-muted-light">
+						Project Progress
+					</div>
 				</div>
 
 				{/* Progress cards */}
 				{loading ? (
-					<div className="empty">
-						<div className="empty-ic">⏳</div>
-						<div className="empty-tx">Loading progress…</div>
+					<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
+						<div className="mb-2 text-3xl">⏳</div>
+						<div className="text-sm text-brand-muted-light">
+							Loading progress…
+						</div>
 					</div>
 				) : projects.length === 0 ? (
-					<div className="empty">
-						<div className="empty-ic">📊</div>
-						<div className="empty-tx">No projects yet</div>
+					<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
+						<div className="mb-2 text-3xl">📊</div>
+						<div className="text-sm text-brand-muted-light">
+							No projects yet
+						</div>
 					</div>
 				) : (
-					<div style={{ display: "grid", gap: 16 }}>
+					<div className="grid gap-4">
 						{projects.map((p) => (
-							<div key={p.id} className="card">
-								<div
-									style={{
-										display: "flex",
-										justifyContent: "space-between",
-										alignItems: "center",
-										marginBottom: 12,
-									}}
-								>
+							<div
+								key={p.id}
+								className="rounded-md border border-brand-border-light bg-brand-card p-4"
+							>
+								<div className="mb-3 flex items-center justify-between">
 									<div>
-										<div
-											style={{
-												fontSize: ".85rem",
-												fontWeight: 500,
-												marginBottom: 4,
-											}}
-										>
+										<div className="mb-1 text-sm font-medium text-white">
 											{p.name}
 										</div>
-										<div
-											style={{
-												fontSize: ".72rem",
-												color: "var(--gray)",
-											}}
-										>
+										<div className="text-xs text-brand-muted">
 											{p.location ?? "Location TBD"}
 										</div>
 									</div>
-									<span
-										style={{
-											fontFamily:
-												"'Cormorant Garamond', serif",
-											fontSize: "1.1rem",
-											color: "var(--gold)",
-										}}
-									>
+									<span className="font-serif text-xl text-brand-gold">
 										{p.overall_progress}%
 									</span>
 								</div>
 
-								<div className="pb" style={{ marginBottom: 8 }}>
+								<div className="mb-2 h-1.5 overflow-hidden rounded bg-brand-border">
 									<div
-										className="pf"
+										className="h-full rounded"
 										style={{
 											width: `${p.overall_progress}%`,
 											background:
@@ -109,21 +95,10 @@ export default function ClientProgress() {
 										}}
 									/>
 								</div>
-
-								<div
-									style={{
-										display: "grid",
-										gridTemplateColumns: "repeat(3, 1fr)",
-										gap: 12,
-										fontSize: ".7rem",
-										color: "var(--gray)",
-									}}
-								>
+								<div className="grid grid-cols-3 gap-3 text-[0.7rem] text-brand-muted">
 									<div>
-										<div style={{ marginBottom: 4 }}>
-											Start
-										</div>
-										<div style={{ color: "var(--white)" }}>
+										<div className="mb-1">Start</div>
+										<div className="text-white">
 											{p.start_date
 												? new Date(
 														p.start_date,
@@ -138,10 +113,8 @@ export default function ClientProgress() {
 										</div>
 									</div>
 									<div>
-										<div style={{ marginBottom: 4 }}>
-											Expected End
-										</div>
-										<div style={{ color: "var(--white)" }}>
+										<div className="mb-1">Expected End</div>
+										<div className="text-white">
 											{p.expected_end_date
 												? new Date(
 														p.expected_end_date,
@@ -156,19 +129,15 @@ export default function ClientProgress() {
 										</div>
 									</div>
 									<div>
-										<div style={{ marginBottom: 4 }}>
-											Status
-										</div>
+										<div className="mb-1">Status</div>
 										<div
-											style={{
-												color:
-													p.status === "completed"
-														? "var(--green)"
-														: p.status ===
-															  "in_progress"
-															? "var(--gold)"
-															: "var(--orange)",
-											}}
+											className={
+												p.status === "completed"
+													? "text-[#27ae60]"
+													: p.status === "in_progress"
+														? "text-brand-gold"
+														: "text-[#e67e22]"
+											}
 										>
 											{p.status.replace("_", " ")}
 										</div>

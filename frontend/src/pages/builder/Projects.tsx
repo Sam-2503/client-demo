@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/client";
 import { useToast } from "../../components/Toast";
+import { cn } from "../../utils/cn";
 import type {
 	Project,
 	ProjectStatus,
@@ -24,10 +25,10 @@ const STATUS_LABEL: Record<ProjectStatus, string> = {
 };
 
 const STATUS_BADGE: Record<ProjectStatus, string> = {
-	planning: "b-pend",
-	in_progress: "b-active",
-	on_hold: "b-hold",
-	completed: "b-done",
+	planning: "bg-brand-muted text-brand-black",
+	in_progress: "bg-brand-gold text-brand-black",
+	on_hold: "bg-[#e67e22] text-brand-black",
+	completed: "bg-[#27ae60] text-brand-black",
 };
 
 const EMPTY: CreateProjectRequest = {
@@ -106,11 +107,13 @@ export default function BuilderProjects() {
 	return (
 		<>
 			{/* Topbar */}
-			<div className="topbar">
-				<div className="tb-title">Projects</div>
-				<div className="tb-right">
+			<div className="flex items-center justify-between border-b border-brand-border-light bg-brand-card px-6 py-4">
+				<div className="font-serif text-2xl font-semibold text-white">
+					Projects
+				</div>
+				<div className="flex items-center gap-3">
 					<button
-						className="btn-g btn-sm"
+						className="rounded bg-brand-gold px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-brand-black transition hover:bg-brand-gold-light"
 						onClick={() => setOpen(true)}
 					>
 						+ New Project
@@ -118,18 +121,20 @@ export default function BuilderProjects() {
 				</div>
 			</div>
 
-			<div className="content fade-up">
+			<div className="animate-fade-up px-6 py-6">
 				{loading ? (
-					<div className="empty">
-						<div className="empty-ic">⏳</div>
-						<div className="empty-tx">Loading…</div>
+					<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
+						<div className="mb-2 text-3xl">⏳</div>
+						<div className="text-sm text-brand-muted-light">
+							Loading…
+						</div>
 					</div>
 				) : (
-					<div className="proj-grid">
+					<div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
 						{projects.map((p) => (
 							<div
 								key={p.id}
-								className="proj-card"
+								className="cursor-pointer rounded-md border border-brand-border-light border-t-2 bg-brand-card p-4 transition hover:border-brand-gold"
 								style={{
 									borderTopColor: STATUS_COLOR[p.status],
 								}}
@@ -137,35 +142,38 @@ export default function BuilderProjects() {
 									navigate(`/builder/projects/${p.id}`)
 								}
 							>
-								<div className="proj-card-top">
-									<div className="proj-card-hdr">
+								<div className="space-y-4">
+									<div className="flex items-start justify-between gap-3">
 										<div>
-											<div className="proj-card-name">
+											<div className="text-sm font-semibold text-white">
 												{p.name}
 											</div>
-											<div className="proj-card-sub">
+											<div className="text-xs text-brand-muted">
 												{p.location ?? "Location TBD"}
 											</div>
 										</div>
 										<span
-											className={`badge ${STATUS_BADGE[p.status]}`}
+											className={cn(
+												"rounded px-2 py-0.5 text-[0.65rem] font-semibold uppercase",
+												STATUS_BADGE[p.status],
+											)}
 										>
 											{STATUS_LABEL[p.status]}
 										</span>
 									</div>
 
-									<div className="proj-card-client">
+									<div className="text-xs text-brand-muted-light">
 										📍 {p.location ?? "—"}
 									</div>
 
 									<div>
-										<div className="pl">
+										<div className="mb-1 flex items-center justify-between text-[0.7rem] text-brand-muted-light">
 											<span>Progress</span>
 											<span>{p.overall_progress}%</span>
 										</div>
-										<div className="pb">
+										<div className="h-1.5 overflow-hidden rounded bg-brand-border">
 											<div
-												className="pf"
+												className="h-full rounded"
 												style={{
 													width: `${p.overall_progress}%`,
 													background:
@@ -176,17 +184,14 @@ export default function BuilderProjects() {
 									</div>
 								</div>
 
-								<div className="proj-card-bot">
-									<div className="proj-card-phase">
+								<div className="mt-4 flex items-center justify-between border-t border-brand-border pt-3">
+									<div className="text-[0.72rem] text-brand-muted-light">
 										Status:{" "}
-										<span>{STATUS_LABEL[p.status]}</span>
+										<span className="text-brand-gold">
+											{STATUS_LABEL[p.status]}
+										</span>
 									</div>
-									<div
-										style={{
-											fontSize: ".68rem",
-											color: "var(--gray)",
-										}}
-									>
+									<div className="text-[0.68rem] text-brand-muted">
 										{p.expected_end_date
 											? "Due: " +
 												new Date(
@@ -203,11 +208,13 @@ export default function BuilderProjects() {
 
 						{/* Add card */}
 						<div
-							className="proj-card add-proj-card"
+							className="grid cursor-pointer place-items-center rounded-md border border-dashed border-brand-gold bg-brand-card p-6 text-center transition hover:bg-brand-panel"
 							onClick={() => setOpen(true)}
 						>
-							<div className="add-proj-card-icon">＋</div>
-							<div className="add-proj-card-label">
+							<div className="mb-2 text-2xl text-brand-gold">
+								＋
+							</div>
+							<div className="text-sm font-medium text-brand-muted-light">
 								Create New Project
 							</div>
 						</div>
@@ -217,31 +224,38 @@ export default function BuilderProjects() {
 
 			{/* ── CREATE PROJECT MODAL ── */}
 			<div
-				className={`mo${open ? " open" : ""}`}
+				className={cn(
+					"fixed inset-0 z-[1000] grid place-items-center bg-black/65 p-4 backdrop-blur-sm transition",
+					open ? "visible opacity-100" : "invisible opacity-0",
+				)}
 				onClick={(e) => e.target === e.currentTarget && setOpen(false)}
 			>
-				<div className="modal" style={{ maxWidth: 520 }}>
-					<div className="modal-bar" />
-					<div className="modal-in">
-						<div className="mhdr">
+				<div className="w-full max-w-[520px] rounded-md border border-brand-border-light bg-brand-card shadow-2xl">
+					<div className="h-1 w-full bg-brand-gold" />
+					<div className="p-5">
+						<div className="mb-5 flex items-start justify-between">
 							<div>
-								<div className="mti">New Project</div>
-								<div className="msu">
+								<div className="font-serif text-2xl text-white">
+									New Project
+								</div>
+								<div className="text-sm text-brand-muted-light">
 									Fill in the project details below
 								</div>
 							</div>
 							<button
-								className="mc"
+								className="rounded border border-brand-border px-2 py-1 text-sm text-brand-muted-light transition hover:border-brand-gold hover:text-brand-gold"
 								onClick={() => setOpen(false)}
 							>
 								✕
 							</button>
 						</div>
 
-						<div className="mf">
-							<label className="ml2">Project Name *</label>
+						<div className="mb-4 space-y-1">
+							<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+								Project Name *
+							</label>
 							<input
-								className="mi2"
+								className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
 								placeholder="e.g. Villa Areca, Green Meadows Phase 2"
 								value={form.name}
 								onChange={(e) =>
@@ -253,45 +267,42 @@ export default function BuilderProjects() {
 							/>
 						</div>
 
-						<div className="mf">
-							<label className="ml2">Description</label>
+						<div className="mb-4 space-y-1">
+							<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+								Description
+							</label>
 							<textarea
-								className="mta2"
+								className="min-h-24 w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
 								placeholder="Brief description of the project…"
 								value={form.description ?? ""}
 								onChange={set("description")}
 							/>
 						</div>
 
-						<div className="mf">
-							<label className="ml2">Location</label>
+						<div className="mb-4 space-y-1">
+							<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+								Location
+							</label>
 							<input
-								className="mi2"
+								className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
 								placeholder="e.g. Banjara Hills, Hyderabad"
 								value={form.location ?? ""}
 								onChange={set("location")}
 							/>
 						</div>
 
-						<div className="mf">
-							<label className="ml2">Assign Client *</label>
+						<div className="mb-4 space-y-1">
+							<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+								Assign Client *
+							</label>
 							{clients.length === 0 ? (
-								<div
-									style={{
-										padding: "10px 12px",
-										background: "var(--panel2)",
-										fontSize: ".78rem",
-										color: "var(--gray)",
-										borderBottom:
-											"2px solid var(--border2)",
-									}}
-								>
+								<div className="border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-xs text-brand-muted">
 									No clients registered yet. Ask client to
 									register first.
 								</div>
 							) : (
 								<select
-									className="ms2"
+									className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
 									value={form.client_id}
 									onChange={(e) =>
 										setForm((f) => ({
@@ -310,20 +321,24 @@ export default function BuilderProjects() {
 							)}
 						</div>
 
-						<div className="grid-2">
-							<div className="mf">
-								<label className="ml2">Start Date</label>
+						<div className="mb-4 grid grid-cols-1 gap-3 md:grid-cols-2">
+							<div className="space-y-1">
+								<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+									Start Date
+								</label>
 								<input
-									className="mi2"
+									className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
 									type="date"
 									value={form.start_date ?? ""}
 									onChange={set("start_date")}
 								/>
 							</div>
-							<div className="mf">
-								<label className="ml2">Expected Handover</label>
+							<div className="space-y-1">
+								<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+									Expected Handover
+								</label>
 								<input
-									className="mi2"
+									className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
 									type="date"
 									value={form.expected_end_date ?? ""}
 									onChange={set("expected_end_date")}
@@ -331,15 +346,15 @@ export default function BuilderProjects() {
 							</div>
 						</div>
 
-						<div className="macts">
+						<div className="mt-3 flex gap-2">
 							<button
-								className="btn-o"
+								className="rounded border border-brand-border px-4 py-2 text-sm text-brand-muted-light transition hover:border-brand-gold hover:text-brand-gold"
 								onClick={() => setOpen(false)}
 							>
 								Cancel
 							</button>
 							<button
-								className="btn-g"
+								className="flex-1 rounded bg-brand-gold px-4 py-2 text-sm font-semibold uppercase tracking-[0.08em] text-brand-black transition hover:bg-brand-gold-light disabled:opacity-60"
 								style={{ flex: 1 }}
 								onClick={create}
 								disabled={saving}

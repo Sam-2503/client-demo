@@ -84,27 +84,25 @@ export default function BuilderUpdates() {
 	return (
 		<>
 			{/* Topbar */}
-			<div className="topbar">
-				<div className="tb-title">Recent Updates</div>
+			<div className="flex items-center justify-between border-b border-brand-border-light bg-brand-card px-6 py-4">
+				<div className="font-serif text-2xl font-semibold text-white">
+					Recent Updates
+				</div>
 			</div>
 
-			<div className="content fade-up">
+			<div className="animate-fade-up space-y-4 px-6 py-6">
 				{/* Filters */}
-				<div className="card" style={{ marginBottom: 16 }}>
-					<div className="sh" style={{ marginBottom: 12 }}>
-						<div className="st">Filter</div>
+				<div className="rounded-md border border-brand-border-light bg-brand-card p-4">
+					<div className="mb-3 text-sm font-semibold uppercase tracking-[0.1em] text-brand-muted-light">
+						Filter
 					</div>
-					<div
-						style={{
-							display: "grid",
-							gridTemplateColumns: "auto 1fr",
-							gap: "16px 24px",
-						}}
-					>
+					<div className="grid grid-cols-1 gap-4 md:grid-cols-[220px_1fr]">
 						<div>
-							<label className="ml2">Category</label>
+							<label className="mb-1 block text-xs uppercase tracking-[0.08em] text-brand-muted">
+								Category
+							</label>
 							<select
-								className="ms2"
+								className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
 								value={categoryFilter}
 								onChange={(e) =>
 									setCategoryFilter(
@@ -122,9 +120,11 @@ export default function BuilderUpdates() {
 						</div>
 
 						<div>
-							<label className="ml2">Search Project</label>
+							<label className="mb-1 block text-xs uppercase tracking-[0.08em] text-brand-muted">
+								Search Project
+							</label>
 							<input
-								className="mi2"
+								className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
 								placeholder="Search by project ID…"
 								value={projectFilter}
 								onChange={(e) =>
@@ -137,35 +137,40 @@ export default function BuilderUpdates() {
 
 				{/* Updates feed */}
 				{loading ? (
-					<div className="empty">
-						<div className="empty-ic">⏳</div>
-						<div className="empty-tx">Loading updates…</div>
+					<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
+						<div className="mb-2 text-3xl">⏳</div>
+						<div className="text-sm text-brand-muted-light">
+							Loading updates…
+						</div>
 					</div>
 				) : filteredUpdates.length === 0 ? (
-					<div className="empty">
-						<div className="empty-ic">📝</div>
-						<div className="empty-tx">No updates found</div>
+					<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
+						<div className="mb-2 text-3xl">📝</div>
+						<div className="text-sm text-brand-muted-light">
+							No updates found
+						</div>
 					</div>
 				) : (
-					<div className="feed">
+					<div className="space-y-3">
 						{filteredUpdates.map((u) => (
 							<div
 								key={u.id}
-								className={`fi ${u.progress_percentage >= 100 ? "fi-green" : "fi-gold"}`}
+								className={`flex cursor-pointer gap-3 rounded-md border p-4 ${u.progress_percentage >= 100 ? "border-[#27ae60] bg-[rgba(39,174,96,0.08)]" : "border-brand-gold bg-[rgba(200,151,31,0.08)]"}`}
 								onClick={() =>
 									navigate(
 										`/builder/projects/${u.project_id}`,
 									)
 								}
-								style={{ cursor: "pointer" }}
 							>
-								<div className="fi-ic">
+								<div className="grid h-9 w-9 place-items-center rounded bg-brand-panel text-base">
 									{CAT_IC[u.category]}
 								</div>
 								<div style={{ flex: 1 }}>
-									<div className="fi-ti">{u.title}</div>
+									<div className="text-sm font-medium text-white">
+										{u.title}
+									</div>
 									{u.description && (
-										<div className="fi-de">
+										<div className="mt-1 text-[0.78rem] text-brand-muted-light">
 											{u.description}
 										</div>
 									)}
@@ -178,10 +183,7 @@ export default function BuilderUpdates() {
 											flexWrap: "wrap",
 										}}
 									>
-										<span
-											className="badge b-pend"
-											style={{ fontSize: ".58rem" }}
-										>
+										<span className="rounded bg-brand-panel-light px-2 py-0.5 text-[0.58rem] uppercase text-brand-muted-light">
 											{u.category.replace("_", " ")}
 										</span>
 										<span
@@ -206,7 +208,7 @@ export default function BuilderUpdates() {
 											</span>
 										)}
 									</div>
-									<div className="fi-tm">
+									<div className="mt-2 text-[0.68rem] text-brand-muted">
 										Project: {u.project_id}
 										{" · "}
 										{new Date(u.created_at).toLocaleString(

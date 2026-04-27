@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/client";
 import { useToast } from "../../components/Toast";
+import { cn } from "../../utils/cn";
 import type { Project, ProjectStatus } from "../../types";
 
 const STATUS_COLOR: Record<ProjectStatus, string> = {
@@ -19,10 +20,10 @@ const STATUS_LABEL: Record<ProjectStatus, string> = {
 };
 
 const STATUS_BADGE: Record<ProjectStatus, string> = {
-	planning: "b-pend",
-	in_progress: "b-active",
-	on_hold: "b-hold",
-	completed: "b-done",
+	planning: "bg-brand-muted text-brand-black",
+	in_progress: "bg-brand-gold text-brand-black",
+	on_hold: "bg-[#e67e22] text-brand-black",
+	completed: "bg-[#27ae60] text-brand-black",
 };
 
 export default function BuilderDashboard() {
@@ -50,12 +51,16 @@ export default function BuilderDashboard() {
 	return (
 		<>
 			{/* Topbar */}
-			<div className="topbar">
-				<div className="tb-title">Dashboard</div>
-				<div className="tb-right">
-					<span className="badge b-admin">ADMIN</span>
+			<div className="flex items-center justify-between border-b border-brand-border-light bg-brand-card px-6 py-4">
+				<div className="font-serif text-2xl font-semibold text-white">
+					Dashboard
+				</div>
+				<div className="flex items-center gap-3">
+					<span className="rounded bg-brand-gold px-2 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.08em] text-brand-black">
+						ADMIN
+					</span>
 					<button
-						className="btn-g btn-sm"
+						className="rounded bg-brand-gold px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-brand-black transition hover:bg-brand-gold-light"
 						onClick={() => navigate("/builder/projects")}
 					>
 						+ New Project
@@ -63,49 +68,60 @@ export default function BuilderDashboard() {
 				</div>
 			</div>
 
-			<div className="content fade-up">
+			<div className="animate-fade-up space-y-5 px-6 py-6">
 				{/* KPIs */}
-				<div className="kpi-row">
-					<div className="kpi">
-						<div className="kpi-v">{total}</div>
-						<div className="kpi-l">Total Projects</div>
-						<div className="kpi-n">All time</div>
+				<div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+					<div className="rounded-md border border-brand-border-light border-t-2 border-t-brand-gold bg-brand-card p-4">
+						<div className="font-serif text-3xl text-brand-gold">
+							{total}
+						</div>
+						<div className="mt-1 text-sm font-medium text-white">
+							Total Projects
+						</div>
+						<div className="text-xs text-brand-muted">All time</div>
 					</div>
-					<div
-						className="kpi"
-						style={{ borderTopColor: "var(--green)" }}
-					>
-						<div
-							className="kpi-v"
-							style={{ color: "var(--green2)" }}
-						>
+					<div className="rounded-md border border-brand-border-light border-t-2 border-t-[#27ae60] bg-brand-card p-4">
+						<div className="font-serif text-3xl text-[#4caf50]">
 							{active}
 						</div>
-						<div className="kpi-l">Active Builds</div>
-						<div className="kpi-n">In progress</div>
+						<div className="mt-1 text-sm font-medium text-white">
+							Active Builds
+						</div>
+						<div className="text-xs text-brand-muted">
+							In progress
+						</div>
 					</div>
-					<div
-						className="kpi"
-						style={{ borderTopColor: "var(--blue)" }}
-					>
-						<div className="kpi-v" style={{ color: "#5dade2" }}>
+					<div className="rounded-md border border-brand-border-light border-t-2 border-t-[#2980b9] bg-brand-card p-4">
+						<div className="font-serif text-3xl text-[#5dade2]">
 							{completed}
 						</div>
-						<div className="kpi-l">Completed</div>
-						<div className="kpi-n">Delivered</div>
+						<div className="mt-1 text-sm font-medium text-white">
+							Completed
+						</div>
+						<div className="text-xs text-brand-muted">
+							Delivered
+						</div>
 					</div>
-					<div className="kpi">
-						<div className="kpi-v">{avgProg}%</div>
-						<div className="kpi-l">Avg Progress</div>
-						<div className="kpi-n">Across all projects</div>
+					<div className="rounded-md border border-brand-border-light border-t-2 border-t-brand-gold bg-brand-card p-4">
+						<div className="font-serif text-3xl text-brand-gold">
+							{avgProg}%
+						</div>
+						<div className="mt-1 text-sm font-medium text-white">
+							Avg Progress
+						</div>
+						<div className="text-xs text-brand-muted">
+							Across all projects
+						</div>
 					</div>
 				</div>
 
 				{/* Projects header */}
-				<div className="sh" style={{ marginBottom: 14 }}>
-					<div className="st">All Projects</div>
+				<div className="mb-3 flex items-center justify-between">
+					<div className="text-sm font-semibold uppercase tracking-[0.1em] text-brand-muted-light">
+						All Projects
+					</div>
 					<button
-						className="btn-g btn-sm"
+						className="rounded bg-brand-gold px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-brand-black transition hover:bg-brand-gold-light"
 						onClick={() => navigate("/builder/projects")}
 					>
 						+ New Project
@@ -114,16 +130,18 @@ export default function BuilderDashboard() {
 
 				{/* Projects grid */}
 				{loading ? (
-					<div className="empty">
-						<div className="empty-ic">⏳</div>
-						<div className="empty-tx">Loading projects…</div>
+					<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
+						<div className="mb-2 text-3xl">⏳</div>
+						<div className="text-sm text-brand-muted-light">
+							Loading projects…
+						</div>
 					</div>
 				) : (
-					<div className="proj-grid">
+					<div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
 						{projects.map((p) => (
 							<div
 								key={p.id}
-								className="proj-card"
+								className="cursor-pointer rounded-md border border-brand-border-light border-t-2 bg-brand-card p-4 transition hover:border-brand-gold"
 								style={{
 									borderTopColor: STATUS_COLOR[p.status],
 								}}
@@ -131,35 +149,38 @@ export default function BuilderDashboard() {
 									navigate(`/builder/projects/${p.id}`)
 								}
 							>
-								<div className="proj-card-top">
-									<div className="proj-card-hdr">
+								<div className="space-y-4">
+									<div className="flex items-start justify-between gap-3">
 										<div>
-											<div className="proj-card-name">
+											<div className="text-sm font-semibold text-white">
 												{p.name}
 											</div>
-											<div className="proj-card-sub">
+											<div className="text-xs text-brand-muted">
 												{p.location ?? "Location TBD"}
 											</div>
 										</div>
 										<span
-											className={`badge ${STATUS_BADGE[p.status]}`}
+											className={cn(
+												"rounded px-2 py-0.5 text-[0.65rem] font-semibold uppercase",
+												STATUS_BADGE[p.status],
+											)}
 										>
 											{STATUS_LABEL[p.status]}
 										</span>
 									</div>
 
-									<div className="proj-card-client">
+									<div className="text-xs text-brand-muted-light">
 										📍 {p.location ?? "—"}
 									</div>
 
 									<div>
-										<div className="pl">
+										<div className="mb-1 flex items-center justify-between text-[0.7rem] text-brand-muted-light">
 											<span>Progress</span>
 											<span>{p.overall_progress}%</span>
 										</div>
-										<div className="pb">
+										<div className="h-1.5 overflow-hidden rounded bg-brand-border">
 											<div
-												className="pf"
+												className="h-full rounded"
 												style={{
 													width: `${p.overall_progress}%`,
 													background:
@@ -170,17 +191,14 @@ export default function BuilderDashboard() {
 									</div>
 								</div>
 
-								<div className="proj-card-bot">
-									<div className="proj-card-phase">
+								<div className="mt-4 flex items-center justify-between border-t border-brand-border pt-3">
+									<div className="text-[0.72rem] text-brand-muted-light">
 										Status:{" "}
-										<span>{STATUS_LABEL[p.status]}</span>
+										<span className="text-brand-gold">
+											{STATUS_LABEL[p.status]}
+										</span>
 									</div>
-									<div
-										style={{
-											fontSize: ".68rem",
-											color: "var(--gray)",
-										}}
-									>
+									<div className="text-[0.68rem] text-brand-muted">
 										{p.start_date
 											? new Date(
 													p.start_date,
@@ -196,11 +214,13 @@ export default function BuilderDashboard() {
 
 						{/* Add new card */}
 						<div
-							className="proj-card add-proj-card"
+							className="grid cursor-pointer place-items-center rounded-md border border-dashed border-brand-gold bg-brand-card p-6 text-center transition hover:bg-brand-panel"
 							onClick={() => navigate("/builder/projects")}
 						>
-							<div className="add-proj-card-icon">＋</div>
-							<div className="add-proj-card-label">
+							<div className="mb-2 text-2xl text-brand-gold">
+								＋
+							</div>
+							<div className="text-sm font-medium text-brand-muted-light">
 								Create New Project
 							</div>
 						</div>

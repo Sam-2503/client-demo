@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, useToast, QueryList, QueryResponseForm } from "../../components";
 import api from "../../api/client";
 import type { Query, RespondToQueryRequest } from "../../types";
-import "./styles/QueriesPage.css";
+import { cn } from "../../utils/cn";
 
 export default function QueriesPage() {
 	const [queries, setQueries] = useState<Query[]>([]);
@@ -55,33 +55,46 @@ export default function QueriesPage() {
 	};
 
 	return (
-		<div className="queries-page">
+		<div className="space-y-6 px-6 py-6">
 			{/* Header */}
-			<div className="queries-page-header">
-				<div className="queries-page-title-section">
-					<h1 className="queries-page-title">Client Questions</h1>
-					<p className="queries-page-subtitle">
+			<div>
+				<div className="flex flex-col gap-2">
+					<h1 className="font-serif text-3xl font-semibold text-white">
+						Client Questions
+					</h1>
+					<p className="text-sm text-brand-muted-light">
 						Respond to client questions about projects
 					</p>
 				</div>
 			</div>
 
 			{/* Filter Tabs */}
-			<div className="queries-page-tabs">
+			<div className="flex gap-3 overflow-x-auto border-b-2 border-brand-border pb-0">
 				<button
-					className={`queries-page-tab ${filter === "all" ? "active" : ""}`}
+					className={cn(
+						"mb-[-2px] border-b-2 border-transparent px-4 py-3 text-sm font-medium text-brand-muted-light transition hover:text-brand-gold",
+						filter === "all" && "border-brand-gold text-brand-gold",
+					)}
 					onClick={() => setFilter("all")}
 				>
 					All ({statusCounts.all})
 				</button>
 				<button
-					className={`queries-page-tab ${filter === "open" ? "active" : ""}`}
+					className={cn(
+						"mb-[-2px] border-b-2 border-transparent px-4 py-3 text-sm font-medium text-brand-muted-light transition hover:text-brand-gold",
+						filter === "open" &&
+							"border-brand-gold text-brand-gold",
+					)}
 					onClick={() => setFilter("open")}
 				>
 					Open ({statusCounts.open})
 				</button>
 				<button
-					className={`queries-page-tab ${filter === "resolved" ? "active" : ""}`}
+					className={cn(
+						"mb-[-2px] border-b-2 border-transparent px-4 py-3 text-sm font-medium text-brand-muted-light transition hover:text-brand-gold",
+						filter === "resolved" &&
+							"border-brand-gold text-brand-gold",
+					)}
 					onClick={() => setFilter("resolved")}
 				>
 					Resolved ({statusCounts.resolved})
@@ -89,9 +102,9 @@ export default function QueriesPage() {
 			</div>
 
 			{/* Main Content */}
-			<div className="queries-page-content">
+			<div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
 				{/* Queries List */}
-				<div className="queries-page-list-section">
+				<div className="space-y-4">
 					<QueryList
 						queries={filteredQueries}
 						loading={loading}
@@ -101,10 +114,10 @@ export default function QueriesPage() {
 
 				{/* Response Form (if query selected) */}
 				{selectedQuery && (
-					<div className="queries-page-response-section">
-						<Card className="queries-page-close-button-container">
+					<div className="space-y-4 xl:sticky xl:top-6">
+						<Card className="border border-brand-border bg-brand-panel p-3">
 							<button
-								className="queries-page-close-button"
+								className="w-full rounded border border-brand-border px-4 py-3 text-sm font-medium text-brand-muted-light transition hover:border-brand-gold hover:text-brand-gold"
 								onClick={() => setSelectedQuery(null)}
 							>
 								← Back to List

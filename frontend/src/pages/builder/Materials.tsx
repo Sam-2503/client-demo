@@ -83,41 +83,33 @@ export default function BuilderMaterials() {
 	return (
 		<>
 			{/* Topbar */}
-			<div className="topbar">
-				<div className="tb-title">Materials Inventory</div>
-				<div className="tb-right">
-					<span style={{ fontSize: ".78rem", color: "var(--gray)" }}>
+			<div className="flex items-center justify-between border-b border-brand-border-light bg-brand-card px-6 py-4">
+				<div className="font-serif text-2xl font-semibold text-white">
+					Materials Inventory
+				</div>
+				<div className="flex items-center gap-2">
+					<span className="text-xs text-brand-muted">
 						Total Cost:
 					</span>
-					<span
-						style={{
-							fontFamily: "'Cormorant Garamond', serif",
-							fontSize: "1.1rem",
-							color: "var(--gold)",
-						}}
-					>
+					<span className="font-serif text-xl text-brand-gold">
 						₹{totalCost.toLocaleString()}
 					</span>
 				</div>
 			</div>
 
-			<div className="content fade-up">
+			<div className="animate-fade-up space-y-4 px-6 py-6">
 				{/* Filters */}
-				<div className="card" style={{ marginBottom: 16 }}>
-					<div className="sh" style={{ marginBottom: 12 }}>
-						<div className="st">Filter & Sort</div>
+				<div className="rounded-md border border-brand-border-light bg-brand-card p-4">
+					<div className="mb-3 text-sm font-semibold uppercase tracking-[0.1em] text-brand-muted-light">
+						Filter & Sort
 					</div>
-					<div
-						style={{
-							display: "grid",
-							gridTemplateColumns: "auto auto 1fr",
-							gap: "16px 24px",
-						}}
-					>
+					<div className="grid grid-cols-1 gap-4 lg:grid-cols-[220px_220px_1fr]">
 						<div>
-							<label className="ml2">Material Type</label>
+							<label className="mb-1 block text-xs uppercase tracking-[0.08em] text-brand-muted">
+								Material Type
+							</label>
 							<select
-								className="ms2"
+								className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
 								value={typeFilter}
 								onChange={(e) =>
 									setTypeFilter(
@@ -135,9 +127,11 @@ export default function BuilderMaterials() {
 						</div>
 
 						<div>
-							<label className="ml2">Sort By</label>
+							<label className="mb-1 block text-xs uppercase tracking-[0.08em] text-brand-muted">
+								Sort By
+							</label>
 							<select
-								className="ms2"
+								className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
 								value={sortBy}
 								onChange={(e) =>
 									setSortBy(
@@ -155,9 +149,11 @@ export default function BuilderMaterials() {
 						</div>
 
 						<div>
-							<label className="ml2">Search Project</label>
+							<label className="mb-1 block text-xs uppercase tracking-[0.08em] text-brand-muted">
+								Search Project
+							</label>
 							<input
-								className="mi2"
+								className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
 								placeholder="Search by project ID…"
 								value={projectFilter}
 								onChange={(e) =>
@@ -170,24 +166,25 @@ export default function BuilderMaterials() {
 
 				{/* Materials table */}
 				{loading ? (
-					<div className="empty">
-						<div className="empty-ic">⏳</div>
-						<div className="empty-tx">Loading materials…</div>
+					<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
+						<div className="mb-2 text-3xl">⏳</div>
+						<div className="text-sm text-brand-muted-light">
+							Loading materials…
+						</div>
 					</div>
 				) : filteredMaterials.length === 0 ? (
-					<div className="empty">
-						<div className="empty-ic">🪵</div>
-						<div className="empty-tx">No materials found</div>
+					<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
+						<div className="mb-2 text-3xl">🪵</div>
+						<div className="text-sm text-brand-muted-light">
+							No materials found
+						</div>
 					</div>
 				) : (
-					<div
-						className="card"
-						style={{ padding: 0, overflow: "hidden" }}
-					>
+					<div className="overflow-hidden rounded-md border border-brand-border-light bg-brand-card">
 						<div style={{ overflowX: "auto" }}>
-							<table className="dt">
+							<table className="min-w-full text-left text-sm">
 								<thead>
-									<tr>
+									<tr className="border-b border-brand-border bg-brand-panel text-xs uppercase tracking-[0.08em] text-brand-muted-light">
 										<th>Material Name</th>
 										<th>Type</th>
 										<th>Quantity</th>
@@ -207,18 +204,13 @@ export default function BuilderMaterials() {
 													`/builder/projects/${m.project_id}`,
 												)
 											}
-											style={{ cursor: "pointer" }}
+											className="cursor-pointer border-b border-brand-border/50 text-brand-muted-light transition hover:bg-brand-panel"
 										>
-											<td style={{ fontWeight: 500 }}>
+											<td className="px-3 py-2 font-medium text-white">
 												{m.name}
 											</td>
 											<td>
-												<span
-													className="badge b-pend"
-													style={{
-														fontSize: ".58rem",
-													}}
-												>
+												<span className="rounded bg-brand-panel-light px-2 py-0.5 text-[0.58rem] uppercase text-brand-muted-light">
 													{m.material_type.replace(
 														"_",
 														" ",
@@ -231,29 +223,14 @@ export default function BuilderMaterials() {
 											<td>
 												₹{m.unit_cost.toLocaleString()}
 											</td>
-											<td
-												style={{
-													color: "var(--gold)",
-													fontWeight: 500,
-												}}
-											>
+											<td className="px-3 py-2 font-medium text-brand-gold">
 												₹{m.total_cost.toLocaleString()}
 											</td>
-											<td
-												style={{
-													fontSize: ".72rem",
-													color: "var(--gray)",
-												}}
-											>
+											<td className="px-3 py-2 text-xs text-brand-muted">
 												{m.project_id.slice(0, 12)}…
 											</td>
 											<td>{m.supplier ?? "—"}</td>
-											<td
-												style={{
-													fontSize: ".7rem",
-													color: "var(--gray)",
-												}}
-											>
+											<td className="px-3 py-2 text-xs text-brand-muted">
 												{new Date(
 													m.purchased_at,
 												).toLocaleDateString("en-IN", {
@@ -267,31 +244,12 @@ export default function BuilderMaterials() {
 								</tbody>
 							</table>
 						</div>
-						<div
-							style={{
-								padding: "12px 20px",
-								borderTop: "1px solid var(--border)",
-								display: "flex",
-								justifyContent: "space-between",
-								alignItems: "center",
-							}}
-						>
-							<span
-								style={{
-									fontSize: ".78rem",
-									color: "var(--gray)",
-								}}
-							>
+						<div className="flex items-center justify-between border-t border-brand-border px-4 py-3">
+							<span className="text-xs text-brand-muted">
 								{filteredMaterials.length} material
 								{filteredMaterials.length !== 1 ? "s" : ""}
 							</span>
-							<span
-								style={{
-									fontFamily: "'Cormorant Garamond', serif",
-									fontSize: "1.05rem",
-									color: "var(--gold)",
-								}}
-							>
+							<span className="font-serif text-lg text-brand-gold">
 								Total: ₹{totalCost.toLocaleString()}
 							</span>
 						</div>
