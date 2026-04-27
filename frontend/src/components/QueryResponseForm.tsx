@@ -56,7 +56,10 @@ export default function QueryResponseForm({
 
 			<form onSubmit={handleSubmit} className="flex flex-col gap-5">
 				<div className="flex flex-col gap-3">
-					<label htmlFor="response-text" className="text-base font-medium text-brand-muted-light">
+					<label
+						htmlFor="response-text"
+						className="text-base font-medium text-brand-muted-light"
+					>
 						Your Response
 					</label>
 					<textarea

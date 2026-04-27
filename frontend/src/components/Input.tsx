@@ -20,12 +20,7 @@ export default function Input({
 	const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
 
 	return (
-		<div
-			className={cn(
-				"flex flex-col gap-2",
-				fullWidth && "w-full",
-			)}
-		>
+		<div className={cn("flex flex-col gap-2", fullWidth && "w-full")}>
 			{label && (
 				<label
 					htmlFor={inputId}
@@ -47,7 +42,11 @@ export default function Input({
 				)}
 				{...props}
 			/>
-			{error && <span className="text-xs font-medium text-red-400">{error}</span>}
+			{error && (
+				<span className="text-xs font-medium text-red-400">
+					{error}
+				</span>
+			)}
 			{helperText && !error && (
 				<span className="text-xs text-brand-muted">{helperText}</span>
 			)}

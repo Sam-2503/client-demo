@@ -112,7 +112,12 @@ export default function AdminDashboard() {
 			</div>
 
 			<div className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(250px,1fr))] max-lg:[grid-template-columns:repeat(auto-fit,minmax(200px,1fr))] max-md:grid-cols-1">
-				<div className={cn("flex flex-col gap-3 rounded-lg border bg-brand-card p-4", statCardClass)}>
+				<div
+					className={cn(
+						"flex flex-col gap-3 rounded-lg border bg-brand-card p-4",
+						statCardClass,
+					)}
+				>
 					<div className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
 						Total Projects
 					</div>
@@ -129,7 +134,12 @@ export default function AdminDashboard() {
 					</div>
 				</div>
 
-				<div className={cn("flex flex-col gap-3 rounded-lg border bg-brand-card p-4", statCardClass)}>
+				<div
+					className={cn(
+						"flex flex-col gap-3 rounded-lg border bg-brand-card p-4",
+						statCardClass,
+					)}
+				>
 					<div className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
 						Active Projects
 					</div>
@@ -137,11 +147,21 @@ export default function AdminDashboard() {
 						{stats.activeProjects}
 					</div>
 					<div className="text-sm text-brand-muted">
-						{((stats.activeProjects / (stats.totalProjects || 1)) * 100).toFixed(0)}% of total
+						{(
+							(stats.activeProjects /
+								(stats.totalProjects || 1)) *
+							100
+						).toFixed(0)}
+						% of total
 					</div>
 				</div>
 
-				<div className={cn("flex flex-col gap-3 rounded-lg border bg-brand-card p-4", statCardClass)}>
+				<div
+					className={cn(
+						"flex flex-col gap-3 rounded-lg border bg-brand-card p-4",
+						statCardClass,
+					)}
+				>
 					<div className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
 						Completed
 					</div>
@@ -173,7 +193,12 @@ export default function AdminDashboard() {
 					</div>
 				</div>
 
-				<div className={cn("flex flex-col gap-3 rounded-lg border bg-brand-card p-4", statCardClass)}>
+				<div
+					className={cn(
+						"flex flex-col gap-3 rounded-lg border bg-brand-card p-4",
+						statCardClass,
+					)}
+				>
 					<div className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
 						Builders
 					</div>
@@ -183,7 +208,12 @@ export default function AdminDashboard() {
 					<div className="text-sm text-brand-muted">Approved</div>
 				</div>
 
-				<div className={cn("flex flex-col gap-3 rounded-lg border bg-brand-card p-4", statCardClass)}>
+				<div
+					className={cn(
+						"flex flex-col gap-3 rounded-lg border bg-brand-card p-4",
+						statCardClass,
+					)}
+				>
 					<div className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
 						Clients
 					</div>
@@ -237,7 +267,9 @@ export default function AdminDashboard() {
 									<span
 										className={cn(
 											"inline-flex whitespace-nowrap rounded-sm border px-3 py-2 text-[0.72rem] font-semibold capitalize",
-											projectStatusClasses[project.status],
+											projectStatusClasses[
+												project.status
+											],
 										)}
 									>
 										{project.status.replace("_", " ")}

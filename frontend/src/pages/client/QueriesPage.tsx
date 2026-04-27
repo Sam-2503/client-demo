@@ -148,9 +148,7 @@ export default function ClientQueriesPage() {
 						) : (
 							<Card className="border-brand-border-light bg-brand-card">
 								<div className="px-8 py-12 text-center">
-									<div className="mb-4 text-3xl">
-										📋
-									</div>
+									<div className="mb-4 text-3xl">📋</div>
 									<div className="text-brand-muted-light">
 										Select a project to ask questions
 									</div>

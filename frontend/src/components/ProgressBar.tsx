@@ -43,7 +43,12 @@ export default function ProgressBar({
 					)}
 				</div>
 			)}
-			<div className={cn("w-full overflow-hidden rounded-sm border border-brand-border bg-brand-panel", sizeClass[size])}>
+			<div
+				className={cn(
+					"w-full overflow-hidden rounded-sm border border-brand-border bg-brand-panel",
+					sizeClass[size],
+				)}
+			>
 				<div
 					className={cn(
 						"h-full rounded-sm bg-gradient-to-r from-brand-gold to-brand-gold-light transition-[width] duration-300 ease-out",

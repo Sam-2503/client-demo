@@ -108,7 +108,9 @@ export default function ClientUpdates() {
 				{loading ? (
 					<div className="rounded-md border border-brand-border-light bg-brand-card px-8 py-12 text-center">
 						<div className="mb-2 text-3xl">⏳</div>
-						<div className="text-sm text-brand-muted-light">Loading updates…</div>
+						<div className="text-sm text-brand-muted-light">
+							Loading updates…
+						</div>
 					</div>
 				) : filteredUpdates.length === 0 ? (
 					<div className="rounded-md border border-brand-border-light bg-brand-card px-8 py-12 text-center">
@@ -150,17 +152,23 @@ export default function ClientUpdates() {
 												{u.category.replace("_", " ")}
 											</span>
 											<span className="text-brand-gold">
-												Progress: {u.progress_percentage}%
+												Progress:{" "}
+												{u.progress_percentage}%
 											</span>
 											{u.photo_urls.length > 0 && (
 												<span className="text-[#5dade2]">
-													📸 {u.photo_urls.length} photo
-													{u.photo_urls.length > 1 ? "s" : ""}
+													📸 {u.photo_urls.length}{" "}
+													photo
+													{u.photo_urls.length > 1
+														? "s"
+														: ""}
 												</span>
 											)}
 										</div>
 										<div className="mt-2 text-xs text-brand-muted">
-											{new Date(u.created_at).toLocaleString("en-IN", {
+											{new Date(
+												u.created_at,
+											).toLocaleString("en-IN", {
 												day: "2-digit",
 												month: "short",
 												year: "numeric",

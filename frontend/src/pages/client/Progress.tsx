@@ -27,7 +27,9 @@ export default function ClientProgress() {
 						key={index}
 						className={cn(
 							"flex-1 rounded",
-							index < filledSegments ? progressFillClass(status, progress) : "bg-transparent",
+							index < filledSegments
+								? progressFillClass(status, progress)
+								: "bg-transparent",
 						)}
 					/>
 				))}
@@ -80,7 +82,9 @@ export default function ClientProgress() {
 				) : projects.length === 0 ? (
 					<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
 						<div className="mb-2 text-3xl">📊</div>
-						<div className="text-sm text-brand-muted-light">No projects yet</div>
+						<div className="text-sm text-brand-muted-light">
+							No projects yet
+						</div>
 					</div>
 				) : (
 					<div className="grid gap-4">
@@ -103,17 +107,25 @@ export default function ClientProgress() {
 									</span>
 								</div>
 
-								{renderProgressBar(p.status, p.overall_progress)}
+								{renderProgressBar(
+									p.status,
+									p.overall_progress,
+								)}
 
 								<div className="grid grid-cols-3 gap-3 text-[0.7rem] text-brand-muted">
 									<div>
 										<div className="mb-1">Start</div>
 										<div className="text-white">
 											{p.start_date
-												? new Date(p.start_date).toLocaleDateString("en-IN", {
-													day: "2-digit",
-													month: "short",
-												})
+												? new Date(
+														p.start_date,
+													).toLocaleDateString(
+														"en-IN",
+														{
+															day: "2-digit",
+															month: "short",
+														},
+													)
 												: "—"}
 										</div>
 									</div>
@@ -121,10 +133,15 @@ export default function ClientProgress() {
 										<div className="mb-1">Expected End</div>
 										<div className="text-white">
 											{p.expected_end_date
-												? new Date(p.expected_end_date).toLocaleDateString("en-IN", {
-													day: "2-digit",
-													month: "short",
-												})
+												? new Date(
+														p.expected_end_date,
+													).toLocaleDateString(
+														"en-IN",
+														{
+															day: "2-digit",
+															month: "short",
+														},
+													)
 												: "—"}
 										</div>
 									</div>

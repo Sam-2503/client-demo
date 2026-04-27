@@ -127,13 +127,22 @@ export default function ClientProjectDetail() {
 
 			<div className="flex flex-col gap-6">
 				<div className="flex border-b border-brand-border-light">
-					<button onClick={() => setActiveTab("updates")} className={tabClass("updates")}>
+					<button
+						onClick={() => setActiveTab("updates")}
+						className={tabClass("updates")}
+					>
 						Updates ({updates.length})
 					</button>
-					<button onClick={() => setActiveTab("queries")} className={tabClass("queries")}>
+					<button
+						onClick={() => setActiveTab("queries")}
+						className={tabClass("queries")}
+					>
 						Questions ({queries.length})
 					</button>
-					<button onClick={() => setActiveTab("info")} className={tabClass("info")}>
+					<button
+						onClick={() => setActiveTab("info")}
+						className={tabClass("info")}
+					>
 						Info
 					</button>
 				</div>
@@ -143,7 +152,9 @@ export default function ClientProjectDetail() {
 						{updates.length === 0 ? (
 							<div className="rounded-md border border-brand-border-light bg-brand-card px-8 py-12 text-center">
 								<div className="mb-2 text-3xl">📝</div>
-								<div className="text-sm text-brand-muted-light">No updates yet</div>
+								<div className="text-sm text-brand-muted-light">
+									No updates yet
+								</div>
 							</div>
 						) : (
 							<div className="flex flex-col gap-4">
@@ -158,8 +169,17 @@ export default function ClientProjectDetail() {
 													{update.title}
 												</h3>
 												<div className="flex flex-wrap gap-4 text-sm text-brand-muted">
-													<span>{update.category.replace("_", " ")}</span>
-													<span>{new Date(update.created_at).toLocaleDateString()}</span>
+													<span>
+														{update.category.replace(
+															"_",
+															" ",
+														)}
+													</span>
+													<span>
+														{new Date(
+															update.created_at,
+														).toLocaleDateString()}
+													</span>
 												</div>
 											</div>
 											<div className="rounded bg-brand-gold px-3 py-1.5 text-sm font-semibold text-brand-black">
@@ -173,21 +193,28 @@ export default function ClientProjectDetail() {
 											</p>
 										)}
 
-										{update.photo_urls && update.photo_urls.length > 0 && (
-											<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-												{update.photo_urls.map((url, idx) => (
-													<img
-														key={idx}
-														src={url}
-														alt={`Update ${idx + 1}`}
-														className="max-h-[300px] w-full rounded-md object-cover"
-														onError={(e) => {
-															e.currentTarget.classList.add("hidden");
-														}}
-													/>
-												))}
-											</div>
-										)}
+										{update.photo_urls &&
+											update.photo_urls.length > 0 && (
+												<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+													{update.photo_urls.map(
+														(url, idx) => (
+															<img
+																key={idx}
+																src={url}
+																alt={`Update ${idx + 1}`}
+																className="max-h-[300px] w-full rounded-md object-cover"
+																onError={(
+																	e,
+																) => {
+																	e.currentTarget.classList.add(
+																		"hidden",
+																	);
+																}}
+															/>
+														),
+													)}
+												</div>
+											)}
 									</div>
 								))}
 							</div>
@@ -214,10 +241,14 @@ export default function ClientProjectDetail() {
 							<div className="mt-4 flex gap-3 max-md:flex-col">
 								<button
 									type="submit"
-									disabled={submittingQuery || !newQuery.trim()}
+									disabled={
+										submittingQuery || !newQuery.trim()
+									}
 									className="inline-flex w-full max-w-[200px] items-center justify-center rounded-md border border-brand-gold bg-brand-gold px-4 py-2.5 text-sm font-semibold text-brand-black transition hover:border-brand-gold-light hover:bg-brand-gold-light disabled:cursor-not-allowed disabled:opacity-60 max-md:max-w-none"
 								>
-									{submittingQuery ? "Submitting..." : "Submit Question"}
+									{submittingQuery
+										? "Submitting..."
+										: "Submit Question"}
 								</button>
 							</div>
 						</form>
@@ -225,8 +256,12 @@ export default function ClientProjectDetail() {
 						{queries.length === 0 ? (
 							<div className="rounded-md border border-brand-border-light bg-brand-card px-8 py-12 text-center">
 								<div className="mb-2 text-3xl">💬</div>
-								<div className="text-sm text-brand-muted-light">No questions yet</div>
-								<div className="mt-2 text-xs text-brand-muted">Ask your first question above</div>
+								<div className="text-sm text-brand-muted-light">
+									No questions yet
+								</div>
+								<div className="mt-2 text-xs text-brand-muted">
+									Ask your first question above
+								</div>
 							</div>
 						) : (
 							<div className="flex flex-col gap-4">
@@ -241,7 +276,9 @@ export default function ClientProjectDetail() {
 													{query.question}
 												</h3>
 												<div className="text-sm text-brand-muted">
-													{new Date(query.created_at).toLocaleDateString()}
+													{new Date(
+														query.created_at,
+													).toLocaleDateString()}
 												</div>
 											</div>
 											<div
@@ -299,7 +336,9 @@ export default function ClientProjectDetail() {
 									<div className="mb-2 text-sm font-semibold uppercase tracking-[0.05em] text-brand-muted">
 										Location
 									</div>
-									<div className="text-base text-white">📍 {project.location}</div>
+									<div className="text-base text-white">
+										📍 {project.location}
+									</div>
 								</div>
 							)}
 
@@ -309,7 +348,9 @@ export default function ClientProjectDetail() {
 										Started
 									</div>
 									<div className="text-base text-white">
-										{new Date(project.start_date).toLocaleDateString()}
+										{new Date(
+											project.start_date,
+										).toLocaleDateString()}
 									</div>
 								</div>
 							)}
@@ -320,7 +361,9 @@ export default function ClientProjectDetail() {
 										Expected End
 									</div>
 									<div className="text-base text-white">
-										{new Date(project.expected_end_date).toLocaleDateString()}
+										{new Date(
+											project.expected_end_date,
+										).toLocaleDateString()}
 									</div>
 								</div>
 							)}

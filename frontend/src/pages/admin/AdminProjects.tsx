@@ -77,7 +77,8 @@ export default function AdminProjects() {
 					type="button"
 					className={cn(
 						"relative -mb-px border-b-2 border-transparent px-4 py-3 text-sm font-medium text-brand-muted transition-colors duration-300 hover:text-brand-gold max-md:px-3 max-md:py-2 max-md:text-xs",
-						filter === "active" && "border-brand-gold text-brand-gold",
+						filter === "active" &&
+							"border-brand-gold text-brand-gold",
 					)}
 					onClick={() => setFilter("active")}
 				>
@@ -87,7 +88,8 @@ export default function AdminProjects() {
 					type="button"
 					className={cn(
 						"relative -mb-px border-b-2 border-transparent px-4 py-3 text-sm font-medium text-brand-muted transition-colors duration-300 hover:text-brand-gold max-md:px-3 max-md:py-2 max-md:text-xs",
-						filter === "completed" && "border-brand-gold text-brand-gold",
+						filter === "completed" &&
+							"border-brand-gold text-brand-gold",
 					)}
 					onClick={() => setFilter("completed")}
 				>
@@ -118,7 +120,9 @@ export default function AdminProjects() {
 							key={project.id}
 							type="button"
 							className="flex flex-col gap-4 rounded-lg border border-brand-border bg-brand-card p-4 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-gold hover:bg-brand-panel"
-							onClick={() => navigate(`/builder/projects/${project.id}`)}
+							onClick={() =>
+								navigate(`/builder/projects/${project.id}`)
+							}
 						>
 							<div className="flex items-start justify-between gap-3">
 								<div className="min-w-0 flex-1">
@@ -165,7 +169,9 @@ export default function AdminProjects() {
 											Started
 										</span>
 										<span className="text-sm font-medium text-white">
-											{new Date(project.start_date).toLocaleDateString()}
+											{new Date(
+												project.start_date,
+											).toLocaleDateString()}
 										</span>
 									</div>
 								)}
@@ -175,7 +181,9 @@ export default function AdminProjects() {
 											Expected End
 										</span>
 										<span className="text-sm font-medium text-white">
-											{new Date(project.expected_end_date).toLocaleDateString()}
+											{new Date(
+												project.expected_end_date,
+											).toLocaleDateString()}
 										</span>
 									</div>
 								)}

@@ -204,7 +204,8 @@ export default function ApprovalRequests() {
 												status={
 													request.status === "pending"
 														? "pending"
-														: request.status === "approved"
+														: request.status ===
+															  "approved"
 															? "done"
 															: "blocked"
 												}
@@ -213,7 +214,9 @@ export default function ApprovalRequests() {
 											</Badge>
 										</td>
 										<td className="px-4 py-4 text-sm text-brand-muted max-md:hidden">
-											{new Date(request.created_at).toLocaleDateString()}
+											{new Date(
+												request.created_at,
+											).toLocaleDateString()}
 										</td>
 										<td className="px-4 py-4 text-right text-sm text-white">
 											{request.status === "pending" ? (
@@ -223,7 +226,10 @@ export default function ApprovalRequests() {
 														size="sm"
 														className="w-full lg:w-auto"
 														onClick={() =>
-															openApprovalModal(request.id, "approve")
+															openApprovalModal(
+																request.id,
+																"approve",
+															)
 														}
 														disabled={submitting}
 													>
@@ -234,7 +240,10 @@ export default function ApprovalRequests() {
 														size="sm"
 														className="w-full lg:w-auto"
 														onClick={() =>
-															openApprovalModal(request.id, "reject")
+															openApprovalModal(
+																request.id,
+																"reject",
+															)
 														}
 														disabled={submitting}
 													>
@@ -242,7 +251,9 @@ export default function ApprovalRequests() {
 													</Button>
 												</div>
 											) : (
-												<span className="text-brand-muted">—</span>
+												<span className="text-brand-muted">
+													—
+												</span>
 											)}
 										</td>
 									</tr>
