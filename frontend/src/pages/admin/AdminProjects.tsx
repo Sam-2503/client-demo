@@ -1,162 +1,197 @@
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Card, ProgressBar, useToast } from '../../components'
-import api from '../../api/client'
-import type { Project } from '../../types'
-import './styles/AdminProjects.css'
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { ProgressBar, useToast } from "../../components";
+import api from "../../api/client";
+import type { Project } from "../../types";
+import { cn } from "../../utils";
+
+const projectStatusClasses: Record<Project["status"], string> = {
+	planning:
+		"border-[rgba(127,140,141,0.3)] bg-[rgba(127,140,141,0.15)] text-[#7f8c8d]",
+	in_progress:
+		"border-[rgba(200,151,31,0.3)] bg-[rgba(200,151,31,0.15)] text-brand-gold",
+	on_hold:
+		"border-[rgba(230,126,34,0.3)] bg-[rgba(230,126,34,0.15)] text-[#e67e22]",
+	completed:
+		"border-[rgba(39,174,96,0.3)] bg-[rgba(39,174,96,0.15)] text-[#27ae60]",
+};
 
 export default function AdminProjects() {
-  const [projects, setProjects] = useState<Project[]>([])
-  const [loading, setLoading] = useState(true)
-  const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all')
-  const toast = useToast()
-  const navigate = useNavigate()
+	const [projects, setProjects] = useState<Project[]>([]);
+	const [loading, setLoading] = useState(true);
+	const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
+	const toast = useToast();
+	const navigate = useNavigate();
 
-  const loadProjects = async () => {
-    setLoading(true)
-    try {
-      const res = await api.get<Project[]>('/api/projects/')
-      setProjects(res.data)
-    } catch {
-      toast('Failed to load projects')
-    } finally {
-      setLoading(false)
-    }
-  }
+	const loadProjects = async () => {
+		setLoading(true);
+		try {
+			const res = await api.get<Project[]>("/api/projects/");
+			setProjects(res.data);
+		} catch {
+			toast("Failed to load projects");
+		} finally {
+			setLoading(false);
+		}
+	};
 
-  useEffect(() => {
-    loadProjects()
-  }, [])
+	useEffect(() => {
+		loadProjects();
+	}, []);
 
-  const filteredProjects = projects.filter((p) => {
-    if (filter === 'active') return p.status === 'in_progress'
-    if (filter === 'completed') return p.status === 'completed'
-    return true
-  })
+	const filteredProjects = projects.filter((p) => {
+		if (filter === "active") return p.status === "in_progress";
+		if (filter === "completed") return p.status === "completed";
+		return true;
+	});
 
-  const statusCounts = {
-    all: projects.length,
-    active: projects.filter((p) => p.status === 'in_progress').length,
-    completed: projects.filter((p) => p.status === 'completed').length,
-  }
+	const statusCounts = {
+		all: projects.length,
+		active: projects.filter((p) => p.status === "in_progress").length,
+		completed: projects.filter((p) => p.status === "completed").length,
+	};
 
-  return (
-    <div className="admin-projects-page">
-      {/* Header */}
-      <div className="admin-projects-page-header">
-        <div className="admin-projects-page-title-section">
-          <h1 className="admin-projects-page-title">All Projects</h1>
-          <p className="admin-projects-page-subtitle">
-            System-wide project management
-          </p>
-        </div>
-      </div>
+	return (
+		<div className="flex flex-col gap-6 p-6 max-md:p-4">
+			<div className="mb-2 flex flex-col gap-2">
+				<h1 className="font-serif text-[1.75rem] font-semibold text-white max-md:text-2xl">
+					All Projects
+				</h1>
+				<p className="text-sm text-brand-muted">
+					System-wide project management
+				</p>
+			</div>
 
-      {/* Filter Tabs */}
-      <div className="admin-projects-filter-tabs">
-        <button
-          className={`admin-projects-filter-tab ${filter === 'all' ? 'active' : ''}`}
-          onClick={() => setFilter('all')}
-        >
-          All Projects ({statusCounts.all})
-        </button>
-        <button
-          className={`admin-projects-filter-tab ${filter === 'active' ? 'active' : ''}`}
-          onClick={() => setFilter('active')}
-        >
-          Active ({statusCounts.active})
-        </button>
-        <button
-          className={`admin-projects-filter-tab ${filter === 'completed' ? 'active' : ''}`}
-          onClick={() => setFilter('completed')}
-        >
-          Completed ({statusCounts.completed})
-        </button>
-      </div>
+			<div className="flex gap-4 border-b-2 border-brand-border max-md:gap-2 max-md:mb-1">
+				<button
+					type="button"
+					className={cn(
+						"relative -mb-px border-b-2 border-transparent px-4 py-3 text-sm font-medium text-brand-muted transition-colors duration-300 hover:text-brand-gold max-md:px-3 max-md:py-2 max-md:text-xs",
+						filter === "all" && "border-brand-gold text-brand-gold",
+					)}
+					onClick={() => setFilter("all")}
+				>
+					All Projects ({statusCounts.all})
+				</button>
+				<button
+					type="button"
+					className={cn(
+						"relative -mb-px border-b-2 border-transparent px-4 py-3 text-sm font-medium text-brand-muted transition-colors duration-300 hover:text-brand-gold max-md:px-3 max-md:py-2 max-md:text-xs",
+						filter === "active" &&
+							"border-brand-gold text-brand-gold",
+					)}
+					onClick={() => setFilter("active")}
+				>
+					Active ({statusCounts.active})
+				</button>
+				<button
+					type="button"
+					className={cn(
+						"relative -mb-px border-b-2 border-transparent px-4 py-3 text-sm font-medium text-brand-muted transition-colors duration-300 hover:text-brand-gold max-md:px-3 max-md:py-2 max-md:text-xs",
+						filter === "completed" &&
+							"border-brand-gold text-brand-gold",
+					)}
+					onClick={() => setFilter("completed")}
+				>
+					Completed ({statusCounts.completed})
+				</button>
+			</div>
 
-      {/* Projects List */}
-      {loading ? (
-        <div className="admin-projects-page-loading">Loading projects...</div>
-      ) : filteredProjects.length === 0 ? (
-        <Card className="admin-projects-page-empty">
-          <div className="admin-projects-page-empty-icon">📋</div>
-          <div className="admin-projects-page-empty-title">No projects found</div>
-          <div className="admin-projects-page-empty-text">
-            {filter === 'all'
-              ? 'Start by creating your first project'
-              : `No ${filter} projects at this time`}
-          </div>
-        </Card>
-      ) : (
-        <div className="admin-projects-page-grid">
-          {filteredProjects.map((project) => (
-            <div
-              key={project.id}
-              className="admin-projects-page-item"
-              onClick={() => navigate(`/builder/projects/${project.id}`)}
-              style={{ cursor: 'pointer' }}
-            >
-              <div className="admin-projects-page-item-header">
-                <div className="admin-projects-page-item-title-section">
-                  <h3 className="admin-projects-page-item-title">
-                    {project.name}
-                  </h3>
-                  {project.location && (
-                    <p className="admin-projects-page-item-location">
-                      📍 {project.location}
-                    </p>
-                  )}
-                </div>
-                <span
-                  className={`admin-projects-page-item-status admin-projects-page-status-${project.status}`}
-                >
-                  {project.status.replace('_', ' ')}
-                </span>
-              </div>
+			{loading ? (
+				<div className="flex min-h-[280px] items-center justify-center rounded-lg border border-brand-border bg-brand-card text-sm text-brand-muted">
+					Loading projects...
+				</div>
+			) : filteredProjects.length === 0 ? (
+				<div className="flex min-h-[280px] flex-col items-center justify-center gap-4 rounded-lg border border-brand-border bg-brand-card px-6 py-12 text-center">
+					<div className="text-4xl">📋</div>
+					<div className="font-serif text-lg font-semibold text-white">
+						No projects found
+					</div>
+					<div className="text-sm text-brand-muted">
+						{filter === "all"
+							? "Start by creating your first project"
+							: `No ${filter} projects at this time`}
+					</div>
+				</div>
+			) : (
+				<div className="grid gap-4 [grid-template-columns:repeat(auto-fill,minmax(400px,1fr))] max-lg:[grid-template-columns:repeat(auto-fill,minmax(350px,1fr))] max-md:grid-cols-1">
+					{filteredProjects.map((project) => (
+						<button
+							key={project.id}
+							type="button"
+							className="flex flex-col gap-4 rounded-lg border border-brand-border bg-brand-card p-4 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-gold hover:bg-brand-panel"
+							onClick={() =>
+								navigate(`/builder/projects/${project.id}`)
+							}
+						>
+							<div className="flex items-start justify-between gap-3">
+								<div className="min-w-0 flex-1">
+									<h3 className="mb-1 font-serif text-lg font-semibold text-white">
+										{project.name}
+									</h3>
+									{project.location && (
+										<p className="text-sm text-brand-muted">
+											📍 {project.location}
+										</p>
+									)}
+								</div>
+								<span
+									className={cn(
+										"shrink-0 whitespace-nowrap rounded-sm border px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-[0.05em]",
+										projectStatusClasses[project.status],
+									)}
+								>
+									{project.status.replace("_", " ")}
+								</span>
+							</div>
 
-              {project.description && (
-                <p className="admin-projects-page-item-description">
-                  {project.description}
-                </p>
-              )}
+							{project.description && (
+								<p className="text-sm leading-6 text-brand-muted">
+									{project.description}
+								</p>
+							)}
 
-              <div className="admin-projects-page-item-progress">
-                <div className="admin-projects-page-progress-label">
-                  Progress
-                </div>
-                <ProgressBar
-                  value={project.overall_progress}
-                  max={100}
-                  label={`${project.overall_progress}%`}
-                />
-              </div>
+							<div className="flex flex-col gap-2">
+								<div className="text-sm font-semibold uppercase tracking-[0.05em] text-brand-muted">
+									Progress
+								</div>
+								<ProgressBar
+									value={project.overall_progress}
+									max={100}
+									label={`${project.overall_progress}%`}
+								/>
+							</div>
 
-              <div className="admin-projects-page-item-meta">
-                {project.start_date && (
-                  <div className="admin-projects-page-item-date">
-                    <span className="admin-projects-page-item-date-label">
-                      Started
-                    </span>
-                    <span className="admin-projects-page-item-date-value">
-                      {new Date(project.start_date).toLocaleDateString()}
-                    </span>
-                  </div>
-                )}
-                {project.expected_end_date && (
-                  <div className="admin-projects-page-item-date">
-                    <span className="admin-projects-page-item-date-label">
-                      Expected End
-                    </span>
-                    <span className="admin-projects-page-item-date-value">
-                      {new Date(project.expected_end_date).toLocaleDateString()}
-                    </span>
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  )
+							<div className="grid gap-3 border-t border-brand-border pt-4 sm:grid-cols-2">
+								{project.start_date && (
+									<div className="flex flex-col gap-1">
+										<span className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
+											Started
+										</span>
+										<span className="text-sm font-medium text-white">
+											{new Date(
+												project.start_date,
+											).toLocaleDateString()}
+										</span>
+									</div>
+								)}
+								{project.expected_end_date && (
+									<div className="flex flex-col gap-1">
+										<span className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
+											Expected End
+										</span>
+										<span className="text-sm font-medium text-white">
+											{new Date(
+												project.expected_end_date,
+											).toLocaleDateString()}
+										</span>
+									</div>
+								)}
+							</div>
+						</button>
+					))}
+				</div>
+			)}
+		</div>
+	);
 }

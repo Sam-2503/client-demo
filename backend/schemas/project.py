@@ -36,6 +36,7 @@ class ProjectOut(BaseModel):
     expected_end_date: Optional[datetime]
     client_id: uuid.UUID
     builder_id: uuid.UUID
+    created_by_id: uuid.UUID
     created_at: datetime
     updated_at: datetime
 
