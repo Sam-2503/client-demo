@@ -16,19 +16,6 @@ const CATS: { v: WorkCategory; l: string }[] = [
 	{ v: "other", l: "Other" },
 ];
 
-const CAT_COLORS: Record<WorkCategory, string> = {
-	foundation: "bg-[rgba(212,175,55,0.15)] border-[#d4af37]",
-	framing: "bg-[rgba(168,135,94,0.15)] border-[#a8875e]",
-	roofing: "bg-[rgba(93,173,226,0.15)] border-[#5dade2]",
-	plumbing: "bg-[rgba(52,152,219,0.15)] border-[#3498db]",
-	electrical: "bg-[rgba(241,196,15,0.15)] border-[#f1c40f]",
-	painting: "bg-[rgba(155,89,182,0.15)] border-[#9b59b6]",
-	flooring: "bg-[rgba(230,126,34,0.15)] border-[#e67e22]",
-	windows_doors: "bg-[rgba(52,73,94,0.15)] border-[#34495e]",
-	finishing: "bg-[rgba(46,204,113,0.15)] border-[#2ecc71]",
-	other: "bg-[rgba(149,165,166,0.15)] border-[#95a5a6]",
-};
-
 export default function ClientUpdates() {
 	const [recentUpdates, setRecentUpdates] = useState<Update[]>([]);
 	const [loading, setLoading] = useState(true);

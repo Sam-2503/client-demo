@@ -4,19 +4,6 @@ import api from "../../api/client";
 import { useToast } from "../../components/Toast";
 import type { Update, WorkCategory } from "../../types";
 
-const CAT_IC: Record<WorkCategory, string> = {
-	foundation: "",
-	framing: "",
-	roofing: "",
-	plumbing: "",
-	electrical: "",
-	painting: "",
-	flooring: "",
-	windows_doors: "",
-	finishing: "",
-	other: "",
-};
-
 const CATS: { v: WorkCategory; l: string }[] = [
 	{ v: "foundation", l: "Foundation" },
 	{ v: "framing", l: "Framing" },

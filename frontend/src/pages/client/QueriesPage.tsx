@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Card, useToast, QueryForm, QueryList } from "../../components";
+import { useToast, QueryForm, QueryList } from "../../components";
 import api from "../../api/client";
 import type { Query, CreateQueryRequest, Project } from "../../types";
 
