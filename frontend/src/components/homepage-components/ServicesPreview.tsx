@@ -30,12 +30,6 @@ export default function ServicesPreview() {
 							Comprehensive Construction Delivery Under One Team
 						</h2>
 					</div>
-					<a
-						href="/services"
-						className="inline-flex h-11 items-center justify-center rounded-md border border-[#dfc598]/40 bg-[#dfc598] px-5 text-[12px] font-semibold uppercase tracking-[0.14em] text-[#122338] transition hover:brightness-105"
-					>
-						View Service Details
-					</a>
 				</div>
 
 				<div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">

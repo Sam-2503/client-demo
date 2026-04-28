@@ -17,7 +17,10 @@ export default function Navbar() {
 		<nav className="fixed inset-x-0 top-0 z-[100] border-b border-white/10 bg-[rgba(8,14,22,0.84)] backdrop-blur-xl">
 			<div className="mx-auto flex h-[78px] max-w-[1280px] items-center justify-between px-4 md:px-8">
 				<a href="/home" className="flex items-center gap-3">
-					<div className="h-9 w-9 rounded-full border border-[#d5b47a]/40 bg-[radial-gradient(circle_at_30%_25%,#e4cda2_0%,#b68945_60%,#7a5a2e_100%)] shadow-[0_8px_24px_rgba(182,137,69,0.35)]" />
+					<img
+						src="/rjs-logo.svg"
+						className="h-12 w-12 rounded-full border border-[#d5b47a]/40 bg-[radial-gradient(circle_at_30%_25%,#e4cda2_0%,#b68945_60%,#7a5a2e_100%)] shadow-[0_8px_24px_rgba(182,137,69,0.35)]"
+					/>
 					<div>
 						<div className="font-serif text-lg font-semibold tracking-[0.08em] text-[#f3ede2]">
 							RJS Homes

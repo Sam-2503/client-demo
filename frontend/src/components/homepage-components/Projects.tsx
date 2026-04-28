@@ -90,7 +90,7 @@ export default function Projects() {
 	return (
 		<section className="px-4 py-24 md:px-8" id="projects">
 			<div className="mx-auto max-w-[1280px]">
-				<div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+				<div className=" gap-3 md:flex-row md:items-end md:justify-between">
 					<div>
 						<div className="text-[11px] uppercase tracking-[0.18em] text-[#c9aa72]">
 							Featured Portfolio
