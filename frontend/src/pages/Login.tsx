@@ -8,7 +8,7 @@ interface RoleOption {
 	ic: string;
 	name: string;
 	desc: string;
-	badge: string;
+	badgeClass: string;
 	bl: string;
 }
 
@@ -18,7 +18,7 @@ const ROLES: RoleOption[] = [
 		ic: "🏗",
 		name: "Builder",
 		desc: "Manage projects & updates",
-		badge: "b-builder",
+		badgeClass: "bg-[rgba(79,155,212,0.15)] text-[#4f9bd4]",
 		bl: "Builder",
 	},
 	{
@@ -26,7 +26,7 @@ const ROLES: RoleOption[] = [
 		ic: "👤",
 		name: "Client",
 		desc: "View your project progress",
-		badge: "b-client",
+		badgeClass: "bg-[rgba(100,180,150,0.15)] text-[#64b496]",
 		bl: "Client",
 	},
 ];
@@ -91,54 +91,64 @@ export default function Login() {
 	};
 
 	return (
-		<div className="login-screen">
-			<div className="login-wrap">
-				{/* Brand */}
-				<div className="login-brand">
-					<div className="login-brand-icon">RJS</div>
+		<div className="flex min-h-screen items-center justify-center overflow-y-auto bg-brand-black px-4 py-4 text-white">
+			<div className="w-full max-w-[450px] animate-fade-up">
+				<div className="mb-4 flex items-center gap-2 text-left">
+					<div className="font-serif text-[20px] font-bold tracking-[2px] text-brand-gold">
+						RJS
+					</div>
 					<div>
-						<div className="login-brand-name">RJS Homes</div>
-						<div className="login-brand-sub">Project Portal</div>
+						<div className="mb-0.5 font-serif text-sm font-semibold text-white">
+							RJS Homes
+						</div>
+						<div className="text-[10px] uppercase tracking-[1px] text-brand-muted">
+							Project Portal
+						</div>
 					</div>
 				</div>
 
-				{/* Card */}
-				<div className="login-card">
-					<div className="login-gold-bar" />
-					<div className="login-inner">
+				<div className="overflow-hidden rounded-lg border border-brand-border-light bg-brand-card shadow-[0_0_0_1px_rgba(255,255,255,0.02)]">
+					<div className="h-0.5 bg-brand-gold" />
+					<div className="px-4 py-5 sm:px-5">
 						{showSuccessMessage ? (
-							<>
-								<div className="login-h">
-									Registration Successful
-								</div>
-								<div className="login-s">
-									Your builder account has been created
+							<div className="flex flex-col gap-4">
+								<div>
+									<div className="mb-2 font-serif text-[18px] font-bold text-white">
+										Registration Successful
+									</div>
+									<div className="text-xs text-brand-muted">
+										Your builder account has been created
+									</div>
 								</div>
 
-								<div className="login-success-message">
-									<div className="login-success-icon">✓</div>
-									<div className="login-success-title">
+								<div className="flex flex-col gap-4 rounded-lg border border-[rgba(39,174,96,0.3)] bg-[rgba(39,174,96,0.1)] p-5 text-center">
+									<div className="text-[3rem] leading-none text-[#27ae60]">
+										✓
+									</div>
+									<div className="font-serif text-[1.12rem] font-semibold text-[#27ae60]">
 										Pending Admin Approval
 									</div>
-									<div className="login-success-text">
+									<div className="text-sm leading-6 text-brand-muted">
 										Your registration is pending admin
 										approval. You will be able to access
 										your account once an administrator
 										reviews and approves your request. This
 										typically takes 24-48 hours.
 									</div>
-									<div className="login-success-info">
-										<strong>What to expect:</strong>
-										<ul>
-											<li>
+									<div className="rounded-md bg-[rgba(39,174,96,0.05)] p-4 text-left">
+										<strong className="mb-3 block text-xs font-semibold uppercase tracking-[0.05em] text-[#27ae60]">
+											What to expect:
+										</strong>
+										<ul className="flex flex-col gap-2">
+											<li className="relative pl-4 text-sm text-brand-muted before:absolute before:left-0 before:text-[#27ae60] before:content-['✓']">
 												Admin will review your
 												credentials
 											</li>
-											<li>
+											<li className="relative pl-4 text-sm text-brand-muted before:absolute before:left-0 before:text-[#27ae60] before:content-['✓']">
 												You'll receive an email once
 												approved
 											</li>
-											<li>
+											<li className="relative pl-4 text-sm text-brand-muted before:absolute before:left-0 before:text-[#27ae60] before:content-['✓']">
 												You can then log in with your
 												credentials
 											</li>
@@ -147,7 +157,8 @@ export default function Login() {
 								</div>
 
 								<button
-									className="login-btn"
+									type="button"
+									className="mt-4 inline-flex w-full items-center justify-center rounded border border-brand-gold bg-brand-gold px-4 py-3 text-xs font-bold uppercase tracking-[1px] text-brand-black transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-gold-light hover:bg-brand-gold-light disabled:cursor-not-allowed disabled:opacity-60"
 									onClick={() => {
 										setShowSuccessMessage(false);
 										switchMode("login");
@@ -155,61 +166,69 @@ export default function Login() {
 								>
 									Back to Login →
 								</button>
-							</>
+							</div>
 						) : (
-							<>
-								<div className="login-h">
+							<div className="flex flex-col">
+								<div className="mb-2 font-serif text-[18px] font-bold text-white">
 									{mode === "login"
 										? "Welcome Back"
 										: "Create Account"}
 								</div>
-								<div className="login-s">
+								<div className="mb-4 text-xs text-brand-muted">
 									{mode === "login"
 										? "Sign in to your project portal"
 										: "Register to get access"}
 								</div>
 
-								{/* Role selector — register only */}
 								{mode === "register" && (
 									<>
-										<div className="acc-grid">
-											{ROLES.map((r) => (
-												<div
-													key={r.id}
-													className={`acc${role === r.id ? " sel" : ""}`}
-													onClick={() =>
-														setRole(r.id)
-													}
-												>
-													{role === r.id && (
-														<div className="acc-check">
-															✓
-														</div>
-													)}
-													<div className="acc-ic">
-														{r.ic}
-													</div>
-													<div className="acc-n">
-														{r.name}
-													</div>
-													<div className="acc-d">
-														{r.desc}
-													</div>
-													<span
-														className={`badge ${r.badge}`}
+										<div className="mb-4 grid grid-cols-2 gap-3">
+											{ROLES.map((r) => {
+												const selected = role === r.id;
+
+												return (
+													<button
+														key={r.id}
+														type="button"
+														className={`relative rounded-md border-2 px-4 py-4 text-center transition-all duration-300 ${
+															selected
+																? "border-brand-gold bg-[rgba(200,151,31,0.08)]"
+																: "border-brand-border-light bg-brand-panel hover:border-brand-gold hover:bg-brand-panel-light"
+														}`}
+														onClick={() =>
+															setRole(r.id)
+														}
 													>
-														{r.bl}
-													</span>
-												</div>
-											))}
+														{selected && (
+															<div className="absolute right-2 top-2 flex h-5 w-5 items-center justify-center rounded-full bg-brand-gold text-[10px] font-bold text-brand-black">
+																✓
+															</div>
+														)}
+														<div className="mb-2 text-2xl leading-none">
+															{r.ic}
+														</div>
+														<div className="mb-0.5 text-xs font-semibold text-white">
+															{r.name}
+														</div>
+														<div className="mb-2 text-[10px] text-brand-muted">
+															{r.desc}
+														</div>
+														<span
+															className={`inline-flex rounded-sm px-2 py-1 text-[10px] font-semibold ${r.badgeClass}`}
+														>
+															{r.bl}
+														</span>
+													</button>
+												);
+											})}
 										</div>
 
-										<div className="fg">
-											<label className="fl">
+										<div className="mb-4">
+											<label className="mb-1 block text-[11px] font-semibold uppercase tracking-[0.5px] text-white">
 												Full Name
 											</label>
 											<input
-												className="fi-inp"
+												className="w-full rounded border border-brand-border-light bg-brand-panel px-3 py-2 text-xs text-white transition-all duration-300 placeholder:text-brand-muted focus:border-brand-gold focus:bg-brand-panel-light focus:outline-none"
 												placeholder="Your full name"
 												value={fullName}
 												onChange={(e) =>
@@ -220,10 +239,12 @@ export default function Login() {
 									</>
 								)}
 
-								<div className="fg">
-									<label className="fl">Email Address</label>
+								<div className="mb-4">
+									<label className="mb-1 block text-[11px] font-semibold uppercase tracking-[0.5px] text-white">
+										Email Address
+									</label>
 									<input
-										className="fi-inp"
+										className="w-full rounded border border-brand-border-light bg-brand-panel px-3 py-2 text-xs text-white transition-all duration-300 placeholder:text-brand-muted focus:border-brand-gold focus:bg-brand-panel-light focus:outline-none"
 										type="email"
 										placeholder="you@example.com"
 										value={email}
@@ -236,10 +257,12 @@ export default function Login() {
 									/>
 								</div>
 
-								<div className="fg">
-									<label className="fl">Password</label>
+								<div className="mb-4">
+									<label className="mb-1 block text-[11px] font-semibold uppercase tracking-[0.5px] text-white">
+										Password
+									</label>
 									<input
-										className="fi-inp"
+										className="w-full rounded border border-brand-border-light bg-brand-panel px-3 py-2 text-xs text-white transition-all duration-300 placeholder:text-brand-muted focus:border-brand-gold focus:bg-brand-panel-light focus:outline-none"
 										type="password"
 										placeholder="••••••••"
 										value={password}
@@ -252,10 +275,15 @@ export default function Login() {
 									/>
 								</div>
 
-								{err && <div className="login-err">{err}</div>}
+								{err && (
+									<div className="mb-4 animate-fade-in rounded border border-[rgba(192,57,43,0.3)] bg-[rgba(192,57,43,0.1)] px-4 py-3 text-xs text-[#e74c3c]">
+										{err}
+									</div>
+								)}
 
 								<button
-									className="login-btn"
+									type="button"
+									className="mb-3 inline-flex w-full items-center justify-center rounded border border-brand-gold bg-brand-gold px-4 py-3 text-xs font-bold uppercase tracking-[1px] text-brand-black transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-gold-light hover:bg-brand-gold-light disabled:cursor-not-allowed disabled:opacity-60"
 									onClick={submit}
 									disabled={loading}
 								>
@@ -266,36 +294,40 @@ export default function Login() {
 											: "Create Account →"}
 								</button>
 
-								<div className="login-toggle">
+								<div className="mb-3 text-center text-[11px] text-brand-muted">
 									{mode === "login" ? (
 										<>
 											No account?{" "}
-											<span
+											<button
+												type="button"
+												className="font-semibold text-brand-gold transition-colors duration-300 hover:text-brand-gold-light"
 												onClick={() =>
 													switchMode("register")
 												}
 											>
 												Register here
-											</span>
+											</button>
 										</>
 									) : (
 										<>
 											Have an account?{" "}
-											<span
+											<button
+												type="button"
+												className="font-semibold text-brand-gold transition-colors duration-300 hover:text-brand-gold-light"
 												onClick={() =>
 													switchMode("login")
 												}
 											>
 												Sign In
-											</span>
+											</button>
 										</>
 									)}
 								</div>
 
-								<div className="login-hint">
+								<div className="text-center text-[9px] uppercase tracking-[0.5px] text-[#777]">
 									RJS Homes · Hyderabad · Est. 2002
 								</div>
-							</>
+							</div>
 						)}
 					</div>
 				</div>
