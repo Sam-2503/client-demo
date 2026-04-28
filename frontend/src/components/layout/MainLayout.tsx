@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles/MainLayout.css";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 
@@ -31,14 +30,14 @@ export default function MainLayout({
 	subtitle = "Homes",
 }: MainLayoutProps) {
 	return (
-		<div className="main-layout">
+		<div className="flex h-screen w-full overflow-hidden">
 			<Sidebar
 				navItems={navItems}
 				logo={logo}
 				title={title}
 				subtitle={subtitle}
 			/>
-			<div className="main-content">
+			<div className="flex flex-1 flex-col overflow-hidden">
 				{(pageTitle || pageSubtitle || pageActions) && (
 					<Topbar
 						title={pageTitle}
@@ -46,7 +45,9 @@ export default function MainLayout({
 						actions={pageActions}
 					/>
 				)}
-				<div className="page-content">{children}</div>
+				<div className="flex-1 overflow-x-hidden overflow-y-auto bg-brand-dark p-6">
+					{children}
+				</div>
 			</div>
 		</div>
 	);

@@ -1,5 +1,4 @@
 import React from "react";
-import "./styles/Skeleton.css";
 import { cn } from "../utils/cn";
 
 type SkeletonType = "text" | "circle" | "rect" | "card";
@@ -19,6 +18,15 @@ export default function Skeleton({
 	height,
 	className,
 }: SkeletonProps) {
+	const baseClass =
+		"animate-pulse rounded-md bg-gradient-to-r from-brand-panel via-brand-panel-light to-brand-panel";
+
+	const typeClass: Record<Exclude<SkeletonType, "card">, string> = {
+		text: "mb-3 h-[14px] w-full",
+		circle: "h-10 w-10 rounded-full",
+		rect: "h-[120px] w-full",
+	};
+
 	const style: React.CSSProperties = {};
 
 	if (width) {
@@ -32,22 +40,26 @@ export default function Skeleton({
 	const skeletons = Array.from({ length: count }, (_, i) => (
 		<div
 			key={i}
-			className={cn("skeleton", `skeleton-${type}`, className)}
+			className={cn(
+				baseClass,
+				type !== "card" && typeClass[type],
+				className,
+			)}
 			style={style}
 		/>
 	));
 
 	if (type === "card") {
 		return (
-			<div className="skeleton-card">
+			<div className="overflow-hidden rounded-lg border border-brand-border bg-brand-card">
 				<div
-					className="skeleton skeleton-rect"
+					className={cn(baseClass, "h-[120px] rounded-none")}
 					style={{ height: "120px" }}
 				/>
-				<div className="skeleton-card-content">
-					<div className="skeleton skeleton-text" />
+				<div className="flex flex-col gap-3 p-4">
+					<div className={cn(baseClass, "h-[14px] w-full")} />
 					<div
-						className="skeleton skeleton-text"
+						className={cn(baseClass, "h-[14px] w-4/5")}
 						style={{ width: "80%" }}
 					/>
 				</div>

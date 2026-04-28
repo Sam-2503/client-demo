@@ -5,7 +5,6 @@ import {
 	useCallback,
 	type ReactNode,
 } from "react";
-import "./styles/Toast.css";
 
 type ToastFn = (msg: string) => void;
 
@@ -24,7 +23,11 @@ export function ToastProvider({ children }: { children: ReactNode }) {
 	return (
 		<ToastContext.Provider value={toast}>
 			{children}
-			{show && <div className="toast">{msg}</div>}
+			{show && (
+				<div className="fixed bottom-6 left-1/2 z-[9999] flex max-w-[400px] -translate-x-1/2 items-center gap-4 rounded-md border border-brand-border border-l-4 border-l-brand-gold bg-brand-card px-6 py-4 text-sm font-medium text-white shadow-[0_8px_24px_rgba(0,0,0,0.3)] animate-fade-in">
+					{msg}
+				</div>
+			)}
 		</ToastContext.Provider>
 	);
 }
