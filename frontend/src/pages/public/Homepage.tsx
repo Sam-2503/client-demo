@@ -10,29 +10,32 @@ import Footer from "../../components/homepage-components/Footer.tsx";
 
 export default function Homepage() {
 	return (
-		<div className="min-h-screen overflow-x-hidden bg-[radial-gradient(120%_80%_at_50%_0%,#182d43_0%,#0a1320_45%,#060b14_100%)] font-sans text-white">
-			{/* NAVBAR */}
-			<Navbar />
+		<>
+			<title>RJS Homes - Home</title>
+			<div className="min-h-screen overflow-x-hidden bg-[radial-gradient(120%_80%_at_50%_0%,#182d43_0%,#0a1320_45%,#060b14_100%)] font-sans text-white">
+				{/* NAVBAR */}
+				<Navbar />
 
-			{/* HERO SECTION */}
-			<Hero />
+				{/* HERO SECTION */}
+				<Hero />
 
-			{/* STATS STRIP */}
-			<Stats />
-			{/* ABOUT SECTION */}
-			<About />
+				{/* STATS STRIP */}
+				<Stats />
+				{/* ABOUT SECTION */}
+				<About />
 
-			{/* SERVICES PREVIEW SECTION */}
-			<ServicesPreview />
+				{/* SERVICES PREVIEW SECTION */}
+				<ServicesPreview />
 
-			{/* PROJECTS SECTION */}
-			<Projects />
+				{/* PROJECTS SECTION */}
+				<Projects />
 
-			{/* CONTACT SECTION */}
-			<Contact />
+				{/* CONTACT SECTION */}
+				<Contact />
 
-			{/* FOOTER */}
-			<Footer />
-		</div>
+				{/* FOOTER */}
+				<Footer />
+			</div>
+		</>
 	);
 }
