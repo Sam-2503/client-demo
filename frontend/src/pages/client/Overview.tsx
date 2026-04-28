@@ -63,7 +63,10 @@ export default function ClientOverview() {
 				<div className="flex-1 overflow-hidden rounded-full bg-[rgba(13,38,58,0.5)]">
 					<div
 						className="h-2 rounded-full transition-all"
-						style={{ width: `${progress}%`, backgroundColor: statusColor[status] }}
+						style={{
+							width: `${progress}%`,
+							backgroundColor: statusColor[status],
+						}}
 					/>
 				</div>
 				<span className="text-sm text-[#a9b7c8]">{progress}%</span>
@@ -83,16 +86,30 @@ export default function ClientOverview() {
 			<div className="animate-fade-up space-y-6 px-6 py-8">
 				<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
 					{[
-						{ label: "Total Projects", value: total, color: "#5dade2" },
+						{
+							label: "Total Projects",
+							value: total,
+							color: "#5dade2",
+						},
 						{ label: "Active", value: active, color: "#d8bc8f" },
-						{ label: "Completed", value: completed, color: "#69c58a" },
-						{ label: "Avg. Progress", value: `${avgProgress}%`, color: "#a8875e" },
+						{
+							label: "Completed",
+							value: completed,
+							color: "#69c58a",
+						},
+						{
+							label: "Avg. Progress",
+							value: `${avgProgress}%`,
+							color: "#a8875e",
+						},
 					].map((stat) => (
 						<div
 							key={stat.label}
 							className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] p-5 backdrop-blur-sm"
 						>
-							<p className="text-sm text-[#7a8894]">{stat.label}</p>
+							<p className="text-sm text-[#7a8894]">
+								{stat.label}
+							</p>
 							<div className="mt-2 flex items-end gap-2">
 								<span
 									className="text-3xl font-bold"
@@ -107,7 +124,9 @@ export default function ClientOverview() {
 
 				<div>
 					<div className="mb-4 flex items-center justify-between">
-						<h2 className="text-2xl font-bold text-[#f5efe2]">Your Projects</h2>
+						<h2 className="text-2xl font-bold text-[#f5efe2]">
+							Your Projects
+						</h2>
 						<button
 							onClick={() => navigate("/client/projects")}
 							className="rounded-lg border border-[#d8bc8f]/30 px-4 py-2 text-sm font-medium text-[#d8bc8f] transition-all hover:bg-[#d8bc8f]/10"
@@ -129,7 +148,9 @@ export default function ClientOverview() {
 							{projects.map((p) => (
 								<div
 									key={p.id}
-									onClick={() => navigate(`/client/projects/${p.id}`)}
+									onClick={() =>
+										navigate(`/client/projects/${p.id}`)
+									}
 									className={cn(
 										"cursor-pointer rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] p-5 transition-all hover:bg-[rgba(13,38,58,0.5)] hover:shadow-lg backdrop-blur-sm",
 										statusAccent[p.status],
@@ -137,7 +158,9 @@ export default function ClientOverview() {
 								>
 									<div className="mb-3 flex items-start justify-between">
 										<div>
-											<h3 className="font-semibold text-[#f5efe2]">{p.name}</h3>
+											<h3 className="font-semibold text-[#f5efe2]">
+												{p.name}
+											</h3>
 											<p className="mt-1 text-sm text-[#a9b7c8]">
 												{p.location ?? "Location TBD"}
 											</p>
@@ -151,7 +174,10 @@ export default function ClientOverview() {
 											{p.status.replace("_", " ")}
 										</span>
 									</div>
-									{renderProgressBar(p.overall_progress, p.status)}
+									{renderProgressBar(
+										p.overall_progress,
+										p.status,
+									)}
 								</div>
 							))}
 						</div>
