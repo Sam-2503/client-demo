@@ -62,17 +62,17 @@ export default function QueriesPage() {
 					<h1 className="font-serif text-3xl font-semibold text-white">
 						Client Questions
 					</h1>
-					<p className="text-sm text-brand-muted-light">
+					<p className="text-sm text-[#a9b7c8]">
 						Respond to client questions about projects
 					</p>
 				</div>
 			</div>
 
 			{/* Filter Tabs */}
-			<div className="flex gap-3 overflow-x-auto border-b-2 border-brand-border pb-0">
+			<div className="flex gap-3 overflow-x-auto border-b-2 border-white/10 pb-0">
 				<button
 					className={cn(
-						"mb-[-2px] border-b-2 border-transparent px-4 py-3 text-sm font-medium text-brand-muted-light transition hover:text-brand-gold",
+						"mb-[-2px] border-b-2 border-transparent px-4 py-3 text-sm font-medium text-[#a9b7c8] transition hover:text-brand-gold",
 						filter === "all" && "border-brand-gold text-brand-gold",
 					)}
 					onClick={() => setFilter("all")}
@@ -81,7 +81,7 @@ export default function QueriesPage() {
 				</button>
 				<button
 					className={cn(
-						"mb-[-2px] border-b-2 border-transparent px-4 py-3 text-sm font-medium text-brand-muted-light transition hover:text-brand-gold",
+						"mb-[-2px] border-b-2 border-transparent px-4 py-3 text-sm font-medium text-[#a9b7c8] transition hover:text-brand-gold",
 						filter === "open" &&
 							"border-brand-gold text-brand-gold",
 					)}
@@ -91,7 +91,7 @@ export default function QueriesPage() {
 				</button>
 				<button
 					className={cn(
-						"mb-[-2px] border-b-2 border-transparent px-4 py-3 text-sm font-medium text-brand-muted-light transition hover:text-brand-gold",
+						"mb-[-2px] border-b-2 border-transparent px-4 py-3 text-sm font-medium text-[#a9b7c8] transition hover:text-brand-gold",
 						filter === "resolved" &&
 							"border-brand-gold text-brand-gold",
 					)}
@@ -115,9 +115,9 @@ export default function QueriesPage() {
 				{/* Response Form (if query selected) */}
 				{selectedQuery && (
 					<div className="space-y-4 xl:sticky xl:top-6">
-						<Card className="border border-brand-border bg-brand-panel p-3">
+						<Card className="border border-white/10 bg-white/5 p-3">
 							<button
-								className="w-full rounded border border-brand-border px-4 py-3 text-sm font-medium text-brand-muted-light transition hover:border-brand-gold hover:text-brand-gold"
+								className="w-full rounded border border-white/10 px-4 py-3 text-sm font-medium text-[#a9b7c8] transition hover:border-brand-gold hover:text-brand-gold"
 								onClick={() => setSelectedQuery(null)}
 							>
 								← Back to List

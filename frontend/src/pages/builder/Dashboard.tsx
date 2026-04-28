@@ -6,10 +6,10 @@ import { cn } from "../../utils/cn";
 import type { Project, ProjectStatus } from "../../types";
 
 const STATUS_COLOR: Record<ProjectStatus, string> = {
-	planning: "var(--gray)",
-	in_progress: "var(--gold)",
-	on_hold: "var(--orange)",
-	completed: "var(--green)",
+	planning: "#5a6b7a",
+	in_progress: "#d8bc8f",
+	on_hold: "#f39c12",
+	completed: "#69c58a",
 };
 
 const STATUS_LABEL: Record<ProjectStatus, string> = {
@@ -20,10 +20,10 @@ const STATUS_LABEL: Record<ProjectStatus, string> = {
 };
 
 const STATUS_BADGE: Record<ProjectStatus, string> = {
-	planning: "bg-brand-muted text-brand-black",
-	in_progress: "bg-brand-gold text-brand-black",
-	on_hold: "bg-[#e67e22] text-brand-black",
-	completed: "bg-[#27ae60] text-brand-black",
+	planning: "bg-[#5a6b7a] text-white",
+	in_progress: "bg-[#d8bc8f] text-[#101824]",
+	on_hold: "bg-[#f39c12] text-white",
+	completed: "bg-[#69c58a] text-white",
 };
 
 export default function BuilderDashboard() {
@@ -51,88 +51,70 @@ export default function BuilderDashboard() {
 	return (
 		<>
 			{/* Topbar */}
-			<div className="flex items-center justify-between border-b border-brand-border-light bg-brand-card px-6 py-4">
-				<div className="font-serif text-2xl font-semibold text-white">
+			<div className="border-b border-white/10 bg-[linear-gradient(160deg,rgba(10,18,28,0.4)_0%,rgba(16,31,48,0.4)_100%)] px-6 py-6 backdrop-blur-sm">
+				<div className="font-serif text-3xl font-semibold text-[#f5efe2]">
 					Dashboard
-				</div>
-				<div className="flex items-center gap-3">
-					<span className="rounded bg-brand-gold px-2 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.08em] text-brand-black">
-						ADMIN
-					</span>
-					<button
-						className="rounded bg-brand-gold px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-brand-black transition hover:bg-brand-gold-light"
-						onClick={() => navigate("/builder/projects")}
-					>
-						+ New Project
-					</button>
 				</div>
 			</div>
 
-			<div className="animate-fade-up space-y-5 px-6 py-6">
+			<div className="animate-fade-up space-y-8 px-6 py-8">
 				{/* KPIs */}
 				<div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-					<div className="rounded-md border border-brand-border-light border-t-2 border-t-brand-gold bg-brand-card p-4">
-						<div className="font-serif text-3xl text-brand-gold">
-							{total}
-						</div>
-						<div className="mt-1 text-sm font-medium text-white">
+					<div className="rounded-2xl border border-white/10 border-t-2 border-t-[#d8bc8f] bg-[rgba(13,38,58,0.3)] p-5 backdrop-blur-sm transition hover:border-[#d8bc8f]/20 hover:bg-[rgba(13,38,58,0.5)]">
+						<div className="text-sm uppercase tracking-[0.12em] text-[#a9b7c8]">
 							Total Projects
 						</div>
-						<div className="text-xs text-brand-muted">All time</div>
-					</div>
-					<div className="rounded-md border border-brand-border-light border-t-2 border-t-[#27ae60] bg-brand-card p-4">
-						<div className="font-serif text-3xl text-[#4caf50]">
-							{active}
+						<div className="mt-3 font-serif text-4xl font-semibold text-[#d8bc8f]">
+							{total}
 						</div>
-						<div className="mt-1 text-sm font-medium text-white">
+						<div className="mt-2 text-xs text-[#7a8894]">
+							All time
+						</div>
+					</div>
+					<div className="rounded-2xl border border-white/10 border-t-2 border-t-[#69c58a] bg-[rgba(13,38,58,0.3)] p-5 backdrop-blur-sm transition hover:border-[#69c58a]/20 hover:bg-[rgba(13,38,58,0.5)]">
+						<div className="text-sm uppercase tracking-[0.12em] text-[#a9b7c8]">
 							Active Builds
 						</div>
-						<div className="text-xs text-brand-muted">
+						<div className="mt-3 font-serif text-4xl font-semibold text-[#69c58a]">
+							{active}
+						</div>
+						<div className="mt-2 text-xs text-[#7a8894]">
 							In progress
 						</div>
 					</div>
-					<div className="rounded-md border border-brand-border-light border-t-2 border-t-[#2980b9] bg-brand-card p-4">
-						<div className="font-serif text-3xl text-[#5dade2]">
-							{completed}
-						</div>
-						<div className="mt-1 text-sm font-medium text-white">
+					<div className="rounded-2xl border border-white/10 border-t-2 border-t-[#5dade2] bg-[rgba(13,38,58,0.3)] p-5 backdrop-blur-sm transition hover:border-[#5dade2]/20 hover:bg-[rgba(13,38,58,0.5)]">
+						<div className="text-sm uppercase tracking-[0.12em] text-[#a9b7c8]">
 							Completed
 						</div>
-						<div className="text-xs text-brand-muted">
+						<div className="mt-3 font-serif text-4xl font-semibold text-[#5dade2]">
+							{completed}
+						</div>
+						<div className="mt-2 text-xs text-[#7a8894]">
 							Delivered
 						</div>
 					</div>
-					<div className="rounded-md border border-brand-border-light border-t-2 border-t-brand-gold bg-brand-card p-4">
-						<div className="font-serif text-3xl text-brand-gold">
-							{avgProg}%
-						</div>
-						<div className="mt-1 text-sm font-medium text-white">
+					<div className="rounded-2xl border border-white/10 border-t-2 border-t-[#d8bc8f] bg-[rgba(13,38,58,0.3)] p-5 backdrop-blur-sm transition hover:border-[#d8bc8f]/20 hover:bg-[rgba(13,38,58,0.5)]">
+						<div className="text-sm uppercase tracking-[0.12em] text-[#a9b7c8]">
 							Avg Progress
 						</div>
-						<div className="text-xs text-brand-muted">
+						<div className="mt-3 font-serif text-4xl font-semibold text-[#d8bc8f]">
+							{avgProg}%
+						</div>
+						<div className="mt-2 text-xs text-[#7a8894]">
 							Across all projects
 						</div>
 					</div>
 				</div>
 
 				{/* Projects header */}
-				<div className="mb-3 flex items-center justify-between">
-					<div className="text-sm font-semibold uppercase tracking-[0.1em] text-brand-muted-light">
-						All Projects
-					</div>
-					<button
-						className="rounded bg-brand-gold px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-brand-black transition hover:bg-brand-gold-light"
-						onClick={() => navigate("/builder/projects")}
-					>
-						+ New Project
-					</button>
+				<div className="mb-4 text-sm font-semibold uppercase tracking-[0.12em] text-[#a9b7c8]">
+					All Projects
 				</div>
 
 				{/* Projects grid */}
 				{loading ? (
-					<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
-						<div className="mb-2 text-3xl">⏳</div>
-						<div className="text-sm text-brand-muted-light">
+					<div className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] p-12 text-center backdrop-blur-sm">
+						<div className="text-sm text-[#a9b7c8]">
 							Loading projects…
 						</div>
 					</div>
@@ -141,7 +123,7 @@ export default function BuilderDashboard() {
 						{projects.map((p) => (
 							<div
 								key={p.id}
-								className="cursor-pointer rounded-md border border-brand-border-light border-t-2 bg-brand-card p-4 transition hover:border-brand-gold"
+								className="cursor-pointer rounded-2xl border border-white/10 border-t-2 bg-[rgba(13,38,58,0.3)] p-5 transition hover:border-[#d8bc8f]/35 hover:bg-[rgba(13,38,58,0.5)]"
 								style={{
 									borderTopColor: STATUS_COLOR[p.status],
 								}}
@@ -152,16 +134,16 @@ export default function BuilderDashboard() {
 								<div className="space-y-4">
 									<div className="flex items-start justify-between gap-3">
 										<div>
-											<div className="text-sm font-semibold text-white">
+											<div className="font-medium text-white">
 												{p.name}
 											</div>
-											<div className="text-xs text-brand-muted">
+											<div className="mt-1 text-xs text-[#a9b7c8]">
 												{p.location ?? "Location TBD"}
 											</div>
 										</div>
 										<span
 											className={cn(
-												"rounded px-2 py-0.5 text-[0.65rem] font-semibold uppercase",
+												"rounded-full px-3 py-1 text-[0.65rem] font-semibold uppercase",
 												STATUS_BADGE[p.status],
 											)}
 										>
@@ -169,18 +151,18 @@ export default function BuilderDashboard() {
 										</span>
 									</div>
 
-									<div className="text-xs text-brand-muted-light">
-										📍 {p.location ?? "—"}
-									</div>
-
 									<div>
-										<div className="mb-1 flex items-center justify-between text-[0.7rem] text-brand-muted-light">
-											<span>Progress</span>
-											<span>{p.overall_progress}%</span>
+										<div className="mb-2 flex items-center justify-between text-[0.7rem]">
+											<span className="text-[#a9b7c8]">
+												Progress
+											</span>
+											<span className="font-semibold text-white">
+												{p.overall_progress}%
+											</span>
 										</div>
-										<div className="h-1.5 overflow-hidden rounded bg-brand-border">
+										<div className="h-1.5 overflow-hidden rounded-full bg-white/5">
 											<div
-												className="h-full rounded"
+												className="h-full rounded-full"
 												style={{
 													width: `${p.overall_progress}%`,
 													background:
@@ -191,14 +173,14 @@ export default function BuilderDashboard() {
 									</div>
 								</div>
 
-								<div className="mt-4 flex items-center justify-between border-t border-brand-border pt-3">
-									<div className="text-[0.72rem] text-brand-muted-light">
+								<div className="mt-4 border-t border-white/10 pt-3 text-[0.72rem]">
+									<div className="text-[#a9b7c8]">
 										Status:{" "}
-										<span className="text-brand-gold">
+										<span className="text-[#d8bc8f]">
 											{STATUS_LABEL[p.status]}
 										</span>
 									</div>
-									<div className="text-[0.68rem] text-brand-muted">
+									<div className="mt-2 text-[#7a8894]">
 										{p.start_date
 											? new Date(
 													p.start_date,
@@ -214,14 +196,16 @@ export default function BuilderDashboard() {
 
 						{/* Add new card */}
 						<div
-							className="grid cursor-pointer place-items-center rounded-md border border-dashed border-brand-gold bg-brand-card p-6 text-center transition hover:bg-brand-panel"
+							className="grid cursor-pointer place-items-center rounded-2xl border border-dashed border-[#d8bc8f]/50 bg-[rgba(216,188,143,0.08)] p-8 text-center transition hover:border-[#d8bc8f]/70 hover:bg-[rgba(216,188,143,0.12)]"
 							onClick={() => navigate("/builder/projects")}
 						>
-							<div className="mb-2 text-2xl text-brand-gold">
-								＋
-							</div>
-							<div className="text-sm font-medium text-brand-muted-light">
-								Create New Project
+							<div className="text-[#d8bc8f]">
+								<div className="mb-2 text-2xl font-semibold">
+									+
+								</div>
+								<div className="text-sm font-medium">
+									Create New Project
+								</div>
 							</div>
 						</div>
 					</div>

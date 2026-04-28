@@ -312,13 +312,13 @@ export default function BuilderProjectDetail() {
 	if (!project)
 		return (
 			<>
-				<div className="flex items-center justify-between border-b border-brand-border-light bg-brand-card px-6 py-4">
+				<div className="flex items-center justify-between border-b border-white/10 bg-[rgba(13,38,58,0.3)] px-6 py-4">
 					<div className="font-serif text-2xl font-semibold text-white">
 						Loading Project…
 					</div>
 				</div>
 				<div className="px-6 py-6">
-					<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
+					<div className="rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] p-10 text-center">
 						<div className="mb-2 text-3xl">⏳</div>
 						<div
 							style={{
@@ -350,7 +350,7 @@ export default function BuilderProjectDetail() {
 	return (
 		<>
 			{/* Topbar */}
-			<div className="flex items-center justify-between border-b border-brand-border-light bg-brand-card px-6 py-4">
+			<div className="flex items-center justify-between border-b border-white/10 bg-[rgba(13,38,58,0.3)] px-6 py-4">
 				<div
 					className="flex items-center gap-2 font-serif text-2xl font-semibold text-white"
 					style={{ display: "flex", alignItems: "center", gap: 10 }}
@@ -364,17 +364,17 @@ export default function BuilderProjectDetail() {
 					{project.name}
 				</div>
 				<div className="flex items-center gap-2">
-					<span className="rounded bg-brand-gold px-2 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-brand-black">
+					<span className="rounded bg-[#d8bc8f] px-2 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-brand-black">
 						{STATUS_LABEL[project.status]}
 					</span>
 					<button
-						className="rounded bg-brand-gold px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-brand-black transition hover:bg-brand-gold-light"
+						className="rounded bg-[#d8bc8f] px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-brand-black transition hover:bg-[#d8bc8f]-light"
 						onClick={() => setShowUpd(true)}
 					>
 						+ Post Update
 					</button>
 					<button
-						className="rounded border border-brand-border px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-brand-muted-light transition hover:border-brand-gold hover:text-brand-gold"
+						className="rounded border border-white/10 px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-[#a9b7c8] transition hover:border-[#d8bc8f] hover:text-[#d8bc8f]"
 						onClick={() => setShowMat(true)}
 					>
 						+ Material
@@ -385,7 +385,7 @@ export default function BuilderProjectDetail() {
 			<div className="animate-fade-up space-y-5 px-6 py-6">
 				{/* KPIs */}
 				<div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-					<div className="rounded-md border border-brand-border-light border-t-2 border-t-[#27ae60] bg-brand-card p-4">
+					<div className="rounded-md border border-white/10 border-t-2 border-t-[#27ae60] bg-[rgba(13,38,58,0.3)] p-4">
 						<div className="font-serif text-3xl text-[#4caf50]">
 							{project.overall_progress}%
 						</div>
@@ -393,24 +393,24 @@ export default function BuilderProjectDetail() {
 							Overall Progress
 						</div>
 					</div>
-					<div className="rounded-md border border-brand-border-light border-t-2 border-t-brand-gold bg-brand-card p-4">
-						<div className="font-serif text-3xl text-brand-gold">
+					<div className="rounded-md border border-white/10 border-t-2 border-t-brand-gold bg-[rgba(13,38,58,0.3)] p-4">
+						<div className="font-serif text-3xl text-[#d8bc8f]">
 							{updates.length}
 						</div>
 						<div className="mt-1 text-sm font-medium text-white">
 							Updates Posted
 						</div>
 					</div>
-					<div className="rounded-md border border-brand-border-light border-t-2 border-t-brand-gold bg-brand-card p-4">
-						<div className="font-serif text-3xl text-brand-gold">
+					<div className="rounded-md border border-white/10 border-t-2 border-t-brand-gold bg-[rgba(13,38,58,0.3)] p-4">
+						<div className="font-serif text-3xl text-[#d8bc8f]">
 							{materials.length}
 						</div>
 						<div className="mt-1 text-sm font-medium text-white">
 							Materials Logged
 						</div>
 					</div>
-					<div className="rounded-md border border-brand-border-light border-t-2 border-t-brand-gold bg-brand-card p-4">
-						<div className="font-serif text-3xl text-brand-gold">
+					<div className="rounded-md border border-white/10 border-t-2 border-t-brand-gold bg-[rgba(13,38,58,0.3)] p-4">
+						<div className="font-serif text-3xl text-[#d8bc8f]">
 							₹{(totalCost / 1000).toFixed(0)}K
 						</div>
 						<div className="mt-1 text-sm font-medium text-white">
@@ -420,9 +420,9 @@ export default function BuilderProjectDetail() {
 				</div>
 
 				{/* Progress + status control */}
-				<div className="rounded-md border border-brand-border-light bg-brand-card p-4">
+				<div className="rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] p-4">
 					<div className="mb-4 flex items-center justify-between gap-3">
-						<div className="text-sm font-semibold uppercase tracking-[0.1em] text-brand-muted-light">
+						<div className="text-sm font-semibold uppercase tracking-[0.1em] text-[#a9b7c8]">
 							Overall Progress
 						</div>
 						<div
@@ -464,13 +464,13 @@ export default function BuilderProjectDetail() {
 						</div>
 					</div>
 					<div className="space-y-2">
-						<div className="flex items-center justify-between text-[0.72rem] text-brand-muted-light">
+						<div className="flex items-center justify-between text-[0.72rem] text-[#a9b7c8]">
 							<span>{project.name}</span>
 							<span>{project.overall_progress}%</span>
 						</div>
 						<div className="h-1.5 overflow-hidden rounded bg-brand-border">
 							<div
-								className="h-full rounded bg-brand-gold"
+								className="h-full rounded bg-[#d8bc8f]"
 								style={{
 									width: `${project.overall_progress}%`,
 								}}
@@ -518,7 +518,7 @@ export default function BuilderProjectDetail() {
 				</div>
 
 				{/* Tabs */}
-				<div className="mb-4 flex border-b border-brand-border">
+				<div className="mb-4 flex border-b border-white/10">
 					{(
 						[
 							["updates", "📝 Updates"],
@@ -533,8 +533,8 @@ export default function BuilderProjectDetail() {
 							className={cn(
 								"mb-[-1px] border-b-2 border-transparent px-4 py-2 text-xs font-medium uppercase tracking-[0.08em] transition",
 								tab === k
-									? "border-brand-gold text-brand-gold"
-									: "text-brand-muted hover:text-brand-gold",
+									? "border-[#d8bc8f] text-[#d8bc8f]"
+									: "text-[#888888] hover:text-[#d8bc8f]",
 							)}
 						>
 							{l}
@@ -545,9 +545,9 @@ export default function BuilderProjectDetail() {
 				{/* ── UPDATES TAB ── */}
 				{tab === "updates" &&
 					(updates.length === 0 ? (
-						<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
+						<div className="rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] p-10 text-center">
 							<div className="mb-2 text-3xl">📝</div>
-							<div className="text-sm text-brand-muted-light">
+							<div className="text-sm text-[#a9b7c8]">
 								No updates yet. Click "+ Post Update" to add
 								one.
 							</div>
@@ -557,9 +557,9 @@ export default function BuilderProjectDetail() {
 							{updates.map((u) => (
 								<div
 									key={u.id}
-									className={`flex gap-3 rounded-md border p-4 ${u.progress_percentage >= 100 ? "border-[#27ae60] bg-[rgba(39,174,96,0.08)]" : "border-brand-gold bg-[rgba(200,151,31,0.08)]"}`}
+									className={`flex gap-3 rounded-md border p-4 ${u.progress_percentage >= 100 ? "border-[#27ae60] bg-[rgba(39,174,96,0.08)]" : "border-[#d8bc8f] bg-[rgba(200,151,31,0.08)]"}`}
 								>
-									<div className="grid h-9 w-9 place-items-center rounded bg-brand-panel">
+									<div className="grid h-9 w-9 place-items-center rounded bg-white/5">
 										{CAT_IC[u.category]}
 									</div>
 									<div style={{ flex: 1 }}>
@@ -567,7 +567,7 @@ export default function BuilderProjectDetail() {
 											{u.title}
 										</div>
 										{u.description && (
-											<div className="mt-1 text-[0.78rem] text-brand-muted-light">
+											<div className="mt-1 text-[0.78rem] text-[#a9b7c8]">
 												{u.description}
 											</div>
 										)}
@@ -580,7 +580,7 @@ export default function BuilderProjectDetail() {
 												flexWrap: "wrap",
 											}}
 										>
-											<span className="rounded bg-brand-panel-light px-2 py-0.5 text-[0.58rem] uppercase text-brand-muted-light">
+											<span className="rounded bg-white/5-light px-2 py-0.5 text-[0.58rem] uppercase text-[#a9b7c8]">
 												{u.category.replace("_", " ")}
 											</span>
 											<span
@@ -607,7 +607,7 @@ export default function BuilderProjectDetail() {
 												</span>
 											)}
 										</div>
-										<div className="mt-2 text-[0.68rem] text-brand-muted">
+										<div className="mt-2 text-[0.68rem] text-[#888888]">
 											{new Date(
 												u.created_at,
 											).toLocaleString("en-IN", {
@@ -627,15 +627,15 @@ export default function BuilderProjectDetail() {
 				{/* ── MATERIALS TAB ── */}
 				{tab === "materials" &&
 					(materials.length === 0 ? (
-						<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
+						<div className="rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] p-10 text-center">
 							<div className="mb-2 text-3xl">🪵</div>
-							<div className="text-sm text-brand-muted-light">
+							<div className="text-sm text-[#a9b7c8]">
 								No materials logged yet. Click "+ Material" to
 								add one.
 							</div>
 						</div>
 					) : (
-						<div className="overflow-hidden rounded-md border border-brand-border-light bg-brand-card">
+						<div className="overflow-hidden rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)]">
 							<table className="min-w-full text-left text-sm">
 								<thead>
 									<tr>
@@ -653,7 +653,7 @@ export default function BuilderProjectDetail() {
 										<tr key={m.id}>
 											<td>{m.name}</td>
 											<td>
-												<span className="rounded bg-brand-panel-light px-2 py-0.5 text-[0.58rem] uppercase text-brand-muted-light">
+												<span className="rounded bg-white/5-light px-2 py-0.5 text-[0.58rem] uppercase text-[#a9b7c8]">
 													{m.material_type.replace(
 														"_",
 														" ",
@@ -720,9 +720,9 @@ export default function BuilderProjectDetail() {
 				{/* ── QUERIES TAB ── */}
 				{tab === "queries" &&
 					(queries.length === 0 ? (
-						<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
+						<div className="rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] p-10 text-center">
 							<div className="mb-2 text-3xl">💬</div>
-							<div className="text-sm text-brand-muted-light">
+							<div className="text-sm text-[#a9b7c8]">
 								No questions yet
 							</div>
 						</div>
@@ -953,8 +953,8 @@ export default function BuilderProjectDetail() {
 
 				{/* ── INFO TAB ── */}
 				{tab === "info" && (
-					<div className="rounded-md border border-brand-border-light bg-brand-card p-4">
-						<div className="mb-4 text-sm font-semibold uppercase tracking-[0.1em] text-brand-muted-light">
+					<div className="rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] p-4">
+						<div className="mb-4 text-sm font-semibold uppercase tracking-[0.1em] text-[#a9b7c8]">
 							Project Information
 						</div>
 						<div className="grid grid-cols-1 gap-x-6 gap-y-1 md:grid-cols-2">
@@ -1060,17 +1060,17 @@ export default function BuilderProjectDetail() {
 				}
 			>
 				<div
-					className="w-full max-w-[500px] rounded-md border border-brand-border-light bg-brand-card shadow-2xl"
+					className="w-full max-w-[500px] rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] shadow-2xl"
 					style={{ maxWidth: 500 }}
 				>
-					<div className="h-1 w-full bg-brand-gold" />
+					<div className="h-1 w-full bg-[#d8bc8f]" />
 					<div className="p-5">
 						<div className="mb-4 flex items-center justify-between">
 							<div className="font-serif text-2xl text-white">
 								Post Update
 							</div>
 							<button
-								className="rounded border border-brand-border px-2 py-1 text-sm text-brand-muted-light transition hover:border-brand-gold hover:text-brand-gold"
+								className="rounded border border-white/10 px-2 py-1 text-sm text-[#a9b7c8] transition hover:border-[#d8bc8f] hover:text-[#d8bc8f]"
 								onClick={() => setShowUpd(false)}
 							>
 								✕
@@ -1078,11 +1078,11 @@ export default function BuilderProjectDetail() {
 						</div>
 
 						<div className="mb-4 space-y-1">
-							<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+							<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
 								Work Category
 							</label>
 							<select
-								className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+								className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
 								value={updForm.category}
 								onChange={(e) =>
 									setUpdForm((f) => ({
@@ -1100,11 +1100,11 @@ export default function BuilderProjectDetail() {
 							</select>
 						</div>
 						<div className="mb-4 space-y-1">
-							<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+							<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
 								Update Title *
 							</label>
 							<input
-								className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+								className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
 								placeholder="e.g. Foundation slab complete"
 								value={updForm.title}
 								onChange={(e) =>
@@ -1116,11 +1116,11 @@ export default function BuilderProjectDetail() {
 							/>
 						</div>
 						<div className="mb-4 space-y-1">
-							<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+							<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
 								Description
 							</label>
 							<textarea
-								className="min-h-24 w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+								className="min-h-24 w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
 								placeholder="What was done? Materials used? Next steps?"
 								value={updForm.description ?? ""}
 								onChange={(e) =>
@@ -1132,7 +1132,7 @@ export default function BuilderProjectDetail() {
 							/>
 						</div>
 						<div className="mb-4 space-y-1">
-							<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+							<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
 								Category Progress —{" "}
 								{updForm.progress_percentage}%
 							</label>
@@ -1153,7 +1153,7 @@ export default function BuilderProjectDetail() {
 							/>
 						</div>
 						<div className="mb-4 space-y-1">
-							<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+							<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
 								Photo URLs (optional)
 							</label>
 							<div
@@ -1176,7 +1176,7 @@ export default function BuilderProjectDetail() {
 									}}
 								/>
 								<button
-									className="rounded bg-brand-gold px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-brand-black transition hover:bg-brand-gold-light disabled:opacity-60"
+									className="rounded bg-[#d8bc8f] px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-brand-black transition hover:bg-[#d8bc8f]-light disabled:opacity-60"
 									disabled={uploadingPhoto}
 									style={{
 										opacity: uploadingPhoto ? 0.6 : 1,
@@ -1187,14 +1187,14 @@ export default function BuilderProjectDetail() {
 							</div>
 							<div style={{ display: "flex", gap: 8 }}>
 								<input
-									className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+									className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
 									style={{ flex: 1 }}
 									placeholder="Or paste image URL…"
 									value={photoIn}
 									onChange={(e) => setPhotoIn(e.target.value)}
 								/>
 								<button
-									className="rounded border border-brand-border px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-brand-muted-light transition hover:border-brand-gold hover:text-brand-gold"
+									className="rounded border border-white/10 px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-[#a9b7c8] transition hover:border-[#d8bc8f] hover:text-[#d8bc8f]"
 									onClick={addPhoto}
 								>
 									Add
@@ -1223,7 +1223,7 @@ export default function BuilderProjectDetail() {
 										📸 {url}
 									</span>
 									<button
-										className="rounded border border-brand-border px-2 py-1 text-sm text-brand-muted-light transition hover:border-brand-gold hover:text-brand-gold"
+										className="rounded border border-white/10 px-2 py-1 text-sm text-[#a9b7c8] transition hover:border-[#d8bc8f] hover:text-[#d8bc8f]"
 										onClick={() =>
 											setUpdForm((f) => ({
 												...f,
@@ -1240,13 +1240,13 @@ export default function BuilderProjectDetail() {
 						</div>
 						<div className="mt-3 flex gap-2">
 							<button
-								className="rounded border border-brand-border px-4 py-2 text-sm text-brand-muted-light transition hover:border-brand-gold hover:text-brand-gold"
+								className="rounded border border-white/10 px-4 py-2 text-sm text-[#a9b7c8] transition hover:border-[#d8bc8f] hover:text-[#d8bc8f]"
 								onClick={() => setShowUpd(false)}
 							>
 								Cancel
 							</button>
 							<button
-								className="flex-1 rounded bg-brand-gold px-4 py-2 text-sm font-semibold uppercase tracking-[0.08em] text-brand-black transition hover:bg-brand-gold-light disabled:opacity-60"
+								className="flex-1 rounded bg-[#d8bc8f] px-4 py-2 text-sm font-semibold uppercase tracking-[0.08em] text-brand-black transition hover:bg-[#d8bc8f]-light disabled:opacity-60"
 								style={{ flex: 1 }}
 								onClick={postUpdate}
 								disabled={saving}
@@ -1269,17 +1269,17 @@ export default function BuilderProjectDetail() {
 				}
 			>
 				<div
-					className="w-full max-w-[460px] rounded-md border border-brand-border-light bg-brand-card shadow-2xl"
+					className="w-full max-w-[460px] rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] shadow-2xl"
 					style={{ maxWidth: 460 }}
 				>
-					<div className="h-1 w-full bg-brand-gold" />
+					<div className="h-1 w-full bg-[#d8bc8f]" />
 					<div className="p-5">
 						<div className="mb-4 flex items-center justify-between">
 							<div className="font-serif text-2xl text-white">
 								Log Material
 							</div>
 							<button
-								className="rounded border border-brand-border px-2 py-1 text-sm text-brand-muted-light transition hover:border-brand-gold hover:text-brand-gold"
+								className="rounded border border-white/10 px-2 py-1 text-sm text-[#a9b7c8] transition hover:border-[#d8bc8f] hover:text-[#d8bc8f]"
 								onClick={() => setShowMat(false)}
 							>
 								✕
@@ -1287,11 +1287,11 @@ export default function BuilderProjectDetail() {
 						</div>
 						<div className="mb-4 grid grid-cols-1 gap-3 md:grid-cols-2">
 							<div className="space-y-1">
-								<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+								<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
 									Material Type
 								</label>
 								<select
-									className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+									className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
 									value={matForm.material_type}
 									onChange={(e) =>
 										setMatForm((f) => ({
@@ -1309,11 +1309,11 @@ export default function BuilderProjectDetail() {
 								</select>
 							</div>
 							<div className="space-y-1">
-								<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+								<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
 									Name *
 								</label>
 								<input
-									className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+									className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
 									placeholder="e.g. Red Clay Bricks"
 									value={matForm.name}
 									onChange={(e) =>
@@ -1327,11 +1327,11 @@ export default function BuilderProjectDetail() {
 						</div>
 						<div className="mb-4 grid grid-cols-1 gap-3 md:grid-cols-2">
 							<div className="space-y-1">
-								<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+								<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
 									Quantity *
 								</label>
 								<input
-									className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+									className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
 									type="number"
 									min="0"
 									placeholder="500"
@@ -1345,11 +1345,11 @@ export default function BuilderProjectDetail() {
 								/>
 							</div>
 							<div className="space-y-1">
-								<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+								<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
 									Unit
 								</label>
 								<input
-									className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+									className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
 									placeholder="bags / kg / pieces"
 									value={matForm.unit}
 									onChange={(e) =>
@@ -1363,11 +1363,11 @@ export default function BuilderProjectDetail() {
 						</div>
 						<div className="mb-4 grid grid-cols-1 gap-3 md:grid-cols-2">
 							<div className="space-y-1">
-								<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+								<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
 									Unit Cost ₹ *
 								</label>
 								<input
-									className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+									className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
 									type="number"
 									min="0"
 									placeholder="12.50"
@@ -1381,11 +1381,11 @@ export default function BuilderProjectDetail() {
 								/>
 							</div>
 							<div className="space-y-1">
-								<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+								<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
 									Supplier
 								</label>
 								<input
-									className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+									className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
 									placeholder="Supplier name"
 									value={matForm.supplier ?? ""}
 									onChange={(e) =>
@@ -1426,13 +1426,13 @@ export default function BuilderProjectDetail() {
 						)}
 						<div className="mt-3 flex gap-2">
 							<button
-								className="rounded border border-brand-border px-4 py-2 text-sm text-brand-muted-light transition hover:border-brand-gold hover:text-brand-gold"
+								className="rounded border border-white/10 px-4 py-2 text-sm text-[#a9b7c8] transition hover:border-[#d8bc8f] hover:text-[#d8bc8f]"
 								onClick={() => setShowMat(false)}
 							>
 								Cancel
 							</button>
 							<button
-								className="flex-1 rounded bg-brand-gold px-4 py-2 text-sm font-semibold uppercase tracking-[0.08em] text-brand-black transition hover:bg-brand-gold-light disabled:opacity-60"
+								className="flex-1 rounded bg-[#d8bc8f] px-4 py-2 text-sm font-semibold uppercase tracking-[0.08em] text-brand-black transition hover:bg-[#d8bc8f]-light disabled:opacity-60"
 								style={{ flex: 1 }}
 								onClick={addMaterial}
 								disabled={saving}

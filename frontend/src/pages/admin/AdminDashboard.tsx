@@ -17,7 +17,7 @@ const projectStatusClasses: Record<Project["status"], string> = {
 	planning:
 		"border-[rgba(127,140,141,0.3)] bg-[rgba(127,140,141,0.15)] text-[#7f8c8d]",
 	in_progress:
-		"border-[rgba(200,151,31,0.3)] bg-[rgba(200,151,31,0.15)] text-brand-gold",
+		"border-[rgba(200,151,31,0.3)] bg-[rgba(200,151,31,0.15)] text-[#d8bc8f]",
 	on_hold:
 		"border-[rgba(230,126,34,0.3)] bg-[rgba(230,126,34,0.15)] text-[#e67e22]",
 	completed:
@@ -25,7 +25,7 @@ const projectStatusClasses: Record<Project["status"], string> = {
 };
 
 const statCardClass =
-	"relative overflow-hidden border-brand-border before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-0.5 before:bg-gradient-to-r before:from-transparent before:via-brand-gold before:to-transparent before:content-['']";
+	"relative overflow-hidden border-white/10 before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-0.5 before:bg-gradient-to-r before:from-transparent before:via-brand-gold before:to-transparent before:content-['']";
 
 export default function AdminDashboard() {
 	const [stats, setStats] = useState<DashboardStats>({
@@ -93,7 +93,7 @@ export default function AdminDashboard() {
 	if (loading) {
 		return (
 			<div className="flex min-h-[240px] flex-col gap-6 p-6 max-md:p-4">
-				<div className="flex min-h-[240px] items-center justify-center rounded-lg border border-brand-border bg-brand-card text-sm text-brand-muted">
+				<div className="flex min-h-[240px] items-center justify-center rounded-lg border border-white/10 bg-[rgba(13,38,58,0.3)] text-sm text-[#888888]">
 					Loading dashboard...
 				</div>
 			</div>
@@ -106,7 +106,7 @@ export default function AdminDashboard() {
 				<h1 className="font-serif text-[1.75rem] font-semibold text-white max-md:text-2xl">
 					Admin Dashboard
 				</h1>
-				<p className="text-sm text-brand-muted">
+				<p className="text-sm text-[#888888]">
 					System overview and management
 				</p>
 			</div>
@@ -114,19 +114,19 @@ export default function AdminDashboard() {
 			<div className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(250px,1fr))] max-lg:[grid-template-columns:repeat(auto-fit,minmax(200px,1fr))] max-md:grid-cols-1">
 				<div
 					className={cn(
-						"flex flex-col gap-3 rounded-lg border bg-brand-card p-4",
+						"flex flex-col gap-3 rounded-lg border bg-[rgba(13,38,58,0.3)] p-4",
 						statCardClass,
 					)}
 				>
-					<div className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
+					<div className="text-xs font-semibold uppercase tracking-[0.05em] text-[#888888]">
 						Total Projects
 					</div>
-					<div className="font-serif text-[1.75rem] font-bold text-brand-gold">
+					<div className="font-serif text-[1.75rem] font-bold text-[#d8bc8f]">
 						{stats.totalProjects}
 					</div>
-					<div className="h-1 overflow-hidden rounded-sm bg-brand-panel">
+					<div className="h-1 overflow-hidden rounded-sm bg-white/5">
 						<div
-							className="h-full bg-brand-gold transition-[width] duration-500 ease-out"
+							className="h-full bg-[#d8bc8f] transition-[width] duration-500 ease-out"
 							style={{
 								width: `${Math.min(100, (stats.totalProjects / 50) * 100)}%`,
 							}}
@@ -136,17 +136,17 @@ export default function AdminDashboard() {
 
 				<div
 					className={cn(
-						"flex flex-col gap-3 rounded-lg border bg-brand-card p-4",
+						"flex flex-col gap-3 rounded-lg border bg-[rgba(13,38,58,0.3)] p-4",
 						statCardClass,
 					)}
 				>
-					<div className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
+					<div className="text-xs font-semibold uppercase tracking-[0.05em] text-[#888888]">
 						Active Projects
 					</div>
-					<div className="font-serif text-[1.75rem] font-bold text-brand-gold">
+					<div className="font-serif text-[1.75rem] font-bold text-[#d8bc8f]">
 						{stats.activeProjects}
 					</div>
-					<div className="text-sm text-brand-muted">
+					<div className="text-sm text-[#888888]">
 						{(
 							(stats.activeProjects /
 								(stats.totalProjects || 1)) *
@@ -158,35 +158,35 @@ export default function AdminDashboard() {
 
 				<div
 					className={cn(
-						"flex flex-col gap-3 rounded-lg border bg-brand-card p-4",
+						"flex flex-col gap-3 rounded-lg border bg-[rgba(13,38,58,0.3)] p-4",
 						statCardClass,
 					)}
 				>
-					<div className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
+					<div className="text-xs font-semibold uppercase tracking-[0.05em] text-[#888888]">
 						Completed
 					</div>
-					<div className="font-serif text-[1.75rem] font-bold text-brand-gold">
+					<div className="font-serif text-[1.75rem] font-bold text-[#d8bc8f]">
 						{stats.completedProjects}
 					</div>
-					<div className="text-sm text-brand-muted">✓</div>
+					<div className="text-sm text-[#888888]">✓</div>
 				</div>
 
 				<div
 					className={cn(
-						"flex flex-col gap-3 rounded-lg border border-brand-gold bg-brand-card p-4",
+						"flex flex-col gap-3 rounded-lg border border-brand-gold bg-[rgba(13,38,58,0.3)] p-4",
 						statCardClass,
 					)}
 				>
-					<div className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
+					<div className="text-xs font-semibold uppercase tracking-[0.05em] text-[#888888]">
 						Pending Approvals
 					</div>
-					<div className="font-serif text-[1.75rem] font-bold text-brand-gold">
+					<div className="font-serif text-[1.75rem] font-bold text-[#d8bc8f]">
 						{stats.pendingRequests}
 					</div>
 					<div>
 						<a
 							href="/admin/approvals"
-							className="text-sm font-semibold text-brand-gold transition-colors duration-300 hover:text-brand-gold-light"
+							className="text-sm font-semibold text-[#d8bc8f] transition-colors duration-300 hover:text-[#d8bc8f]-light"
 						>
 							Review →
 						</a>
@@ -195,50 +195,50 @@ export default function AdminDashboard() {
 
 				<div
 					className={cn(
-						"flex flex-col gap-3 rounded-lg border bg-brand-card p-4",
+						"flex flex-col gap-3 rounded-lg border bg-[rgba(13,38,58,0.3)] p-4",
 						statCardClass,
 					)}
 				>
-					<div className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
+					<div className="text-xs font-semibold uppercase tracking-[0.05em] text-[#888888]">
 						Builders
 					</div>
-					<div className="font-serif text-[1.75rem] font-bold text-brand-gold">
+					<div className="font-serif text-[1.75rem] font-bold text-[#d8bc8f]">
 						{stats.totalBuilders}
 					</div>
-					<div className="text-sm text-brand-muted">Approved</div>
+					<div className="text-sm text-[#888888]">Approved</div>
 				</div>
 
 				<div
 					className={cn(
-						"flex flex-col gap-3 rounded-lg border bg-brand-card p-4",
+						"flex flex-col gap-3 rounded-lg border bg-[rgba(13,38,58,0.3)] p-4",
 						statCardClass,
 					)}
 				>
-					<div className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
+					<div className="text-xs font-semibold uppercase tracking-[0.05em] text-[#888888]">
 						Clients
 					</div>
-					<div className="font-serif text-[1.75rem] font-bold text-brand-gold">
+					<div className="font-serif text-[1.75rem] font-bold text-[#d8bc8f]">
 						{stats.totalClients}
 					</div>
-					<div className="text-sm text-brand-muted">Registered</div>
+					<div className="text-sm text-[#888888]">Registered</div>
 				</div>
 			</div>
 
-			<div className="rounded-lg border border-brand-border bg-brand-card p-4">
-				<div className="mb-4 flex items-center justify-between gap-4 border-b border-brand-border pb-4 max-md:flex-col max-md:items-start">
+			<div className="rounded-lg border border-white/10 bg-[rgba(13,38,58,0.3)] p-4">
+				<div className="mb-4 flex items-center justify-between gap-4 border-b border-white/10 pb-4 max-md:flex-col max-md:items-start">
 					<h2 className="font-serif text-xl font-semibold text-white">
 						Recent Projects
 					</h2>
 					<a
 						href="/admin/projects"
-						className="text-sm font-semibold text-brand-gold transition-colors duration-300 hover:text-brand-gold-light"
+						className="text-sm font-semibold text-[#d8bc8f] transition-colors duration-300 hover:text-[#d8bc8f]-light"
 					>
 						View All →
 					</a>
 				</div>
 
 				{recentProjects.length === 0 ? (
-					<div className="flex min-h-[160px] items-center justify-center rounded-md border border-dashed border-brand-border bg-brand-panel text-sm text-brand-muted">
+					<div className="flex min-h-[160px] items-center justify-center rounded-md border border-dashed border-white/10 bg-white/5 text-sm text-[#888888]">
 						No projects yet
 					</div>
 				) : (
@@ -246,13 +246,13 @@ export default function AdminDashboard() {
 						{recentProjects.map((project) => (
 							<div
 								key={project.id}
-								className="grid grid-cols-1 gap-4 rounded-md border border-brand-border bg-brand-panel p-4 transition-all duration-300 hover:border-brand-gold hover:bg-[#252525] lg:grid-cols-[minmax(0,1fr)_200px_150px] max-lg:grid-cols-[minmax(0,1fr)_100px] max-md:grid-cols-1"
+								className="grid grid-cols-1 gap-4 rounded-md border border-white/10 bg-white/5 p-4 transition-all duration-300 hover:border-brand-gold hover:bg-[#252525] lg:grid-cols-[minmax(0,1fr)_200px_150px] max-lg:grid-cols-[minmax(0,1fr)_100px] max-md:grid-cols-1"
 							>
 								<div className="min-w-0">
 									<h3 className="mb-1 font-serif text-lg font-semibold text-white">
 										{project.name}
 									</h3>
-									<p className="text-sm text-brand-muted">
+									<p className="text-sm text-[#888888]">
 										{project.location || "No location"}
 									</p>
 								</div>

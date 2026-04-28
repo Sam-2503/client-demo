@@ -45,7 +45,8 @@ export default function ClientLayout() {
 					</div>
 				</div>
 
-				<div className="mb-6 flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3">
+				{/* Logged-in user */}
+				<div className="mx-4 mb-6 flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3">
 					<div className="grid h-10 w-10 place-items-center rounded-full bg-[#d8bc8f] font-semibold text-[#101824]">
 						{initials}
 					</div>
