@@ -68,15 +68,16 @@ export default function BuilderLayout() {
 			{/* ── SIDEBAR ── */}
 			<div className="flex w-[300px] shrink-0 flex-col border-r border-white/10 bg-gradient-to-b from-[#0a121c]/80 to-[#050911]/80 backdrop-blur-xl">
 				{/* Logo */}
-				<div className="mb-5 border-b border-white/10 px-4 py-6">
-					<div className="mb-2 inline-flex rounded bg-[#d8bc8f] px-2 py-1 text-xs font-semibold tracking-[0.1em] text-[#101824]">
-						RJS
-					</div>
+				<div className="flex mb-6 border-b border-white/10 px-6 py-6">
+					<img
+						src="/rjs-logo.svg"
+						className="h-12 w-12 rounded-full border border-[#d5b47a]/40 bg-[radial-gradient(circle_at_30%_25%,#e4cda2_0%,#b68945_60%,#7a5a2e_100%)] shadow-[0_8px_24px_rgba(182,137,69,0.35)]"
+					/>
 					<div>
-						<div className="font-serif text-xl font-semibold text-[#f5efe2]">
+						<div className="pl-8 font-serif text-lg font-semibold text-[#f5efe2]">
 							RJS Homes
 						</div>
-						<div className="text-xs uppercase tracking-[0.12em] text-[#a9b7c8]">
+						<div className="pl-8 text-[10px] uppercase tracking-[0.12em] text-[#a9b7c8]">
 							{isAdmin ? "Admin Portal" : "Builder Portal"}
 						</div>
 					</div>
