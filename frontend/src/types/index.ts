@@ -26,6 +26,7 @@ export interface Project {
   expected_end_date: string | null;
   client_id: string;
   builder_id: string;
+  created_by_id: string;
   created_at: string;
   updated_at: string;
 }
