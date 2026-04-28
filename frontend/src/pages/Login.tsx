@@ -91,7 +91,15 @@ export default function Login() {
 	};
 
 	return (
-		<div className="flex min-h-screen items-center justify-center overflow-y-auto bg-brand-black px-4 py-4 text-white">
+		<div className="relative flex min-h-screen items-center justify-center overflow-y-auto bg-brand-black px-4 py-4 text-white">
+			<button
+				type="button"
+				className="absolute left-4 top-4 inline-flex items-center gap-2 rounded border border-brand-border-light bg-brand-card px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.5px] text-brand-muted transition-all duration-300 hover:border-brand-gold hover:text-brand-gold"
+				onClick={() => navigate("/")}
+			>
+				<span aria-hidden="true">←</span>
+				Back
+			</button>
 			<div className="w-full max-w-[450px] animate-fade-up">
 				<div className="mb-4 flex items-center gap-2 text-left">
 					<div className="font-serif text-[20px] font-bold tracking-[2px] text-brand-gold">
