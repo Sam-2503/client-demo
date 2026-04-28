@@ -1,63 +1,112 @@
 export default function Hero() {
 	const primaryBtnClass =
-		"inline-block border-0 bg-brand-gold px-8 py-3.5 text-[0.85rem] font-semibold uppercase tracking-[0.1em] text-brand-black transition duration-200 hover:-translate-y-0.5 hover:bg-brand-gold-light hover:shadow-glow";
+		"inline-flex items-center justify-center rounded-md border border-[#d5b47a]/40 bg-[linear-gradient(90deg,#dac195_0%,#b3833f_100%)] px-7 py-3 text-[12px] font-semibold uppercase tracking-[0.14em] text-[#0e1722] transition hover:-translate-y-0.5 hover:brightness-110";
 	const outlineBtnClass =
-		"inline-block border border-[#444] px-8 py-3.5 text-[0.85rem] uppercase tracking-[0.1em] text-white transition duration-200 hover:border-brand-gold hover:text-brand-gold";
+		"inline-flex items-center justify-center rounded-md border border-white/20 bg-white/5 px-7 py-3 text-[12px] font-medium uppercase tracking-[0.14em] text-[#e6ebf2] transition hover:border-[#d5b47a]/55 hover:text-[#f2e7d4]";
+	const trustPillClass =
+		"rounded-md border border-white/15 bg-white/5 px-3 py-2 text-[11px] uppercase tracking-[0.12em] text-[#d2d8e1]";
+
 	return (
 		<section
-			className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-[#080808] px-4 pb-16 pt-28 md:px-[5vw] md:pb-20 md:pt-32"
+			className="relative overflow-hidden bg-[linear-gradient(160deg,#070c14_0%,#0e1b2d_55%,#1b3248_100%)] px-4 pb-20 pt-32 md:px-8 md:pb-24 md:pt-40"
 			id="home"
 		>
-			<div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_80%_50%,rgba(200,151,31,0.06)_0%,transparent_70%)]"></div>
-			<div className="absolute bottom-0 left-0 top-0 w-[5px] bg-brand-gold"></div>
-			<div className="relative max-w-[640px] animate-fade-up">
-				<div className="mb-6 flex items-center gap-2.5 text-[0.78rem] uppercase tracking-[0.2em] text-brand-gold before:h-px before:w-8 before:bg-brand-gold before:content-['']">
-					Hyderabad's Premium Real Estate
+			<div className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_90%_at_85%_0%,rgba(213,180,122,0.18)_0%,transparent_62%),radial-gradient(55%_50%_at_10%_35%,rgba(70,109,146,0.26)_0%,transparent_70%)]" />
+			<div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[length:66px_66px] opacity-30" />
+
+			<div className="relative mx-auto grid w-full max-w-[1280px] grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-center">
+				<div className="animate-fade-up">
+					<div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#d5b47a]/35 bg-[#d5b47a]/10 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.18em] text-[#efdcbc]">
+						Civil + Interior Delivery Experts
+					</div>
+
+					<h1 className="font-serif text-[clamp(2.4rem,5.4vw,4.9rem)] font-semibold leading-[1.07] text-[#f6f3ec]">
+						Precision Construction.
+						<br />
+						<span className="text-[#d5b47a]">
+							Transparent Project Delivery.
+						</span>
+					</h1>
+
+					<p className="mt-6 max-w-[650px] text-[1.03rem] leading-8 text-[#c8d1dd]">
+						RJS Homes combines two decades of site execution with
+						digital reporting, milestone-led planning, and rigorous
+						quality control to deliver homes and interiors that are
+						crafted to last.
+					</p>
+
+					<div className="mt-8 flex flex-wrap gap-3">
+						<a href="#projects" className={primaryBtnClass}>
+							Explore Projects
+						</a>
+						<a href="#contact" className={outlineBtnClass}>
+							Schedule Consultation
+						</a>
+					</div>
+
+					<div className="mt-8 flex flex-wrap gap-3">
+						<div className={trustPillClass}>Since 2002</div>
+						<div className={trustPillClass}>
+							500+ Homes Delivered
+						</div>
+						<div className={trustPillClass}>
+							Dedicated Project Portal
+						</div>
+					</div>
 				</div>
-				<h1 className="mb-6 font-serif text-[clamp(2.8rem,6vw,5rem)] font-bold leading-[1.1]">
-					Building Dreams
-					<br />
-					<span className="text-brand-gold">Since 2002</span>
-				</h1>
-				<p className="mb-10 max-w-[520px] text-[1.05rem] leading-[1.7] text-brand-muted-light">
-					From our father's legacy of craftsmanship to a fully
-					transparent, technology-driven real estate experience — RJS
-					Homes delivers quality, trust, and innovation.
-				</p>
-				<div className="flex flex-wrap gap-4">
-					<a href="#projects" className={primaryBtnClass}>
-						View Our Projects
-					</a>
-					<a href="#about" className={outlineBtnClass}>
-						Our Story
-					</a>
-				</div>
-			</div>
-			<div className="relative mt-10 flex animate-fade-in flex-row justify-center gap-6 md:absolute md:right-[5vw] md:top-1/2 md:mt-0 md:-translate-y-1/2 md:flex-col md:gap-6">
-				<div className="text-center">
-					<div className="font-serif text-5xl font-bold leading-none text-brand-gold">
-						20+
+
+				<div className="animate-fade-in rounded-xl border border-white/15 bg-[linear-gradient(180deg,rgba(255,255,255,0.12)_0%,rgba(255,255,255,0.03)_100%)] p-5 shadow-[0_24px_48px_rgba(0,0,0,0.4)] backdrop-blur-lg">
+					<div className="rounded-lg border border-white/10 bg-[#111f33] p-5">
+						<div className="text-[11px] uppercase tracking-[0.14em] text-[#aeb8c7]">
+							Live Delivery Blueprint
+						</div>
+						<h3 className="mt-2 font-serif text-2xl text-[#f5efe3]">
+							Jubilee Hills Residential Build
+						</h3>
+						<div className="mt-4 space-y-3">
+							{[
+								{
+									label: "Structure & Envelope",
+									value: "100%",
+								},
+								{ label: "MEP Integration", value: "86%" },
+								{ label: "Interior Fit-Out", value: "64%" },
+							].map((item) => (
+								<div key={item.label}>
+									<div className="mb-1 flex items-center justify-between text-[12px] text-[#d3dae5]">
+										<span>{item.label}</span>
+										<span className="font-semibold text-[#f2e4c9]">
+											{item.value}
+										</span>
+									</div>
+									<div className="h-2 rounded-full bg-[#21344f]">
+										<div
+											className="h-full rounded-full bg-[linear-gradient(90deg,#d8bc8f_0%,#af7c38_100%)]"
+											style={{ width: item.value }}
+										/>
+									</div>
+								</div>
+							))}
+						</div>
 					</div>
-					<div className="mt-1 text-[0.72rem] uppercase tracking-[0.12em] text-brand-muted">
-						Years
-					</div>
-				</div>
-				<div className="mx-auto h-8 w-px bg-[#333]"></div>
-				<div className="text-center">
-					<div className="font-serif text-5xl font-bold leading-none text-brand-gold">
-						500+
-					</div>
-					<div className="mt-1 text-[0.72rem] uppercase tracking-[0.12em] text-brand-muted">
-						Families
-					</div>
-				</div>
-				<div className="mx-auto h-8 w-px bg-[#333]"></div>
-				<div className="text-center">
-					<div className="font-serif text-5xl font-bold leading-none text-brand-gold">
-						50+
-					</div>
-					<div className="mt-1 text-[0.72rem] uppercase tracking-[0.12em] text-brand-muted">
-						Projects
+					<div className="mt-4 grid grid-cols-3 gap-3">
+						{[
+							{ value: "20+", label: "Years" },
+							{ value: "50+", label: "Projects" },
+							{ value: "99%", label: "On-Time" },
+						].map((metric) => (
+							<div
+								key={metric.label}
+								className="rounded-lg border border-white/10 bg-[#0e1a2b] p-3 text-center"
+							>
+								<div className="font-serif text-2xl text-[#d8bc8f]">
+									{metric.value}
+								</div>
+								<div className="text-[10px] uppercase tracking-[0.12em] text-[#9aa8bd]">
+									{metric.label}
+								</div>
+							</div>
+						))}
 					</div>
 				</div>
 			</div>

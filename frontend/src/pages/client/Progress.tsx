@@ -11,22 +11,22 @@ export default function ClientProgress() {
 
 	const progressFillClass = (status: Project["status"], progress: number) =>
 		progress === 100
-			? "bg-brand-green"
+			? "bg-[#69c58a]"
 			: progress >= 75
-				? "bg-brand-gold"
+				? "bg-[#d8bc8f]"
 				: status === "completed"
-					? "bg-brand-green"
-					: "bg-brand-orange";
+					? "bg-[#69c58a]"
+					: "bg-[#f39c12]";
 
 	const renderProgressBar = (status: Project["status"], progress: number) => {
 		const filledSegments = Math.ceil((progress / 100) * 20);
 		return (
-			<div className="mb-2 flex h-1.5 gap-px overflow-hidden rounded bg-brand-border">
+			<div className="mb-2 flex h-1.5 gap-px overflow-hidden rounded-full bg-white/5">
 				{Array.from({ length: 20 }).map((_, index) => (
 					<div
 						key={index}
 						className={cn(
-							"flex-1 rounded",
+							"flex-1 rounded-full",
 							index < filledSegments
 								? progressFillClass(status, progress)
 								: "bg-transparent",
@@ -59,30 +59,29 @@ export default function ClientProgress() {
 
 	return (
 		<>
-			<div className="flex items-center justify-between border-b border-brand-border-light bg-brand-card px-6 py-4">
-				<div className="font-serif text-2xl font-semibold text-white">
+			<div className="border-b border-white/10 bg-[linear-gradient(160deg,rgba(10,18,28,0.4)_0%,rgba(16,31,48,0.4)_100%)] px-6 py-6 backdrop-blur-sm">
+				<div className="font-serif text-3xl font-semibold text-[#f5efe2]">
 					Progress Tracking
 				</div>
+				<p className="mt-1 text-sm text-[#a9b7c8]">
+					Monitor your project progress
+				</p>
 			</div>
 
-			<div className="animate-fade-up space-y-5 px-6 py-6">
-				<div className="mb-4 flex items-center justify-between">
-					<div className="text-sm font-semibold uppercase tracking-[0.1em] text-brand-muted-light">
-						Project Progress
-					</div>
+			<div className="animate-fade-up space-y-6 px-6 py-8">
+				<div className="text-sm font-semibold uppercase tracking-[0.12em] text-[#a9b7c8]">
+					Project Progress
 				</div>
 
 				{loading ? (
-					<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
-						<div className="mb-2 text-3xl">⏳</div>
-						<div className="text-sm text-brand-muted-light">
+					<div className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] p-12 text-center backdrop-blur-sm">
+						<div className="text-sm text-[#a9b7c8]">
 							Loading progress…
 						</div>
 					</div>
 				) : projects.length === 0 ? (
-					<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
-						<div className="mb-2 text-3xl">📊</div>
-						<div className="text-sm text-brand-muted-light">
+					<div className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] p-12 text-center backdrop-blur-sm">
+						<div className="text-sm text-[#a9b7c8]">
 							No projects yet
 						</div>
 					</div>
@@ -91,18 +90,18 @@ export default function ClientProgress() {
 						{projects.map((p) => (
 							<div
 								key={p.id}
-								className="rounded-md border border-brand-border-light bg-brand-card p-4"
+								className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] p-5 backdrop-blur-sm"
 							>
-								<div className="mb-3 flex items-center justify-between">
+								<div className="mb-4 flex items-center justify-between">
 									<div>
-										<div className="mb-1 text-sm font-medium text-white">
+										<div className="font-medium text-white">
 											{p.name}
 										</div>
-										<div className="text-xs text-brand-muted">
+										<div className="mt-1 text-xs text-[#a9b7c8]">
 											{p.location ?? "Location TBD"}
 										</div>
 									</div>
-									<span className="font-serif text-xl text-brand-gold">
+									<span className="font-serif text-2xl font-semibold text-[#d8bc8f]">
 										{p.overall_progress}%
 									</span>
 								</div>
@@ -112,10 +111,12 @@ export default function ClientProgress() {
 									p.overall_progress,
 								)}
 
-								<div className="grid grid-cols-3 gap-3 text-[0.7rem] text-brand-muted">
+								<div className="mt-4 grid grid-cols-3 gap-4 border-t border-white/10 pt-4 text-[0.75rem]">
 									<div>
-										<div className="mb-1">Start</div>
-										<div className="text-white">
+										<div className="text-[#a9b7c8]">
+											Start
+										</div>
+										<div className="mt-1 font-medium text-white">
 											{p.start_date
 												? new Date(
 														p.start_date,
@@ -130,8 +131,10 @@ export default function ClientProgress() {
 										</div>
 									</div>
 									<div>
-										<div className="mb-1">Expected End</div>
-										<div className="text-white">
+										<div className="text-[#a9b7c8]">
+											Expected End
+										</div>
+										<div className="mt-1 font-medium text-white">
 											{p.expected_end_date
 												? new Date(
 														p.expected_end_date,
@@ -146,14 +149,16 @@ export default function ClientProgress() {
 										</div>
 									</div>
 									<div>
-										<div className="mb-1">Status</div>
+										<div className="text-[#a9b7c8]">
+											Status
+										</div>
 										<div
 											className={
 												p.status === "completed"
-													? "text-[#27ae60]"
+													? "mt-1 font-medium text-[#69c58a]"
 													: p.status === "in_progress"
-														? "text-brand-gold"
-														: "text-[#e67e22]"
+														? "mt-1 font-medium text-[#d8bc8f]"
+														: "mt-1 font-medium text-[#f39c12]"
 											}
 										>
 											{p.status.replace("_", " ")}

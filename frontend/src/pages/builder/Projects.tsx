@@ -25,10 +25,10 @@ const STATUS_LABEL: Record<ProjectStatus, string> = {
 };
 
 const STATUS_BADGE: Record<ProjectStatus, string> = {
-	planning: "bg-brand-muted text-brand-black",
-	in_progress: "bg-brand-gold text-brand-black",
-	on_hold: "bg-[#e67e22] text-brand-black",
-	completed: "bg-[#27ae60] text-brand-black",
+	planning: "bg-brand-muted text-[#101824]",
+	in_progress: "bg-[#d8bc8f] text-[#101824]",
+	on_hold: "bg-[#e67e22] text-[#101824]",
+	completed: "bg-[#27ae60] text-[#101824]",
 };
 
 const EMPTY: CreateProjectRequest = {
@@ -107,13 +107,13 @@ export default function BuilderProjects() {
 	return (
 		<>
 			{/* Topbar */}
-			<div className="flex items-center justify-between border-b border-brand-border-light bg-brand-card px-6 py-4">
+			<div className="flex items-center justify-between border-b border-white/10 bg-[rgba(13,38,58,0.3)] px-6 py-4">
 				<div className="font-serif text-2xl font-semibold text-white">
 					Projects
 				</div>
 				<div className="flex items-center gap-3">
 					<button
-						className="rounded bg-brand-gold px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-brand-black transition hover:bg-brand-gold-light"
+						className="rounded bg-[#d8bc8f] px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-[#101824] transition hover:bg-[#d8bc8f]-light"
 						onClick={() => setOpen(true)}
 					>
 						+ New Project
@@ -123,9 +123,9 @@ export default function BuilderProjects() {
 
 			<div className="animate-fade-up px-6 py-6">
 				{loading ? (
-					<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
+					<div className="rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] p-10 text-center">
 						<div className="mb-2 text-3xl">⏳</div>
-						<div className="text-sm text-brand-muted-light">
+						<div className="text-sm text-[#a9b7c8]">
 							Loading…
 						</div>
 					</div>
@@ -134,7 +134,7 @@ export default function BuilderProjects() {
 						{projects.map((p) => (
 							<div
 								key={p.id}
-								className="cursor-pointer rounded-md border border-brand-border-light border-t-2 bg-brand-card p-4 transition hover:border-brand-gold"
+								className="cursor-pointer rounded-md border border-white/10 border-t-2 bg-[rgba(13,38,58,0.3)] p-4 transition hover:border-[#d8bc8f]"
 								style={{
 									borderTopColor: STATUS_COLOR[p.status],
 								}}
@@ -148,7 +148,7 @@ export default function BuilderProjects() {
 											<div className="text-sm font-semibold text-white">
 												{p.name}
 											</div>
-											<div className="text-xs text-brand-muted">
+											<div className="text-xs text-[#888888]">
 												{p.location ?? "Location TBD"}
 											</div>
 										</div>
@@ -162,12 +162,12 @@ export default function BuilderProjects() {
 										</span>
 									</div>
 
-									<div className="text-xs text-brand-muted-light">
+									<div className="text-xs text-[#a9b7c8]">
 										📍 {p.location ?? "—"}
 									</div>
 
 									<div>
-										<div className="mb-1 flex items-center justify-between text-[0.7rem] text-brand-muted-light">
+										<div className="mb-1 flex items-center justify-between text-[0.7rem] text-[#a9b7c8]">
 											<span>Progress</span>
 											<span>{p.overall_progress}%</span>
 										</div>
@@ -184,14 +184,14 @@ export default function BuilderProjects() {
 									</div>
 								</div>
 
-								<div className="mt-4 flex items-center justify-between border-t border-brand-border pt-3">
-									<div className="text-[0.72rem] text-brand-muted-light">
+								<div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3">
+									<div className="text-[0.72rem] text-[#a9b7c8]">
 										Status:{" "}
-										<span className="text-brand-gold">
+										<span className="text-[#d8bc8f]">
 											{STATUS_LABEL[p.status]}
 										</span>
 									</div>
-									<div className="text-[0.68rem] text-brand-muted">
+									<div className="text-[0.68rem] text-[#888888]">
 										{p.expected_end_date
 											? "Due: " +
 												new Date(
@@ -208,13 +208,13 @@ export default function BuilderProjects() {
 
 						{/* Add card */}
 						<div
-							className="grid cursor-pointer place-items-center rounded-md border border-dashed border-brand-gold bg-brand-card p-6 text-center transition hover:bg-brand-panel"
+							className="grid cursor-pointer place-items-center rounded-md border border-dashed border-[#d8bc8f] bg-[rgba(13,38,58,0.3)] p-6 text-center transition hover:bg-white/5"
 							onClick={() => setOpen(true)}
 						>
-							<div className="mb-2 text-2xl text-brand-gold">
+							<div className="mb-2 text-2xl text-[#d8bc8f]">
 								＋
 							</div>
-							<div className="text-sm font-medium text-brand-muted-light">
+							<div className="text-sm font-medium text-[#a9b7c8]">
 								Create New Project
 							</div>
 						</div>
@@ -230,20 +230,20 @@ export default function BuilderProjects() {
 				)}
 				onClick={(e) => e.target === e.currentTarget && setOpen(false)}
 			>
-				<div className="w-full max-w-[520px] rounded-md border border-brand-border-light bg-brand-card shadow-2xl">
-					<div className="h-1 w-full bg-brand-gold" />
+				<div className="w-full max-w-[520px] rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] shadow-2xl">
+					<div className="h-1 w-full bg-[#d8bc8f]" />
 					<div className="p-5">
 						<div className="mb-5 flex items-start justify-between">
 							<div>
 								<div className="font-serif text-2xl text-white">
 									New Project
 								</div>
-								<div className="text-sm text-brand-muted-light">
+								<div className="text-sm text-[#a9b7c8]">
 									Fill in the project details below
 								</div>
 							</div>
 							<button
-								className="rounded border border-brand-border px-2 py-1 text-sm text-brand-muted-light transition hover:border-brand-gold hover:text-brand-gold"
+								className="rounded border border-white/10 px-2 py-1 text-sm text-[#a9b7c8] transition hover:border-[#d8bc8f] hover:text-[#d8bc8f]"
 								onClick={() => setOpen(false)}
 							>
 								✕
@@ -251,11 +251,11 @@ export default function BuilderProjects() {
 						</div>
 
 						<div className="mb-4 space-y-1">
-							<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+							<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
 								Project Name *
 							</label>
 							<input
-								className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+								className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
 								placeholder="e.g. Villa Areca, Green Meadows Phase 2"
 								value={form.name}
 								onChange={(e) =>
@@ -268,11 +268,11 @@ export default function BuilderProjects() {
 						</div>
 
 						<div className="mb-4 space-y-1">
-							<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+							<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
 								Description
 							</label>
 							<textarea
-								className="min-h-24 w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+								className="min-h-24 w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
 								placeholder="Brief description of the project…"
 								value={form.description ?? ""}
 								onChange={set("description")}
@@ -280,11 +280,11 @@ export default function BuilderProjects() {
 						</div>
 
 						<div className="mb-4 space-y-1">
-							<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+							<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
 								Location
 							</label>
 							<input
-								className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+								className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
 								placeholder="e.g. Banjara Hills, Hyderabad"
 								value={form.location ?? ""}
 								onChange={set("location")}
@@ -292,17 +292,17 @@ export default function BuilderProjects() {
 						</div>
 
 						<div className="mb-4 space-y-1">
-							<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+							<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
 								Assign Client *
 							</label>
 							{clients.length === 0 ? (
-								<div className="border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-xs text-brand-muted">
+								<div className="border-b-2 border-white/10 bg-white/5 px-3 py-2 text-xs text-[#888888]">
 									No clients registered yet. Ask client to
 									register first.
 								</div>
 							) : (
 								<select
-									className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+									className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
 									value={form.client_id}
 									onChange={(e) =>
 										setForm((f) => ({
@@ -323,22 +323,22 @@ export default function BuilderProjects() {
 
 						<div className="mb-4 grid grid-cols-1 gap-3 md:grid-cols-2">
 							<div className="space-y-1">
-								<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+								<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
 									Start Date
 								</label>
 								<input
-									className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+									className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
 									type="date"
 									value={form.start_date ?? ""}
 									onChange={set("start_date")}
 								/>
 							</div>
 							<div className="space-y-1">
-								<label className="text-xs uppercase tracking-[0.08em] text-brand-muted">
+								<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
 									Expected Handover
 								</label>
 								<input
-									className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+									className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
 									type="date"
 									value={form.expected_end_date ?? ""}
 									onChange={set("expected_end_date")}
@@ -348,13 +348,13 @@ export default function BuilderProjects() {
 
 						<div className="mt-3 flex gap-2">
 							<button
-								className="rounded border border-brand-border px-4 py-2 text-sm text-brand-muted-light transition hover:border-brand-gold hover:text-brand-gold"
+								className="rounded border border-white/10 px-4 py-2 text-sm text-[#a9b7c8] transition hover:border-[#d8bc8f] hover:text-[#d8bc8f]"
 								onClick={() => setOpen(false)}
 							>
 								Cancel
 							</button>
 							<button
-								className="flex-1 rounded bg-brand-gold px-4 py-2 text-sm font-semibold uppercase tracking-[0.08em] text-brand-black transition hover:bg-brand-gold-light disabled:opacity-60"
+								className="flex-1 rounded bg-[#d8bc8f] px-4 py-2 text-sm font-semibold uppercase tracking-[0.08em] text-[#101824] transition hover:bg-[#d8bc8f]-light disabled:opacity-60"
 								style={{ flex: 1 }}
 								onClick={create}
 								disabled={saving}

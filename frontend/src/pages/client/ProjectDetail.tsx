@@ -67,14 +67,14 @@ export default function ClientProjectDetail() {
 		cn(
 			"border-b-2 px-1 py-2 text-base font-medium transition",
 			activeTab === tab
-				? "border-brand-gold text-brand-gold font-semibold"
-				: "border-transparent text-brand-muted hover:text-brand-gold",
+				? "border-[#d8bc8f] text-[#d8bc8f] font-semibold"
+				: "border-transparent text-[#a9b7c8] hover:text-[#d8bc8f]",
 		);
 
 	if (loading) {
 		return (
-			<div className="flex items-center justify-between border-b border-brand-border-light bg-brand-card px-6 py-4">
-				<div className="font-serif text-2xl font-semibold text-white">
+			<div className="border-b border-white/10 bg-[linear-gradient(160deg,rgba(10,18,28,0.4)_0%,rgba(16,31,48,0.4)_100%)] px-6 py-6 backdrop-blur-sm">
+				<div className="font-serif text-3xl font-semibold text-[#f5efe2]">
 					Loading project...
 				</div>
 			</div>
@@ -84,17 +84,19 @@ export default function ClientProjectDetail() {
 	if (!project) {
 		return (
 			<div className="flex min-h-[calc(100vh-1px)] items-center justify-center px-6 py-10">
-				<div className="w-full max-w-md rounded-md border border-brand-border-light bg-brand-card p-8 text-center">
-					<div className="mb-3 text-4xl">❌</div>
-					<div className="font-serif text-2xl font-semibold text-white">
-						Project not found
+				<div className="w-full max-w-md rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] p-8 text-center backdrop-blur-sm">
+					<div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[rgba(220,76,69,0.15)] text-lg font-semibold text-[#f39c12]">
+						•
 					</div>
-					<p className="mt-2 text-sm text-brand-muted-light">
+					<div className="font-serif text-2xl font-semibold text-[#f5efe2]">
+						Project Not Found
+					</div>
+					<p className="mt-2 text-sm text-[#a9b7c8]">
 						The requested project could not be loaded.
 					</p>
 					<button
 						onClick={() => navigate("/client")}
-						className="mt-6 inline-flex items-center justify-center rounded-md border border-brand-gold bg-brand-gold px-4 py-2 text-sm font-semibold text-brand-black transition hover:border-brand-gold-light hover:bg-brand-gold-light hover:shadow-glow"
+						className="mt-6 inline-flex items-center justify-center rounded-xl border border-[#d8bc8f]/35 bg-[rgba(216,188,143,0.1)] px-4 py-2 text-sm font-semibold text-[#d8bc8f] transition hover:border-[#d8bc8f]/50 hover:bg-[rgba(216,188,143,0.15)]"
 					>
 						Back to Projects
 					</button>
@@ -104,29 +106,31 @@ export default function ClientProjectDetail() {
 	}
 
 	return (
-		<div className="flex flex-col gap-6 px-6 py-6 animate-fade-up">
-			<div className="flex items-center gap-4 border-b border-brand-border-light bg-brand-card px-6 py-4">
-				<button
-					onClick={() => navigate("/client")}
-					className="inline-flex items-center gap-2 rounded border border-brand-gold px-3 py-2 text-sm font-medium text-brand-gold transition hover:bg-brand-gold hover:text-brand-black"
-				>
-					<span>←</span>
-					Back
-				</button>
-				<div className="min-w-0">
-					<div className="font-serif text-2xl font-semibold text-white">
-						{project.name}
-					</div>
-					{project.location && (
-						<div className="mt-1 text-sm text-brand-muted">
-							📍 {project.location}
+		<div className="flex flex-col gap-6 px-6 py-8 animate-fade-up">
+			<div className="border-b border-white/10 bg-[linear-gradient(160deg,rgba(10,18,28,0.4)_0%,rgba(16,31,48,0.4)_100%)] mb-2 -mx-6 -mt-8 px-6 py-6 backdrop-blur-sm">
+				<div className="flex items-center gap-4">
+					<button
+						onClick={() => navigate("/client")}
+						className="inline-flex items-center gap-2 rounded-xl border border-[#d8bc8f]/35 px-3 py-2 text-sm font-medium text-[#d8bc8f] transition hover:border-[#d8bc8f]/50 hover:bg-[rgba(216,188,143,0.1)]"
+					>
+						<span>←</span>
+						Back
+					</button>
+					<div className="min-w-0">
+						<div className="font-serif text-3xl font-semibold text-[#f5efe2]">
+							{project.name}
 						</div>
-					)}
+						{project.location && (
+							<div className="mt-1 text-sm text-[#a9b7c8]">
+								{project.location}
+							</div>
+						)}
+					</div>
 				</div>
 			</div>
 
 			<div className="flex flex-col gap-6">
-				<div className="flex border-b border-brand-border-light">
+				<div className="flex border-b border-white/10">
 					<button
 						onClick={() => setActiveTab("updates")}
 						className={tabClass("updates")}
@@ -150,9 +154,8 @@ export default function ClientProjectDetail() {
 				{activeTab === "updates" && (
 					<div>
 						{updates.length === 0 ? (
-							<div className="rounded-md border border-brand-border-light bg-brand-card px-8 py-12 text-center">
-								<div className="mb-2 text-3xl">📝</div>
-								<div className="text-sm text-brand-muted-light">
+							<div className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] px-8 py-12 text-center backdrop-blur-sm">
+								<div className="text-sm text-[#a9b7c8]">
 									No updates yet
 								</div>
 							</div>
@@ -161,14 +164,14 @@ export default function ClientProjectDetail() {
 								{updates.map((update) => (
 									<div
 										key={update.id}
-										className="rounded-md border border-brand-border-light bg-brand-card p-5"
+										className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] p-5 backdrop-blur-sm"
 									>
 										<div className="mb-4 flex items-start justify-between gap-4 max-md:flex-col">
 											<div>
 												<h3 className="mb-2 font-serif text-xl font-semibold text-white">
 													{update.title}
 												</h3>
-												<div className="flex flex-wrap gap-4 text-sm text-brand-muted">
+												<div className="flex flex-wrap gap-4 text-sm text-[#a9b7c8]">
 													<span>
 														{update.category.replace(
 															"_",
@@ -182,13 +185,13 @@ export default function ClientProjectDetail() {
 													</span>
 												</div>
 											</div>
-											<div className="rounded bg-brand-gold px-3 py-1.5 text-sm font-semibold text-brand-black">
+											<div className="rounded-lg bg-[#d8bc8f] px-3 py-1.5 text-sm font-semibold text-[#101824]">
 												{update.progress_percentage}%
 											</div>
 										</div>
 
 										{update.description && (
-											<p className="mb-4 text-sm leading-6 text-brand-muted-light">
+											<p className="mb-4 text-sm leading-6 text-[#a9b7c8]">
 												{update.description}
 											</p>
 										)}
@@ -202,7 +205,7 @@ export default function ClientProjectDetail() {
 																key={idx}
 																src={url}
 																alt={`Update ${idx + 1}`}
-																className="max-h-[300px] w-full rounded-md object-cover"
+																className="max-h-[300px] w-full rounded-2xl object-cover"
 																onError={(
 																	e,
 																) => {
@@ -226,9 +229,9 @@ export default function ClientProjectDetail() {
 					<div className="flex flex-col gap-6">
 						<form
 							onSubmit={handleSubmitQuery}
-							className="rounded-md border border-brand-gold bg-brand-card p-5"
+							className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] p-5 backdrop-blur-sm"
 						>
-							<h3 className="mb-4 font-serif text-xl font-semibold text-white">
+							<h3 className="mb-4 font-serif text-xl font-semibold text-[#f5efe2]">
 								Ask a Question
 							</h3>
 							<textarea
@@ -236,7 +239,7 @@ export default function ClientProjectDetail() {
 								value={newQuery}
 								onChange={(e) => setNewQuery(e.target.value)}
 								disabled={submittingQuery}
-								className="min-h-[120px] w-full resize-y rounded-md border border-brand-border bg-brand-panel px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#3a3a3a] focus:border-brand-gold focus:bg-brand-panel-light focus:ring-2 focus:ring-brand-gold/10 disabled:cursor-not-allowed disabled:opacity-50"
+								className="min-h-[120px] w-full resize-y rounded-xl border border-white/10 bg-[rgba(13,38,58,0.5)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#7a8894] focus:border-[#d8bc8f]/35 focus:bg-[rgba(13,38,58,0.7)] focus:ring-2 focus:ring-[#d8bc8f]/10 disabled:cursor-not-allowed disabled:opacity-50"
 							/>
 							<div className="mt-4 flex gap-3 max-md:flex-col">
 								<button
@@ -244,7 +247,7 @@ export default function ClientProjectDetail() {
 									disabled={
 										submittingQuery || !newQuery.trim()
 									}
-									className="inline-flex w-full max-w-[200px] items-center justify-center rounded-md border border-brand-gold bg-brand-gold px-4 py-2.5 text-sm font-semibold text-brand-black transition hover:border-brand-gold-light hover:bg-brand-gold-light disabled:cursor-not-allowed disabled:opacity-60 max-md:max-w-none"
+									className="inline-flex w-full max-w-[200px] items-center justify-center rounded-xl border border-[#d8bc8f]/35 bg-[rgba(216,188,143,0.1)] px-4 py-2.5 text-sm font-semibold text-[#d8bc8f] transition hover:border-[#d8bc8f]/50 hover:bg-[rgba(216,188,143,0.15)] disabled:cursor-not-allowed disabled:opacity-60 max-md:max-w-none"
 								>
 									{submittingQuery
 										? "Submitting..."
@@ -254,12 +257,11 @@ export default function ClientProjectDetail() {
 						</form>
 
 						{queries.length === 0 ? (
-							<div className="rounded-md border border-brand-border-light bg-brand-card px-8 py-12 text-center">
-								<div className="mb-2 text-3xl">💬</div>
-								<div className="text-sm text-brand-muted-light">
-									No questions yet
+							<div className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] px-8 py-12 text-center backdrop-blur-sm">
+								<div className="text-sm text-[#a9b7c8]">
+									No questions asked yet
 								</div>
-								<div className="mt-2 text-xs text-brand-muted">
+								<div className="mt-2 text-xs text-[#7a8894]">
 									Ask your first question above
 								</div>
 							</div>
@@ -268,14 +270,14 @@ export default function ClientProjectDetail() {
 								{queries.map((query) => (
 									<div
 										key={query.id}
-										className="rounded-md border border-brand-border-light bg-brand-card p-5"
+										className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] p-5 backdrop-blur-sm"
 									>
 										<div className="mb-4 flex items-start justify-between gap-4 max-md:flex-col">
 											<div className="min-w-0">
-												<h3 className="mb-2 font-serif text-lg font-semibold text-white">
+												<h3 className="mb-2 font-serif text-lg font-semibold text-[#f5efe2]">
 													{query.question}
 												</h3>
-												<div className="text-sm text-brand-muted">
+												<div className="text-sm text-[#a9b7c8]">
 													{new Date(
 														query.created_at,
 													).toLocaleDateString()}
@@ -283,10 +285,10 @@ export default function ClientProjectDetail() {
 											</div>
 											<div
 												className={cn(
-													"rounded px-3 py-1.5 text-sm font-semibold whitespace-nowrap",
+													"rounded-lg px-3 py-1.5 text-sm font-semibold whitespace-nowrap",
 													query.status === "resolved"
-														? "bg-brand-green text-brand-black"
-														: "bg-brand-orange text-brand-black",
+														? "bg-[#69c58a] text-white"
+														: "bg-[#f39c12] text-white",
 												)}
 											>
 												{query.status}
@@ -294,11 +296,11 @@ export default function ClientProjectDetail() {
 										</div>
 
 										{query.answer && (
-											<div className="rounded-md border-l-4 border-brand-gold bg-brand-panel-light p-4">
-												<div className="mb-2 text-sm font-semibold uppercase tracking-[0.05em] text-brand-gold">
+											<div className="rounded-xl border-l-4 border-[#d8bc8f] bg-[rgba(216,188,143,0.08)] p-4">
+												<div className="mb-2 text-sm font-semibold uppercase tracking-[0.05em] text-[#d8bc8f]">
 													Builder's Response:
 												</div>
-												<p className="text-sm leading-6 text-brand-muted-light">
+												<p className="text-sm leading-6 text-[#a9b7c8]">
 													{query.answer}
 												</p>
 											</div>
@@ -311,10 +313,10 @@ export default function ClientProjectDetail() {
 				)}
 
 				{activeTab === "info" && (
-					<div className="rounded-md border border-brand-border-light bg-brand-card p-5">
+					<div className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] p-5 backdrop-blur-sm">
 						<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 							<div>
-								<div className="mb-2 text-sm font-semibold uppercase tracking-[0.05em] text-brand-muted">
+								<div className="mb-2 text-sm font-semibold uppercase tracking-[0.05em] text-[#a9b7c8]">
 									Status
 								</div>
 								<div className="text-lg font-semibold text-white">
@@ -323,28 +325,28 @@ export default function ClientProjectDetail() {
 							</div>
 
 							<div>
-								<div className="mb-2 text-sm font-semibold uppercase tracking-[0.05em] text-brand-muted">
+								<div className="mb-2 text-sm font-semibold uppercase tracking-[0.05em] text-[#a9b7c8]">
 									Overall Progress
 								</div>
-								<div className="text-lg font-semibold text-brand-gold">
+								<div className="text-lg font-semibold text-[#d8bc8f]">
 									{project.overall_progress}%
 								</div>
 							</div>
 
 							{project.location && (
 								<div>
-									<div className="mb-2 text-sm font-semibold uppercase tracking-[0.05em] text-brand-muted">
+									<div className="mb-2 text-sm font-semibold uppercase tracking-[0.05em] text-[#a9b7c8]">
 										Location
 									</div>
 									<div className="text-base text-white">
-										📍 {project.location}
+										{project.location}
 									</div>
 								</div>
 							)}
 
 							{project.start_date && (
 								<div>
-									<div className="mb-2 text-sm font-semibold uppercase tracking-[0.05em] text-brand-muted">
+									<div className="mb-2 text-sm font-semibold uppercase tracking-[0.05em] text-[#a9b7c8]">
 										Started
 									</div>
 									<div className="text-base text-white">
@@ -357,7 +359,7 @@ export default function ClientProjectDetail() {
 
 							{project.expected_end_date && (
 								<div>
-									<div className="mb-2 text-sm font-semibold uppercase tracking-[0.05em] text-brand-muted">
+									<div className="mb-2 text-sm font-semibold uppercase tracking-[0.05em] text-[#a9b7c8]">
 										Expected End
 									</div>
 									<div className="text-base text-white">
@@ -370,11 +372,11 @@ export default function ClientProjectDetail() {
 						</div>
 
 						{project.description && (
-							<div className="mt-8 border-t border-brand-border pt-6">
-								<div className="mb-2 text-sm font-semibold uppercase tracking-[0.05em] text-brand-muted">
+							<div className="mt-8 border-t border-white/10 pt-6">
+								<div className="mb-2 text-sm font-semibold uppercase tracking-[0.05em] text-[#a9b7c8]">
 									Description
 								</div>
-								<p className="text-sm leading-6 text-brand-muted-light">
+								<p className="text-sm leading-6 text-[#a9b7c8]">
 									{project.description}
 								</p>
 							</div>

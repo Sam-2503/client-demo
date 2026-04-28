@@ -37,194 +37,126 @@ export default function ClientOverview() {
 		: 0;
 
 	const statusAccent: Record<string, string> = {
-		in_progress: "border-t-brand-gold",
-		completed: "border-t-brand-green",
-		on_hold: "border-t-brand-orange",
-		planning: "border-t-brand-muted",
+		in_progress: "border-t-[#d8bc8f]",
+		completed: "border-t-[#69c58a]",
+		on_hold: "border-t-[#f39c12]",
+		planning: "border-t-[#5a6b7a]",
 	};
 
 	const statusBadge: Record<string, string> = {
-		in_progress: "bg-brand-gold text-brand-black",
-		completed: "bg-brand-green text-brand-black",
-		on_hold: "bg-brand-orange text-brand-black",
-		planning: "bg-brand-muted text-brand-black",
+		in_progress: "bg-[#d8bc8f] text-[#101824]",
+		completed: "bg-[#69c58a] text-white",
+		on_hold: "bg-[#f39c12] text-white",
+		planning: "bg-[#5a6b7a] text-white",
 	};
 
-	const progressFillClass = (status: string) =>
-		status === "in_progress"
-			? "bg-brand-gold"
-			: status === "completed"
-				? "bg-brand-green"
-				: "bg-brand-muted";
-
 	const renderProgressBar = (progress: number, status: string) => {
-		const filledSegments = Math.ceil((progress / 100) * 20);
+		const statusColor: Record<string, string> = {
+			planning: "#5a6b7a",
+			in_progress: "#d8bc8f",
+			on_hold: "#f39c12",
+			completed: "#69c58a",
+		};
+
 		return (
-			<div className="flex h-1.5 gap-px overflow-hidden rounded bg-brand-border">
-				{Array.from({ length: 20 }).map((_, index) => (
+			<div className="mt-2 flex items-center gap-2">
+				<div className="flex-1 overflow-hidden rounded-full bg-[rgba(13,38,58,0.5)]">
 					<div
-						key={index}
-						className={cn(
-							"flex-1 rounded",
-							index < filledSegments
-								? progressFillClass(status)
-								: "bg-transparent",
-						)}
+						className="h-2 rounded-full transition-all"
+						style={{ width: `${progress}%`, backgroundColor: statusColor[status] }}
 					/>
-				))}
+				</div>
+				<span className="text-sm text-[#a9b7c8]">{progress}%</span>
 			</div>
 		);
 	};
 
 	return (
 		<>
-			<div className="flex items-center justify-between border-b border-brand-border-light bg-brand-card px-6 py-4">
-				<div className="font-serif text-2xl font-semibold text-white">
-					My Projects
-				</div>
+			<div className="border-b border-white/10 bg-[linear-gradient(160deg,rgba(10,18,28,0.4)_0%,rgba(16,31,48,0.4)_100%)] px-6 py-8 backdrop-blur-sm">
+				<h1 className="text-4xl font-bold text-[#f5efe2]">Dashboard</h1>
+				<p className="mt-2 text-[#a9b7c8]">
+					Track your projects and their progress in real-time
+				</p>
 			</div>
 
-			<div className="animate-fade-up space-y-5 px-6 py-6">
-				<div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-					<div className="rounded-md border border-brand-border-light border-t-2 border-t-brand-gold bg-brand-card p-4">
-						<div className="font-serif text-3xl text-brand-gold">
-							{total}
+			<div className="animate-fade-up space-y-6 px-6 py-8">
+				<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+					{[
+						{ label: "Total Projects", value: total, color: "#5dade2" },
+						{ label: "Active", value: active, color: "#d8bc8f" },
+						{ label: "Completed", value: completed, color: "#69c58a" },
+						{ label: "Avg. Progress", value: `${avgProgress}%`, color: "#a8875e" },
+					].map((stat) => (
+						<div
+							key={stat.label}
+							className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] p-5 backdrop-blur-sm"
+						>
+							<p className="text-sm text-[#7a8894]">{stat.label}</p>
+							<div className="mt-2 flex items-end gap-2">
+								<span
+									className="text-3xl font-bold"
+									style={{ color: stat.color }}
+								>
+									{stat.value}
+								</span>
+							</div>
 						</div>
-						<div className="mt-1 text-sm font-medium text-white">
-							Total Projects
-						</div>
-						<div className="text-xs text-brand-muted">
-							All projects
-						</div>
-					</div>
-					<div className="rounded-md border border-brand-border-light border-t-2 border-t-brand-green bg-brand-card p-4">
-						<div className="font-serif text-3xl text-brand-green">
-							{active}
-						</div>
-						<div className="mt-1 text-sm font-medium text-white">
-							Active Projects
-						</div>
-						<div className="text-xs text-brand-muted">
-							In progress
-						</div>
-					</div>
-					<div className="rounded-md border border-brand-border-light border-t-2 border-t-[#5dade2] bg-brand-card p-4">
-						<div className="font-serif text-3xl text-[#5dade2]">
-							{completed}
-						</div>
-						<div className="mt-1 text-sm font-medium text-white">
-							Completed
-						</div>
-						<div className="text-xs text-brand-muted">
-							Delivered
-						</div>
-					</div>
-					<div className="rounded-md border border-brand-border-light border-t-2 border-t-brand-gold bg-brand-card p-4">
-						<div className="font-serif text-3xl text-brand-gold">
-							{avgProgress}%
-						</div>
-						<div className="mt-1 text-sm font-medium text-white">
-							Average Progress
-						</div>
-						<div className="text-xs text-brand-muted">
-							Across all projects
-						</div>
-					</div>
+					))}
 				</div>
 
-				<div className="mb-3 flex items-center justify-between">
-					<div className="text-sm font-semibold uppercase tracking-[0.1em] text-brand-muted-light">
-						Your Projects
+				<div>
+					<div className="mb-4 flex items-center justify-between">
+						<h2 className="text-2xl font-bold text-[#f5efe2]">Your Projects</h2>
+						<button
+							onClick={() => navigate("/client/projects")}
+							className="rounded-lg border border-[#d8bc8f]/30 px-4 py-2 text-sm font-medium text-[#d8bc8f] transition-all hover:bg-[#d8bc8f]/10"
+						>
+							View All
+						</button>
 					</div>
-				</div>
 
-				{loading ? (
-					<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
-						<div className="mb-2 text-3xl">⏳</div>
-						<div className="text-sm text-brand-muted-light">
-							Loading projects…
+					{loading ? (
+						<div className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] p-8 text-center backdrop-blur-sm">
+							<p className="text-[#a9b7c8]">Loading projects…</p>
 						</div>
-					</div>
-				) : projects.length === 0 ? (
-					<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
-						<div className="mb-2 text-3xl">📁</div>
-						<div className="text-sm text-brand-muted-light">
-							No projects yet
+					) : projects.length === 0 ? (
+						<div className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] p-8 text-center backdrop-blur-sm">
+							<p className="text-[#a9b7c8]">No projects yet</p>
 						</div>
-					</div>
-				) : (
-					<div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
-						{projects.map((p) => (
-							<div
-								key={p.id}
-								className={cn(
-									"cursor-pointer rounded-md border border-brand-border-light border-t-2 bg-brand-card p-4 transition hover:border-brand-gold",
-									statusAccent[p.status] ??
-										"border-t-brand-muted",
-								)}
-								onClick={() =>
-									navigate(`/client/projects/${p.id}`)
-								}
-							>
-								<div className="space-y-4">
-									<div className="flex items-start justify-between gap-3">
+					) : (
+						<div className="grid gap-4 sm:grid-cols-2">
+							{projects.map((p) => (
+								<div
+									key={p.id}
+									onClick={() => navigate(`/client/projects/${p.id}`)}
+									className={cn(
+										"cursor-pointer rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] p-5 transition-all hover:bg-[rgba(13,38,58,0.5)] hover:shadow-lg backdrop-blur-sm",
+										statusAccent[p.status],
+									)}
+								>
+									<div className="mb-3 flex items-start justify-between">
 										<div>
-											<div className="text-sm font-semibold text-white">
-												{p.name}
-											</div>
-											<div className="text-xs text-brand-muted">
+											<h3 className="font-semibold text-[#f5efe2]">{p.name}</h3>
+											<p className="mt-1 text-sm text-[#a9b7c8]">
 												{p.location ?? "Location TBD"}
-											</div>
+											</p>
 										</div>
 										<span
 											className={cn(
-												"rounded px-2 py-0.5 text-[0.65rem] font-semibold uppercase",
-												statusBadge[p.status] ??
-													"bg-brand-muted text-brand-black",
+												"rounded-full px-3 py-1 text-xs font-medium",
+												statusBadge[p.status],
 											)}
 										>
 											{p.status.replace("_", " ")}
 										</span>
 									</div>
-
-									<div className="text-xs text-brand-muted-light">
-										📍 {p.location ?? "—"}
-									</div>
-
-									<div>
-										<div className="mb-1 flex items-center justify-between text-[0.7rem] text-brand-muted-light">
-											<span>Progress</span>
-											<span>{p.overall_progress}%</span>
-										</div>
-										{renderProgressBar(
-											p.overall_progress,
-											p.status,
-										)}
-									</div>
+									{renderProgressBar(p.overall_progress, p.status)}
 								</div>
-
-								<div className="mt-4 flex items-center justify-between border-t border-brand-border pt-3">
-									<div className="text-[0.72rem] text-brand-muted-light">
-										Status:{" "}
-										<span className="text-brand-gold">
-											{p.status.replace("_", " ")}
-										</span>
-									</div>
-									<div className="text-[0.68rem] text-brand-muted">
-										{p.start_date
-											? new Date(
-													p.start_date,
-												).toLocaleDateString("en-IN", {
-													month: "short",
-													year: "numeric",
-												})
-											: "—"}
-									</div>
-								</div>
-							</div>
-						))}
-					</div>
-				)}
+							))}
+						</div>
+					)}
+				</div>
 			</div>
 		</>
 	);

@@ -1,41 +1,43 @@
 export default function Footer() {
 	return (
-		<footer className="border-t border-[#1a1a1a] bg-brand-black px-4 pb-8 pt-12 md:px-[5vw]">
-			<div className="mx-auto mb-8 grid max-w-[1200px] grid-cols-1 gap-8 md:grid-cols-3">
+		<footer className="border-t border-white/10 bg-[#07101b] px-4 py-10 md:px-8">
+			<div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-8 md:grid-cols-3">
 				<div>
-					<h4 className="mb-4 text-base font-semibold text-brand-gold">
-						RJS HOMES
-					</h4>
-					<p className="text-[0.85rem] leading-[1.6] text-brand-muted-light">
-						Building dreams since 2002. Transparency, quality, and
-						innovation in every project.
+					<div className="font-serif text-2xl text-[#f1e7d5]">
+						RJS Homes
+					</div>
+					<p className="mt-3 max-w-[360px] text-sm leading-7 text-[#aeb9ca]">
+						High-quality construction and interiors delivered with
+						rigorous site execution and transparent client
+						communication.
 					</p>
 				</div>
+
 				<div>
-					<h4 className="mb-4 text-base font-semibold text-brand-gold">
-						Quick Links
-					</h4>
-					<ul className="space-y-2">
-						<li>
-							<a
-								href="#home"
-								className="text-[0.85rem] text-brand-muted-light transition hover:text-brand-gold"
-							>
-								Home
-							</a>
-						</li>
+					<div className="text-[11px] uppercase tracking-[0.16em] text-[#d8bc8f]">
+						Quick Navigation
+					</div>
+					<ul className="mt-4 space-y-2 text-sm text-[#c5cfdd]">
 						<li>
 							<a
 								href="#about"
-								className="text-[0.85rem] text-brand-muted-light transition hover:text-brand-gold"
+								className="transition hover:text-[#f1e7d5]"
 							>
 								About
 							</a>
 						</li>
 						<li>
 							<a
+								href="#services"
+								className="transition hover:text-[#f1e7d5]"
+							>
+								Services
+							</a>
+						</li>
+						<li>
+							<a
 								href="#projects"
-								className="text-[0.85rem] text-brand-muted-light transition hover:text-brand-gold"
+								className="transition hover:text-[#f1e7d5]"
 							>
 								Projects
 							</a>
@@ -43,47 +45,33 @@ export default function Footer() {
 						<li>
 							<a
 								href="#contact"
-								className="text-[0.85rem] text-brand-muted-light transition hover:text-brand-gold"
+								className="transition hover:text-[#f1e7d5]"
 							>
 								Contact
 							</a>
 						</li>
 					</ul>
 				</div>
+
 				<div>
-					<h4 className="mb-4 text-base font-semibold text-brand-gold">
-						Legal
-					</h4>
-					<ul className="space-y-2">
-						<li>
-							<a
-								href="#"
-								className="text-[0.85rem] text-brand-muted-light transition hover:text-brand-gold"
-							>
-								Privacy Policy
-							</a>
-						</li>
-						<li>
-							<a
-								href="#"
-								className="text-[0.85rem] text-brand-muted-light transition hover:text-brand-gold"
-							>
-								Terms & Conditions
-							</a>
-						</li>
-						<li>
-							<a
-								href="#"
-								className="text-[0.85rem] text-brand-muted-light transition hover:text-brand-gold"
-							>
-								Disclaimer
-							</a>
-						</li>
-					</ul>
+					<div className="text-[11px] uppercase tracking-[0.16em] text-[#d8bc8f]">
+						Client Access
+					</div>
+					<p className="mt-4 text-sm leading-7 text-[#c5cfdd]">
+						Use the project portal for approvals, progress tracking,
+						material updates, and issue resolution workflows.
+					</p>
+					<a
+						href="/login"
+						className="mt-4 inline-flex rounded-md border border-[#d8bc8f]/40 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#f2e7d4] transition hover:bg-white/5"
+					>
+						Open Portal
+					</a>
 				</div>
 			</div>
-			<div className="border-t border-[#1a1a1a] pt-8 text-center text-[0.8rem] text-brand-muted">
-				<p>&copy; 2024 RJS Homes. All rights reserved.</p>
+
+			<div className="mx-auto mt-8 max-w-[1280px] border-t border-white/10 pt-6 text-xs uppercase tracking-[0.12em] text-[#7f8ea5]">
+				RJS Homes · Hyderabad · Since 2002
 			</div>
 		</footer>
 	);

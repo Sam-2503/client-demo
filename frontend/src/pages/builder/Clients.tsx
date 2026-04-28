@@ -60,22 +60,22 @@ export default function BuilderClients() {
 	return (
 		<>
 			{/* Topbar */}
-			<div className="flex items-center justify-between border-b border-brand-border-light bg-brand-card px-6 py-4">
+			<div className="flex items-center justify-between border-b border-white/10 bg-[rgba(13,38,58,0.3)] px-6 py-4">
 				<div className="font-serif text-2xl font-semibold text-white">
 					Clients
 				</div>
-				<div className="text-xs text-brand-muted">
+				<div className="text-xs text-[#888888]">
 					{clients.length} client{clients.length !== 1 ? "s" : ""}
 				</div>
 			</div>
 
 			<div className="animate-fade-up space-y-4 px-6 py-6">
 				{/* Search */}
-				<div className="rounded-md border border-brand-border-light bg-brand-card p-4">
+				<div className="rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] p-4">
 					<div className="flex items-center gap-3">
-						<span className="text-xs text-brand-muted">🔍</span>
+						<span className="text-xs text-[#888888]">🔍</span>
 						<input
-							className="w-full border-b-2 border-brand-border bg-brand-panel px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+							className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
 							placeholder="Search by name or email…"
 							value={searchTerm}
 							onChange={(e) => setSearchTerm(e.target.value)}
@@ -85,25 +85,25 @@ export default function BuilderClients() {
 
 				{/* Clients list */}
 				{loading ? (
-					<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
+					<div className="rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] p-10 text-center">
 						<div className="mb-2 text-3xl">⏳</div>
-						<div className="text-sm text-brand-muted-light">
+						<div className="text-sm text-[#a9b7c8]">
 							Loading clients…
 						</div>
 					</div>
 				) : filteredClients.length === 0 ? (
-					<div className="rounded-md border border-brand-border-light bg-brand-card p-10 text-center">
+					<div className="rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] p-10 text-center">
 						<div className="mb-2 text-3xl">👥</div>
-						<div className="text-sm text-brand-muted-light">
+						<div className="text-sm text-[#a9b7c8]">
 							{searchTerm ? "No clients found" : "No clients yet"}
 						</div>
 					</div>
 				) : (
-					<div className="overflow-hidden rounded-md border border-brand-border-light bg-brand-card">
+					<div className="overflow-hidden rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)]">
 						<div style={{ overflowX: "auto" }}>
 							<table className="min-w-full text-left text-sm">
 								<thead>
-									<tr className="border-b border-brand-border bg-brand-panel text-xs uppercase tracking-[0.08em] text-brand-muted-light">
+									<tr className="border-b border-white/10 bg-white/5 text-xs uppercase tracking-[0.08em] text-[#a9b7c8]">
 										<th>Client Name</th>
 										<th>Email</th>
 										<th>Projects</th>
@@ -121,7 +121,7 @@ export default function BuilderClients() {
 												onClick={() =>
 													setSelectedClient(client.id)
 												}
-												className="cursor-pointer border-b border-brand-border/50 text-brand-muted-light transition hover:bg-brand-panel"
+												className="cursor-pointer border-b border-white/10/50 text-[#a9b7c8] transition hover:bg-white/5"
 											>
 												<td className="px-3 py-2 font-medium text-white">
 													{client.full_name}
@@ -130,7 +130,7 @@ export default function BuilderClients() {
 													{client.email}
 												</td>
 												<td>
-													<span className="inline-block rounded bg-brand-panel-light px-2 py-1 text-[0.7rem] font-medium text-brand-gold">
+													<span className="inline-block rounded bg-white/5-light px-2 py-1 text-[0.7rem] font-medium text-brand-gold">
 														{projectCount} project
 														{projectCount !== 1
 															? "s"
@@ -146,7 +146,7 @@ export default function BuilderClients() {
 															: "Inactive"}
 													</span>
 												</td>
-												<td className="px-3 py-2 text-xs text-brand-muted">
+												<td className="px-3 py-2 text-xs text-[#888888]">
 													{new Date(
 														client.created_at,
 													).toLocaleDateString(
@@ -169,7 +169,7 @@ export default function BuilderClients() {
 
 				{/* Client details panel */}
 				{selectedClient && (
-					<div className="rounded-md border border-brand-border-light border-l-4 border-l-brand-gold bg-brand-card p-4">
+					<div className="rounded-md border border-white/10 border-l-4 border-l-brand-gold bg-[rgba(13,38,58,0.3)] p-4">
 						{(() => {
 							const client = clients.find(
 								(c) => c.id === selectedClient,
@@ -191,12 +191,12 @@ export default function BuilderClients() {
 											<div className="mb-2 text-base font-semibold text-white">
 												{client.full_name}
 											</div>
-											<div className="text-xs text-brand-muted">
+											<div className="text-xs text-[#888888]">
 												{client.email}
 											</div>
 										</div>
 										<button
-											className="rounded border border-brand-border px-3 py-2 text-xs font-medium text-brand-muted-light transition hover:border-brand-gold hover:text-brand-gold"
+											className="rounded border border-white/10 px-3 py-2 text-xs font-medium text-[#a9b7c8] transition hover:border-brand-gold hover:text-brand-gold"
 											onClick={() =>
 												setSelectedClient(null)
 											}
@@ -206,12 +206,12 @@ export default function BuilderClients() {
 									</div>
 
 									{/* Client stats */}
-									<div className="mb-4 grid grid-cols-3 gap-3 border-b border-brand-border pb-4">
+									<div className="mb-4 grid grid-cols-3 gap-3 border-b border-white/10 pb-4">
 										<div className="text-center">
 											<div className="font-serif text-2xl text-brand-gold">
 												{clientProjects.length}
 											</div>
-											<div className="text-[0.7rem] text-brand-muted">
+											<div className="text-[0.7rem] text-[#888888]">
 												Total Projects
 											</div>
 										</div>
@@ -232,7 +232,7 @@ export default function BuilderClients() {
 											<div className="font-serif text-2xl text-[#4caf50]">
 												{completedProjects}
 											</div>
-											<div className="text-[0.7rem] text-brand-muted">
+											<div className="text-[0.7rem] text-[#888888]">
 												Completed
 											</div>
 										</div>
@@ -241,7 +241,7 @@ export default function BuilderClients() {
 									{/* Client projects */}
 									{clientProjects.length > 0 ? (
 										<>
-											<div className="mb-2 text-[0.7rem] uppercase tracking-[0.08em] text-brand-muted">
+											<div className="mb-2 text-[0.7rem] uppercase tracking-[0.08em] text-[#888888]">
 												Projects
 											</div>
 											<div className="grid gap-2">
@@ -253,13 +253,13 @@ export default function BuilderClients() {
 																`/builder/projects/${p.id}`,
 															)
 														}
-														className="flex items-center justify-between rounded bg-brand-panel-light p-3 transition hover:bg-brand-panel"
+														className="flex items-center justify-between rounded bg-white/5-light p-3 transition hover:bg-white/5"
 													>
 														<div>
 															<div className="mb-1 text-[0.78rem] font-medium text-white">
 																{p.name}
 															</div>
-															<div className="text-[0.7rem] text-brand-muted">
+															<div className="text-[0.7rem] text-[#888888]">
 																{p.location ||
 																	"Location TBD"}
 															</div>
@@ -277,7 +277,7 @@ export default function BuilderClients() {
 											</div>
 										</>
 									) : (
-										<div className="text-[0.78rem] text-brand-muted">
+										<div className="text-[0.78rem] text-[#888888]">
 											No projects assigned
 										</div>
 									)}

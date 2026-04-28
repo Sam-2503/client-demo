@@ -56,32 +56,32 @@ export default function ClientQueriesPage() {
 		: [];
 
 	return (
-		<div className="flex flex-col gap-6 px-6 py-6 animate-fade-up">
-			<div className="flex flex-col gap-2">
-				<h1 className="font-serif text-[1.75rem] font-semibold text-white">
+		<div className="flex flex-col gap-6 px-6 py-8 animate-fade-up">
+			<div className="border-b border-white/10 bg-[linear-gradient(160deg,rgba(10,18,28,0.4)_0%,rgba(16,31,48,0.4)_100%)] mb-2 px-0 py-6 backdrop-blur-sm">
+				<div className="font-serif text-3xl font-semibold text-[#f5efe2]">
 					Questions
-				</h1>
-				<p className="text-base text-brand-muted-light">
+				</div>
+				<p className="mt-1 text-sm text-[#a9b7c8]">
 					Ask the builder about your project
 				</p>
 			</div>
 
 			{loading ? (
-				<Card className="border-brand-border-light bg-brand-card">
-					<div className="px-8 py-12 text-center text-brand-muted">
-						Loading...
+				<div className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] px-8 py-12 text-center backdrop-blur-sm">
+					<div className="text-sm text-[#a9b7c8]">
+						Loading projects...
 					</div>
-				</Card>
+				</div>
 			) : (
-				<div className="grid items-start gap-6 lg:grid-cols-[250px_1fr]">
+				<div className="grid items-start gap-6 lg:grid-cols-[280px_1fr]">
 					<div className="sticky top-6 hidden lg:block">
-						<Card className="border-brand-border-light bg-brand-card p-4">
-							<div className="mb-4 border-b border-brand-border pb-4 font-serif text-lg font-semibold text-white">
+						<div className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] p-5 backdrop-blur-sm">
+							<div className="mb-4 border-b border-white/10 pb-4 font-serif text-lg font-semibold text-[#f5efe2]">
 								Your Projects
 							</div>
 							<div className="flex flex-col gap-2">
 								{projects.length === 0 ? (
-									<div className="rounded-md bg-brand-panel px-4 py-4 text-center text-sm text-brand-muted-light">
+									<div className="rounded-xl bg-white/5 px-4 py-4 text-center text-sm text-[#a9b7c8]">
 										No projects assigned
 									</div>
 								) : (
@@ -90,17 +90,19 @@ export default function ClientQueriesPage() {
 											key={project.id}
 											className={
 												selectedProjectId === project.id
-													? "flex flex-col gap-1 rounded-md border border-brand-gold bg-brand-panel-light px-4 py-3 text-left text-brand-gold transition"
-													: "flex flex-col gap-1 rounded-md border border-brand-border px-4 py-3 text-left text-brand-muted-light transition hover:border-brand-gold hover:bg-brand-panel hover:text-white"
+													? "flex flex-col gap-1 rounded-xl border border-[#d8bc8f]/35 bg-[rgba(216,188,143,0.1)] px-4 py-3 text-left transition"
+													: "flex flex-col gap-1 rounded-xl border border-white/10 px-4 py-3 text-left transition hover:border-[#d8bc8f]/25 hover:bg-white/5"
 											}
 											onClick={() =>
 												setSelectedProjectId(project.id)
 											}
 										>
-											<div className="font-semibold">
+											<div className="font-semibold text-white">
 												{project.name}
 											</div>
-											<div className="text-xs opacity-80">
+											<div
+												className={`text-xs ${selectedProjectId === project.id ? "text-[#d8bc8f]" : "text-[#a9b7c8]"}`}
+											>
 												{
 													queries.filter(
 														(q) =>
@@ -120,7 +122,7 @@ export default function ClientQueriesPage() {
 									))
 								)}
 							</div>
-						</Card>
+						</div>
 					</div>
 
 					{/* Main Content */}
@@ -136,7 +138,7 @@ export default function ClientQueriesPage() {
 
 								{/* Queries List */}
 								<div className="flex flex-col gap-4">
-									<div className="font-serif text-lg font-semibold text-white">
+									<div className="font-serif text-lg font-semibold text-[#f5efe2]">
 										Questions ({filteredQueries.length})
 									</div>
 									<QueryList
@@ -146,14 +148,11 @@ export default function ClientQueriesPage() {
 								</div>
 							</>
 						) : (
-							<Card className="border-brand-border-light bg-brand-card">
-								<div className="px-8 py-12 text-center">
-									<div className="mb-4 text-3xl">📋</div>
-									<div className="text-brand-muted-light">
-										Select a project to ask questions
-									</div>
+							<div className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] px-8 py-12 text-center backdrop-blur-sm">
+								<div className="text-[#a9b7c8]">
+									Select a project to ask questions
 								</div>
-							</Card>
+							</div>
 						)}
 					</div>
 				</div>

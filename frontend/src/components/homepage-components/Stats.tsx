@@ -1,38 +1,47 @@
+const stats = [
+	{
+		value: "20+",
+		label: "Years of Execution",
+		detail: "Residential and commercial delivery across Hyderabad.",
+	},
+	{
+		value: "500+",
+		label: "Homes Delivered",
+		detail: "From core shell completion to full interior fit-out.",
+	},
+	{
+		value: "50+",
+		label: "Active Teams",
+		detail: "Civil, MEP, interior, finishing and QA specialists.",
+	},
+	{
+		value: "99%",
+		label: "Schedule Reliability",
+		detail: "Milestone-driven planning with weekly progress visibility.",
+	},
+];
+
 export default function Stats() {
 	return (
-		<div className="grid grid-cols-2 gap-8 border-y border-[#1a1a1a] bg-brand-black px-4 py-10 md:grid-cols-4 md:px-[5vw]">
-			<div className="text-center">
-				<div className="mb-2 font-serif text-[2.5rem] font-bold leading-none text-brand-gold">
-					20+
-				</div>
-				<div className="text-[0.8rem] uppercase tracking-[0.1em] text-brand-muted-light">
-					Years of Experience
-				</div>
+		<section className="px-4 py-14 md:px-8">
+			<div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+				{stats.map((stat) => (
+					<article
+						key={stat.label}
+						className="rounded-xl border border-white/10 bg-[linear-gradient(160deg,rgba(13,24,39,0.9)_0%,rgba(18,33,52,0.9)_100%)] p-5 shadow-[0_16px_36px_rgba(0,0,0,0.28)]"
+					>
+						<div className="font-serif text-4xl text-[#d8bc8f]">
+							{stat.value}
+						</div>
+						<div className="mt-2 text-[11px] uppercase tracking-[0.16em] text-[#e1e7f0]">
+							{stat.label}
+						</div>
+						<p className="mt-3 text-[13px] leading-6 text-[#9eabc0]">
+							{stat.detail}
+						</p>
+					</article>
+				))}
 			</div>
-			<div className="text-center">
-				<div className="mb-2 font-serif text-[2.5rem] font-bold leading-none text-brand-gold">
-					500+
-				</div>
-				<div className="text-[0.8rem] uppercase tracking-[0.1em] text-brand-muted-light">
-					Happy Families
-				</div>
-			</div>
-			<div className="text-center">
-				<div className="mb-2 font-serif text-[2.5rem] font-bold leading-none text-brand-gold">
-					50+
-				</div>
-				<div className="text-[0.8rem] uppercase tracking-[0.1em] text-brand-muted-light">
-					Projects Delivered
-				</div>
-			</div>
-			<div className="text-center">
-				<div className="mb-2 font-serif text-[2.5rem] font-bold leading-none text-brand-gold">
-					100%
-				</div>
-				<div className="text-[0.8rem] uppercase tracking-[0.1em] text-brand-muted-light">
-					Transparent Process
-				</div>
-			</div>
-		</div>
+		</section>
 	);
 }

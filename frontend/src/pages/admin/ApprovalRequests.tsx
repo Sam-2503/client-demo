@@ -109,42 +109,42 @@ export default function ApprovalRequests() {
 					<h1 className="font-serif text-[1.75rem] font-semibold text-white max-md:text-2xl">
 						Builder Approval Requests
 					</h1>
-					<p className="text-sm text-brand-muted">
+					<p className="text-sm text-[#888888]">
 						Review and approve pending builder registrations
 					</p>
 				</div>
 
 				<div className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(180px,1fr))] max-md:grid-cols-1">
-					<div className="flex flex-col gap-3 rounded-lg border border-brand-border bg-brand-card p-4 text-center">
+					<div className="flex flex-col gap-3 rounded-lg border border-white/10 bg-[rgba(13,38,58,0.3)] p-4 text-center">
 						<div className="font-serif text-2xl font-bold text-brand-gold">
 							{pendingCount}
 						</div>
-						<div className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
+						<div className="text-xs font-semibold uppercase tracking-[0.05em] text-[#888888]">
 							Pending
 						</div>
 					</div>
-					<div className="flex flex-col gap-3 rounded-lg border border-brand-border bg-brand-card p-4 text-center">
+					<div className="flex flex-col gap-3 rounded-lg border border-white/10 bg-[rgba(13,38,58,0.3)] p-4 text-center">
 						<div className="font-serif text-2xl font-bold text-brand-gold">
 							{approvedCount}
 						</div>
-						<div className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
+						<div className="text-xs font-semibold uppercase tracking-[0.05em] text-[#888888]">
 							Approved
 						</div>
 					</div>
-					<div className="flex flex-col gap-3 rounded-lg border border-brand-border bg-brand-card p-4 text-center">
+					<div className="flex flex-col gap-3 rounded-lg border border-white/10 bg-[rgba(13,38,58,0.3)] p-4 text-center">
 						<div className="font-serif text-2xl font-bold text-brand-gold">
 							{rejectedCount}
 						</div>
-						<div className="text-xs font-semibold uppercase tracking-[0.05em] text-brand-muted">
+						<div className="text-xs font-semibold uppercase tracking-[0.05em] text-[#888888]">
 							Rejected
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div className="overflow-hidden rounded-lg border border-brand-border bg-brand-card">
+			<div className="overflow-hidden rounded-lg border border-white/10 bg-[rgba(13,38,58,0.3)]">
 				{loading ? (
-					<div className="flex min-h-[280px] items-center justify-center p-8 text-sm text-brand-muted">
+					<div className="flex min-h-[280px] items-center justify-center p-8 text-sm text-[#888888]">
 						Loading requests...
 					</div>
 				) : requests.length === 0 ? (
@@ -153,7 +153,7 @@ export default function ApprovalRequests() {
 						<div className="font-serif text-lg font-semibold text-white">
 							All caught up!
 						</div>
-						<div className="text-sm text-brand-muted">
+						<div className="text-sm text-[#888888]">
 							No builder requests to process
 						</div>
 					</div>
@@ -161,20 +161,20 @@ export default function ApprovalRequests() {
 					<div className="overflow-x-auto">
 						<table className="min-w-full border-collapse">
 							<thead>
-								<tr className="border-b-2 border-brand-border bg-brand-panel">
-									<th className="px-4 py-4 text-left text-sm font-semibold uppercase tracking-[0.05em] text-brand-muted max-md:hidden">
+								<tr className="border-b-2 border-white/10 bg-white/5">
+									<th className="px-4 py-4 text-left text-sm font-semibold uppercase tracking-[0.05em] text-[#888888] max-md:hidden">
 										Email
 									</th>
-									<th className="px-4 py-4 text-left text-sm font-semibold uppercase tracking-[0.05em] text-brand-muted">
+									<th className="px-4 py-4 text-left text-sm font-semibold uppercase tracking-[0.05em] text-[#888888]">
 										Full Name
 									</th>
-									<th className="px-4 py-4 text-left text-sm font-semibold uppercase tracking-[0.05em] text-brand-muted">
+									<th className="px-4 py-4 text-left text-sm font-semibold uppercase tracking-[0.05em] text-[#888888]">
 										Status
 									</th>
-									<th className="px-4 py-4 text-left text-sm font-semibold uppercase tracking-[0.05em] text-brand-muted max-md:hidden">
+									<th className="px-4 py-4 text-left text-sm font-semibold uppercase tracking-[0.05em] text-[#888888] max-md:hidden">
 										Submitted
 									</th>
-									<th className="px-4 py-4 text-right text-sm font-semibold uppercase tracking-[0.05em] text-brand-muted">
+									<th className="px-4 py-4 text-right text-sm font-semibold uppercase tracking-[0.05em] text-[#888888]">
 										Actions
 									</th>
 								</tr>
@@ -213,7 +213,7 @@ export default function ApprovalRequests() {
 												{request.status}
 											</Badge>
 										</td>
-										<td className="px-4 py-4 text-sm text-brand-muted max-md:hidden">
+										<td className="px-4 py-4 text-sm text-[#888888] max-md:hidden">
 											{new Date(
 												request.created_at,
 											).toLocaleDateString()}
@@ -251,7 +251,7 @@ export default function ApprovalRequests() {
 													</Button>
 												</div>
 											) : (
-												<span className="text-brand-muted">
+												<span className="text-[#888888]">
 													—
 												</span>
 											)}
@@ -300,7 +300,7 @@ export default function ApprovalRequests() {
 				<div className="flex flex-col gap-4">
 					{approvalState.action === "approve" ? (
 						<>
-							<p className="text-sm leading-6 text-brand-muted">
+							<p className="text-sm leading-6 text-[#888888]">
 								Are you sure you want to approve this builder
 								request?
 							</p>
@@ -320,12 +320,12 @@ export default function ApprovalRequests() {
 						</>
 					) : (
 						<>
-							<p className="text-sm leading-6 text-brand-muted">
+							<p className="text-sm leading-6 text-[#888888]">
 								Please provide a reason for rejecting this
 								request:
 							</p>
 							<textarea
-								className="min-h-[120px] w-full resize-y rounded-md border border-brand-border bg-brand-panel px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#3a3a3a] hover:border-brand-border-light hover:bg-[rgba(200,151,31,0.02)] focus:border-brand-gold focus:bg-[rgba(200,151,31,0.05)] focus:ring-2 focus:ring-brand-gold/10 disabled:cursor-not-allowed disabled:bg-brand-panel-light disabled:opacity-50"
+								className="min-h-[120px] w-full resize-y rounded-md border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#3a3a3a] hover:border-white/10 hover:bg-[rgba(200,151,31,0.02)] focus:border-brand-gold focus:bg-[rgba(200,151,31,0.05)] focus:ring-2 focus:ring-brand-gold/10 disabled:cursor-not-allowed disabled:bg-white/5-light disabled:opacity-50"
 								placeholder="Rejection reason..."
 								value={approvalState.notes}
 								onChange={(e) =>

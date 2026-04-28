@@ -7,131 +7,124 @@ export default function Contact() {
 		phone: "",
 		message: "",
 	});
+
 	const handleContactSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		console.log("Contact form submitted:", formData);
-		alert("Thank you for reaching out! We'll contact you within 24 hours.");
+		alert(
+			"Thank you. Our team will get back to you within one business day.",
+		);
 		setFormData({ name: "", email: "", phone: "", message: "" });
 	};
-	const primaryBtnClass =
-		"inline-block border-0 bg-brand-gold px-8 py-3.5 text-[0.85rem] font-semibold uppercase tracking-[0.1em] text-brand-black transition duration-200 hover:-translate-y-0.5 hover:bg-brand-gold-light hover:shadow-glow";
 
-	const sectionLabelClass =
-		"mb-4 text-xs uppercase tracking-[0.2em] text-brand-gold";
 	return (
-		<section className="bg-[#111111] px-4 py-24 md:px-[5vw]" id="contact">
-			<div className="mx-auto mb-16 max-w-[600px] text-center">
-				<div className={sectionLabelClass}>Get In Touch</div>
-				<h2 className="mb-4 font-serif text-4xl font-bold leading-[1.2] md:text-5xl">
-					Let's Build Your Dream
-					<br />
-					Together
-				</h2>
-				<p className="text-[0.95rem] text-brand-muted-light">
-					We respond within 24 hours. No missed opportunities — just
-					real conversations about your future home.
-				</p>
-			</div>
+		<section className="px-4 pb-24 pt-20 md:px-8" id="contact">
+			<div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+				<div className="rounded-2xl border border-white/10 bg-[linear-gradient(170deg,rgba(9,16,26,0.95)_0%,rgba(17,30,47,0.92)_100%)] p-7 md:p-10">
+					<div className="text-[11px] uppercase tracking-[0.18em] text-[#c9aa72]">
+						Start Your Project
+					</div>
+					<h2 className="mt-3 font-serif text-[clamp(2rem,3.5vw,3rem)] text-[#f5efe3]">
+						Speak with Our Construction Team
+					</h2>
+					<p className="mt-4 max-w-[620px] text-[0.97rem] leading-8 text-[#b9c6d8]">
+						Share your site location, scope, and expected timeline.
+						We will schedule a focused consultation and provide a
+						practical execution roadmap.
+					</p>
 
-			<div className="mx-auto grid max-w-[1000px] grid-cols-1 gap-12 md:grid-cols-2">
-				<div>
-					<h3 className="mb-6 text-[1.2rem]">Send Us a Message</h3>
 					<form
 						onSubmit={handleContactSubmit}
-						className="flex flex-col gap-4"
+						className="mt-8 space-y-4"
 					>
 						<input
 							type="text"
-							className="border border-[#333] bg-brand-panel px-3.5 py-3 text-[0.9rem] text-white transition placeholder:text-[#666] focus:border-brand-gold focus:bg-[#252525] focus:outline-none"
-							placeholder="Your Name"
+							placeholder="Full Name"
+							className="w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-[#f0f4fb] placeholder:text-[#8f9db3] outline-none transition focus:border-[#d8bc8f]/50"
 							value={formData.name}
 							onChange={(e) =>
-								setFormData({
-									...formData,
+								setFormData((prev) => ({
+									...prev,
 									name: e.target.value,
-								})
+								}))
 							}
 							required
 						/>
 						<input
 							type="email"
-							className="border border-[#333] bg-brand-panel px-3.5 py-3 text-[0.9rem] text-white transition placeholder:text-[#666] focus:border-brand-gold focus:bg-[#252525] focus:outline-none"
-							placeholder="Your Email"
+							placeholder="Email Address"
+							className="w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-[#f0f4fb] placeholder:text-[#8f9db3] outline-none transition focus:border-[#d8bc8f]/50"
 							value={formData.email}
 							onChange={(e) =>
-								setFormData({
-									...formData,
+								setFormData((prev) => ({
+									...prev,
 									email: e.target.value,
-								})
+								}))
 							}
 							required
 						/>
 						<input
 							type="tel"
-							className="border border-[#333] bg-brand-panel px-3.5 py-3 text-[0.9rem] text-white transition placeholder:text-[#666] focus:border-brand-gold focus:bg-[#252525] focus:outline-none"
-							placeholder="Your Phone"
+							placeholder="Phone Number"
+							className="w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-[#f0f4fb] placeholder:text-[#8f9db3] outline-none transition focus:border-[#d8bc8f]/50"
 							value={formData.phone}
 							onChange={(e) =>
-								setFormData({
-									...formData,
+								setFormData((prev) => ({
+									...prev,
 									phone: e.target.value,
-								})
+								}))
 							}
 						/>
 						<textarea
-							className="min-h-[120px] resize-y border border-[#333] bg-brand-panel px-3.5 py-3 text-[0.9rem] text-white transition placeholder:text-[#666] focus:border-brand-gold focus:bg-[#252525] focus:outline-none"
-							placeholder="Tell us about your dream..."
+							placeholder="Project requirements"
+							className="min-h-[140px] w-full resize-y rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-[#f0f4fb] placeholder:text-[#8f9db3] outline-none transition focus:border-[#d8bc8f]/50"
 							value={formData.message}
 							onChange={(e) =>
-								setFormData({
-									...formData,
+								setFormData((prev) => ({
+									...prev,
 									message: e.target.value,
-								})
+								}))
 							}
 							required
-						></textarea>
-						<button type="submit" className={primaryBtnClass}>
-							Send Message
+						/>
+						<button
+							type="submit"
+							className="inline-flex h-12 items-center justify-center rounded-md border border-[#d8bc8f]/40 bg-[linear-gradient(90deg,#dac195_0%,#b3833f_100%)] px-6 text-[12px] font-semibold uppercase tracking-[0.14em] text-[#111a27] transition hover:brightness-110"
+						>
+							Request Consultation
 						</button>
 					</form>
 				</div>
 
-				<div className="flex flex-col gap-6">
-					<div>
-						<h4 className="mb-2 text-base font-semibold">
-							📍 Address
-						</h4>
-						<p className="text-[0.9rem] leading-[1.6] text-brand-muted-light">
-							Hyderabad, Telangana
-							<br />
-							India
-						</p>
-					</div>
-					<div>
-						<h4 className="mb-2 text-base font-semibold">
-							📞 Phone
-						</h4>
-						<p className="text-[0.9rem] leading-[1.6] text-brand-muted-light">
-							+91 95 9999 8888
-						</p>
-					</div>
-					<div>
-						<h4 className="mb-2 text-base font-semibold">
-							✉️ Email
-						</h4>
-						<p className="text-[0.9rem] leading-[1.6] text-brand-muted-light">
-							hello@rjshomes.com
-						</p>
-					</div>
-					<div>
-						<h4 className="mb-2 text-base font-semibold">
-							🕐 Hours
-						</h4>
-						<p className="text-[0.9rem] leading-[1.6] text-brand-muted-light">
-							Mon – Fri: 9 AM – 6 PM
-							<br />
-							Sat: 10 AM – 4 PM
-						</p>
+				<div className="rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(17,30,46,0.95)_0%,rgba(14,24,38,0.95)_100%)] p-7 md:p-10">
+					<h3 className="font-serif text-3xl text-[#f5efe3]">
+						Head Office
+					</h3>
+					<div className="mt-6 space-y-6 text-sm leading-7 text-[#c2cfde]">
+						<div>
+							<div className="text-[11px] uppercase tracking-[0.14em] text-[#d8bc8f]">
+								Address
+							</div>
+							<div>Hyderabad, Telangana, India</div>
+						</div>
+						<div>
+							<div className="text-[11px] uppercase tracking-[0.14em] text-[#d8bc8f]">
+								Phone
+							</div>
+							<div>+91 95 9999 8888</div>
+						</div>
+						<div>
+							<div className="text-[11px] uppercase tracking-[0.14em] text-[#d8bc8f]">
+								Email
+							</div>
+							<div>hello@rjshomes.com</div>
+						</div>
+						<div>
+							<div className="text-[11px] uppercase tracking-[0.14em] text-[#d8bc8f]">
+								Working Hours
+							</div>
+							<div>Mon - Fri: 9:00 AM - 6:00 PM</div>
+							<div>Sat: 10:00 AM - 4:00 PM</div>
+						</div>
 					</div>
 				</div>
 			</div>
