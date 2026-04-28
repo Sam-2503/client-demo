@@ -1,5 +1,5 @@
-export { authService } from './services/auth'
-export { projectService } from './services/projects'
-export { updateService } from './services/updates'
-export { materialService } from './services/materials'
-export { userService } from './services/users'
+export { authService } from "./services/auth";
+export { projectService } from "./services/projects";
+export { updateService } from "./services/updates";
+export { materialService } from "./services/materials";
+export { userService } from "./services/users";

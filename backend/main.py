@@ -11,6 +11,7 @@ from database import Base, engine
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from core.cloudinary_config import init_cloudinary
+from sqlalchemy import inspect, text
 
 # Import routers
 from routers.auth import router as auth_router
@@ -30,6 +31,26 @@ else:
 
 # ── Create all tables in Neon.tech on startup ────────────────────────────────
 Base.metadata.create_all(bind=engine)
+
+
+def ensure_project_creator_column() -> None:
+    inspector = inspect(engine)
+    project_columns = {column["name"] for column in inspector.get_columns("projects")}
+
+    if "created_by_id" not in project_columns:
+        with engine.begin() as connection:
+            connection.execute(text("ALTER TABLE projects ADD COLUMN created_by_id UUID"))
+            connection.execute(
+                text(
+                    "UPDATE projects SET created_by_id = builder_id WHERE created_by_id IS NULL"
+                )
+            )
+            connection.execute(
+                text("ALTER TABLE projects ALTER COLUMN created_by_id SET NOT NULL")
+            )
+
+
+ensure_project_creator_column()
 print("✅ Database tables ready")
 
 # ── App init ──────────────────────────────────────────────────────────────────

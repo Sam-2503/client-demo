@@ -8,6 +8,7 @@ from models.project import Project
 from models.user import User, UserRole
 from schemas.project import ProjectCreate, ProjectOut, ProjectUpdate
 from sqlalchemy.orm import Session
+from sqlalchemy import or_
 
 router = APIRouter(prefix="/api/projects", tags=["Projects"])
 
@@ -30,7 +31,11 @@ def create_project(
     
     # Remove builder_id from payload dict since we're setting it explicitly
     project_data = payload.model_dump(exclude={'builder_id'})
-    project = Project(**project_data, builder_id=builder_id)
+    project = Project(
+        **project_data,
+        builder_id=builder_id,
+        created_by_id=current_user.id,
+    )
     
     db.add(project)
     db.commit()
@@ -43,8 +48,15 @@ def get_projects(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    if current_user.role in (UserRole.admin, UserRole.builder):
+    if current_user.role == UserRole.admin:
         return db.query(Project).all()
+    if current_user.role == UserRole.builder:
+        return db.query(Project).filter(
+            or_(
+                Project.builder_id == current_user.id,
+                Project.created_by_id == current_user.id,
+            )
+        ).all()
     return db.query(Project).filter(Project.client_id == current_user.id).all()
 
 
@@ -70,7 +82,7 @@ def get_project(
     
     # Builders can see their own projects
     if current_user.role == UserRole.builder:
-        if project.builder_id != current_user.id:
+        if project.builder_id != current_user.id and project.created_by_id != current_user.id:
             raise HTTPException(status_code=403, detail="Access denied")
         return project
     

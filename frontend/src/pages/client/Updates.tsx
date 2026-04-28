@@ -1,193 +1,166 @@
 import { useEffect, useState } from "react";
 import api from "../../api/client";
 import { useToast } from "../../components/Toast";
-import type {
-  Update,
-  WorkCategory,
-} from "../../types";
+import type { Update, WorkCategory } from "../../types";
 
 const CATS: { v: WorkCategory; l: string }[] = [
-  { v: "foundation", l: "🏗 Foundation" },
-  { v: "framing", l: "🪵 Framing" },
-  { v: "roofing", l: "🏠 Roofing" },
-  { v: "plumbing", l: "💧 Plumbing" },
-  { v: "electrical", l: "⚡ Electrical" },
-  { v: "painting", l: "🎨 Painting" },
-  { v: "flooring", l: "🪨 Flooring" },
-  { v: "windows_doors", l: "🚪 Windows & Doors" },
-  { v: "finishing", l: "✨ Finishing" },
-  { v: "other", l: "📋 Other" },
+	{ v: "foundation", l: "Foundation" },
+	{ v: "framing", l: "Framing" },
+	{ v: "roofing", l: "Roofing" },
+	{ v: "plumbing", l: "Plumbing" },
+	{ v: "electrical", l: "Electrical" },
+	{ v: "painting", l: "Painting" },
+	{ v: "flooring", l: "Flooring" },
+	{ v: "windows_doors", l: "Windows & Doors" },
+	{ v: "finishing", l: "Finishing" },
+	{ v: "other", l: "Other" },
 ];
 
-const CAT_IC: Record<WorkCategory, string> = {
-  foundation: "🏗",
-  framing: "🪵",
-  roofing: "🏠",
-  plumbing: "💧",
-  electrical: "⚡",
-  painting: "🎨",
-  flooring: "🪨",
-  windows_doors: "🚪",
-  finishing: "✨",
-  other: "📋",
-};
-
 export default function ClientUpdates() {
-  const [recentUpdates, setRecentUpdates] = useState<Update[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [categoryFilter, setCategoryFilter] = useState<WorkCategory | 'all'>(
-    'all',
-  );
-  const toast = useToast();
+	const [recentUpdates, setRecentUpdates] = useState<Update[]>([]);
+	const [loading, setLoading] = useState(true);
+	const [categoryFilter, setCategoryFilter] = useState<WorkCategory | "all">(
+		"all",
+	);
+	const toast = useToast();
 
-  useEffect(() => {
-    const load = async () => {
-      setLoading(true);
-      try {
-        const response = await api.get<Update[]>('/api/updates');
-        setRecentUpdates(response.data);
-      } catch {
-        toast('Failed to load updates');
-      } finally {
-        setLoading(false);
-      }
-    };
+	useEffect(() => {
+		const load = async () => {
+			setLoading(true);
+			try {
+				const response = await api.get<Update[]>("/api/updates");
+				setRecentUpdates(response.data);
+			} catch {
+				toast("Failed to load updates");
+			} finally {
+				setLoading(false);
+			}
+		};
 
-    load();
-  }, []);
+		load();
+	}, []);
 
-  const filteredUpdates = recentUpdates.filter((u) => {
-    if (categoryFilter !== 'all') {
-      return u.category === categoryFilter;
-    }
-    return true;
-  });
+	const filteredUpdates = recentUpdates.filter((u) => {
+		if (categoryFilter !== "all") {
+			return u.category === categoryFilter;
+		}
+		return true;
+	});
 
-  return (
-    <>
-      {/* Topbar */}
-      <div className="topbar">
-        <div className="tb-title">Project Updates</div>
-        <div className="tb-right">
-          <span className="badge b-active">View Only</span>
-        </div>
-      </div>
+	return (
+		<div className="flex flex-col gap-6 px-6 py-8 animate-fade-up">
+			<div className="border-b border-white/10 bg-[linear-gradient(160deg,rgba(10,18,28,0.4)_0%,rgba(16,31,48,0.4)_100%)] mb-2 px-0 py-6 backdrop-blur-sm">
+				<div className="font-serif text-3xl font-semibold text-[#f5efe2]">
+					Project Updates
+				</div>
+				<p className="mt-1 text-sm text-[#a9b7c8]">
+					View-only project progress updates
+				</p>
+			</div>
 
-      <div className="content fade-up">
-        {/* Filter Card */}
-        <div className="card" style={{ marginBottom: 16 }}>
-          <div className="sh" style={{ marginBottom: 12 }}>
-            <div className="st">Filter Updates</div>
-          </div>
-          <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
-            <div style={{ flex: 1 }}>
-              <label className="fl" style={{ marginBottom: 8 }}>
-                Work Category
-              </label>
-              <select
-                className="fi-sel"
-                value={categoryFilter}
-                onChange={(e) =>
-                  setCategoryFilter(e.target.value as WorkCategory | 'all')
-                }
-              >
-                <option value="all">All Categories</option>
-                {CATS.map((c) => (
-                  <option key={c.v} value={c.v}>
-                    {c.l}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </div>
+			<div className="flex flex-col gap-6">
+				<div className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] p-5 backdrop-blur-sm">
+					<div className="mb-4 border-b border-white/10 pb-4 font-serif text-lg font-semibold text-[#f5efe2]">
+						Filter Updates
+					</div>
+					<div>
+						<label
+							htmlFor="category-filter"
+							className="mb-3 block text-sm font-semibold uppercase tracking-[0.1em] text-[#a9b7c8]"
+						>
+							Work Category
+						</label>
+						<select
+							id="category-filter"
+							className="w-full rounded-xl border border-white/10 bg-[rgba(13,38,58,0.5)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#a9b7c8] focus:border-[#d8bc8f]/35 focus:bg-[rgba(13,38,58,0.7)]"
+							value={categoryFilter}
+							onChange={(e) =>
+								setCategoryFilter(
+									e.target.value as WorkCategory | "all",
+								)
+							}
+						>
+							<option value="all">All Categories</option>
+							{CATS.map((c) => (
+								<option key={c.v} value={c.v}>
+									{c.l}
+								</option>
+							))}
+						</select>
+					</div>
+				</div>
 
-        {/* Updates Feed */}
-        {loading ? (
-          <div className="empty">
-            <div className="empty-ic">⏳</div>
-            <div className="empty-tx">Loading updates…</div>
-          </div>
-        ) : filteredUpdates.length === 0 ? (
-          <div className="empty">
-            <div className="empty-ic">📝</div>
-            <div className="empty-tx">No updates available yet</div>
-            <div
-              style={{
-                fontSize: '.75rem',
-                color: 'var(--gray)',
-                marginTop: 8,
-              }}
-            >
-              Check back soon for project progress
-            </div>
-          </div>
-        ) : (
-          <div className="feed">
-            {filteredUpdates.map((u) => (
-              <div
-                key={u.id}
-                className={`fi ${u.progress_percentage >= 100 ? 'fi-green' : 'fi-gold'}`}
-              >
-                <div className="fi-ic">{CAT_IC[u.category]}</div>
-                <div style={{ flex: 1 }}>
-                  <div className="fi-ti">{u.title}</div>
-                  {u.description && (
-                    <div
-                      className="fi-de"
-                      style={{
-                        display: '-webkit-box',
-                        WebkitLineClamp: 3,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden',
-                      }}
-                    >
-                      {u.description}
-                    </div>
-                  )}
-                  <div
-                    style={{
-                      display: 'flex',
-                      gap: 8,
-                      marginTop: 5,
-                      flexWrap: 'wrap',
-                    }}
-                  >
-                    <span
-                      className="badge b-pend"
-                      style={{ fontSize: '.58rem' }}
-                    >
-                      {u.category.replace('_', ' ')}
-                    </span>
-                    <span
-                      style={{ fontSize: '.7rem', color: 'var(--gold)' }}
-                    >
-                      Progress: {u.progress_percentage}%
-                    </span>
-                    {u.photo_urls.length > 0 && (
-                      <span
-                        style={{ fontSize: '.7rem', color: 'var(--blue)' }}
-                      >
-                        📸 {u.photo_urls.length} photo
-                        {u.photo_urls.length > 1 ? 's' : ''}
-                      </span>
-                    )}
-                  </div>
-                  <div className="fi-tm">
-                    {new Date(u.created_at).toLocaleString('en-IN', {
-                      day: '2-digit',
-                      month: 'short',
-                      year: 'numeric',
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    </>
-  );
+				{loading ? (
+					<div className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] px-8 py-12 text-center backdrop-blur-sm">
+						<div className="text-sm text-[#a9b7c8]">
+							Loading updates…
+						</div>
+					</div>
+				) : filteredUpdates.length === 0 ? (
+					<div className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] px-8 py-12 text-center backdrop-blur-sm">
+						<div className="text-sm text-[#a9b7c8]">
+							No updates available yet
+						</div>
+						<div className="mt-2 text-xs text-[#7a8894]">
+							Check back soon for project progress
+						</div>
+					</div>
+				) : (
+					<div className="flex flex-col gap-4">
+						{filteredUpdates.map((u) => {
+							const isComplete = u.progress_percentage >= 100;
+							return (
+								<div
+									key={u.id}
+									className={`flex gap-4 rounded-2xl border p-5 backdrop-blur-sm ${
+										isComplete
+											? "border-[#69c58a]/30 bg-[rgba(105,197,138,0.08)]"
+											: "border-[#d8bc8f]/30 bg-[rgba(216,188,143,0.08)]"
+									}`}
+								>
+									<div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-white/5 text-sm font-medium text-[#d8bc8f]">
+										●
+									</div>
+									<div className="min-w-0 flex-1">
+										<div className="font-serif text-lg font-semibold text-white">
+											{u.title}
+										</div>
+										{u.description && (
+											<div className="line-clamp-2 mt-1 text-sm leading-6 text-[#a9b7c8]">
+												{u.description}
+											</div>
+										)}
+										<div className="mt-3 flex flex-wrap gap-2 text-xs">
+											<span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-medium uppercase tracking-[0.05em] text-[#c0ccd8]">
+												{u.category.replace("_", " ")}
+											</span>
+											<span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-medium text-[#d8bc8f]">
+												{u.progress_percentage}% complete
+											</span>
+											{u.photo_urls.length > 0 && (
+												<span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-medium text-[#5dade2]">
+													{u.photo_urls.length} {u.photo_urls.length > 1 ? "photos" : "photo"}
+												</span>
+											)}
+										</div>
+										<div className="mt-3 text-xs text-[#7a8894]">
+											{new Date(
+												u.created_at,
+											).toLocaleString("en-IN", {
+												day: "2-digit",
+												month: "short",
+												year: "numeric",
+												hour: "2-digit",
+												minute: "2-digit",
+											})}
+										</div>
+									</div>
+								</div>
+							);
+						})}
+					</div>
+				)}
+			</div>
+		</div>
+	);
 }
