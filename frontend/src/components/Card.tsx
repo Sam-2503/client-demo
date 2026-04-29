@@ -19,20 +19,20 @@ export default function Card({
 	return (
 		<div
 			className={cn(
-				"overflow-hidden rounded-lg border border-brand-border bg-brand-card transition",
+				"overflow-hidden rounded-lg border border-black/10 bg-[rgba(224,234,242,0.3)] transition",
 				hoverable &&
-					"cursor-pointer hover:border-brand-gold hover:bg-[#1a1a1a] hover:shadow-[0_4px_16px_rgba(200,151,31,0.15)] active:-translate-y-0.5 active:shadow-[0_6px_20px_rgba(200,151,31,0.2)]",
+					"cursor-pointer hover:border-black/20 hover:bg-[rgba(224,234,242,0.5)] hover:shadow-[0_4px_16px_rgba(31,42,52,0.08)] active:-translate-y-0.5 active:shadow-[0_6px_20px_rgba(31,42,52,0.1)]",
 				className,
 			)}
 		>
 			{header && (
-				<div className="border-b border-brand-border bg-[rgba(200,151,31,0.03)] p-4">
+				<div className="border-b border-black/10 bg-[#f8fafb] p-4">
 					{header}
 				</div>
 			)}
 			<div className="p-4">{children}</div>
 			{footer && (
-				<div className="border-t border-brand-border bg-[rgba(255,255,255,0.02)] p-4">
+				<div className="border-t border-black/10 bg-[#f8fafb] p-4">
 					{footer}
 				</div>
 			)}

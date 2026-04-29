@@ -21,7 +21,7 @@ export default function QueryList({
 		return (
 			<div className="flex flex-col gap-5">
 				<Card>
-					<div className="flex flex-col items-center justify-center px-8 py-12 text-center text-brand-muted-light">
+					<div className="flex flex-col items-center justify-center px-8 py-12 text-center text-[#5d6a78]">
 						Loading questions...
 					</div>
 				</Card>
@@ -35,10 +35,10 @@ export default function QueryList({
 				<Card>
 					<div className="flex flex-col items-center justify-center gap-4 px-8 py-12 text-center">
 						<div className="text-5xl leading-none">💬</div>
-						<div className="font-serif text-lg font-semibold text-white">
+						<div className="font-serif text-lg font-semibold text-[#1f2a34]">
 							No questions yet
 						</div>
-						<div className="text-sm text-brand-muted-light">
+						<div className="text-sm text-[#5d6a78]">
 							Ask your first question above
 						</div>
 					</div>
@@ -56,11 +56,11 @@ export default function QueryList({
 					onClick={() => onSelect?.(query)}
 				>
 					<Card
-						className="cursor-pointer border-brand-border-light bg-brand-card p-4"
+						className="cursor-pointer border-black/10 bg-[rgba(224,234,242,0.3)] p-4"
 						hoverable={!!onSelect}
 					>
 						<div className="mb-4 flex items-start justify-between gap-3 max-md:flex-col">
-							<h3 className="font-serif text-lg font-semibold text-white max-md:text-base">
+							<h3 className="font-serif text-lg font-semibold text-[#1f2a34] max-md:text-base">
 								{query.question}
 							</h3>
 							<Badge status={STATUS_BADGE[query.status]}>
@@ -69,17 +69,17 @@ export default function QueryList({
 						</div>
 
 						{query.answer && (
-							<div className="my-4 rounded-sm border-l-4 border-brand-gold bg-brand-panel-light p-4">
-								<div className="mb-1 text-sm font-semibold uppercase tracking-[0.05em] text-brand-gold">
+							<div className="my-4 rounded-sm border-l-4 border-[#c7ced6] bg-[#f8fafb] p-4">
+								<div className="mb-1 text-sm font-semibold uppercase tracking-[0.05em] text-[#5d6a78]">
 									Response from builder:
 								</div>
-								<div className="text-base leading-6 text-white">
+								<div className="text-base leading-6 text-[#1f2a34]">
 									{query.answer}
 								</div>
 							</div>
 						)}
 
-						<div className="mt-4 flex gap-3 border-t border-brand-border pt-4 text-sm text-brand-muted">
+						<div className="mt-4 flex gap-3 border-t border-black/10 pt-4 text-sm text-[#5d6a78]">
 							<span className="flex items-center">
 								{new Date(
 									query.created_at,

@@ -83,8 +83,8 @@ export default function BuilderMaterials() {
 	return (
 		<>
 			{/* Topbar */}
-			<div className="flex items-center justify-between border-b border-white/10 bg-[rgba(13,38,58,0.3)] px-6 py-4">
-				<div className="font-serif text-2xl font-semibold text-white">
+			<div className="flex items-center justify-between border-b border-black/10 bg-[rgba(224,234,242,0.3)] px-6 py-4">
+				<div className="font-serif text-2xl font-semibold text-[#1f2a34]">
 					Materials Inventory
 				</div>
 				<div className="flex items-center gap-2">
@@ -99,8 +99,8 @@ export default function BuilderMaterials() {
 
 			<div className="animate-fade-up space-y-4 px-6 py-6">
 				{/* Filters */}
-				<div className="rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] p-4">
-					<div className="mb-3 text-sm font-semibold uppercase tracking-[0.1em] text-[#a9b7c8]">
+				<div className="rounded-md border border-black/10 bg-[rgba(224,234,242,0.3)] p-4">
+					<div className="mb-3 text-sm font-semibold uppercase tracking-[0.1em] text-[#5d6a78]">
 						Filter & Sort
 					</div>
 					<div className="grid grid-cols-1 gap-4 lg:grid-cols-[220px_220px_1fr]">
@@ -109,7 +109,7 @@ export default function BuilderMaterials() {
 								Material Type
 							</label>
 							<select
-								className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+								className="w-full border-b-2 border-black/10 bg-black/5 px-3 py-2 text-sm text-[#1f2a34] outline-none transition focus:border-brand-gold"
 								value={typeFilter}
 								onChange={(e) =>
 									setTypeFilter(
@@ -131,7 +131,7 @@ export default function BuilderMaterials() {
 								Sort By
 							</label>
 							<select
-								className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+								className="w-full border-b-2 border-black/10 bg-black/5 px-3 py-2 text-sm text-[#1f2a34] outline-none transition focus:border-brand-gold"
 								value={sortBy}
 								onChange={(e) =>
 									setSortBy(
@@ -153,7 +153,7 @@ export default function BuilderMaterials() {
 								Search Project
 							</label>
 							<input
-								className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+								className="w-full border-b-2 border-black/10 bg-black/5 px-3 py-2 text-sm text-[#1f2a34] outline-none transition focus:border-brand-gold"
 								placeholder="Search by project ID…"
 								value={projectFilter}
 								onChange={(e) =>
@@ -166,25 +166,25 @@ export default function BuilderMaterials() {
 
 				{/* Materials table */}
 				{loading ? (
-					<div className="rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] p-10 text-center">
+					<div className="rounded-md border border-black/10 bg-[rgba(224,234,242,0.3)] p-10 text-center">
 						<div className="mb-2 text-3xl">⏳</div>
-						<div className="text-sm text-[#a9b7c8]">
+						<div className="text-sm text-[#5d6a78]">
 							Loading materials…
 						</div>
 					</div>
 				) : filteredMaterials.length === 0 ? (
-					<div className="rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] p-10 text-center">
+					<div className="rounded-md border border-black/10 bg-[rgba(224,234,242,0.3)] p-10 text-center">
 						<div className="mb-2 text-3xl">🪵</div>
-						<div className="text-sm text-[#a9b7c8]">
+						<div className="text-sm text-[#5d6a78]">
 							No materials found
 						</div>
 					</div>
 				) : (
-					<div className="overflow-hidden rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)]">
+					<div className="overflow-hidden rounded-md border border-black/10 bg-[rgba(224,234,242,0.3)]">
 						<div style={{ overflowX: "auto" }}>
 							<table className="min-w-full text-left text-sm">
 								<thead>
-									<tr className="border-b border-white/10 bg-white/5 text-xs uppercase tracking-[0.08em] text-[#a9b7c8]">
+									<tr className="border-b border-black/10 bg-black/5 text-xs uppercase tracking-[0.08em] text-[#5d6a78]">
 										<th>Material Name</th>
 										<th>Type</th>
 										<th>Quantity</th>
@@ -204,13 +204,13 @@ export default function BuilderMaterials() {
 													`/builder/projects/${m.project_id}`,
 												)
 											}
-											className="cursor-pointer border-b border-white/10/50 text-[#a9b7c8] transition hover:bg-white/5"
+											className="cursor-pointer border-b border-black/10/50 text-[#5d6a78] transition hover:bg-black/5"
 										>
-											<td className="px-3 py-2 font-medium text-white">
+											<td className="px-3 py-2 font-medium text-[#1f2a34]">
 												{m.name}
 											</td>
 											<td>
-												<span className="rounded bg-white/5-light px-2 py-0.5 text-[0.58rem] uppercase text-[#a9b7c8]">
+												<span className="rounded bg-black/5-light px-2 py-0.5 text-[0.58rem] uppercase text-[#5d6a78]">
 													{m.material_type.replace(
 														"_",
 														" ",
@@ -244,7 +244,7 @@ export default function BuilderMaterials() {
 								</tbody>
 							</table>
 						</div>
-						<div className="flex items-center justify-between border-t border-white/10 px-4 py-3">
+						<div className="flex items-center justify-between border-t border-black/10 px-4 py-3">
 							<span className="text-xs text-[#888888]">
 								{filteredMaterials.length} material
 								{filteredMaterials.length !== 1 ? "s" : ""}

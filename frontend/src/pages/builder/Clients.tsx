@@ -60,8 +60,8 @@ export default function BuilderClients() {
 	return (
 		<>
 			{/* Topbar */}
-			<div className="flex items-center justify-between border-b border-white/10 bg-[rgba(13,38,58,0.3)] px-6 py-4">
-				<div className="font-serif text-2xl font-semibold text-white">
+			<div className="flex items-center justify-between border-b border-black/10 bg-[rgba(224,234,242,0.3)] px-6 py-4">
+				<div className="font-serif text-2xl font-semibold text-[#1f2a34]">
 					Clients
 				</div>
 				<div className="text-xs text-[#888888]">
@@ -71,11 +71,11 @@ export default function BuilderClients() {
 
 			<div className="animate-fade-up space-y-4 px-6 py-6">
 				{/* Search */}
-				<div className="rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] p-4">
+				<div className="rounded-md border border-black/10 bg-[rgba(224,234,242,0.3)] p-4">
 					<div className="flex items-center gap-3">
 						<span className="text-xs text-[#888888]">🔍</span>
 						<input
-							className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-brand-gold"
+							className="w-full border-b-2 border-black/10 bg-black/5 px-3 py-2 text-sm text-[#1f2a34] outline-none transition focus:border-brand-gold"
 							placeholder="Search by name or email…"
 							value={searchTerm}
 							onChange={(e) => setSearchTerm(e.target.value)}
@@ -85,25 +85,25 @@ export default function BuilderClients() {
 
 				{/* Clients list */}
 				{loading ? (
-					<div className="rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] p-10 text-center">
+					<div className="rounded-md border border-black/10 bg-[rgba(224,234,242,0.3)] p-10 text-center">
 						<div className="mb-2 text-3xl">⏳</div>
-						<div className="text-sm text-[#a9b7c8]">
+						<div className="text-sm text-[#5d6a78]">
 							Loading clients…
 						</div>
 					</div>
 				) : filteredClients.length === 0 ? (
-					<div className="rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] p-10 text-center">
+					<div className="rounded-md border border-black/10 bg-[rgba(224,234,242,0.3)] p-10 text-center">
 						<div className="mb-2 text-3xl">👥</div>
-						<div className="text-sm text-[#a9b7c8]">
+						<div className="text-sm text-[#5d6a78]">
 							{searchTerm ? "No clients found" : "No clients yet"}
 						</div>
 					</div>
 				) : (
-					<div className="overflow-hidden rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)]">
+					<div className="overflow-hidden rounded-md border border-black/10 bg-[rgba(224,234,242,0.3)]">
 						<div style={{ overflowX: "auto" }}>
 							<table className="min-w-full text-left text-sm">
 								<thead>
-									<tr className="border-b border-white/10 bg-white/5 text-xs uppercase tracking-[0.08em] text-[#a9b7c8]">
+									<tr className="border-b border-black/10 bg-black/5 text-xs uppercase tracking-[0.08em] text-[#5d6a78]">
 										<th>Client Name</th>
 										<th>Email</th>
 										<th>Projects</th>
@@ -121,16 +121,16 @@ export default function BuilderClients() {
 												onClick={() =>
 													setSelectedClient(client.id)
 												}
-												className="cursor-pointer border-b border-white/10/50 text-[#a9b7c8] transition hover:bg-white/5"
+												className="cursor-pointer border-b border-black/10/50 text-[#5d6a78] transition hover:bg-black/5"
 											>
-												<td className="px-3 py-2 font-medium text-white">
+												<td className="px-3 py-2 font-medium text-[#1f2a34]">
 													{client.full_name}
 												</td>
 												<td className="px-3 py-2 text-xs">
 													{client.email}
 												</td>
 												<td>
-													<span className="inline-block rounded bg-white/5-light px-2 py-1 text-[0.7rem] font-medium text-brand-gold">
+													<span className="inline-block rounded bg-black/5-light px-2 py-1 text-[0.7rem] font-medium text-brand-gold">
 														{projectCount} project
 														{projectCount !== 1
 															? "s"
@@ -169,7 +169,7 @@ export default function BuilderClients() {
 
 				{/* Client details panel */}
 				{selectedClient && (
-					<div className="rounded-md border border-white/10 border-l-4 border-l-brand-gold bg-[rgba(13,38,58,0.3)] p-4">
+					<div className="rounded-md border border-black/10 border-l-4 border-l-brand-gold bg-[rgba(224,234,242,0.3)] p-4">
 						{(() => {
 							const client = clients.find(
 								(c) => c.id === selectedClient,
@@ -188,7 +188,7 @@ export default function BuilderClients() {
 								<>
 									<div className="mb-4 flex items-start justify-between">
 										<div>
-											<div className="mb-2 text-base font-semibold text-white">
+											<div className="mb-2 text-base font-semibold text-[#1f2a34]">
 												{client.full_name}
 											</div>
 											<div className="text-xs text-[#888888]">
@@ -196,7 +196,7 @@ export default function BuilderClients() {
 											</div>
 										</div>
 										<button
-											className="rounded border border-white/10 px-3 py-2 text-xs font-medium text-[#a9b7c8] transition hover:border-brand-gold hover:text-brand-gold"
+											className="rounded border border-black/10 px-3 py-2 text-xs font-medium text-[#5d6a78] transition hover:border-brand-gold hover:text-brand-gold"
 											onClick={() =>
 												setSelectedClient(null)
 											}
@@ -206,7 +206,7 @@ export default function BuilderClients() {
 									</div>
 
 									{/* Client stats */}
-									<div className="mb-4 grid grid-cols-3 gap-3 border-b border-white/10 pb-4">
+									<div className="mb-4 grid grid-cols-3 gap-3 border-b border-black/10 pb-4">
 										<div className="text-center">
 											<div className="font-serif text-2xl text-brand-gold">
 												{clientProjects.length}
@@ -253,10 +253,10 @@ export default function BuilderClients() {
 																`/builder/projects/${p.id}`,
 															)
 														}
-														className="flex items-center justify-between rounded bg-white/5-light p-3 transition hover:bg-white/5"
+														className="flex items-center justify-between rounded bg-black/5-light p-3 transition hover:bg-black/5"
 													>
 														<div>
-															<div className="mb-1 text-[0.78rem] font-medium text-white">
+															<div className="mb-1 text-[0.78rem] font-medium text-[#1f2a34]">
 																{p.name}
 															</div>
 															<div className="text-[0.7rem] text-[#888888]">

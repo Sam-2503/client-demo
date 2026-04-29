@@ -123,11 +123,25 @@ export default function Login() {
 
 			navigate(result.role === "client" ? "/client" : "/builder");
 		} catch (error: any) {
-			setErr(
-				error?.response?.data?.detail ||
-					error?.message ||
-					"Something went wrong",
-			);
+			console.error("Submit error:", error);
+			let errorMessage = "Something went wrong";
+
+			// Handle validation errors (array format from FastAPI)
+			if (Array.isArray(error?.response?.data?.detail)) {
+				errorMessage = error.response.data.detail
+					.map((e: any) => e.msg || e.message || "Unknown error")
+					.join(", ");
+			}
+			// Handle string detail message
+			else if (typeof error?.response?.data?.detail === "string") {
+				errorMessage = error.response.data.detail;
+			}
+			// Handle custom error message
+			else if (error?.message) {
+				errorMessage = error.message;
+			}
+
+			setErr(errorMessage || "Something went wrong");
 		}
 	};
 
@@ -244,17 +258,6 @@ export default function Login() {
 										<button
 											type="button"
 											className={`flex-1 rounded-full px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.14em] transition ${
-												mode === "login"
-													? "bg-[#1e2a35] text-white"
-													: "text-[#4f5d6a] hover:bg-black/5"
-											}`}
-											onClick={() => switchMode("login")}
-										>
-											Sign in
-										</button>
-										<button
-											type="button"
-											className={`flex-1 rounded-full px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.14em] transition ${
 												mode === "register"
 													? "bg-[#1e2a35] text-white"
 													: "text-[#4f5d6a] hover:bg-black/5"
@@ -264,6 +267,17 @@ export default function Login() {
 											}
 										>
 											Register
+										</button>
+										<button
+											type="button"
+											className={`flex-1 rounded-full px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.14em] transition ${
+												mode === "login"
+													? "bg-[#1e2a35] text-white"
+													: "text-[#4f5d6a] hover:bg-black/5"
+											}`}
+											onClick={() => switchMode("login")}
+										>
+											Sign in
 										</button>
 									</div>
 

@@ -49,30 +49,30 @@ export default function ClientUpdates() {
 
 	return (
 		<div className="flex flex-col gap-6 px-6 py-8 animate-fade-up">
-			<div className="border-b border-white/10 bg-[linear-gradient(160deg,rgba(10,18,28,0.4)_0%,rgba(16,31,48,0.4)_100%)] mb-2 px-0 py-6 backdrop-blur-sm">
-				<div className="font-serif text-3xl font-semibold text-[#f5efe2]">
+			<div className="border-b border-black/10 bg-[linear-gradient(160deg,rgba(243,247,250,0.4)_0%,rgba(238,243,246,0.4)_100%)] mb-2 px-0 py-6 backdrop-blur-sm">
+				<div className="font-serif text-3xl font-semibold text-[#1f2a34]">
 					Project Updates
 				</div>
-				<p className="mt-1 text-sm text-[#a9b7c8]">
+				<p className="mt-1 text-sm text-[#5d6a78]">
 					View-only project progress updates
 				</p>
 			</div>
 
 			<div className="flex flex-col gap-6">
-				<div className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] p-5 backdrop-blur-sm">
-					<div className="mb-4 border-b border-white/10 pb-4 font-serif text-lg font-semibold text-[#f5efe2]">
+				<div className="rounded-2xl border border-black/10 bg-[rgba(224,234,242,0.3)] p-5 backdrop-blur-sm">
+					<div className="mb-4 border-b border-black/10 pb-4 font-serif text-lg font-semibold text-[#1f2a34]">
 						Filter Updates
 					</div>
 					<div>
 						<label
 							htmlFor="category-filter"
-							className="mb-3 block text-sm font-semibold uppercase tracking-[0.1em] text-[#a9b7c8]"
+							className="mb-3 block text-sm font-semibold uppercase tracking-[0.1em] text-[#5d6a78]"
 						>
 							Work Category
 						</label>
 						<select
 							id="category-filter"
-							className="w-full rounded-xl border border-white/10 bg-[rgba(13,38,58,0.5)] px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#a9b7c8] focus:border-[#d8bc8f]/35 focus:bg-[rgba(13,38,58,0.7)]"
+							className="w-full rounded-xl border border-black/10 bg-[rgba(224,234,242,0.5)] px-4 py-3 text-sm text-[#1f2a34] outline-none transition placeholder:text-[#5d6a78] focus:border-[#fbbf24]/35 focus:bg-[rgba(224,234,242,0.7)]"
 							value={categoryFilter}
 							onChange={(e) =>
 								setCategoryFilter(
@@ -91,17 +91,17 @@ export default function ClientUpdates() {
 				</div>
 
 				{loading ? (
-					<div className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] px-8 py-12 text-center backdrop-blur-sm">
-						<div className="text-sm text-[#a9b7c8]">
+					<div className="rounded-2xl border border-black/10 bg-[rgba(224,234,242,0.3)] px-8 py-12 text-center backdrop-blur-sm">
+						<div className="text-sm text-[#5d6a78]">
 							Loading updates…
 						</div>
 					</div>
 				) : filteredUpdates.length === 0 ? (
-					<div className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] px-8 py-12 text-center backdrop-blur-sm">
-						<div className="text-sm text-[#a9b7c8]">
+					<div className="rounded-2xl border border-black/10 bg-[rgba(224,234,242,0.3)] px-8 py-12 text-center backdrop-blur-sm">
+						<div className="text-sm text-[#5d6a78]">
 							No updates available yet
 						</div>
-						<div className="mt-2 text-xs text-[#7a8894]">
+						<div className="mt-2 text-xs text-[#8b9ba9]">
 							Check back soon for project progress
 						</div>
 					</div>
@@ -114,36 +114,40 @@ export default function ClientUpdates() {
 									key={u.id}
 									className={`flex gap-4 rounded-2xl border p-5 backdrop-blur-sm ${
 										isComplete
-											? "border-[#69c58a]/30 bg-[rgba(105,197,138,0.08)]"
-											: "border-[#d8bc8f]/30 bg-[rgba(216,188,143,0.08)]"
+											? "border-[#10b981]/30 bg-[rgba(16,185,129,0.08)]"
+											: "border-[#fbbf24]/30 bg-[rgba(251,191,36,0.08)]"
 									}`}
 								>
-									<div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-white/5 text-sm font-medium text-[#d8bc8f]">
+									<div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-black/5 text-sm font-medium text-[#fbbf24]">
 										●
 									</div>
 									<div className="min-w-0 flex-1">
-										<div className="font-serif text-lg font-semibold text-white">
+										<div className="font-serif text-lg font-semibold text-[#1f2a34]">
 											{u.title}
 										</div>
 										{u.description && (
-											<div className="line-clamp-2 mt-1 text-sm leading-6 text-[#a9b7c8]">
+											<div className="line-clamp-2 mt-1 text-sm leading-6 text-[#5d6a78]">
 												{u.description}
 											</div>
 										)}
 										<div className="mt-3 flex flex-wrap gap-2 text-xs">
-											<span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-medium uppercase tracking-[0.05em] text-[#c0ccd8]">
+											<span className="rounded-full border border-black/10 bg-black/5 px-3 py-1 font-medium uppercase tracking-[0.05em] text-[#475462]">
 												{u.category.replace("_", " ")}
 											</span>
-											<span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-medium text-[#d8bc8f]">
-												{u.progress_percentage}% complete
+											<span className="rounded-full border border-black/10 bg-black/5 px-3 py-1 font-medium text-[#fbbf24]">
+												{u.progress_percentage}%
+												complete
 											</span>
 											{u.photo_urls.length > 0 && (
-												<span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-medium text-[#5dade2]">
-													{u.photo_urls.length} {u.photo_urls.length > 1 ? "photos" : "photo"}
+												<span className="rounded-full border border-black/10 bg-black/5 px-3 py-1 font-medium text-[#3b82f6]">
+													{u.photo_urls.length}{" "}
+													{u.photo_urls.length > 1
+														? "photos"
+														: "photo"}
 												</span>
 											)}
 										</div>
-										<div className="mt-3 text-xs text-[#7a8894]">
+										<div className="mt-3 text-xs text-[#8b9ba9]">
 											{new Date(
 												u.created_at,
 											).toLocaleString("en-IN", {

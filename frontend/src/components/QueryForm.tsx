@@ -45,9 +45,9 @@ export default function QueryForm({
 	};
 
 	return (
-		<Card className="mb-6 border-brand-border-light bg-brand-card">
+		<Card className="mb-6 border-black/10 bg-[rgba(224,234,242,0.3)]">
 			<form onSubmit={handleSubmit} className="flex flex-col gap-5">
-				<h3 className="font-serif text-xl font-semibold text-white">
+				<h3 className="font-serif text-xl font-semibold text-[#1f2a34]">
 					Ask a Question
 				</h3>
 
@@ -62,7 +62,7 @@ export default function QueryForm({
 				/>
 
 				{error && (
-					<div className="rounded-md border border-red-700 bg-[rgba(192,57,43,0.1)] px-4 py-3 text-sm text-red-400">
+					<div className="rounded-md border border-black/10 bg-black/5 px-4 py-3 text-sm text-[#b45309]">
 						{error}
 					</div>
 				)}

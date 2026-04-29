@@ -43,7 +43,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 	const register = async (payload: RegisterRequest): Promise<User> => {
 		setLoading(true);
 		try {
-			await api.post<any>("/api/auth/register", payload);
+			const res = await api.post<any>("/api/auth/register", payload);
+			console.log("Registration response:", res.data);
 
 			// For builders, registration returns a pending request message, not a user
 			if (payload.role === "builder") {
@@ -59,6 +60,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
 			// For clients/admins, auto-login
 			return await login(payload.email, payload.password);
+		} catch (error: any) {
+			console.error("Registration error:", error);
+			console.error("Error response:", error?.response);
+			throw error;
 		} finally {
 			setLoading(false);
 		}

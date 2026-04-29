@@ -17,14 +17,14 @@ export default function Badge({
 	size = "md",
 }: BadgeProps) {
 	const statusClass: Record<BadgeStatus, string> = {
-		done: "border-[rgba(39,174,96,0.3)] bg-[rgba(39,174,96,0.15)] text-[#27ae60] hover:border-[rgba(39,174,96,0.5)] hover:bg-[rgba(39,174,96,0.25)]",
-		active: "border-[rgba(41,128,185,0.3)] bg-[rgba(41,128,185,0.15)] text-[#2980b9] hover:border-[rgba(41,128,185,0.5)] hover:bg-[rgba(41,128,185,0.25)]",
+		done: "border-black/10 bg-[#eef3f6] text-[#475462] hover:border-black/20 hover:bg-white",
+		active: "border-black/10 bg-[#eef3f6] text-[#475462] hover:border-black/20 hover:bg-white",
 		pending:
-			"border-[rgba(230,126,34,0.3)] bg-[rgba(230,126,34,0.15)] text-[#e67e22] hover:border-[rgba(230,126,34,0.5)] hover:bg-[rgba(230,126,34,0.25)]",
+			"border-black/10 bg-[#eef3f6] text-[#475462] hover:border-black/20 hover:bg-white",
 		blocked:
-			"border-[rgba(192,57,43,0.3)] bg-[rgba(192,57,43,0.15)] text-[#c0392b] hover:border-[rgba(192,57,43,0.5)] hover:bg-[rgba(192,57,43,0.25)]",
+			"border-black/10 bg-[#eef3f6] text-[#475462] hover:border-black/20 hover:bg-white",
 		default:
-			"border-[rgba(127,140,141,0.3)] bg-[rgba(127,140,141,0.15)] text-[#7f8c8d] hover:border-[rgba(127,140,141,0.5)] hover:bg-[rgba(127,140,141,0.25)]",
+			"border-black/10 bg-[#eef3f6] text-[#475462] hover:border-black/20 hover:bg-white",
 	};
 
 	const sizeClass: Record<"sm" | "md", string> = {

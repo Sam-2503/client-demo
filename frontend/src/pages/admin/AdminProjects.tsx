@@ -54,20 +54,20 @@ export default function AdminProjects() {
 	return (
 		<div className="flex flex-col gap-6 p-6 max-md:p-4">
 			<div className="mb-2 flex flex-col gap-2">
-				<h1 className="font-serif text-[1.75rem] font-semibold text-white max-md:text-2xl">
+				<h1 className="font-serif text-[1.75rem] font-semibold text-[#1f2a34] max-md:text-2xl">
 					All Projects
 				</h1>
-				<p className="text-sm text-[#888888]">
+				<p className="text-sm text-[#5d6a78]">
 					System-wide project management
 				</p>
 			</div>
 
-			<div className="flex gap-4 border-b-2 border-white/10 max-md:gap-2 max-md:mb-1">
+			<div className="flex gap-4 border-b-2 border-black/10 max-md:gap-2 max-md:mb-1">
 				<button
 					type="button"
 					className={cn(
-						"relative -mb-px border-b-2 border-transparent px-4 py-3 text-sm font-medium text-[#888888] transition-colors duration-300 hover:text-brand-gold max-md:px-3 max-md:py-2 max-md:text-xs",
-						filter === "all" && "border-brand-gold text-brand-gold",
+						"relative -mb-px border-b-2 border-transparent px-4 py-3 text-sm font-medium text-[#5d6a78] transition-colors duration-300 hover:text-[#1f2a34] max-md:px-3 max-md:py-2 max-md:text-xs",
+						filter === "all" && "border-black/10 text-[#1f2a34]",
 					)}
 					onClick={() => setFilter("all")}
 				>
@@ -76,9 +76,8 @@ export default function AdminProjects() {
 				<button
 					type="button"
 					className={cn(
-						"relative -mb-px border-b-2 border-transparent px-4 py-3 text-sm font-medium text-[#888888] transition-colors duration-300 hover:text-brand-gold max-md:px-3 max-md:py-2 max-md:text-xs",
-						filter === "active" &&
-							"border-brand-gold text-brand-gold",
+						"relative -mb-px border-b-2 border-transparent px-4 py-3 text-sm font-medium text-[#5d6a78] transition-colors duration-300 hover:text-[#1f2a34] max-md:px-3 max-md:py-2 max-md:text-xs",
+						filter === "active" && "border-black/10 text-[#1f2a34]",
 					)}
 					onClick={() => setFilter("active")}
 				>
@@ -87,9 +86,9 @@ export default function AdminProjects() {
 				<button
 					type="button"
 					className={cn(
-						"relative -mb-px border-b-2 border-transparent px-4 py-3 text-sm font-medium text-[#888888] transition-colors duration-300 hover:text-brand-gold max-md:px-3 max-md:py-2 max-md:text-xs",
+						"relative -mb-px border-b-2 border-transparent px-4 py-3 text-sm font-medium text-[#5d6a78] transition-colors duration-300 hover:text-[#1f2a34] max-md:px-3 max-md:py-2 max-md:text-xs",
 						filter === "completed" &&
-							"border-brand-gold text-brand-gold",
+							"border-black/10 text-[#1f2a34]",
 					)}
 					onClick={() => setFilter("completed")}
 				>
@@ -98,16 +97,16 @@ export default function AdminProjects() {
 			</div>
 
 			{loading ? (
-				<div className="flex min-h-[280px] items-center justify-center rounded-lg border border-white/10 bg-[rgba(13,38,58,0.3)] text-sm text-[#888888]">
+				<div className="flex min-h-[280px] items-center justify-center rounded-lg border border-black/10 bg-[rgba(224,234,242,0.3)] text-sm text-[#5d6a78]">
 					Loading projects...
 				</div>
 			) : filteredProjects.length === 0 ? (
-				<div className="flex min-h-[280px] flex-col items-center justify-center gap-4 rounded-lg border border-white/10 bg-[rgba(13,38,58,0.3)] px-6 py-12 text-center">
+				<div className="flex min-h-[280px] flex-col items-center justify-center gap-4 rounded-lg border border-black/10 bg-[rgba(224,234,242,0.3)] px-6 py-12 text-center">
 					<div className="text-4xl">📋</div>
-					<div className="font-serif text-lg font-semibold text-white">
+					<div className="font-serif text-lg font-semibold text-[#1f2a34]">
 						No projects found
 					</div>
-					<div className="text-sm text-[#888888]">
+					<div className="text-sm text-[#5d6a78]">
 						{filter === "all"
 							? "Start by creating your first project"
 							: `No ${filter} projects at this time`}
@@ -119,18 +118,18 @@ export default function AdminProjects() {
 						<button
 							key={project.id}
 							type="button"
-							className="flex flex-col gap-4 rounded-lg border border-white/10 bg-[rgba(13,38,58,0.3)] p-4 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-gold hover:bg-white/5"
+							className="flex flex-col gap-4 rounded-lg border border-black/10 bg-[rgba(224,234,242,0.3)] p-4 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-black/20 hover:bg-black/5"
 							onClick={() =>
 								navigate(`/builder/projects/${project.id}`)
 							}
 						>
 							<div className="flex items-start justify-between gap-3">
 								<div className="min-w-0 flex-1">
-									<h3 className="mb-1 font-serif text-lg font-semibold text-white">
+									<h3 className="mb-1 font-serif text-lg font-semibold text-[#1f2a34]">
 										{project.name}
 									</h3>
 									{project.location && (
-										<p className="text-sm text-[#888888]">
+										<p className="text-sm text-[#5d6a78]">
 											📍 {project.location}
 										</p>
 									)}
@@ -162,13 +161,13 @@ export default function AdminProjects() {
 								/>
 							</div>
 
-							<div className="grid gap-3 border-t border-white/10 pt-4 sm:grid-cols-2">
+							<div className="grid gap-3 border-t border-black/10 pt-4 sm:grid-cols-2">
 								{project.start_date && (
 									<div className="flex flex-col gap-1">
 										<span className="text-xs font-semibold uppercase tracking-[0.05em] text-[#888888]">
 											Started
 										</span>
-										<span className="text-sm font-medium text-white">
+										<span className="text-sm font-medium text-[#1f2a34]">
 											{new Date(
 												project.start_date,
 											).toLocaleDateString()}
@@ -180,7 +179,7 @@ export default function AdminProjects() {
 										<span className="text-xs font-semibold uppercase tracking-[0.05em] text-[#888888]">
 											Expected End
 										</span>
-										<span className="text-sm font-medium text-white">
+										<span className="text-sm font-medium text-[#1f2a34]">
 											{new Date(
 												project.expected_end_date,
 											).toLocaleDateString()}

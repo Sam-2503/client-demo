@@ -6,10 +6,10 @@ import { cn } from "../../utils/cn";
 import type { Project, ProjectStatus } from "../../types";
 
 const STATUS_COLOR: Record<ProjectStatus, string> = {
-	planning: "#5a6b7a",
-	in_progress: "#d8bc8f",
-	on_hold: "#f39c12",
-	completed: "#69c58a",
+	planning: "#c7ced6",
+	in_progress: "#c7ced6",
+	on_hold: "#c7ced6",
+	completed: "#c7ced6",
 };
 
 const STATUS_LABEL: Record<ProjectStatus, string> = {
@@ -20,10 +20,10 @@ const STATUS_LABEL: Record<ProjectStatus, string> = {
 };
 
 const STATUS_BADGE: Record<ProjectStatus, string> = {
-	planning: "bg-[#5a6b7a] text-white",
-	in_progress: "bg-[#d8bc8f] text-[#101824]",
-	on_hold: "bg-[#f39c12] text-white",
-	completed: "bg-[#69c58a] text-white",
+	planning: "bg-[#eef3f6] text-[#475462]",
+	in_progress: "bg-[#eef3f6] text-[#475462]",
+	on_hold: "bg-[#eef3f6] text-[#475462]",
+	completed: "bg-[#eef3f6] text-[#475462]",
 };
 
 export default function BuilderDashboard() {
@@ -51,8 +51,8 @@ export default function BuilderDashboard() {
 	return (
 		<>
 			{/* Topbar */}
-			<div className="border-b border-white/10 bg-[linear-gradient(160deg,rgba(10,18,28,0.4)_0%,rgba(16,31,48,0.4)_100%)] px-6 py-6 backdrop-blur-sm">
-				<div className="font-serif text-3xl font-semibold text-[#f5efe2]">
+			<div className="border-b border-black/10 bg-[#f8fafb] px-6 py-6 backdrop-blur-sm">
+				<div className="font-serif text-3xl font-semibold text-[#1f2a34]">
 					Dashboard
 				</div>
 			</div>
@@ -60,61 +60,61 @@ export default function BuilderDashboard() {
 			<div className="animate-fade-up space-y-8 px-6 py-8">
 				{/* KPIs */}
 				<div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-					<div className="rounded-2xl border border-white/10 border-t-2 border-t-[#d8bc8f] bg-[rgba(13,38,58,0.3)] p-5 backdrop-blur-sm transition hover:border-[#d8bc8f]/20 hover:bg-[rgba(13,38,58,0.5)]">
-						<div className="text-sm uppercase tracking-[0.12em] text-[#a9b7c8]">
+					<div className="rounded-2xl border border-black/10 border-t-2 border-t-[#c7ced6] bg-[rgba(224,234,242,0.3)] p-5 backdrop-blur-sm transition hover:border-black/20 hover:bg-[rgba(224,234,242,0.5)]">
+						<div className="text-sm uppercase tracking-[0.12em] text-[#5d6a78]">
 							Total Projects
 						</div>
-						<div className="mt-3 font-serif text-4xl font-semibold text-[#d8bc8f]">
+						<div className="mt-3 font-serif text-4xl font-semibold text-[#1f2a34]">
 							{total}
 						</div>
-						<div className="mt-2 text-xs text-[#7a8894]">
+						<div className="mt-2 text-xs text-[#8b9ba9]">
 							All time
 						</div>
 					</div>
-					<div className="rounded-2xl border border-white/10 border-t-2 border-t-[#69c58a] bg-[rgba(13,38,58,0.3)] p-5 backdrop-blur-sm transition hover:border-[#69c58a]/20 hover:bg-[rgba(13,38,58,0.5)]">
-						<div className="text-sm uppercase tracking-[0.12em] text-[#a9b7c8]">
+					<div className="rounded-2xl border border-black/10 border-t-2 border-t-[#c7ced6] bg-[rgba(224,234,242,0.3)] p-5 backdrop-blur-sm transition hover:border-black/20 hover:bg-[rgba(224,234,242,0.5)]">
+						<div className="text-sm uppercase tracking-[0.12em] text-[#5d6a78]">
 							Active Builds
 						</div>
-						<div className="mt-3 font-serif text-4xl font-semibold text-[#69c58a]">
+						<div className="mt-3 font-serif text-4xl font-semibold text-[#1f2a34]">
 							{active}
 						</div>
-						<div className="mt-2 text-xs text-[#7a8894]">
+						<div className="mt-2 text-xs text-[#8b9ba9]">
 							In progress
 						</div>
 					</div>
-					<div className="rounded-2xl border border-white/10 border-t-2 border-t-[#5dade2] bg-[rgba(13,38,58,0.3)] p-5 backdrop-blur-sm transition hover:border-[#5dade2]/20 hover:bg-[rgba(13,38,58,0.5)]">
-						<div className="text-sm uppercase tracking-[0.12em] text-[#a9b7c8]">
+					<div className="rounded-2xl border border-black/10 border-t-2 border-t-[#c7ced6] bg-[rgba(224,234,242,0.3)] p-5 backdrop-blur-sm transition hover:border-black/20 hover:bg-[rgba(224,234,242,0.5)]">
+						<div className="text-sm uppercase tracking-[0.12em] text-[#5d6a78]">
 							Completed
 						</div>
-						<div className="mt-3 font-serif text-4xl font-semibold text-[#5dade2]">
+						<div className="mt-3 font-serif text-4xl font-semibold text-[#1f2a34]">
 							{completed}
 						</div>
-						<div className="mt-2 text-xs text-[#7a8894]">
+						<div className="mt-2 text-xs text-[#8b9ba9]">
 							Delivered
 						</div>
 					</div>
-					<div className="rounded-2xl border border-white/10 border-t-2 border-t-[#d8bc8f] bg-[rgba(13,38,58,0.3)] p-5 backdrop-blur-sm transition hover:border-[#d8bc8f]/20 hover:bg-[rgba(13,38,58,0.5)]">
-						<div className="text-sm uppercase tracking-[0.12em] text-[#a9b7c8]">
+					<div className="rounded-2xl border border-black/10 border-t-2 border-t-[#c7ced6] bg-[rgba(224,234,242,0.3)] p-5 backdrop-blur-sm transition hover:border-black/20 hover:bg-[rgba(224,234,242,0.5)]">
+						<div className="text-sm uppercase tracking-[0.12em] text-[#5d6a78]">
 							Avg Progress
 						</div>
-						<div className="mt-3 font-serif text-4xl font-semibold text-[#d8bc8f]">
+						<div className="mt-3 font-serif text-4xl font-semibold text-[#1f2a34]">
 							{avgProg}%
 						</div>
-						<div className="mt-2 text-xs text-[#7a8894]">
+						<div className="mt-2 text-xs text-[#8b9ba9]">
 							Across all projects
 						</div>
 					</div>
 				</div>
 
 				{/* Projects header */}
-				<div className="mb-4 text-sm font-semibold uppercase tracking-[0.12em] text-[#a9b7c8]">
+				<div className="mb-4 text-sm font-semibold uppercase tracking-[0.12em] text-[#5d6a78]">
 					All Projects
 				</div>
 
 				{/* Projects grid */}
 				{loading ? (
-					<div className="rounded-2xl border border-white/10 bg-[rgba(13,38,58,0.3)] p-12 text-center backdrop-blur-sm">
-						<div className="text-sm text-[#a9b7c8]">
+					<div className="rounded-2xl border border-black/10 bg-[rgba(224,234,242,0.3)] p-12 text-center backdrop-blur-sm">
+						<div className="text-sm text-[#5d6a78]">
 							Loading projects…
 						</div>
 					</div>
@@ -123,7 +123,7 @@ export default function BuilderDashboard() {
 						{projects.map((p) => (
 							<div
 								key={p.id}
-								className="cursor-pointer rounded-2xl border border-white/10 border-t-2 bg-[rgba(13,38,58,0.3)] p-5 transition hover:border-[#d8bc8f]/35 hover:bg-[rgba(13,38,58,0.5)]"
+								className="cursor-pointer rounded-2xl border border-black/10 border-t-2 bg-[rgba(224,234,242,0.3)] p-5 transition hover:border-black/20 hover:bg-[rgba(224,234,242,0.5)]"
 								style={{
 									borderTopColor: STATUS_COLOR[p.status],
 								}}
@@ -134,10 +134,10 @@ export default function BuilderDashboard() {
 								<div className="space-y-4">
 									<div className="flex items-start justify-between gap-3">
 										<div>
-											<div className="font-medium text-white">
+											<div className="font-medium text-[#1f2a34]">
 												{p.name}
 											</div>
-											<div className="mt-1 text-xs text-[#a9b7c8]">
+											<div className="mt-1 text-xs text-[#5d6a78]">
 												{p.location ?? "Location TBD"}
 											</div>
 										</div>
@@ -153,14 +153,14 @@ export default function BuilderDashboard() {
 
 									<div>
 										<div className="mb-2 flex items-center justify-between text-[0.7rem]">
-											<span className="text-[#a9b7c8]">
+											<span className="text-[#5d6a78]">
 												Progress
 											</span>
-											<span className="font-semibold text-white">
+											<span className="font-semibold text-[#1f2a34]">
 												{p.overall_progress}%
 											</span>
 										</div>
-										<div className="h-1.5 overflow-hidden rounded-full bg-white/5">
+										<div className="h-1.5 overflow-hidden rounded-full bg-black/5">
 											<div
 												className="h-full rounded-full"
 												style={{
@@ -173,14 +173,14 @@ export default function BuilderDashboard() {
 									</div>
 								</div>
 
-								<div className="mt-4 border-t border-white/10 pt-3 text-[0.72rem]">
-									<div className="text-[#a9b7c8]">
+								<div className="mt-4 border-t border-black/10 pt-3 text-[0.72rem]">
+									<div className="text-[#5d6a78]">
 										Status:{" "}
-										<span className="text-[#d8bc8f]">
+										<span className="text-[#475462]">
 											{STATUS_LABEL[p.status]}
 										</span>
 									</div>
-									<div className="mt-2 text-[#7a8894]">
+									<div className="mt-2 text-[#8b9ba9]">
 										{p.start_date
 											? new Date(
 													p.start_date,
@@ -196,10 +196,10 @@ export default function BuilderDashboard() {
 
 						{/* Add new card */}
 						<div
-							className="grid cursor-pointer place-items-center rounded-2xl border border-dashed border-[#d8bc8f]/50 bg-[rgba(216,188,143,0.08)] p-8 text-center transition hover:border-[#d8bc8f]/70 hover:bg-[rgba(216,188,143,0.12)]"
+							className="grid cursor-pointer place-items-center rounded-2xl border border-dashed border-black/15 bg-[rgba(224,234,242,0.3)] p-8 text-center transition hover:border-black/20 hover:bg-[rgba(224,234,242,0.5)]"
 							onClick={() => navigate("/builder/projects")}
 						>
-							<div className="text-[#d8bc8f]">
+							<div className="text-[#1f2a34]">
 								<div className="mb-2 text-2xl font-semibold">
 									+
 								</div>
