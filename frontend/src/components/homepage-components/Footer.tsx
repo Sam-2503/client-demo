@@ -1,27 +1,26 @@
 export default function Footer() {
 	return (
-		<footer className="border-t border-white/10 bg-[#07101b] px-4 py-10 md:px-8">
-			<div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-8 md:grid-cols-3">
+		<footer className="border-t border-gray-200 bg-gray-50 px-4 py-12 md:px-8">
+			<div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-8 md:grid-cols-4">
 				<div>
-					<div className="font-serif text-2xl text-[#f1e7d5]">
+					<div className="font-serif text-xl font-bold text-gray-900">
 						RJS Homes
 					</div>
-					<p className="mt-3 max-w-[360px] text-sm leading-7 text-[#aeb9ca]">
-						High-quality construction and interiors delivered with
-						rigorous site execution and transparent client
-						communication.
+					<p className="mt-3 max-w-[300px] text-sm leading-7 text-gray-600">
+						Building quality construction and interiors with
+						discipline, transparency, and rigorous site execution.
 					</p>
 				</div>
 
 				<div>
-					<div className="text-[11px] uppercase tracking-[0.16em] text-[#d8bc8f]">
-						Quick Navigation
+					<div className="text-[11px] font-bold uppercase tracking-[0.16em] text-gray-900">
+						Quick Links
 					</div>
-					<ul className="mt-4 space-y-2 text-sm text-[#c5cfdd]">
+					<ul className="mt-4 space-y-2 text-sm text-gray-600">
 						<li>
 							<a
 								href="#about"
-								className="transition hover:text-[#f1e7d5]"
+								className="transition hover:text-gray-900"
 							>
 								About
 							</a>
@@ -29,23 +28,23 @@ export default function Footer() {
 						<li>
 							<a
 								href="#services"
-								className="transition hover:text-[#f1e7d5]"
+								className="transition hover:text-gray-900"
 							>
 								Services
 							</a>
 						</li>
 						<li>
 							<a
-								href="#projects"
-								className="transition hover:text-[#f1e7d5]"
+								href="#process"
+								className="transition hover:text-gray-900"
 							>
-								Projects
+								Our Process
 							</a>
 						</li>
 						<li>
 							<a
 								href="#contact"
-								className="transition hover:text-[#f1e7d5]"
+								className="transition hover:text-gray-900"
 							>
 								Contact
 							</a>
@@ -54,24 +53,69 @@ export default function Footer() {
 				</div>
 
 				<div>
-					<div className="text-[11px] uppercase tracking-[0.16em] text-[#d8bc8f]">
-						Client Access
+					<div className="text-[11px] font-bold uppercase tracking-[0.16em] text-gray-900">
+						Services
 					</div>
-					<p className="mt-4 text-sm leading-7 text-[#c5cfdd]">
-						Use the project portal for approvals, progress tracking,
-						material updates, and issue resolution workflows.
-					</p>
-					<a
-						href="/login"
-						className="mt-4 inline-flex rounded-md border border-[#d8bc8f]/40 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#f2e7d4] transition hover:bg-white/5"
-					>
-						Open Portal
-					</a>
+					<ul className="mt-4 space-y-2 text-sm text-gray-600">
+						<li>
+							<a
+								href="#services"
+								className="transition hover:text-gray-900"
+							>
+								Construction
+							</a>
+						</li>
+						<li>
+							<a
+								href="#services"
+								className="transition hover:text-gray-900"
+							>
+								Renovation
+							</a>
+						</li>
+						<li>
+							<a
+								href="#services"
+								className="transition hover:text-gray-900"
+							>
+								Architecture
+							</a>
+						</li>
+						<li>
+							<a
+								href="#services"
+								className="transition hover:text-gray-900"
+							>
+								Concrete Supply
+							</a>
+						</li>
+					</ul>
 				</div>
-			</div>
 
-			<div className="mx-auto mt-8 max-w-[1280px] border-t border-white/10 pt-6 text-xs uppercase tracking-[0.12em] text-[#7f8ea5]">
-				RJS Homes · Hyderabad · Since 2002
+				<div>
+					<div className="text-[11px] font-bold uppercase tracking-[0.16em] text-gray-900">
+						Contact
+					</div>
+					<div className="mt-4 space-y-3 text-sm text-gray-600">
+						<div>
+							<a
+								href="tel:+919599998888"
+								className="transition hover:text-gray-900"
+							>
+								+91 95 9999 8888
+							</a>
+						</div>
+						<div>
+							<a
+								href="mailto:hello@rjshomes.com"
+								className="transition hover:text-gray-900"
+							>
+								hello@rjshomes.com
+							</a>
+						</div>
+						<div>Hyderabad, Telangana</div>
+					</div>
+				</div>
 			</div>
 		</footer>
 	);
