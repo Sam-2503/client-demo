@@ -117,3 +117,28 @@ html {
 ::-webkit-scrollbar-thumb:hover {
 	background: var(--gray);
 }
+
+.with-arrow {
+	position: relative;
+}
+
+.with-arrow::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: -40px;
+	width: 60px;
+	border-top: 3px dashed #c2b937;
+	transform: translateY(-50%);
+}
+
+.with-arrow::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: -40px;
+	transform: translateY(-50%);
+	border-left: 6px solid #cbd5e1;
+	border-top: 4px solid transparent;
+	border-bottom: 4px solid transparent;
+}

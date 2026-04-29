@@ -1,14 +1,14 @@
 export default function Services() {
 	const services = [
 		{
-			title: "Construction Services",
+			title: "Build Your Dream Home",
 			route: "/home#contact",
 			description:
 				"From planning and design to complete construction and building execution with accountability and precision.",
 			image: "https://images.unsplash.com/photo-1532562145520-b8cce2486cd2?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 		},
 		{
-			title: "Order Furniture",
+			title: "Get Furniture Delivered to Your Doorstep",
 			route: "/shop",
 			description:
 				"Curated furniture collections delivered and installed with care right at your doorstep.",
@@ -20,13 +20,14 @@ export default function Services() {
 		<section className="px-4 py-14 md:px-8" id="services">
 			<div className="mx-auto max-w-[1240px]">
 				{/* Main Header */}
-				<div className="mb-12">
+				<div className="mb-8">
 					<h2 className="text-[clamp(1.8rem,3.5vw,2.9rem)] font-semibold text-[#1f2b35]">
-						Our Services
+						Choose Your Service
 					</h2>
-					<p className="mt-2 max-w-[760px] text-[15px] text-[#51606e]">
-						We take care from the planning to building to delivering
-						your interior right at your doorstep.
+					<p className="mt-2 max-w-[1240px] text-[15px] text-[#51606e]">
+						We provide construction services and furniture delivery
+						services to build your dream home from the plans to the
+						final touches.
 					</p>
 				</div>
 
