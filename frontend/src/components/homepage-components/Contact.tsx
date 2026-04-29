@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export default function Contact() {
 	return (
 		<section className="px-4 pb-16 pt-14 md:px-8" id="contact">
