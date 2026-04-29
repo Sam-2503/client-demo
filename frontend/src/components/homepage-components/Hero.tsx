@@ -29,10 +29,10 @@ export default function Hero() {
 							</a>
 							<button
 								type="button"
-								onClick={() => navigate("/login")}
+								onClick={() => navigate("/shop")}
 								className="rounded-full border border-[#1e2a35] bg-transparent px-5 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#1e2a35]"
 							>
-								Client portal
+								Shop for furniture
 							</button>
 						</div>
 					</div>
