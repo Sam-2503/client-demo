@@ -31,25 +31,25 @@ export default function Services() {
 					</p>
 				</div>
 
-				{/* Two Box Layout */}
+				{/* Two Box Layout - Compact Tabs that Expand on Hover */}
 				<div className="grid gap-6 md:grid-cols-2">
 					{services.map((service) => (
 						<a
 							href={service.route}
 							key={service.title}
-							className="group relative min-h-[400px] overflow-hidden rounded-[12px] border border-black/10"
+							className="group relative h-24 overflow-hidden rounded-[12px] border border-black/10 transition-all duration-500 ease-out hover:h-96 md:h-28 md:hover:h-96"
 						>
 							<img
 								src={service.image}
 								alt={service.title}
 								className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
 							/>
-							<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-							<div className="absolute inset-x-0 bottom-0 p-6 text-white">
-								<h3 className="text-2xl font-semibold leading-tight">
+							<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-all duration-500 group-hover:from-black/95 group-hover:via-black/70 group-hover:to-black/40" />
+							<div className="absolute inset-0 p-6 text-white flex flex-col justify-end transition-all duration-500 ease-out">
+								<h3 className="text-lg font-semibold leading-tight md:text-2xl">
 									{service.title}
 								</h3>
-								<p className="mt-3 text-sm leading-6 text-white/85">
+								<p className="mt-3 max-h-0 overflow-hidden text-sm leading-6 text-white/85 transition-all duration-500 ease-out group-hover:max-h-96">
 									{service.description}
 								</p>
 							</div>

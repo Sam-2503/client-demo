@@ -272,7 +272,7 @@ export default function Services() {
 				</div>
 
 				<div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-5">
-					<div className="border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.02)] p-8 text-center">
+					<div className="with-arrow border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.02)] p-8 text-center">
 						<div className="mb-4 font-serif text-5xl font-bold text-[#c4763e]">
 							01
 						</div>
@@ -284,7 +284,7 @@ export default function Services() {
 							detail.
 						</p>
 					</div>
-					<div className="border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.02)] p-8 text-center">
+					<div className="with-arrow border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.02)] p-8 text-center">
 						<div className="mb-4 font-serif text-5xl font-bold text-[#c4763e]">
 							02
 						</div>
@@ -296,7 +296,7 @@ export default function Services() {
 							for approval.
 						</p>
 					</div>
-					<div className="border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.02)] p-8 text-center">
+					<div className="with-arrow border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.02)] p-8 text-center">
 						<div className="mb-4 font-serif text-5xl font-bold text-[#c4763e]">
 							03
 						</div>
@@ -308,7 +308,7 @@ export default function Services() {
 							updates provided.
 						</p>
 					</div>
-					<div className="border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.02)] p-8 text-center">
+					<div className="with-arrow border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.02)] p-8 text-center">
 						<div className="mb-4 font-serif text-5xl font-bold text-[#c4763e]">
 							04
 						</div>

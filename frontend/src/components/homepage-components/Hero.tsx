@@ -14,7 +14,7 @@ export default function Hero() {
 						<h1 className="text-[clamp(2rem,4vw,3.6rem)] font-semibold leading-[1.1] text-[#141b20]">
 							From Dreams to Finished Spaces
 						</h1>
-						<p className="mt-4 max-w-[560px] text-[15px] leading-7 text-[#000000]">
+						<p className="mt-4 max-w-[560px] text-sm leading-7 text-[#000000]">
 							RJS Homes takes care of planning and construction of
 							your dream house till delivering your furniture
 							right at your doorstep
@@ -22,14 +22,14 @@ export default function Hero() {
 						<div className="mt-8 flex gap-3">
 							<a
 								href="/login"
-								className="mt-2 rounded-full border border-[#1e2a35] bg-[#1e2a35] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition hover:opacity-90 md:mt-0"
+								className="mt-2 rounded-full border border-[#1e2a35] bg-[#1e2a35] px-4 py-2 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:opacity-90 md:mt-0"
 							>
 								Track your project
 							</a>
 							<button
 								type="button"
 								onClick={() => navigate("/shop")}
-								className="mt-2 rounded-full border border-[#1e2a35] bg-transparent px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#1e2a35] transition hover:bg-[#1e2a35] hover:text-white md:mt-0"
+								className="mt-2 rounded-full border border-[#1e2a35] bg-transparent px-4 py-2 text-sm font-bold uppercase tracking-[0.14em] text-[#1e2a35] transition hover:bg-[#1e2a35] hover:text-white md:mt-0"
 							>
 								Shop for furniture
 							</button>
