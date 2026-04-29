@@ -1,24 +1,24 @@
 export default function Differentiator() {
 	const differentiators = [
 		{
-			title: "Ground-Level Execution",
+			title: "No Unnecessary Delays",
 			description:
-				"We stay directly involved on-site, ensuring decisions are practical and work progresses without unnecessary delays.",
+				"Projects don’t drag endlessly. Rest assured while work moves with a clear plan and steady progress on-site.",
 		},
 		{
-			title: "Consistent Quality Checks",
+			title: "No Constant Follow-Ups",
 			description:
-				"Materials and workmanship are reviewed at every stage to avoid rework and maintain long-term durability.",
+				"You won’t have to keep calling for updates you we keep you updated without you having to ask.",
 		},
 		{
-			title: "Clear Communication",
+			title: "Website and App Support",
 			description:
-				"You’re always aware of what’s happening — timelines, changes, and progress are shared without confusion.",
+				"All your updates, project details, and communication in one place with our website and app support.",
 		},
 		{
-			title: "Integrated Furniture Support",
+			title: "Ready-to-Use Spaces",
 			description:
-				"Alongside construction, we make essential furniture available without long waiting periods, helping you complete spaces faster.",
+				"We don’t stop at construction. We take care of your interior as well, so your space is actually ready to live in.",
 		},
 	];
 	return (
@@ -28,8 +28,8 @@ export default function Differentiator() {
 					Why Choose RJS Homes
 				</h2>
 				<p className="mt-2 max-w-[780px] text-[15px] text-[#5a6674]">
-					We focus on practical execution, reliable communication, and
-					workmanship that stands up over time.
+					We focus on execution that stays on track, communication
+					that stays clear, and results that hold up over time.
 				</p>
 				<div className="mt-8 grid gap-4 md:grid-cols-4">
 					{differentiators.map((item) => (

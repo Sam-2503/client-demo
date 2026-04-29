@@ -35,7 +35,7 @@ export default function Process() {
 					{processSteps.map((step) => (
 						<div
 							key={step.step}
-							className="rounded-[10px] border border-black/10 bg-[#f1f5f8] p-5"
+							className="with-arrow rounded-[10px] border border-black/10 bg-[#f1f5f8] p-5"
 						>
 							<div className="text-xs font-semibold tracking-[0.12em] text-[#5e6b79]">
 								STEP {step.step}
