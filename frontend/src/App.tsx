@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./pages/Login";
 import Homepage from "./pages/public/Homepage";
 import Services from "./pages/public/Services";
+import FurnitureShop from "./pages/public/FurnitureShop";
 
 import BuilderLayout from "./pages/builder/Layout";
 import BuilderDashboard from "./pages/builder/Dashboard";
@@ -52,6 +53,7 @@ export default function App() {
 					<Routes>
 						<Route path="/" element={<RootRedirect />} />
 						<Route path="/home" element={<Homepage />} />
+						<Route path="/shop" element={<FurnitureShop />} />
 						<Route path="/services" element={<Services />} />
 						<Route path="/login" element={<Login />} />
 

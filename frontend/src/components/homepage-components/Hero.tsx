@@ -12,27 +12,26 @@ export default function Hero() {
 				<div className="grid gap-8 px-6 pb-8 pt-8 md:grid-cols-[1.1fr_1fr] md:px-10 md:pt-10">
 					<div className="flex flex-col justify-center">
 						<h1 className="text-[clamp(2rem,4vw,3.6rem)] font-semibold leading-[1.1] text-[#141b20]">
-							From Construction Sites to Finished Spaces.
+							From Dreams to Finished Spaces
 						</h1>
 						<p className="mt-4 max-w-[560px] text-[15px] leading-7 text-[#000000]">
-							RJS Homes delivers construction and interior
-							execution with practical planning, reliable
-							coordination, and quality-focused delivery so you
-							don’t have to deal with multiple vendors or delays.
+							RJS Homes takes care of planning and construction of
+							your dream house till delivering your furniture
+							right at your doorstep
 						</p>
 						<div className="mt-8 flex gap-3">
 							<a
-								href="#contact"
-								className="rounded-full border border-[#1e2a35] bg-[#1e2a35] px-5 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-white"
+								href="/login"
+								className="mt-2 rounded-full border border-[#1e2a35] bg-[#1e2a35] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition hover:opacity-90 md:mt-0"
 							>
-								Get in touch
+								Track your project
 							</a>
 							<button
 								type="button"
-								onClick={() => navigate("/login")}
-								className="rounded-full border border-[#1e2a35] bg-transparent px-5 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#1e2a35]"
+								onClick={() => navigate("/shop")}
+								className="mt-2 rounded-full border border-[#1e2a35] bg-transparent px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#1e2a35] transition hover:bg-[#1e2a35] hover:text-white md:mt-0"
 							>
-								Client portal
+								Shop for furniture
 							</button>
 						</div>
 					</div>

@@ -6,6 +6,7 @@ from models.builder_request import BuilderRequest
 from schemas.user import LoginRequest, Token, UserCreate, UserOut
 from schemas.builder_request import BuilderRequestOut
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 
 router = APIRouter(prefix="/api/auth", tags=["Auth"])
 
@@ -17,47 +18,69 @@ def register(payload: UserCreate, db: Session = Depends(get_db)):
     - Clients/Admins: Account created immediately with access token
     - Builders: Request created, awaiting admin approval
     """
-    # Check if email exists in users or pending requests
-    existing_user = db.query(User).filter(User.email == payload.email).first()
-    if existing_user:
-        raise HTTPException(status_code=400, detail="Email already registered")
-    
-    existing_request = db.query(BuilderRequest).filter(BuilderRequest.email == payload.email).first()
-    if existing_request:
-        raise HTTPException(status_code=400, detail="Registration request already exists for this email")
+    try:
+        # Check if email exists in users or pending requests
+        existing_user = db.query(User).filter(User.email == payload.email).first()
+        if existing_user:
+            raise HTTPException(status_code=400, detail="Email already registered")
+        
+        existing_request = db.query(BuilderRequest).filter(BuilderRequest.email == payload.email).first()
+        if existing_request:
+            raise HTTPException(status_code=400, detail="Registration request already exists for this email")
 
-    # For builders: create pending request instead of user
-    if payload.role == UserRole.builder:
-        builder_request = BuilderRequest(
-            email=payload.email,
-            full_name=payload.full_name,
-            hashed_password=hash_password(payload.password),
-        )
-        db.add(builder_request)
-        db.commit()
-        db.refresh(builder_request)
-        return {
-            "message": "Registration request submitted. Please wait for admin approval.",
-            "request_id": str(builder_request.id),
-            "email": builder_request.email,
-            "status": "pending"
-        }
+        # For builders: create pending request instead of user
+        if payload.role == UserRole.builder:
+            try:
+                builder_request = BuilderRequest(
+                    email=payload.email,
+                    full_name=payload.full_name,
+                    hashed_password=hash_password(payload.password),
+                )
+                db.add(builder_request)
+                db.commit()
+                db.refresh(builder_request)
+                return {
+                    "message": "Registration request submitted. Please wait for admin approval.",
+                    "request_id": str(builder_request.id),
+                    "email": builder_request.email,
+                    "status": "pending"
+                }
+            except IntegrityError as e:
+                db.rollback()
+                raise HTTPException(status_code=400, detail="Email already exists. Please try a different email.")
+            except Exception as e:
+                db.rollback()
+                print(f"Builder registration error: {str(e)}")
+                raise HTTPException(status_code=500, detail="Failed to create registration request. Please try again.")
 
-    # For clients/admins: create user immediately with access token
-    user = User(
-        full_name=payload.full_name,
-        email=payload.email,
-        hashed_password=hash_password(payload.password),
-        role=payload.role,
-        is_approved=True,  # Admins and clients are auto-approved
-    )
-    db.add(user)
-    db.commit()
-    db.refresh(user)
-    
-    # Return Token (with access_token) for immediate login capability
-    token = create_access_token(data={"sub": str(user.id), "role": user.role})
-    return Token(access_token=token, user=UserOut.model_validate(user))
+        # For clients/admins: create user immediately with access token
+        try:
+            user = User(
+                full_name=payload.full_name,
+                email=payload.email,
+                hashed_password=hash_password(payload.password),
+                role=payload.role,
+                is_approved=True,  # Admins and clients are auto-approved
+            )
+            db.add(user)
+            db.commit()
+            db.refresh(user)
+            
+            # Return Token (with access_token) for immediate login capability
+            token = create_access_token(data={"sub": str(user.id), "role": user.role})
+            return Token(access_token=token, user=UserOut.model_validate(user))
+        except IntegrityError as e:
+            db.rollback()
+            raise HTTPException(status_code=400, detail="Email already exists. Please try a different email.")
+        except Exception as e:
+            db.rollback()
+            print(f"User registration error: {str(e)}")
+            raise HTTPException(status_code=500, detail="Failed to create account. Please try again.")
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Unexpected registration error: {str(e)}")
+        raise HTTPException(status_code=500, detail="An unexpected error occurred. Please try again.")
 
 
 @router.post("/login", response_model=Token)

@@ -6,10 +6,10 @@ import type { Project } from "../../types";
 import api from "../../api/client";
 
 const STATUS_COLOR: Record<string, string> = {
-	planning: "#5a6b7a",
-	in_progress: "#d8bc8f",
-	on_hold: "#f39c12",
-	completed: "#69c58a",
+	planning: "#c7ced6",
+	in_progress: "#c7ced6",
+	on_hold: "#c7ced6",
+	completed: "#c7ced6",
 };
 
 export default function BuilderLayout() {
@@ -70,35 +70,35 @@ export default function BuilderLayout() {
 			) : (
 				<title>RJS Homes - Builder Portal</title>
 			)}
-			<div className="flex min-h-screen w-full bg-[#101824] text-white">
+			<div className="flex min-h-screen w-full bg-[#eef3f6] text-[#1f2a34]">
 				{/* ── SIDEBAR ── */}
-				<div className="flex w-[300px] shrink-0 flex-col border-r border-white/10 bg-gradient-to-b from-[#0a121c]/80 to-[#050911]/80 backdrop-blur-xl">
+				<div className="flex w-[300px] shrink-0 flex-col border-r border-black/10 bg-[#f8fafb] backdrop-blur-xl">
 					{/* Logo */}
-					<div className="flex mb-6 border-b border-white/10 px-6 py-6">
+					<div className="flex mb-6 border-b border-black/10 px-6 py-6">
 						<img
 							src="/rjs-logo.svg"
-							className="h-12 w-12 rounded-full border border-[#d5b47a]/40 bg-[radial-gradient(circle_at_30%_25%,#e4cda2_0%,#b68945_60%,#7a5a2e_100%)] shadow-[0_8px_24px_rgba(182,137,69,0.35)]"
+							className="h-12 w-12 rounded-full border border-black/10 bg-[#eef3f6] shadow-[0_8px_24px_rgba(31,42,52,0.08)]"
 						/>
 						<div>
-							<div className="pl-8 font-serif text-lg font-semibold text-[#f5efe2]">
+							<div className="pl-8 font-serif text-lg font-semibold text-[#1f2a34]">
 								RJS Homes
 							</div>
-							<div className="pl-8 text-[10px] uppercase tracking-[0.12em] text-[#a9b7c8]">
+							<div className="pl-8 text-[10px] uppercase tracking-[0.12em] text-[#5d6a78]">
 								{isAdmin ? "Admin Portal" : "Builder Portal"}
 							</div>
 						</div>
 					</div>
 
 					{/* Logged-in user */}
-					<div className="mx-4 mb-5 flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 p-3">
-						<div className="grid h-10 w-10 place-items-center rounded-full bg-[#d8bc8f] font-semibold text-[#101824]">
+					<div className="mx-4 mb-5 flex items-center gap-3 rounded-xl border border-black/10 bg-[#f7f8fa] p-3">
+						<div className="grid h-10 w-10 place-items-center rounded-full bg-[#1f2a34] font-semibold text-white">
 							{initials}
 						</div>
 						<div>
-							<div className="text-sm font-medium text-white">
+							<div className="text-sm font-medium text-[#1f2a34]">
 								{user?.full_name}
 							</div>
-							<div className="text-xs uppercase text-[#a9b7c8]">
+							<div className="text-xs uppercase text-[#5d6a78]">
 								{user?.role}
 							</div>
 						</div>
@@ -108,11 +108,11 @@ export default function BuilderLayout() {
 					{!isAdmin && (
 						<>
 							<div className="mb-2 flex items-center justify-between px-4">
-								<div className="text-xs uppercase tracking-[0.12em] text-[#a9b7c8]">
+								<div className="text-xs uppercase tracking-[0.12em] text-[#5d6a78]">
 									Projects
 								</div>
 								<button
-									className="rounded-lg border border-[#d8bc8f]/35 px-2 py-1 text-[0.62rem] uppercase tracking-[0.08em] text-[#d8bc8f] transition hover:border-[#d8bc8f]/50 hover:bg-[rgba(216,188,143,0.1)]"
+									className="rounded-lg border border-black/10 px-2 py-1 text-[0.62rem] uppercase tracking-[0.08em] text-[#475462] transition hover:border-black/20 hover:bg-black/5"
 									onClick={() =>
 										navigate("/builder/projects")
 									}
@@ -121,21 +121,21 @@ export default function BuilderLayout() {
 								</button>
 							</div>
 
-							<div className="mx-3 mb-4 max-h-52 space-y-1 overflow-y-auto rounded-xl border border-white/10 bg-white/5 p-2">
+							<div className="mx-3 mb-4 max-h-52 space-y-1 overflow-y-auto rounded-xl border border-black/10 bg-black/5 p-2">
 								{projects.slice(0, 6).map((p) => (
 									<div
 										key={p.id}
-										className="cursor-pointer rounded-lg border border-transparent px-2 py-2 transition hover:border-[#d8bc8f]/25 hover:bg-white/5"
+										className="cursor-pointer rounded-lg border border-transparent px-2 py-2 transition hover:border-black/20 hover:bg-black/5"
 										onClick={() =>
 											navigate(
 												`/builder/projects/${p.id}`,
 											)
 										}
 									>
-										<div className="truncate text-xs font-medium text-white">
+										<div className="truncate text-xs font-medium text-[#1f2a34]">
 											{p.name}
 										</div>
-										<div className="mt-1 text-[0.68rem] text-[#a9b7c8]">
+										<div className="mt-1 text-[0.68rem] text-[#5d6a78]">
 											<span
 												style={{
 													display: "inline-block",
@@ -156,7 +156,7 @@ export default function BuilderLayout() {
 									</div>
 								))}
 								{projects.length === 0 && (
-									<div className="px-2 py-1 text-[0.72rem] text-[#a9b7c8]">
+									<div className="px-2 py-1 text-[0.72rem] text-[#5d6a78]">
 										No projects yet
 									</div>
 								)}
@@ -165,7 +165,7 @@ export default function BuilderLayout() {
 					)}
 
 					{/* Nav */}
-					<div className="px-4 pb-2 text-xs uppercase tracking-[0.12em] text-[#a9b7c8]">
+					<div className="px-4 pb-2 text-xs uppercase tracking-[0.12em] text-[#5d6a78]">
 						Navigation
 					</div>
 					{nav.map((n) => (
@@ -177,8 +177,8 @@ export default function BuilderLayout() {
 								cn(
 									"mx-3 mb-1 flex items-center gap-3 rounded-lg border border-transparent px-3 py-2 text-sm transition",
 									isActive
-										? "border-[#d8bc8f]/35 bg-[rgba(216,188,143,0.08)] text-[#d8bc8f]"
-										: "text-[#a9b7c8] hover:border-[#d8bc8f]/25 hover:bg-white/5 hover:text-[#f0e0c1]",
+										? "border-black/10 bg-black/5 text-[#1f2a34]"
+										: "border-black/10 text-[#5d6a78] hover:bg-black/5 hover:text-[#1f2a34]",
 								)
 							}
 						>
@@ -186,9 +186,9 @@ export default function BuilderLayout() {
 						</NavLink>
 					))}
 
-					<div className="mt-auto border-t border-white/10 p-4">
+					<div className="mt-auto border-t border-black/10 p-4">
 						<button
-							className="w-full rounded-lg border border-red-900/40 bg-[rgba(220,76,69,0.08)] px-3 py-2 text-sm font-medium text-red-400 transition hover:bg-[rgba(220,76,69,0.15)]"
+							className="w-full rounded-lg border border-black/10 bg-[#f7f8fa] px-3 py-2 text-sm font-medium text-[#475462] transition hover:bg-black/5 hover:text-[#1f2a34]"
 							onClick={doLogout}
 						>
 							Sign Out
@@ -197,7 +197,7 @@ export default function BuilderLayout() {
 				</div>
 
 				{/* ── MAIN ── */}
-				<div className="min-w-0 flex-1 overflow-x-hidden bg-[linear-gradient(120%_90%_at_50%_100%,#13263a_0%,#08111c_48%,#050911_100%)]">
+				<div className="min-w-0 flex-1 overflow-x-hidden bg-[#eef3f6]">
 					<Outlet />
 				</div>
 			</div>

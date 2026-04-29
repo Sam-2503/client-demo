@@ -3,12 +3,20 @@ export default function Footer() {
 		<footer className="border-t border-gray-200 bg-gray-50 px-4 py-12 md:px-8">
 			<div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-8 md:grid-cols-4">
 				<div>
-					<div className="font-serif text-xl font-bold text-gray-900">
-						RJS Homes
+					<div className="flex items-center gap-3">
+						<img
+							src="/rjs-logo.svg"
+							alt="RJS Homes logo"
+							className="h-10 w-10 rounded-full border border-[#d5b47a]/50 bg-[radial-gradient(circle_at_30%_25%,#e4cda2_0%,#b68945_60%,#7a5a2e_100%)]"
+						/>
+						<div className="font-serif text-xl font-bold text-gray-900">
+							RJS Homes
+						</div>
 					</div>
 					<p className="mt-3 max-w-[300px] text-sm leading-7 text-gray-600">
-						Building quality construction and interiors with
-						discipline, transparency, and rigorous site execution.
+						We take care of planning and construction of your dream
+						house till delivering your furniture right at your
+						doorstep.
 					</p>
 				</div>
 
@@ -59,34 +67,18 @@ export default function Footer() {
 					<ul className="mt-4 space-y-2 text-sm text-gray-600">
 						<li>
 							<a
-								href="#services"
+								href="/login"
 								className="transition hover:text-gray-900"
 							>
-								Construction
+								Construction Services
 							</a>
 						</li>
 						<li>
 							<a
-								href="#services"
+								href="/shop"
 								className="transition hover:text-gray-900"
 							>
-								Renovation
-							</a>
-						</li>
-						<li>
-							<a
-								href="#services"
-								className="transition hover:text-gray-900"
-							>
-								Architecture
-							</a>
-						</li>
-						<li>
-							<a
-								href="#services"
-								className="transition hover:text-gray-900"
-							>
-								Concrete Supply
+								Shop for Furniture
 							</a>
 						</li>
 					</ul>

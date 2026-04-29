@@ -12,9 +12,9 @@ import type {
 
 const STATUS_COLOR: Record<ProjectStatus, string> = {
 	planning: "var(--gray)",
-	in_progress: "var(--gold)",
-	on_hold: "var(--orange)",
-	completed: "var(--green)",
+	in_progress: "#c7ced6",
+	on_hold: "#c7ced6",
+	completed: "#c7ced6",
 };
 
 const STATUS_LABEL: Record<ProjectStatus, string> = {
@@ -25,10 +25,10 @@ const STATUS_LABEL: Record<ProjectStatus, string> = {
 };
 
 const STATUS_BADGE: Record<ProjectStatus, string> = {
-	planning: "bg-brand-muted text-[#101824]",
-	in_progress: "bg-[#d8bc8f] text-[#101824]",
-	on_hold: "bg-[#e67e22] text-[#101824]",
-	completed: "bg-[#27ae60] text-[#101824]",
+	planning: "bg-[#eef3f6] text-[#475462]",
+	in_progress: "bg-[#eef3f6] text-[#475462]",
+	on_hold: "bg-[#eef3f6] text-[#475462]",
+	completed: "bg-[#eef3f6] text-[#475462]",
 };
 
 const EMPTY: CreateProjectRequest = {
@@ -107,13 +107,13 @@ export default function BuilderProjects() {
 	return (
 		<>
 			{/* Topbar */}
-			<div className="flex items-center justify-between border-b border-white/10 bg-[rgba(13,38,58,0.3)] px-6 py-4">
-				<div className="font-serif text-2xl font-semibold text-white">
+			<div className="flex items-center justify-between border-b border-black/10 bg-[rgba(224,234,242,0.3)] px-6 py-4">
+				<div className="font-serif text-2xl font-semibold text-[#1f2a34]">
 					Projects
 				</div>
 				<div className="flex items-center gap-3">
 					<button
-						className="rounded bg-[#d8bc8f] px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-[#101824] transition hover:bg-[#d8bc8f]-light"
+						className="rounded bg-[#1f2a34] px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-white transition hover:bg-[#2a3641]"
 						onClick={() => setOpen(true)}
 					>
 						+ New Project
@@ -123,18 +123,16 @@ export default function BuilderProjects() {
 
 			<div className="animate-fade-up px-6 py-6">
 				{loading ? (
-					<div className="rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] p-10 text-center">
+					<div className="rounded-md border border-black/10 bg-[rgba(224,234,242,0.3)] p-10 text-center">
 						<div className="mb-2 text-3xl">⏳</div>
-						<div className="text-sm text-[#a9b7c8]">
-							Loading…
-						</div>
+						<div className="text-sm text-[#5d6a78]">Loading…</div>
 					</div>
 				) : (
 					<div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
 						{projects.map((p) => (
 							<div
 								key={p.id}
-								className="cursor-pointer rounded-md border border-white/10 border-t-2 bg-[rgba(13,38,58,0.3)] p-4 transition hover:border-[#d8bc8f]"
+								className="cursor-pointer rounded-md border border-black/10 border-t-2 bg-[rgba(224,234,242,0.3)] p-4 transition hover:border-black/20"
 								style={{
 									borderTopColor: STATUS_COLOR[p.status],
 								}}
@@ -145,7 +143,7 @@ export default function BuilderProjects() {
 								<div className="space-y-4">
 									<div className="flex items-start justify-between gap-3">
 										<div>
-											<div className="text-sm font-semibold text-white">
+											<div className="text-sm font-semibold text-[#1f2a34]">
 												{p.name}
 											</div>
 											<div className="text-xs text-[#888888]">
@@ -162,16 +160,16 @@ export default function BuilderProjects() {
 										</span>
 									</div>
 
-									<div className="text-xs text-[#a9b7c8]">
+									<div className="text-xs text-[#5d6a78]">
 										📍 {p.location ?? "—"}
 									</div>
 
 									<div>
-										<div className="mb-1 flex items-center justify-between text-[0.7rem] text-[#a9b7c8]">
+										<div className="mb-1 flex items-center justify-between text-[0.7rem] text-[#5d6a78]">
 											<span>Progress</span>
 											<span>{p.overall_progress}%</span>
 										</div>
-										<div className="h-1.5 overflow-hidden rounded bg-brand-border">
+										<div className="h-1.5 overflow-hidden rounded bg-black/10">
 											<div
 												className="h-full rounded"
 												style={{
@@ -184,10 +182,10 @@ export default function BuilderProjects() {
 									</div>
 								</div>
 
-								<div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3">
-									<div className="text-[0.72rem] text-[#a9b7c8]">
+								<div className="mt-4 flex items-center justify-between border-t border-black/10 pt-3">
+									<div className="text-[0.72rem] text-[#5d6a78]">
 										Status:{" "}
-										<span className="text-[#d8bc8f]">
+										<span className="text-[#475462]">
 											{STATUS_LABEL[p.status]}
 										</span>
 									</div>
@@ -208,13 +206,13 @@ export default function BuilderProjects() {
 
 						{/* Add card */}
 						<div
-							className="grid cursor-pointer place-items-center rounded-md border border-dashed border-[#d8bc8f] bg-[rgba(13,38,58,0.3)] p-6 text-center transition hover:bg-white/5"
+							className="grid cursor-pointer place-items-center rounded-md border border-dashed border-black/15 bg-[rgba(224,234,242,0.3)] p-6 text-center transition hover:bg-black/5"
 							onClick={() => setOpen(true)}
 						>
-							<div className="mb-2 text-2xl text-[#d8bc8f]">
+							<div className="mb-2 text-2xl text-[#1f2a34]">
 								＋
 							</div>
-							<div className="text-sm font-medium text-[#a9b7c8]">
+							<div className="text-sm font-medium text-[#5d6a78]">
 								Create New Project
 							</div>
 						</div>
@@ -230,33 +228,33 @@ export default function BuilderProjects() {
 				)}
 				onClick={(e) => e.target === e.currentTarget && setOpen(false)}
 			>
-				<div className="w-full max-w-[520px] rounded-md border border-white/10 bg-[rgba(13,38,58,0.3)] shadow-2xl">
-					<div className="h-1 w-full bg-[#d8bc8f]" />
-					<div className="p-5">
-						<div className="mb-5 flex items-start justify-between">
+				<div className="w-full max-w-[520px] rounded-[12px] border border-black/10 bg-[#dfe7ec] shadow-2xl">
+					<div className="p-6">
+						<div className="mb-6 flex items-start justify-between">
 							<div>
-								<div className="font-serif text-2xl text-white">
+								<div className="text-xs font-semibold uppercase tracking-[0.12em] text-[#5a6977]">
+									Create Project
+								</div>
+								<h2 className="mt-2 font-semibold text-[#1f2a34] text-xl">
 									New Project
-								</div>
-								<div className="text-sm text-[#a9b7c8]">
+								</h2>
+								<p className="mt-2 max-w-[420px] text-sm text-[#556372]">
 									Fill in the project details below
-								</div>
+								</p>
 							</div>
 							<button
-								className="rounded border border-white/10 px-2 py-1 text-sm text-[#a9b7c8] transition hover:border-[#d8bc8f] hover:text-[#d8bc8f]"
+								className="rounded border border-black/10 px-2 py-1 text-sm text-[#5d6a78] transition hover:border-black/20 hover:text-[#1f2a34]"
 								onClick={() => setOpen(false)}
 							>
 								✕
 							</button>
 						</div>
 
-						<div className="mb-4 space-y-1">
-							<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
-								Project Name *
-							</label>
+						<form className="grid gap-3 rounded-[10px] border border-black/10 bg-white p-5">
 							<input
-								className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
-								placeholder="e.g. Villa Areca, Green Meadows Phase 2"
+								type="text"
+								className="w-full rounded-md border border-black/15 px-3 py-2 text-sm outline-none"
+								placeholder="Project name"
 								value={form.name}
 								onChange={(e) =>
 									setForm((f) => ({
@@ -265,44 +263,31 @@ export default function BuilderProjects() {
 									}))
 								}
 							/>
-						</div>
 
-						<div className="mb-4 space-y-1">
-							<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
-								Description
-							</label>
 							<textarea
-								className="min-h-24 w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
-								placeholder="Brief description of the project…"
+								className="w-full rounded-md border border-black/15 px-3 py-2 text-sm outline-none"
+								rows={4}
+								placeholder="Project description"
 								value={form.description ?? ""}
 								onChange={set("description")}
 							/>
-						</div>
 
-						<div className="mb-4 space-y-1">
-							<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
-								Location
-							</label>
 							<input
-								className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
-								placeholder="e.g. Banjara Hills, Hyderabad"
+								type="text"
+								className="w-full rounded-md border border-black/15 px-3 py-2 text-sm outline-none"
+								placeholder="Project location"
 								value={form.location ?? ""}
 								onChange={set("location")}
 							/>
-						</div>
 
-						<div className="mb-4 space-y-1">
-							<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
-								Assign Client *
-							</label>
 							{clients.length === 0 ? (
-								<div className="border-b-2 border-white/10 bg-white/5 px-3 py-2 text-xs text-[#888888]">
+								<div className="rounded-md border border-black/15 px-3 py-2 text-xs text-[#888888]">
 									No clients registered yet. Ask client to
 									register first.
 								</div>
 							) : (
 								<select
-									className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
+									className="w-full rounded-md border border-black/15 px-3 py-2 text-sm outline-none"
 									value={form.client_id}
 									onChange={(e) =>
 										setForm((f) => ({
@@ -319,49 +304,31 @@ export default function BuilderProjects() {
 									))}
 								</select>
 							)}
-						</div>
 
-						<div className="mb-4 grid grid-cols-1 gap-3 md:grid-cols-2">
-							<div className="space-y-1">
-								<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
-									Start Date
-								</label>
+							<div className="grid grid-cols-2 gap-3">
 								<input
-									className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
 									type="date"
+									className="rounded-md border border-black/15 px-3 py-2 text-sm outline-none"
 									value={form.start_date ?? ""}
 									onChange={set("start_date")}
 								/>
-							</div>
-							<div className="space-y-1">
-								<label className="text-xs uppercase tracking-[0.08em] text-[#888888]">
-									Expected Handover
-								</label>
 								<input
-									className="w-full border-b-2 border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition focus:border-[#d8bc8f]"
 									type="date"
+									className="rounded-md border border-black/15 px-3 py-2 text-sm outline-none"
 									value={form.expected_end_date ?? ""}
 									onChange={set("expected_end_date")}
 								/>
 							</div>
-						</div>
 
-						<div className="mt-3 flex gap-2">
 							<button
-								className="rounded border border-white/10 px-4 py-2 text-sm text-[#a9b7c8] transition hover:border-[#d8bc8f] hover:text-[#d8bc8f]"
-								onClick={() => setOpen(false)}
-							>
-								Cancel
-							</button>
-							<button
-								className="flex-1 rounded bg-[#d8bc8f] px-4 py-2 text-sm font-semibold uppercase tracking-[0.08em] text-[#101824] transition hover:bg-[#d8bc8f]-light disabled:opacity-60"
-								style={{ flex: 1 }}
+								type="button"
+								className="rounded-full bg-[#1e2a35] px-5 py-2 text-xs font-semibold uppercase tracking-[0.09em] text-white"
 								onClick={create}
 								disabled={saving}
 							>
-								{saving ? "Creating…" : "Create Project →"}
+								{saving ? "Creating…" : "Submit inquiry"}
 							</button>
-						</div>
+						</form>
 					</div>
 				</div>
 			</div>

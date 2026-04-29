@@ -22,11 +22,11 @@ export default function Button({
 
 	const variantClass = {
 		primary:
-			"border-brand-gold bg-brand-gold text-brand-black hover:-translate-y-0.5 hover:border-brand-gold-light hover:bg-brand-gold-light hover:shadow-[0_4px_16px_rgba(200,151,31,0.3)] focus-visible:outline-brand-gold-dark",
+			"border-black/10 bg-[#1f2a34] text-white hover:-translate-y-0.5 hover:border-black/20 hover:bg-[#2a3641] hover:shadow-[0_4px_16px_rgba(31,42,52,0.18)] focus-visible:outline-[#1f2a34]",
 		outline:
-			"border-brand-gold bg-transparent text-brand-gold hover:-translate-y-0.5 hover:border-brand-gold-light hover:bg-[rgba(200,151,31,0.15)] hover:shadow-[0_4px_12px_rgba(200,151,31,0.15)] focus-visible:outline-brand-gold",
+			"border-black/10 bg-transparent text-[#475462] hover:-translate-y-0.5 hover:border-black/20 hover:bg-black/5 hover:shadow-[0_4px_12px_rgba(31,42,52,0.08)] focus-visible:outline-[#1f2a34]",
 		secondary:
-			"border-brand-border bg-brand-panel text-white hover:-translate-y-0.5 hover:border-brand-gold hover:bg-[#252525] hover:shadow-[0_4px_12px_rgba(200,151,31,0.1)] focus-visible:outline-brand-gold",
+			"border-black/10 bg-[#f8fafb] text-[#1f2a34] hover:-translate-y-0.5 hover:border-black/20 hover:bg-white hover:shadow-[0_4px_12px_rgba(31,42,52,0.08)] focus-visible:outline-[#1f2a34]",
 	}[variant];
 
 	const sizeClass = {

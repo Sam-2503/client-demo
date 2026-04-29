@@ -50,11 +50,18 @@ export default function Navbar() {
 						</a>
 					))}
 					<a
+						href="/shop"
+						className="mt-2 rounded-full border border-[#1e2a35] bg-transparent px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#1e2a35] transition hover:bg-[#1e2a35] hover:text-white md:mt-0"
+						onClick={() => setMenuOpen(false)}
+					>
+						Shop for furniture
+					</a>
+					<a
 						href="#contact"
 						className="mt-2 rounded-full border border-[#1e2a35] bg-[#1e2a35] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition hover:opacity-90 md:mt-0"
 						onClick={() => setMenuOpen(false)}
 					>
-						Get in touch
+						Get a Quote
 					</a>
 				</div>
 

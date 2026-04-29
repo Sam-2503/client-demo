@@ -1,15 +1,15 @@
 export default function About() {
 	return (
 		<section className="bg-white px-4 py-14 md:px-8" id="about">
-			<div className="mx-auto grid max-w-[1240px] gap-6 md:grid-cols-[1fr_1.2fr]">
-				<div className="min-h-[280px] overflow-hidden rounded-[12px] border border-black/10 bg-black">
+			<div className="mx-auto grid max-w-[1240px] md:grid-cols-[1fr_1.2fr]">
+				<div className="min-h-[280px] overflow-hidden rounded-l-[12px] border border-black/10 bg-black">
 					<img
 						src="/founder.jpeg"
 						alt="Founder"
 						className="h-full w-full object-cover"
 					/>
 				</div>
-				<div className="rounded-[12px] border border-black/10 bg-[#f7f8fa] p-6 md:p-8">
+				<div className="rounded-r-[12px] border border-black/10 bg-[#f7f8fa] p-6 md:p-8">
 					<h2 className="text-[clamp(1.8rem,3vw,2.6rem)] font-semibold text-[#1f2a34]">
 						About The Team
 					</h2>

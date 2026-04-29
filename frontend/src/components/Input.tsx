@@ -26,7 +26,7 @@ export default function Input({
 					htmlFor={inputId}
 					className={cn(
 						"text-sm font-semibold uppercase tracking-[0.06em] transition",
-						error ? "text-red-300" : "text-brand-muted",
+						error ? "text-[#b45309]" : "text-[#5d6a78]",
 					)}
 				>
 					{label}
@@ -35,20 +35,20 @@ export default function Input({
 			<input
 				id={inputId}
 				className={cn(
-					"w-full rounded-md border border-brand-border bg-brand-panel px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#3a3a3a] hover:border-brand-border-light hover:bg-[rgba(200,151,31,0.02)] focus:border-brand-gold focus:bg-[rgba(200,151,31,0.05)] focus:ring-2 focus:ring-brand-gold/10 disabled:cursor-not-allowed disabled:bg-brand-panel-light disabled:opacity-50",
+					"w-full rounded-md border border-black/10 bg-[#f8fafb] px-4 py-3 text-sm text-[#1f2a34] outline-none transition placeholder:text-[#8b9ba9] hover:border-black/20 hover:bg-white focus:border-black/20 focus:bg-white focus:ring-2 focus:ring-black/10 disabled:cursor-not-allowed disabled:bg-[#f8fafb] disabled:opacity-50",
 					error &&
-						"border-red-700 bg-[rgba(192,57,43,0.05)] focus:border-red-500 focus:ring-red-500/10",
+						"border-[#b45309] bg-[#fff7ed] focus:border-[#b45309] focus:ring-[#b45309]/10",
 					className,
 				)}
 				{...props}
 			/>
 			{error && (
-				<span className="text-xs font-medium text-red-400">
+				<span className="text-xs font-medium text-[#b45309]">
 					{error}
 				</span>
 			)}
 			{helperText && !error && (
-				<span className="text-xs text-brand-muted">{helperText}</span>
+				<span className="text-xs text-[#5d6a78]">{helperText}</span>
 			)}
 		</div>
 	);
