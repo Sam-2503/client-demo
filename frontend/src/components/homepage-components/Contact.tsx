@@ -1,20 +1,36 @@
 export default function Contact() {
 	return (
 		<section className="px-4 pb-16 pt-14 md:px-8" id="contact">
-			<div className="mx-auto max-w-[1240px] rounded-[12px] border border-black/10 bg-[#dfe7ec] p-6 md:p-10">
+			<div className="relative mx-auto max-w-[1240px] rounded-[12px] border border-black/10 bg-[#dfe7ec] p-6 md:p-10">
 				<div className="grid gap-8 md:grid-cols-[1fr_1.1fr]">
 					<div>
-						<div className="text-xs font-semibold uppercase tracking-[0.12em] text-[#5a6977]">
-							Get in Touch
+						<div>
+							<div className="text-xs font-semibold uppercase tracking-[0.12em] text-[#5a6977]">
+								Get in Touch
+							</div>
+							<h2 className="mt-3 text-[clamp(2rem,3.5vw,3rem)] font-semibold leading-[1.1] text-[#1f2a34]">
+								Contact us to get started on your project
+							</h2>
+							<p className="mt-4 max-w-[520px] text-[15px] leading-7 text-[#556372]">
+								Share your scope and timeline. We will respond
+								with the next practical steps for planning and
+								execution.
+							</p>
 						</div>
-						<h2 className="mt-3 text-[clamp(2rem,3.5vw,3rem)] font-semibold leading-[1.1] text-[#1f2a34]">
-							Contact us to get started on your project
-						</h2>
-						<p className="mt-4 max-w-[520px] text-[15px] leading-7 text-[#556372]">
-							Share your scope and timeline. We will respond with
-							the next practical steps for planning and execution.
-						</p>
+
+						<div className="absolute left-6 bottom-12 flex items-center">
+							<p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#5a6977] px-4">
+								Already a client?
+							</p>
+							<a
+								href="/login"
+								className="mt-2 rounded-full border border-[#1e2a35] bg-[#1e2a35] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition hover:opacity-90 md:mt-0"
+							>
+								Track your project
+							</a>
+						</div>
 					</div>
+
 					<form className="grid gap-3 rounded-[10px] border border-black/10 bg-white p-4 md:p-5">
 						<input
 							type="text"
@@ -38,7 +54,7 @@ export default function Contact() {
 						/>
 						<button
 							type="button"
-							className="rounded-full bg-[#1e2a35] px-5 py-2 text-xs font-semibold uppercase tracking-[0.09em] text-white"
+							className="mt-2 rounded-full border border-[#1e2a35] bg-transparent px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#1e2a35] transition hover:bg-[#1e2a35] hover:text-white md:mt-0"
 						>
 							Submit inquiry
 						</button>

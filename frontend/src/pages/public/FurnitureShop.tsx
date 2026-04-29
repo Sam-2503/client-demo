@@ -56,18 +56,25 @@ const COLORS = ["Oak", "Walnut", "Ash", "White", "Sand"];
 export default function FurnitureShop() {
 	return (
 		<>
-			<title>RJS Homes - Furniture Shop</title>
+			<title>RJS Homes - Furniture</title>
 			<div className="min-h-screen bg-[#f1f2f4] text-[#1f2a34]">
 				<header className="border-b border-black/10 bg-white/90 backdrop-blur-sm">
 					<div className="mx-auto flex max-w-[1440px] flex-col gap-4 px-4 py-4 md:px-8 lg:flex-row lg:items-center lg:justify-between">
-						<div>
-							<div className="text-xs font-semibold uppercase tracking-[0.14em] text-[#5a6977]">
-								RJS Homes Furniture
+						<a href="/home" className="flex items-center gap-3">
+							<img
+								src="/rjs-logo.svg"
+								alt="RJS Homes logo"
+								className="h-10 w-10 rounded-full border border-[#d5b47a]/50 bg-[radial-gradient(circle_at_30%_25%,#e4cda2_0%,#b68945_60%,#7a5a2e_100%)]"
+							/>
+							<div>
+								<div className="font-serif text-base font-bold text-[#1f2a34]">
+									RJS Homes
+								</div>
+								<div className="text-[10px] uppercase tracking-[0.16em] text-[#617181]">
+									Furniture
+								</div>
 							</div>
-							<h1 className="mt-1 font-serif text-3xl font-semibold text-[#1f2a34]">
-								Shop for furniture
-							</h1>
-						</div>
+						</a>
 						<div className="flex flex-1 flex-col gap-3 lg:max-w-[780px] lg:flex-row">
 							<div className="flex items-center gap-2 rounded-full border border-black/10 bg-[#f8fafb] px-4 py-2 text-sm text-[#5d6a78] lg:flex-[1.2]">
 								<span className="text-xs font-semibold uppercase tracking-[0.1em]">
@@ -96,7 +103,7 @@ export default function FurnitureShop() {
 				<main className="mx-auto grid max-w-[1440px] gap-6 px-4 py-6 md:px-8 lg:grid-cols-[270px_1fr]">
 					<aside className="rounded-[18px] border border-black/10 bg-white p-5 shadow-[0_18px_50px_rgba(15,23,42,0.06)]">
 						<div className="flex items-center justify-between">
-							<h2 className="font-serif text-xl font-semibold text-[#1f2a34]">
+							<h2 className="text-xl tracking-wide font-semibold text-[#1f2a34]">
 								Filter
 							</h2>
 							<button className="text-sm text-[#5d6a78]">
@@ -183,7 +190,7 @@ export default function FurnitureShop() {
 									</div>
 									<div className="space-y-3 p-4">
 										<div>
-											<h3 className="font-serif text-[1.05rem] font-semibold text-[#1f2a34]">
+											<h3 className="text-[1.05rem] font-semibold text-[#1f2a34]">
 												{product.name}
 											</h3>
 											<p className="mt-1 text-sm text-[#5d6a78]">
