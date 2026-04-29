@@ -1,21 +1,6 @@
 import { useState } from "react";
 
 export default function Contact() {
-	const [formData, setFormData] = useState({
-		name: "",
-		email: "",
-		phone: "",
-		message: "",
-	});
-
-	const handleContactSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
-		alert(
-			"Thank you. Our team will get back to you within one business day.",
-		);
-		setFormData({ name: "", email: "", phone: "", message: "" });
-	};
-
 	return (
 		<section className="px-4 pb-16 pt-14 md:px-8" id="contact">
 			<div className="mx-auto max-w-[1240px] rounded-[12px] border border-black/10 bg-[#dfe7ec] p-6 md:p-10">
