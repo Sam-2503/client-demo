@@ -9,14 +9,8 @@ interface RoleOption {
 }
 
 const ROLES: RoleOption[] = [
-	{
-		id: "builder",
-		name: "Builder",
-	},
-	{
-		id: "client",
-		name: "Client",
-	},
+	{ id: "builder", name: "Builder" },
+	{ id: "client", name: "Client" },
 ];
 
 function EyeIcon({ open }: { open: boolean }) {
@@ -144,258 +138,308 @@ export default function Login() {
 			) : (
 				<title>RJS Homes - Login</title>
 			)}
-			<div className="relative min-h-screen overflow-hidden bg-[radial-gradient(120%_90%_at_50%_0%,#13263a_0%,#08111c_48%,#050911_100%)] px-4 py-8 text-white md:px-8">
-				<div className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_70%_at_84%_10%,rgba(216,188,143,0.14)_0%,transparent_60%),radial-gradient(55%_45%_at_12%_30%,rgba(93,126,161,0.2)_0%,transparent_70%)]" />
-				<div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.032)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.024)_1px,transparent_1px)] bg-[length:68px_68px] opacity-35" />
+			<div className="relative min-h-screen overflow-hidden bg-[#eef3f6] px-4 py-8 text-[#1b242d] md:px-8">
+				<div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_55%_at_50%_0%,rgba(255,255,255,0.75)_0%,rgba(255,255,255,0)_68%),radial-gradient(60%_45%_at_15%_20%,rgba(255,255,255,0.55)_0%,transparent_60%)]" />
 
-				<button
-					type="button"
-					className="absolute left-4 top-4 z-20 inline-flex items-center gap-2 rounded-full border border-white/10 bg-[rgba(10,18,28,0.72)] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#c9d2de] shadow-[0_10px_24px_rgba(0,0,0,0.18)] backdrop-blur-xl transition hover:border-[#d8bc8f]/40 hover:text-[#f0e0c1]"
-					onClick={() => navigate("/")}
-				>
-					<span aria-hidden="true">←</span>
-					Back Home
-				</button>
-
-				<div className="relative mx-auto flex min-h-screen w-full max-w-[440px] flex-col items-center justify-center">
-					{showSuccessMessage ? (
-						<div className="w-full space-y-6 rounded-[24px] border border-white/10 bg-[linear-gradient(160deg,rgba(10,18,28,0.86)_0%,rgba(16,31,48,0.86)_100%)] p-8 shadow-[0_28px_70px_rgba(0,0,0,0.35)] backdrop-blur-2xl">
+				<div className="relative mx-auto flex min-h-screen w-full max-w-[1180px] items-center justify-center">
+					<div className="grid w-full gap-8 rounded-[18px] border border-black/10 bg-[#dbe6ec]/95 p-4 shadow-[0_24px_60px_rgba(24,39,51,0.12)] md:grid-cols-[0.95fr_1.05fr] md:p-5 lg:p-6">
+						<div className="flex min-h-[220px] flex-col justify-between rounded-[14px] bg-[linear-gradient(180deg,#dbe6ec_0%,#cfdce4_100%)] p-6 md:min-h-full md:p-8">
 							<div>
-								<div className="text-[11px] uppercase tracking-[0.18em] text-[#c9aa72]">
-									Registration Status
-								</div>
-								<h2 className="mt-3 font-serif text-4xl text-[#f5efe2]">
-									Registration submitted.
-								</h2>
-								<p className="mt-3 text-sm leading-7 text-[#c0ccd8]">
-									Your builder account has been created and is
-									pending admin approval.
-								</p>
-							</div>
-
-							<div className="rounded-2xl border border-[rgba(99,176,125,0.28)] bg-[rgba(99,176,125,0.08)] p-5">
-								<div className="text-[2.2rem] leading-none text-[#69c58a]">
-									●
-								</div>
-								<div className="mt-3 font-serif text-[1.15rem] font-semibold text-[#69c58a]">
-									Pending Admin Approval
-								</div>
-								<p className="mt-3 text-sm leading-7 text-[#c8d5e0]">
-									We review every builder account for quality
-									and security. You will receive access once
-									the review is complete.
-								</p>
-							</div>
-
-							<button
-								type="button"
-								className="inline-flex h-12 w-full items-center justify-center rounded-full border border-[#d8bc8f]/35 bg-[linear-gradient(90deg,#d8c29b_0%,#b58543_100%)] px-5 text-[12px] font-semibold uppercase tracking-[0.14em] text-[#101824] transition hover:brightness-110"
-								onClick={() => {
-									setShowSuccessMessage(false);
-									switchMode("login");
-								}}
-							>
-								Back to Sign In
-							</button>
-						</div>
-					) : (
-						<div className="w-full space-y-6 rounded-[24px] border border-white/10 bg-[linear-gradient(160deg,rgba(10,18,28,0.86)_0%,rgba(16,31,48,0.86)_100%)] p-8 shadow-[0_28px_70px_rgba(0,0,0,0.35)] backdrop-blur-2xl">
-							<div>
-								<h1 className="font-serif text-[2.8rem] font-semibold leading-tight text-[#f5efe2]">
-									{mode === "login"
-										? "Welcome back."
-										: "Create account."}
-								</h1>
-								<p className="mt-2 text-[13px] text-[#a9b7c8]">
-									{mode === "login"
-										? "Sign in to access your project dashboard."
-										: "Register as a builder or client."}
-								</p>
-							</div>
-
-							<div className="flex flex-wrap gap-2 rounded-full border border-white/10 bg-white/5 p-1">
 								<button
 									type="button"
-									className={`flex-1 rounded-full px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.14em] transition ${
-										mode === "login"
-											? "bg-[#d8bc8f] text-[#101824]"
-											: "text-[#c7d1de] hover:text-[#f3e7d1]"
-									}`}
-									onClick={() => switchMode("login")}
+									className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1e2a35] transition hover:border-black/20 hover:bg-white"
+									onClick={() => navigate("/")}
 								>
-									Sign In
+									<span aria-hidden="true">←</span>
+									Back Home
 								</button>
-								<button
-									type="button"
-									className={`flex-1 rounded-full px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.14em] transition ${
-										mode === "register"
-											? "bg-[#d8bc8f] text-[#101824]"
-											: "text-[#c7d1de] hover:text-[#f3e7d1]"
-									}`}
-									onClick={() => switchMode("register")}
-								>
-									Register
-								</button>
-							</div>
 
-							{mode === "register" && (
-								<div className="space-y-3">
-									<label className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-[#a9b7c8]">
-										I am a:
-									</label>
-									<div className="grid grid-cols-2 gap-3">
-										{ROLES.map((item) => {
-											const selected = role === item.id;
-											return (
-												<button
-													key={item.id}
-													type="button"
-													className={`relative rounded-2xl border p-4 text-center transition duration-300 ${
-														selected
-															? "border-[#d8bc8f]/45 bg-[rgba(216,188,143,0.08)]"
-															: "border-white/10 bg-white/5 hover:border-[#d8bc8f]/25 hover:bg-white/8"
-													}`}
-													onClick={() =>
-														setRole(item.id)
-													}
-												>
-													{selected && (
-														<div className="absolute right-2 top-2 flex h-5 w-5 items-center justify-center rounded-full bg-[#d8bc8f] text-[9px] font-bold text-[#101824]">
-															✓
-														</div>
-													)}
-													<div className="text-[12px] font-semibold text-[#f4ece0]">
-														{item.name}
-													</div>
-												</button>
-											);
-										})}
-									</div>
-								</div>
-							)}
-
-							<div className="space-y-4">
-								{mode === "register" && (
-									<div>
-										<label className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.12em] text-[#e8ebef]">
-											Full Name
-										</label>
-										<input
-											className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#8f9cac] focus:border-[#d8bc8f]/45 focus:bg-white/7"
-											placeholder="Your full name"
-											value={fullName}
-											onChange={(e) =>
-												setFullName(e.target.value)
-											}
-										/>
-									</div>
-								)}
-
-								<div>
-									<label className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.12em] text-[#e8ebef]">
-										Email Address
-									</label>
-									<input
-										className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#8f9cac] focus:border-[#d8bc8f]/45 focus:bg-white/7"
-										type="email"
-										placeholder="you@example.com"
-										value={email}
-										onChange={(e) =>
-											setEmail(e.target.value)
-										}
-										onKeyDown={(e) =>
-											e.key === "Enter" && submit()
-										}
+								<div className="mt-10 flex items-center gap-3">
+									<img
+										src="/rjs-logo.svg"
+										alt="RJS Homes logo"
+										className="h-12 w-12 rounded-full border border-[#d5b47a]/50 bg-[radial-gradient(circle_at_30%_25%,#e4cda2_0%,#b68945_60%,#7a5a2e_100%)]"
 									/>
-								</div>
-
-								<div>
-									<label className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.12em] text-[#e8ebef]">
-										Password
-									</label>
-									<div className="relative">
-										<input
-											className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 pr-12 text-sm text-white outline-none transition placeholder:text-[#8f9cac] focus:border-[#d8bc8f]/45 focus:bg-white/7"
-											type={
-												showPassword
-													? "text"
-													: "password"
-											}
-											placeholder="••••••••"
-											value={password}
-											onChange={(e) =>
-												setPassword(e.target.value)
-											}
-											onKeyDown={(e) =>
-												e.key === "Enter" && submit()
-											}
-										/>
-										<button
-											type="button"
-											className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-2 text-[#bcc7d4] transition hover:bg-white/5 hover:text-[#f4e7cf]"
-											onClick={() =>
-												setShowPassword((prev) => !prev)
-											}
-											aria-label={
-												showPassword
-													? "Hide password"
-													: "Show password"
-											}
-										>
-											<EyeIcon open={showPassword} />
-										</button>
+									<div>
+										<div className="font-serif text-xl font-semibold text-[#1f2a34]">
+											RJS Homes
+										</div>
+										<div className="text-[10px] uppercase tracking-[0.18em] text-[#5d6a78]">
+											Construction
+										</div>
 									</div>
 								</div>
+
+								<h1 className="mt-8 max-w-[420px] text-[clamp(2.2rem,3vw,3.5rem)] font-semibold leading-[1.08] text-[#1e2a35]">
+									Access your project workspace.
+								</h1>
+								<p className="mt-4 max-w-[440px] text-[15px] leading-7 text-[#51606e]">
+									Sign in to review updates, approvals, and
+									project progress. New clients and builders
+									can register from the same screen.
+								</p>
 							</div>
+						</div>
 
-							{err && (
-								<div className="rounded-2xl border border-[rgba(209,81,72,0.24)] bg-[rgba(209,81,72,0.08)] px-4 py-3 text-sm text-[#f1a69f]">
-									{err}
+						<div className="rounded-[14px] border border-black/10 bg-[#f7f8fa] p-5 md:p-7 lg:p-8">
+							{showSuccessMessage ? (
+								<div className="space-y-6">
+									<div>
+										<div className="text-[11px] uppercase tracking-[0.16em] text-[#5f6c79]">
+											Registration status
+										</div>
+										<h2 className="mt-3 font-serif text-[clamp(2rem,2.8vw,2.6rem)] font-semibold text-[#1f2a34]">
+											Registration submitted.
+										</h2>
+										<p className="mt-3 text-sm leading-7 text-[#556271]">
+											Your builder account has been
+											created and is pending admin
+											approval.
+										</p>
+									</div>
+
+									<div className="rounded-[12px] border border-[#cfe1cf] bg-[#eef6ee] p-5 text-[#28553a]">
+										<div className="text-[11px] font-semibold uppercase tracking-[0.14em]">
+											Pending admin approval
+										</div>
+										<p className="mt-2 text-sm leading-6 text-[#44644f]">
+											We review every builder account for
+											quality and security before access
+											is granted.
+										</p>
+									</div>
+
+									<button
+										type="button"
+										className="w-full rounded-full bg-[#1e2a35] px-5 py-3 text-[12px] font-semibold uppercase tracking-[0.14em] text-white transition hover:opacity-95"
+										onClick={() => {
+											setShowSuccessMessage(false);
+											switchMode("login");
+										}}
+									>
+										Back to sign in
+									</button>
 								</div>
-							)}
+							) : (
+								<div className="space-y-6">
+									<div>
+										<div className="text-[11px] uppercase tracking-[0.16em] text-[#5f6c79]">
+											{mode === "login"
+												? "Sign in"
+												: "Register"}
+										</div>
+										<h2 className="mt-3 font-serif text-[clamp(2rem,2.8vw,2.8rem)] font-semibold text-[#1f2a34]">
+											{mode === "login"
+												? "Welcome back."
+												: "Create account."}
+										</h2>
+										<p className="mt-3 text-sm leading-7 text-[#556271]">
+											{mode === "login"
+												? "Sign in to access your project dashboard."
+												: "Register as a builder or client using the same RJS Homes theme."}
+										</p>
+									</div>
 
-							<button
-								type="button"
-								className="inline-flex h-12 w-full items-center justify-center rounded-full border border-[#d8bc8f]/35 bg-[linear-gradient(90deg,#d8c29b_0%,#b58543_100%)] px-5 text-[12px] font-semibold uppercase tracking-[0.14em] text-[#101824] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
-								onClick={submit}
-								disabled={loading}
-							>
-								{loading
-									? "Please wait..."
-									: mode === "login"
-										? "Sign In"
-										: "Create Account"}
-							</button>
-
-							<div className="text-center text-[11px] text-[#a9b7c8]">
-								{mode === "login" ? (
-									<>
-										No account yet?{" "}
+									<div className="flex rounded-full border border-black/10 bg-white/75 p-1">
 										<button
 											type="button"
-											className="font-semibold text-[#e5c68d] transition hover:text-[#f0ddb2]"
+											className={`flex-1 rounded-full px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.14em] transition ${
+												mode === "login"
+													? "bg-[#1e2a35] text-white"
+													: "text-[#4f5d6a] hover:bg-black/5"
+											}`}
+											onClick={() => switchMode("login")}
+										>
+											Sign in
+										</button>
+										<button
+											type="button"
+											className={`flex-1 rounded-full px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.14em] transition ${
+												mode === "register"
+													? "bg-[#1e2a35] text-white"
+													: "text-[#4f5d6a] hover:bg-black/5"
+											}`}
 											onClick={() =>
 												switchMode("register")
 											}
 										>
-											Register here
+											Register
 										</button>
-									</>
-								) : (
-									<>
-										Already have an account?{" "}
-										<button
-											type="button"
-											className="font-semibold text-[#e5c68d] transition hover:text-[#f0ddb2]"
-											onClick={() => switchMode("login")}
-										>
-											Sign In
-										</button>
-									</>
-								)}
-							</div>
+									</div>
+
+									{mode === "register" && (
+										<div className="space-y-3">
+											<label className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-[#5f6c79]">
+												I am a:
+											</label>
+											<div className="grid grid-cols-2 gap-3">
+												{ROLES.map((item) => {
+													const selected =
+														role === item.id;
+													return (
+														<button
+															key={item.id}
+															type="button"
+															className={`relative rounded-[12px] border p-4 text-center transition duration-300 ${
+																selected
+																	? "border-[#1e2a35] bg-[#dbe6ec]"
+																	: "border-black/10 bg-white/75 hover:border-black/20 hover:bg-white"
+															}`}
+															onClick={() =>
+																setRole(item.id)
+															}
+														>
+															{selected && (
+																<div className="absolute right-2 top-2 flex h-5 w-5 items-center justify-center rounded-full bg-[#1e2a35] text-[9px] font-bold text-white">
+																	✓
+																</div>
+															)}
+															<div className="text-[12px] font-semibold text-[#1f2a34]">
+																{item.name}
+															</div>
+														</button>
+													);
+												})}
+											</div>
+										</div>
+									)}
+
+									<div className="space-y-4">
+										{mode === "register" && (
+											<div>
+												<label className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.12em] text-[#5f6c79]">
+													Full name
+												</label>
+												<input
+													className="w-full rounded-[12px] border border-black/10 bg-white px-4 py-3 text-sm text-[#1b242d] outline-none transition placeholder:text-[#8b99a6] focus:border-[#1e2a35]/50"
+													placeholder="Your full name"
+													value={fullName}
+													onChange={(e) =>
+														setFullName(
+															e.target.value,
+														)
+													}
+												/>
+											</div>
+										)}
+
+										<div>
+											<label className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.12em] text-[#5f6c79]">
+												Email address
+											</label>
+											<input
+												className="w-full rounded-[12px] border border-black/10 bg-white px-4 py-3 text-sm text-[#1b242d] outline-none transition placeholder:text-[#8b99a6] focus:border-[#1e2a35]/50"
+												type="email"
+												placeholder="you@example.com"
+												value={email}
+												onChange={(e) =>
+													setEmail(e.target.value)
+												}
+												onKeyDown={(e) =>
+													e.key === "Enter" &&
+													submit()
+												}
+											/>
+										</div>
+
+										<div>
+											<label className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.12em] text-[#5f6c79]">
+												Password
+											</label>
+											<div className="relative">
+												<input
+													className="w-full rounded-[12px] border border-black/10 bg-white px-4 py-3 pr-12 text-sm text-[#1b242d] outline-none transition placeholder:text-[#8b99a6] focus:border-[#1e2a35]/50"
+													type={
+														showPassword
+															? "text"
+															: "password"
+													}
+													placeholder="••••••••"
+													value={password}
+													onChange={(e) =>
+														setPassword(
+															e.target.value,
+														)
+													}
+													onKeyDown={(e) =>
+														e.key === "Enter" &&
+														submit()
+													}
+												/>
+												<button
+													type="button"
+													className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-2 text-[#607181] transition hover:bg-black/5 hover:text-[#1e2a35]"
+													onClick={() =>
+														setShowPassword(
+															(prev) => !prev,
+														)
+													}
+													aria-label={
+														showPassword
+															? "Hide password"
+															: "Show password"
+													}
+												>
+													<EyeIcon
+														open={showPassword}
+													/>
+												</button>
+											</div>
+										</div>
+									</div>
+
+									{err && (
+										<div className="rounded-[12px] border border-[#e2b1ab] bg-[#f8ece9] px-4 py-3 text-sm text-[#8c3d35]">
+											{err}
+										</div>
+									)}
+
+									<button
+										type="button"
+										className="inline-flex h-12 w-full items-center justify-center rounded-full bg-[#1e2a35] px-5 text-[12px] font-semibold uppercase tracking-[0.14em] text-white transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60"
+										onClick={submit}
+										disabled={loading}
+									>
+										{loading
+											? "Please wait..."
+											: mode === "login"
+												? "Sign in"
+												: "Create account"}
+									</button>
+
+									<div className="text-center text-[11px] text-[#5f6c79]">
+										{mode === "login" ? (
+											<>
+												No account yet?{" "}
+												<button
+													type="button"
+													className="font-semibold text-[#1e2a35] transition hover:opacity-80"
+													onClick={() =>
+														switchMode("register")
+													}
+												>
+													Register here
+												</button>
+											</>
+										) : (
+											<>
+												Already have an account?{" "}
+												<button
+													type="button"
+													className="font-semibold text-[#1e2a35] transition hover:opacity-80"
+													onClick={() =>
+														switchMode("login")
+													}
+												>
+													Sign in
+												</button>
+											</>
+										)}
+									</div>
+								</div>
+							)}
 						</div>
-					)}
+					</div>
 				</div>
 			</div>
 		</>

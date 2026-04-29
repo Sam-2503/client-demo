@@ -35,7 +35,7 @@ export default function Differentiator() {
 					{differentiators.map((item) => (
 						<div
 							key={item.title}
-							className="rounded-[10px] border border-black/10 bg-[#f7f4ed] p-5"
+							className="rounded-[10px] border border-black/10 bg-[#f1f5f8] p-5"
 						>
 							<h3 className="text-lg font-semibold text-[#1f2a34]">
 								{item.title}
