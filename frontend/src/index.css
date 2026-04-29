@@ -122,23 +122,51 @@ html {
 	position: relative;
 }
 
+/* Mobile first: vertical arrow between stacked cards */
 .with-arrow::after {
 	content: "";
 	position: absolute;
-	top: 50%;
-	right: -40px;
-	width: 60px;
-	border-top: 3px dashed #c2b937;
-	transform: translateY(-50%);
+	bottom: -40px;
+	left: 50%;
+	height: 60px;
+	border-left: 3px dashed #c2b937;
+	transform: translateX(-50%);
 }
 
 .with-arrow::before {
 	content: "";
 	position: absolute;
-	top: 50%;
-	right: -40px;
-	transform: translateY(-50%);
-	border-left: 6px solid #cbd5e1;
-	border-top: 4px solid transparent;
-	border-bottom: 4px solid transparent;
+	bottom: -40px;
+	left: 50%;
+	transform: translateX(-50%);
+	border-top: 6px solid #cbd5e1;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+}
+
+/* Desktop: horizontal arrow to the right of the card */
+@media (min-width: 768px) {
+	.with-arrow::after {
+		top: 50%;
+		right: -40px;
+		bottom: auto;
+		left: auto;
+		width: 60px;
+		height: auto;
+		border-top: 3px dashed #c2b937;
+		border-left: none;
+		transform: translateY(-50%);
+	}
+
+	.with-arrow::before {
+		top: 50%;
+		right: -40px;
+		bottom: auto;
+		left: auto;
+		transform: translateY(-50%);
+		border-left: 6px solid #cbd5e1;
+		border-top: 4px solid transparent;
+		border-bottom: 4px solid transparent;
+		border-right: none;
+	}
 }

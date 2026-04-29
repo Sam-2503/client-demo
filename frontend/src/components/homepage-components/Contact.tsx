@@ -18,17 +18,7 @@ export default function Contact() {
 							</p>
 						</div>
 
-						<div className="absolute left-6 bottom-12 flex items-center">
-							<p className="text-sm font-semibold uppercase tracking-[0.12em] text-[#5a6977] px-4">
-								Already a client?
-							</p>
-							<a
-								href="/login"
-								className="mt-2 rounded-full border border-[#1e2a35] bg-[#1e2a35] px-4 py-2 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:opacity-90 md:mt-0"
-							>
-								Track your project
-							</a>
-						</div>
+						{/* moved below the form on mobile; absolute on md+ */}
 					</div>
 
 					<form className="grid gap-3 rounded-[10px] border border-black/10 bg-white p-4 md:p-5">
@@ -59,6 +49,19 @@ export default function Contact() {
 							Submit inquiry
 						</button>
 					</form>
+
+					{/* Already a client - static below form on mobile, absolute on desktop */}
+					<div className="mt-4 flex items-center gap-3 md:absolute md:left-6 md:bottom-12 md:mt-0">
+						<p className="text-sm font-semibold uppercase tracking-[0.12em] text-[#5a6977] px-4">
+							Already a client?
+						</p>
+						<a
+							href="/login"
+							className="text-center rounded-full border border-[#1e2a35] bg-[#1e2a35] px-4 py-2 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:opacity-90"
+						>
+							Track your project
+						</a>
+					</div>
 				</div>
 			</div>
 		</section>
