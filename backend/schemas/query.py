@@ -1,6 +1,6 @@
 from datetime import datetime
-from typing import Optional
-from pydantic import BaseModel
+from typing import Optional, List
+from pydantic import BaseModel, Field
 from uuid import UUID
 
 
@@ -11,6 +11,7 @@ class QueryCreate(BaseModel):
 
 class QueryRespond(BaseModel):
     answer: str
+    answer_media_urls: Optional[List[str]] = None
 
 
 class UserBasic(BaseModel):
@@ -30,6 +31,7 @@ class QueryOut(BaseModel):
     answered_by_id: Optional[UUID] = None
     question: str
     answer: Optional[str] = None
+    answer_media_urls: List[str] = Field(default_factory=list)
     status: str  # open, resolved
     created_at: datetime
     resolved_at: Optional[datetime] = None
@@ -46,6 +48,7 @@ class QueryDetailOut(BaseModel):
     answered_by_id: Optional[UUID] = None
     question: str
     answer: Optional[str] = None
+    answer_media_urls: List[str] = Field(default_factory=list)
     status: str
     created_at: datetime
     resolved_at: Optional[datetime] = None

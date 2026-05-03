@@ -73,7 +73,6 @@ export default function BuilderClients() {
 				{/* Search */}
 				<div className="rounded-md border border-black/10 bg-[rgba(224,234,242,0.3)] p-4">
 					<div className="flex items-center gap-3">
-						<span className="text-xs text-[#888888]">🔍</span>
 						<input
 							className="w-full border-b-2 border-black/10 bg-black/5 px-3 py-2 text-sm text-[#1f2a34] outline-none transition focus:border-brand-gold"
 							placeholder="Search by name or email…"
@@ -86,14 +85,13 @@ export default function BuilderClients() {
 				{/* Clients list */}
 				{loading ? (
 					<div className="rounded-md border border-black/10 bg-[rgba(224,234,242,0.3)] p-10 text-center">
-						<div className="mb-2 text-3xl">⏳</div>
+						<div className="mx-auto mb-2 loading-spinner" />
 						<div className="text-sm text-[#5d6a78]">
 							Loading clients…
 						</div>
 					</div>
 				) : filteredClients.length === 0 ? (
 					<div className="rounded-md border border-black/10 bg-[rgba(224,234,242,0.3)] p-10 text-center">
-						<div className="mb-2 text-3xl">👥</div>
 						<div className="text-sm text-[#5d6a78]">
 							{searchTerm ? "No clients found" : "No clients yet"}
 						</div>
@@ -104,11 +102,13 @@ export default function BuilderClients() {
 							<table className="min-w-full text-left text-sm">
 								<thead>
 									<tr className="border-b border-black/10 bg-black/5 text-xs uppercase tracking-[0.08em] text-[#5d6a78]">
-										<th>Client Name</th>
-										<th>Email</th>
-										<th>Projects</th>
-										<th>Status</th>
-										<th>Joined</th>
+										<th className="px-3 py-3">
+											Client Name
+										</th>
+										<th className="px-3 py-3">Email</th>
+										<th className="py-3">Projects</th>
+										<th className="py-3">Status</th>
+										<th className="px-3 py-3">Joined</th>
 									</tr>
 								</thead>
 								<tbody>

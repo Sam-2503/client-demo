@@ -50,7 +50,26 @@ def ensure_project_creator_column() -> None:
             )
 
 
+def ensure_query_answer_media_column() -> None:
+    inspector = inspect(engine)
+    query_columns = {column["name"] for column in inspector.get_columns("queries")}
+
+    if "answer_media_urls" not in query_columns:
+        with engine.begin() as connection:
+            connection.execute(text("ALTER TABLE queries ADD COLUMN answer_media_urls JSON"))
+            connection.execute(
+                text("UPDATE queries SET answer_media_urls = '[]'::json WHERE answer_media_urls IS NULL")
+            )
+            connection.execute(
+                text("ALTER TABLE queries ALTER COLUMN answer_media_urls SET DEFAULT '[]'::json")
+            )
+            connection.execute(
+                text("ALTER TABLE queries ALTER COLUMN answer_media_urls SET NOT NULL")
+            )
+
+
 ensure_project_creator_column()
+ensure_query_answer_media_column()
 print("✅ Database tables ready")
 
 # ── App init ──────────────────────────────────────────────────────────────────

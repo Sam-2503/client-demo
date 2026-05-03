@@ -93,7 +93,7 @@ export default function BuilderProjects() {
 		setSaving(true);
 		try {
 			await api.post("/api/projects/", form);
-			toast("Project created ✓");
+			toast("Project created successfully");
 			setOpen(false);
 			setForm(EMPTY);
 			load();
@@ -124,7 +124,7 @@ export default function BuilderProjects() {
 			<div className="animate-fade-up px-6 py-6">
 				{loading ? (
 					<div className="rounded-md border border-black/10 bg-[rgba(224,234,242,0.3)] p-10 text-center">
-						<div className="mb-2 text-3xl">⏳</div>
+						<div className="mx-auto mb-2 loading-spinner" />
 						<div className="text-sm text-[#5d6a78]">Loading…</div>
 					</div>
 				) : (
@@ -161,7 +161,7 @@ export default function BuilderProjects() {
 									</div>
 
 									<div className="text-xs text-[#5d6a78]">
-										📍 {p.location ?? "—"}
+										{p.location ?? "—"}
 									</div>
 
 									<div>

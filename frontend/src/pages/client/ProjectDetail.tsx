@@ -303,6 +303,22 @@ export default function ClientProjectDetail() {
 												<p className="text-sm leading-6 text-[#5d6a78]">
 													{query.answer}
 												</p>
+												{(query.answer_media_urls ?? [])
+													.length > 0 && (
+													<div className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-3">
+														{(
+															query.answer_media_urls ??
+															[]
+														).map((url) => (
+															<img
+																key={url}
+																src={url}
+																alt="Builder response media"
+																className="h-24 w-full rounded-md object-cover"
+															/>
+														))}
+													</div>
+												)}
 											</div>
 										)}
 									</div>

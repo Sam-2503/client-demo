@@ -115,6 +115,10 @@ export default function BuilderProjectDetail() {
 	const [updForm, setUpdForm] = useState<CreateUpdateRequest>(EMPTY_UPD);
 	const [matForm, setMatForm] = useState(EMPTY_MAT);
 	const [queryResponseText, setQueryResponseText] = useState("");
+	const [queryResponseMediaUrls, setQueryResponseMediaUrls] = useState<
+		string[]
+	>([]);
+	const [uploadingQueryMedia, setUploadingQueryMedia] = useState(false);
 	const [photoIn, setPhotoIn] = useState("");
 	const [uploadingPhoto, setUploadingPhoto] = useState(false);
 	const [saving, setSaving] = useState(false);
@@ -278,15 +282,50 @@ export default function BuilderProjectDetail() {
 		try {
 			await api.post(`/api/queries/${queryId}/respond`, {
 				answer: queryResponseText.trim(),
+				answer_media_urls: queryResponseMediaUrls,
 			});
 			toast("Response posted ✓");
 			setQueryResponseText("");
+			setQueryResponseMediaUrls([]);
 			setShowQueryResponse(null);
 			await load();
 		} catch (e: any) {
 			toast(e?.response?.data?.detail ?? "Failed to post response");
 		} finally {
 			setSaving(false);
+		}
+	};
+
+	const handleQueryMediaUpload = async (
+		e: React.ChangeEvent<HTMLInputElement>,
+	) => {
+		const files = e.target.files;
+		if (!files || files.length === 0) return;
+
+		setUploadingQueryMedia(true);
+		try {
+			const uploadedUrls: string[] = [];
+			for (const file of Array.from(files)) {
+				const formData = new FormData();
+				formData.append("file", file);
+				const response = await api.post<{ url: string }>(
+					"/api/queries/upload-image",
+					formData,
+					{
+						headers: {
+							"Content-Type": "multipart/form-data",
+						},
+					},
+				);
+				uploadedUrls.push(response.data.url);
+			}
+			setQueryResponseMediaUrls((prev) => [...prev, ...uploadedUrls]);
+			toast("Response image uploaded ✓");
+		} catch (e: any) {
+			toast(e?.response?.data?.detail ?? "Failed to upload image");
+		} finally {
+			setUploadingQueryMedia(false);
+			e.target.value = "";
 		}
 	};
 
@@ -806,6 +845,22 @@ export default function BuilderProjectDetail() {
 											>
 												{q.answer}
 											</div>
+											{(q.answer_media_urls ?? [])
+												.length > 0 && (
+												<div className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-3">
+													{(
+														q.answer_media_urls ??
+														[]
+													).map((url) => (
+														<img
+															key={url}
+															src={url}
+															alt="Query response media"
+															className="h-24 w-full rounded-md object-cover"
+														/>
+													))}
+												</div>
+											)}
 										</div>
 									)}
 
@@ -849,6 +904,85 @@ export default function BuilderProjectDetail() {
 															resize: "vertical",
 														}}
 													/>
+													<div
+														style={{
+															marginBottom:
+																"1rem",
+														}}
+													>
+														<input
+															type="file"
+															accept="image/*"
+															multiple
+															onChange={
+																handleQueryMediaUpload
+															}
+															disabled={
+																saving ||
+																uploadingQueryMedia
+															}
+															style={{
+																color: "var(--white)",
+															}}
+														/>
+														{uploadingQueryMedia && (
+															<div
+																style={{
+																	fontSize:
+																		".8rem",
+																	color: "var(--gray)",
+																	marginTop:
+																		"0.5rem",
+																}}
+															>
+																Uploading
+																image...
+															</div>
+														)}
+														{queryResponseMediaUrls.length >
+															0 && (
+															<div className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-3">
+																{queryResponseMediaUrls.map(
+																	(url) => (
+																		<div
+																			key={
+																				url
+																			}
+																			className="relative overflow-hidden rounded-md border border-black/10"
+																		>
+																			<img
+																				src={
+																					url
+																				}
+																				alt="Selected response media"
+																				className="h-24 w-full object-cover"
+																			/>
+																			<button
+																				type="button"
+																				onClick={() =>
+																					setQueryResponseMediaUrls(
+																						(
+																							prev,
+																						) =>
+																							prev.filter(
+																								(
+																									item,
+																								) =>
+																									item !==
+																									url,
+																							),
+																					)
+																				}
+																				className="absolute right-1 top-1 rounded bg-black/70 px-2 py-0.5 text-xs text-white"
+																			>
+																				Remove
+																			</button>
+																		</div>
+																	),
+																)}
+															</div>
+														)}
+													</div>
 													<div
 														style={{
 															display: "flex",
@@ -898,6 +1032,9 @@ export default function BuilderProjectDetail() {
 																setQueryResponseText(
 																	"",
 																);
+																setQueryResponseMediaUrls(
+																	[],
+																);
 															}}
 															disabled={saving}
 															style={{
@@ -926,6 +1063,9 @@ export default function BuilderProjectDetail() {
 														);
 														setQueryResponseText(
 															"",
+														);
+														setQueryResponseMediaUrls(
+															[],
 														);
 													}}
 													style={{
