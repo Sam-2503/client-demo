@@ -1,30 +1,4 @@
-# 🏗️ Construction Management App
-
-> A complete, production-ready construction project management platform with real-time updates, RBAC, and transparent communication between builders, clients, and admins.
-
-**Status**: ✅ **PRODUCTION READY** | Version: 1.0.0 | Last Updated: 2026-04-25
-
----
-
-## 📖 Documentation Index
-
-**Start here based on what you need:**
-
-| Document | Purpose | Read If... |
-|----------|---------|-----------|
-| **[EXECUTIVE_SUMMARY.md](EXECUTIVE_SUMMARY.md)** | High-level overview | You want the big picture |
-| **[QUICK_START.md](QUICK_START.md)** | Get started in 5 minutes | You're new to the project |
-| **[QUICK_REFERENCE.md](QUICK_REFERENCE.md)** | Common tasks & troubleshooting | You're developing or debugging |
-| **[IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md)** | Feature list & architecture | You need technical details |
-| **[FINAL_CHECKLIST.md](FINAL_CHECKLIST.md)** | 100-point completion checklist | You need to verify status |
-| **[LANDING_PAGES.md](LANDING_PAGES.md)** | Public homepage & services | You want to modify landing pages |
-| **[BUILDER_PROJECT_DETAIL_DEBUG.md](BUILDER_PROJECT_DETAIL_DEBUG.md)** | Debug guide | You're troubleshooting project loading |
-| **[SYSTEM_STATUS.md](SYSTEM_STATUS.md)** | Recent updates & known issues | You want recent context |
-| **[QUERY_FEATURE_GUIDE.md](QUERY_FEATURE_GUIDE.md)** | Query system documentation | You're implementing queries |
-
----
-
-## 🚀 Quick Start (2 minutes)
+## Quick Start (2 minutes)
 
 ### Prerequisites
 - Python 3.8+
@@ -47,60 +21,46 @@ npm run dev
 
 **Browser**: Open http://localhost:5173
 
-That's it! Both services are now running. ✅
+That's it! Both services are now running. 
 
 ---
-
-## 🌐 Live URLs
-
-| Service | URL | Status |
-|---------|-----|--------|
-| Homepage | http://localhost:5173/home | ✅ Public |
-| Services | http://localhost:5173/services | ✅ Public |
-| Login | http://localhost:5173/login | ✅ Public |
-| Admin Portal | http://localhost:5173/admin | 🔒 Auth Required |
-| Builder Portal | http://localhost:5173/builder | 🔒 Auth Required |
-| Client Portal | http://localhost:5173/client | 🔒 Auth Required |
-
----
-
-## 👥 Test Accounts
+## Test Accounts
 
 ```
 Admin
-  Email: admin@test.com
-  Password: Admin123
+  Email: test_admin@test.com
+  Password: test1234
   
 Builder
-  Email: builder@test.com
-  Password: Builder123
-  (Requires admin approval first)
+  Email: test_builder@test.com
+  Password: test_1234
+  (Registering as a builder requires admin approval first)
   
 Client
-  Email: client@test.com
-  Password: Client123
+  Email: test_client@test.com
+  Password: test1234
 ```
 
 ---
 
-## 🎯 What Each Role Can Do
+## What Each Role Can Do
 
-### 👨‍💼 Admin
+### Admin
 - ✅ View pending builder requests
 - ✅ Approve/reject builders
 - ✅ Create projects
 - ✅ View all projects and users
 - ✅ Monitor system activity
 
-### 👷 Builder
+### Builder
 - ✅ Manage assigned projects
 - ✅ Post progress updates
 - ✅ Log materials used
 - ✅ View client queries
 - ✅ Respond to client questions
-- ⏳ (Requires admin approval to login)
+- ⏳ (Requires admin approval to create account)
 
-### 👤 Client
+### Client
 - ✅ View assigned projects
 - ✅ See progress updates
 - ✅ Track materials used
@@ -109,15 +69,15 @@ Client
 
 ---
 
-## 📊 Technology Stack
+## Technology Stack
 
 ```
 Frontend
-├── React 18 + TypeScript
+├── React + TypeScript
 ├── Vite (build tool)
 ├── React Router (navigation)
 ├── Axios (API client)
-└── CSS3 (styling)
+└── TailwindCSS (styling)
 
 Backend
 ├── FastAPI (web framework)
@@ -130,52 +90,13 @@ Database
 └── PostgreSQL (Neon.tech)
 
 Deployment
-├── Frontend: Vercel/Netlify ready
-└── Backend: AWS/Heroku/Railway ready
+├── Frontend: Vercel
+└── Backend: Vercel
 ```
 
 ---
 
-## 📁 Project Structure
-
-```
-construction-management-app/
-├── backend/                          # FastAPI server
-│   ├── main.py                       # App entry point
-│   ├── config.py                     # Configuration
-│   ├── database.py                   # DB connection
-│   ├── models/                       # SQLAlchemy models
-│   ├── schemas/                      # Pydantic validators
-│   ├── routers/                      # API endpoints
-│   ├── core/                         # Auth utilities
-│   └── requirements.txt              # Dependencies
-│
-├── frontend/                         # React application
-│   ├── src/
-│   │   ├── pages/
-│   │   │   ├── public/               # Landing pages
-│   │   │   ├── builder/              # Builder dashboard
-│   │   │   ├── admin/                # Admin dashboard
-│   │   │   ├── client/               # Client portal
-│   │   │   └── Login.tsx
-│   │   ├── components/               # Reusable components
-│   │   ├── api/                      # API client
-│   │   ├── context/                  # Auth context
-│   │   ├── types/                    # TypeScript types
-│   │   ├── App.tsx                   # Main router
-│   │   └── index.css                 # Global styles
-│   ├── index.html
-│   ├── vite.config.ts
-│   ├── package.json
-│   └── tsconfig.json
-│
-├── docs/                             # Documentation files
-└── [Various README & guides]
-```
-
----
-
-## 🔌 API Endpoints (16+ Endpoints)
+## API Endpoints (16+ Endpoints)
 
 ### Authentication
 - `POST /api/auth/register` - Register new user
@@ -207,90 +128,20 @@ construction-management-app/
 
 **Full API docs available at**: http://localhost:8000/docs
 
----
-
-## 🎨 Design Specifications
-
-**Color Scheme:**
-- Primary Gold: #C8971F
-- Dark Background: #0A0A0A - #202020
-- Accent: #CCCCCC
-- Text: #FFFFFF
-
-**Typography:**
-- Display Font: Cormorant Garamond (serif)
-- Body Font: Jost / DM Sans (sans-serif)
-
-**Responsive Breakpoints:**
-- 4K: 3840px
-- Desktop: 1920px, 1366px
-- Tablet: 1024px, 768px
-- Mobile: 480px, 375px
-
----
-
-## 🔒 Security Features
-
-- ✅ JWT token-based authentication
-- ✅ Bcrypt password hashing
-- ✅ CORS protection
-- ✅ Role-based access control (RBAC)
-- ✅ SQL injection prevention (ORM)
-- ✅ XSS protection (React escaping)
-- ✅ HTTPS ready
-- ✅ Secure token storage
-
----
-
-## 📈 Performance
-
-| Metric | Value |
-|--------|-------|
-| Build Time | 277ms |
-| First Paint | <2s |
-| Time to Interactive | <3s |
-| API Response | <100ms |
-| Database Query | <50ms |
-| Bundle Size | 390KB (105KB gzipped) |
-
----
-
-## 🧪 Testing
-
-All major features have been tested:
-- ✅ Authentication workflows
-- ✅ RBAC enforcement
-- ✅ Project management
-- ✅ Update system
-- ✅ Query system
-- ✅ Admin approvals
-- ✅ Responsive design
-- ✅ Performance optimization
-
----
-
-## 🚢 Deployment
-
-### Frontend
-```bash
-cd frontend
-npm run build
-# Upload dist/ to Vercel, Netlify, or S3
-```
-
-### Backend
-```bash
-cd backend
-pip install -r requirements.txt
-python -m uvicorn main:app --host 0.0.0.0 --port 8000
-```
-
 ### Environment Variables
 
 **Backend (.env):**
 ```
-DATABASE_URL=postgresql://user:pass@host:port/dbname
-JWT_SECRET=your_secret_key_here
+FRONTEND_URL="https://rjs-home-silk.vercel.app"
+APP_NAME="rjs-home API"
+SECRET_KEY="your-secret-key"
+ALGORITHM="HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES="60"
+DATABASE_URL="postgresql://your-neon-tech-database-url/"
+
+CLOUDINARY_CLOUD_NAME= "cloud-name"
+CLOUDINARY_API_KEY= "cloudinary-api-key"
+CLOUDINARY_API_SECRET= "cloudinary-api-secret"
 ```
 
 **Frontend (.env):**
@@ -299,50 +150,6 @@ VITE_API_URL=https://api.yoursite.com
 ```
 
 ---
-
-## 🐛 Troubleshooting
-
-**Backend won't start?**
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate  # or `venv\Scripts\activate` on Windows
-pip install -r requirements.txt
-python -m uvicorn main:app --port 8000
-```
-
-**Frontend shows "Unable to fetch"?**
-- Verify backend is running: `curl http://localhost:8000/docs`
-- Check backend CORS configuration
-- Verify API URL in frontend .env
-
-**Login fails with 500 error?**
-- Check backend logs for error details
-- Verify DATABASE_URL is correct
-- Ensure PostgreSQL is accessible
-
-**Projects won't load?**
-- Check browser console (F12) for errors
-- Verify token in localStorage
-- Check Network tab for API responses
-
-**See more**: [QUICK_REFERENCE.md](QUICK_REFERENCE.md) - Comprehensive troubleshooting guide
-
----
-
-## 📞 Support Resources
-
-| Question | Resource |
-|----------|----------|
-| How do I...? | [QUICK_START.md](QUICK_START.md) |
-| I'm debugging | [QUICK_REFERENCE.md](QUICK_REFERENCE.md) |
-| Is it done? | [FINAL_CHECKLIST.md](FINAL_CHECKLIST.md) |
-| What's included? | [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) |
-| How does it work? | [EXECUTIVE_SUMMARY.md](EXECUTIVE_SUMMARY.md) |
-| Project loading issue | [BUILDER_PROJECT_DETAIL_DEBUG.md](BUILDER_PROJECT_DETAIL_DEBUG.md) |
-
----
-
 ## ✨ Key Features
 
 ### User Management
@@ -389,7 +196,7 @@ python -m uvicorn main:app --port 8000
 
 ---
 
-## 🌟 Highlights
+## Highlights
 
 ✅ **Complete RBAC System** - Three roles with full permission enforcement
 ✅ **Real-Time Updates** - Changes visible immediately
@@ -399,20 +206,6 @@ python -m uvicorn main:app --port 8000
 ✅ **Production Ready** - Fully tested and optimized
 ✅ **Scalable Architecture** - Handles unlimited projects
 
----
-
-## 📊 By The Numbers
-
-- 10,000+ lines of code
-- 16+ API endpoints
-- 6 database tables
-- 20+ React components
-- 2,000+ lines of CSS
-- 6 responsive breakpoints
-- 5+ browser support
-- 99.9% uptime SLA
-
----
 
 ## 🎓 How to Use
 
@@ -462,59 +255,3 @@ python -m uvicorn main:app --port 8000
    ↓
 9. Everyone stays informed ✅
 ```
-
----
-
-## 📅 Version History
-
-| Version | Date | Status |
-|---------|------|--------|
-| 1.0.0 | 2026-04-25 | ✅ Production Ready |
-
----
-
-## 📝 License
-
-This project is built for the construction management industry.
-
----
-
-## 🙏 Credits
-
-**Built by**: Copilot  
-**Technology**: React + FastAPI + PostgreSQL  
-**Deployment**: Ready for production
-
----
-
-## 🚀 What's Next?
-
-- Email notifications
-- Push notifications
-- Project timelines (Gantt charts)
-- Advanced analytics
-- Mobile app
-- Payment integration
-- Team collaboration tools
-
----
-
-## ✅ Ready?
-
-```bash
-# Start everything in 2 commands:
-cd backend && python -m uvicorn main:app --port 8000  # Terminal 1
-cd frontend && npm run dev                              # Terminal 2
-
-# Then open: http://localhost:5173
-```
-
-**Everything is ready to go!** 🎯
-
----
-
-**Questions?** Read the [documentation index](#-documentation-index) above.
-
-**Status**: 🟢 **PRODUCTION READY**  
-**Version**: 1.0.0  
-**Date**: 2026-04-25
