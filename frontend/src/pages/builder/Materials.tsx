@@ -88,9 +88,7 @@ export default function BuilderMaterials() {
 					Materials Inventory
 				</div>
 				<div className="flex items-center gap-2">
-					<span className="text-xs text-[#888888]">
-						Total Cost:
-					</span>
+					<span className="text-xs text-[#888888]">Total Cost:</span>
 					<span className="font-serif text-xl text-brand-gold">
 						₹{totalCost.toLocaleString()}
 					</span>
@@ -167,14 +165,13 @@ export default function BuilderMaterials() {
 				{/* Materials table */}
 				{loading ? (
 					<div className="rounded-md border border-black/10 bg-[rgba(224,234,242,0.3)] p-10 text-center">
-						<div className="mb-2 text-3xl">⏳</div>
+						<div className="mx-auto mb-2 loading-spinner" />
 						<div className="text-sm text-[#5d6a78]">
 							Loading materials…
 						</div>
 					</div>
 				) : filteredMaterials.length === 0 ? (
 					<div className="rounded-md border border-black/10 bg-[rgba(224,234,242,0.3)] p-10 text-center">
-						<div className="mb-2 text-3xl">🪵</div>
 						<div className="text-sm text-[#5d6a78]">
 							No materials found
 						</div>

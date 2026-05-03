@@ -3,8 +3,10 @@ from typing import List
 from uuid import UUID
 
 from core.deps import get_current_user
+from core.deps import require_builder
+from core.cloudinary_config import upload_image
 from database import get_db
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File
 from models.user import User, UserRole
 from models.query import Query, QueryStatus
 from models.project import Project
@@ -127,6 +129,7 @@ def respond_to_query(
         raise HTTPException(status_code=403, detail="Only project builder/admin can respond")
 
     query.answer = payload.answer
+    query.answer_media_urls = payload.answer_media_urls or []
     query.answered_by_id = current_user.id
     query.status = QueryStatus.resolved
     query.resolved_at = datetime.utcnow()
@@ -134,6 +137,39 @@ def respond_to_query(
     db.commit()
     db.refresh(query)
     return query
+
+
+@router.post("/upload-image", status_code=200)
+async def upload_query_response_image(
+    file: UploadFile = File(...),
+    current_user: User = Depends(require_builder),
+):
+    """Upload an image for a query response (builders/admins only)."""
+
+    allowed_types = ["image/jpeg", "image/png", "image/jpg", "image/webp"]
+    if file.content_type not in allowed_types:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid file type. Allowed: {', '.join(allowed_types)}",
+        )
+
+    file_content = await file.read()
+    if len(file_content) > 5 * 1024 * 1024:
+        raise HTTPException(status_code=400, detail="File size must be less than 5MB")
+
+    try:
+        result = upload_image(
+            file_content,
+            filename=file.filename,
+            folder=f"rjs-homes/queries/user_{str(current_user.id)[:8]}",
+        )
+        return {
+            "url": result["url"],
+            "public_id": result["public_id"],
+            "message": "Image uploaded successfully",
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to upload image: {str(e)}")
 
 
 @router.put("/{query_id}", response_model=QueryOut)

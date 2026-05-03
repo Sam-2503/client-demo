@@ -3,7 +3,7 @@ import uuid
 from datetime import datetime
 
 from database import Base
-from sqlalchemy import DateTime, ForeignKey, Text, Enum
+from sqlalchemy import DateTime, ForeignKey, Text, Enum, JSON
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -25,6 +25,7 @@ class Query(Base):
     
     question: Mapped[str] = mapped_column(Text, nullable=False)
     answer: Mapped[str] = mapped_column(Text, nullable=True)
+    answer_media_urls: Mapped[list[str]] = mapped_column(JSON, default=list, nullable=False)
     status: Mapped[QueryStatus] = mapped_column(Enum(QueryStatus), default=QueryStatus.open)
     
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)

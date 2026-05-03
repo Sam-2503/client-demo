@@ -157,6 +157,7 @@ export interface Query {
 	answered_by_id: string | null;
 	question: string;
 	answer: string | null;
+	answer_media_urls?: string[];
 	status: "open" | "resolved";
 	created_at: string;
 	resolved_at: string | null;
@@ -169,4 +170,5 @@ export interface CreateQueryRequest {
 
 export interface RespondToQueryRequest {
 	answer: string;
+	answer_media_urls?: string[];
 }
