@@ -56,27 +56,26 @@ export default function ClientQueriesPage() {
 		: [];
 
 	return (
-		<div className="flex flex-col gap-6 bg-[#eef3f6] px-6 py-8 text-[#1f2a34] animate-fade-up">
-			<div className="mb-2 border-b border-black/10 bg-[#f8fafb] px-0 py-6 backdrop-blur-sm">
-				<div className="font-serif text-3xl font-semibold text-[#1f2a34]">
-					Questions
-				</div>
-				<p className="mt-1 text-sm text-[#5d6a78]">
+		<>
+			<div className="border-b border-black/10 bg-[#f8fafb] px-6 py-8 backdrop-blur-sm">
+				<h1 className="text-4xl font-bold text-[#1f2a34]">Questions</h1>
+				<p className="mt-2 text-[#5d6a78]">
 					Ask the builder about your project
 				</p>
 			</div>
 
-			{loading ? (
+			<div className="animate-fade-up space-y-6 px-6 py-8 text-[#1f2a34]">
+				{loading ? (
 				<div className="rounded-2xl border border-black/10 bg-[rgba(224,234,242,0.3)] px-8 py-12 text-center backdrop-blur-sm">
 					<div className="text-sm text-[#5d6a78]">
 						Loading projects...
 					</div>
 				</div>
-			) : (
+				) : (
 				<div className="grid items-start gap-6 lg:grid-cols-[280px_1fr]">
 					<div className="sticky top-6 hidden lg:block">
 						<div className="rounded-2xl border border-black/10 bg-[rgba(224,234,242,0.3)] p-5 backdrop-blur-sm">
-							<div className="mb-4 border-b border-black/10 pb-4 font-serif text-lg font-semibold text-[#1f2a34]">
+							<div className="mb-4 border-b border-black/10 pb-4 text-lg font-semibold text-[#1f2a34]">
 								Your Projects
 							</div>
 							<div className="flex flex-col gap-2">
@@ -138,7 +137,7 @@ export default function ClientQueriesPage() {
 
 								{/* Queries List */}
 								<div className="flex flex-col gap-4">
-									<div className="font-serif text-lg font-semibold text-[#1f2a34]">
+									<div className="text-lg font-semibold text-[#1f2a34]">
 										Questions ({filteredQueries.length})
 									</div>
 									<QueryList
@@ -156,7 +155,8 @@ export default function ClientQueriesPage() {
 						)}
 					</div>
 				</div>
-			)}
-		</div>
+				)}
+			</div>
+		</>
 	);
 }
